@@ -1,0 +1,15 @@
+食材编辑上报：ingredient-edit
+食材上报预览：ingredient-view
+食材上报不通过：ingredient-view-notpass
+订单已完成：ingredient-view-complete
+
+
+
+学校领导审核：ingredient-approval-sc
+学校领导审核预览、审核通过（状态更正为：等待营养办审核）、审核不通过、订单已完成等页面根据上面的同类页面改文字和主体
+
+
+
+营养办审核：ingredient-approval
+
+

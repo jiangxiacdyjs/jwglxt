@@ -1,0 +1,6 @@
+@charset "utf-8";
+/* 你自己的样式 */
+label{cursor: pointer;}
+.check{float: left;margin-right: 15px}
+.checkboxBg{cursor: pointer;display: inline-block;margin:-5px 2px;width: 19px;height: 19px;background: url(../../h-ui/images/iCheck/blue.png) -19px 0}
+.checkedBg{background-position: -40px 0}
