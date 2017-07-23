@@ -28,7 +28,7 @@
         <div class="row clearfix">
             <div class="col-xs-12 col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-header">学校本周食材总览<a href="nutritious-meal/ingredient-total-view.html" target="_blank" class="r">查看详情</a></div>
+                    <div class="panel-header">学校本周食材总览<a id="ingredientMore" href="javascript:;" class="r">查看详情</a></div>
                     <div class="panel-body">
                         <table class="table table-border table-hover">
                             <thead>
@@ -59,7 +59,7 @@
             </div>
             <div class="col-xs-12 col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-header">学校基本信息总览<a href="schools-total-info-view.html" class="r" target="_blank">查看详情</a></div>
+                    <div class="panel-header">学校基本信息总览<a id="schoolMore" href="javascript:;" class="r">查看详情</a></div>
                     <div class="panel-body">
                         <table class="table table-border table-hover">
                             <thead>
@@ -119,98 +119,115 @@
                 </div>
             </div>
         </div>
+    </div>
     <script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="lib/eCharts/echarts.min.js"></script>
     <script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
     <script>
-    var myChart1 = echarts.init(document.getElementById('chartPie'));
-    option1 = {
-        tooltip: {
-            trigger: 'item',
-            formatter: "{a} <br/>{b} : {c} ({d}%)"
-        },
-        legend: {
-            orient: 'vertical',
-            left: 'left',
-            data: ['肉品类', '海产类', '蔬果类', '其他', ]
-        },
-        series: [{
-            name: '食材占比',
-            type: 'pie',
-            radius: '80%',
-            data: [{
-                value: 335,
-                name: '肉品类'
-            }, {
-                value: 310,
-                name: '海产类'
-            }, {
-                value: 234,
-                name: '蔬果类'
-            }, {
-                value: 135,
-                name: '其他'
-            }, ],
-            itemStyle: {
-                emphasis: {
-                    shadowBlur: 10,
-                    shadowOffsetX: 0,
-                    shadowColor: 'rgba(0, 0, 0, 0.5)'
-                }
-            }
-        }]
-    };
-    myChart1.setOption(option1);
+        $(function () {
+            //模拟点击事件
+            var triIngredient = $(window.parent.document.getElementById('triIngredient')),
+                triSchool = $(window.parent.document.getElementById('triSchool'));
+            $('#ingredientMore').click(function () {
+                triIngredient.click()
+            })
+            $('#schoolMore').click(function () {
+                triSchool.click()
+            });
+            // echarts
+            var myChart1 = echarts.init(document.getElementById('chartPie'));
+            option1 = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b} : {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    left: 'left',
+                    data: ['肉品类', '海产类', '蔬果类', '其他', ]
+                },
+                series: [{
+                    name: '食材占比',
+                    type: 'pie',
+                    radius: '80%',
+                    data: [{
+                        value: 335,
+                        name: '肉品类'
+                    }, {
+                        value: 310,
+                        name: '海产类'
+                    }, {
+                        value: 234,
+                        name: '蔬果类'
+                    }, {
+                        value: 135,
+                        name: '其他'
+                    }, ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }]
+            };
+            myChart1.setOption(option1);
 
-    var myChart2 = echarts.init(document.getElementById('chartLine'));
-	option2 = {
-	    tooltip: {
-	        trigger: 'none',
-	        axisPointer: {
-	            type: 'cross'
-	        }
-	    },
-	    grid: {
-	        top: 30,
-	        bottom: 30
-	    },
-	    xAxis: [
-	        {
-	            type: 'category',
-	            axisTick: {
-	                alignWithLabel: true
-	            },
-	            axisLine: {
-	                onZero: false,
-	            },
-	            axisPointer: {
-	                label: {
-	                    formatter: function (params) {
-	                        return params.value
-	                            + (params.seriesData.length ? '：' + params.seriesData[0].data : '')
-	                            + '天';
-	                    }
-	                }
-	            },
-	            data: ["第一周", "第二周", "第三周", "第四周", "第五周", "第六周"]
-	        }
-	    ],
-	    yAxis: [
-	        {
-	            type: 'value',
-	        }
-	    ],
-	    series: [
+            var myChart2 = echarts.init(document.getElementById('chartLine'));
+            option2 = {
+                tooltip: {
+                    trigger: 'none',
+                    axisPointer: {
+                        type: 'cross'
+                    }
+                },
+                grid: {
+                    top: 30,
+                    bottom: 30
+                },
+                xAxis: [
+                    {
+                        type: 'category',
+                        axisTick: {
+                            alignWithLabel: true
+                        },
+                        axisLine: {
+                            onZero: false,
+                        },
+                        axisPointer: {
+                            label: {
+                                formatter: function (params) {
+                                    return params.value
+                                        + (params.seriesData.length ? '：' + params.seriesData[0].data : '')
+                                        + '天';
+                                }
+                            }
+                        },
+                        data: ["第一周", "第二周", "第三周", "第四周", "第五周", "第六周"]
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value',
+                    }
+                ],
+                series: [
 
-	        {
-	            name:'各周食材配送周期',
-	            type:'line',
-	            smooth: true,
-	            data: [2,2,5,2,3,4,]
-	        }
-	    ]
-	};
-    myChart2.setOption(option2);
+                    {
+                        name:'各周食材配送周期',
+                        type:'line',
+                        smooth: true,
+                        data: [2,2,5,2,3,4,]
+                    }
+                ]
+            };
+            myChart2.setOption(option2);
+        })
+
+
+
+
     </script>
 </body>
 
