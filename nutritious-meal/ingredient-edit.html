@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE HTML>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
@@ -88,10 +87,16 @@
             height: 100%;
         }
         .add-name.Hui-iconfont{
-            visibility: hidden;
+            display: none;
         }
         .active .add-name.Hui-iconfont{
-            visibility: visible;
+            display: block;
+        }
+        .tabs-list li.active a {
+            background-color: #19A97B;
+        }
+        .accordion-handle.active {
+            background-color: #19A97B;
         }
     </style>
     <title>学校食材编辑上报</title>
@@ -106,13 +111,14 @@
 <div class="page-container">
     <div class="panel panel-success">
         <div class="panel-header pos-r">食材选择列表
-            <span id="addKind" class="Hui-iconfont f-30 pos-a" style="top: -4px;left: 130px;">&#xe604;</span>
+            <!--<span id="addKind" class="Hui-iconfont f-30 pos-a" style="top: -4px;left: 130px;">&#xe604;</span>-->
+            <button id="addKind" class="btn btn-primary pos-a Hui-iconfont" type="button" style="top: 0;left: 110px;height: 100%">&#xe600;</button>
         </div>
         <div class="panel-body">
             <div class="row cl">
                 <div class="col-xs-6">
                     <div class="tabs tabs-vertical-left">
-                        <ul class="tabs-list">
+                        <ul id="list1" class="tabs-list">
                             <li class="active">
                                 <a href="javascript:;" class="pos-r">
                                     蔬菜类汇总<button class="btn btn-default pos-a add-name Hui-iconfont" type="button">&#xe600;</button>
@@ -124,7 +130,7 @@
                                 </a>
                             </li>
                         </ul>
-                        <div class="tabs-container">
+                        <div id="tab1" class="tabs-container">
                             <div class="tab-content" style="display:block;">
                                 <label>B</label>
                                 <span class="fname fname-sc">白菜</span>
@@ -201,7 +207,7 @@
                 </div>
                 <div class="col-xs-6">
                     <div class="tabs tabs-vertical-left">
-                        <ul class="tabs-list">
+                        <ul id="list2" class="tabs-list">
                             <li class="active">
                                 <a href="javascript:;" class="pos-r">
                                     调料类汇总<button class="btn btn-default pos-a add-name Hui-iconfont" type="button">&#xe600;</button>
@@ -219,11 +225,16 @@
                             </li>
                             <li>
                                 <a href="javascript:;" class="pos-r">
+                                    干菜类汇总<button class="btn btn-default pos-a add-name Hui-iconfont" type="button">&#xe600;</button>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:;" class="pos-r">
                                     粮油类汇总<button class="btn btn-default pos-a add-name Hui-iconfont" type="button">&#xe600;</button>
                                 </a>
                             </li>
                         </ul>
-                        <div class="tabs-container">
+                        <div id="tab2" class="tabs-container">
                             <div class="tab-content" style="display:block;">
                                 <label>D</label>
                                 <span class="fname fname-tl">豆瓣酱</span>
@@ -286,6 +297,26 @@
 
                                 <label>Y</label>
                                 <span class="fname fname-dz">烟熏豆腐</span>
+                            </div>
+                            <div class="tab-content">
+                                <label>C</label>
+                                <span class="fname fname-gc">炒豆</span>
+
+                                <label>D</label>
+                                <span class="fname fname-gc">大豆米</span>
+
+                                <label>G</label>
+                                <span class="fname fname-gc">干木耳</span>
+                                <span class="fname fname-gc">干香菇</span>
+
+                                <label>H</label>
+                                <span class="fname fname-gc">海带</span>
+
+                                <label>X</label>
+                                <span class="fname fname-gc">细木耳</span>
+
+                                <label>Z</label>
+                                <span class="fname fname-gc">紫菜</span>
                             </div>
                             <div class="tab-content">
                                 <label>C</label>
@@ -586,7 +617,6 @@
         </div>
     </div>
 </div>
-
 <script type="text/javascript" src="../lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="../static/h-ui/js/jQuery.Huitab.js"></script>
@@ -609,22 +639,39 @@
                 formType: 3
             }, function (pass, index) {
                 layer.close(index);
-                var hfd1 = $('#Huifold1'),
-                    hfd2 = $('#Huifold2'),
-                    newLi = '<li class="item">';
-                newLi += "<h4 class='selected'>" + pass + "<b>+</b></h4>";
-                newLi += '<div class="info mlr--10">';
-                newLi += "ad";
-                newLi += "</div>";
-                newLi += "</li>";
-                if (hfd1.children().length < hfd2.children().length) {
-                    hfd1.find('h4').removeClass('selected');
-                    hfd1.append(newLi);
-                    $.Huifold("#Huifold1 .item h4", "#Huifold1 .item .info", "fast", 1, "click");
+                var tab1 = $('#tab1'),
+                    tab2 = $('#tab2'),
+                    list1 = $('#list1'),
+                    list2 = $('#list2'),
+                    newLi,
+                    newCon;
+                newLi += '<li><a href="javascript:;" class="pos-r">';
+                newLi += pass;
+                newLi += '<button class="btn btn-default pos-a add-name Hui-iconfont" type="button">&#xe600;</button>';
+                newLi += "</a></li>";
+                newCon = $('<div>',{'class':'tab-content'});
+                if (tab1.children().length < tab2.children().length) {
+                    list1.append(newLi);
+                    tab1.append(newCon);
+                    $('.tabs').respTabs();
                 } else {
-                    hfd2.append(newLi);
-                    $.Huifold("#Huifold2 .item h4", "#Huifold2 .item .info", "fast", 1, "click");
+                    list2.append(newLi);
+                    tab2.append(newCon);
+                    $('.tabs').respTabs();
                 }
+            });
+        })
+        $('.add-name').eq(0).click(function () {
+            layer.prompt({
+                title: '请输入食材名',
+                formType: 3
+            }, function (pass,index) {
+                layer.close(index);
+                newSpan = '<span class="fname fname-sc">';
+                newSpan += pass ;
+                newSpan += "</span>";
+                newSpan += " ";
+                $('.tab-content').eq(0).append(newSpan)
             });
         })
 
@@ -697,7 +744,6 @@
                 }
             });
         }
-
         resetTabullet();
         $('.fname').click(function (event) {
             $("[data-tabullet-id='-1']").find('input').eq(0).val($(this).text());
@@ -736,32 +782,6 @@
             });
         });
     }
-    /*汉字-排序(如果传了第二个参数，则遍历出a-z所有)*/
-    function pySegSort(arr, empty) {
-        if (!String.prototype.localeCompare)
-            return null;
-        var letters = "*abcdefghjklmnopqrstwxyz".split('');
-        var zh = "阿八嚓哒妸发旮哈讥咔垃痳拏噢妑七呥扨它穵夕丫帀".split('');
-        var segs = [];
-        var curr;
-        $.each(letters, function (i) {
-            curr = {letter: this, data: []};
-            $.each(arr, function () {
-                if ((!zh[i - 1] || zh[i - 1].localeCompare(this) <= 0) && this.localeCompare(zh[i]) == -1) {
-                    curr.data.push(this);
-                }
-            });
-            if (empty || curr.data.length) {
-                segs.push(curr);
-                curr.data.sort(function (a, b) {
-                    return a.localeCompare(b);
-                });
-            }
-        });
-        return segs;
-    }
-    console.log(JSON.stringify(pySegSort(['朱德', '张翰', '朱昌明', '朱啊', '猫', "鸡"])));
-
 </script>
 </body>
 
