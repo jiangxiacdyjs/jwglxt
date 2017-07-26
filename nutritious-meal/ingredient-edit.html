@@ -63,11 +63,6 @@
         .fname-ly {
             background-color: #228fbd;
         }
-
-        .Hui-iconfont.pos-a:hover {
-            opacity: 0.8;
-        }
-
         .mlr--10 {
             margin-left: -10px;
             margin-right: -10px;
@@ -75,6 +70,11 @@
 
         .pointer {
             cursor: pointer
+        }
+
+        .btn-success.pos-a:hover{
+            background-color: #3b883b!important;
+            border-color: #3b883b!important;
         }
 
         .tab-content {
@@ -85,6 +85,14 @@
             top: 0;
             bottom: 0;
             height: 100%;
+            background-color: #16986f;
+            border-color: #16986f;
+            color: #fff;
+        }
+        .add-name:hover{
+            background-color: #148863 !important;
+            border-color: #148863 !important;
+            color: #fff;
         }
         .add-name.Hui-iconfont{
             display: none;
@@ -112,7 +120,7 @@
     <div class="panel panel-success">
         <div class="panel-header pos-r">食材选择列表
             <!--<span id="addKind" class="Hui-iconfont f-30 pos-a" style="top: -4px;left: 130px;">&#xe604;</span>-->
-            <button id="addKind" class="btn btn-primary pos-a Hui-iconfont" type="button" style="top: 0;left: 110px;height: 100%">&#xe600;</button>
+            <button id="addKind" class="btn btn-success pos-a" type="button" style="top: 0;left: 110px;height: 100%;background-color:#429842;border-color: #429842">+&nbsp;&nbsp;新增食材分类</button>
         </div>
         <div class="panel-body">
             <div class="row cl">
@@ -641,23 +649,31 @@
                 layer.close(index);
                 var tab1 = $('#tab1'),
                     tab2 = $('#tab2'),
+                    child1_len = $('#tab1').children('.tab-content').length,
+                    child2_len = $('#tab2').children('.tab-content').length,
                     list1 = $('#list1'),
                     list2 = $('#list2'),
-                    newLi,
-                    newCon;
+                    newLi = "",
+                    newCon = "";
                 newLi += '<li><a href="javascript:;" class="pos-r">';
                 newLi += pass;
                 newLi += '<button class="btn btn-default pos-a add-name Hui-iconfont" type="button">&#xe600;</button>';
                 newLi += "</a></li>";
                 newCon = $('<div>',{'class':'tab-content'});
-                if (tab1.children().length < tab2.children().length) {
+                if (child1_len < child2_len-1) {
                     list1.append(newLi);
                     tab1.append(newCon);
-                    $('.tabs').respTabs();
+                    child1_len ++;
+                    $('.tabs').respTabs({
+                        responsive : false
+                    });
                 } else {
                     list2.append(newLi);
                     tab2.append(newCon);
-                    $('.tabs').respTabs();
+                    child2_len ++;
+                    $('.tabs').respTabs({
+                        responsive : false
+                    });
                 }
             });
         })
