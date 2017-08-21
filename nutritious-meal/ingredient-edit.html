@@ -638,7 +638,9 @@
 <script>
     $(function () {
         /*食材名称列表tab */
-        $('.tabs').respTabs();
+        $('.tabs').respTabs({
+            responsive : false
+        });
 
         /* 菜谱增删改 */
         $('#togList').click(function () {
