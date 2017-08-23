@@ -1,0 +1,271 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../Public/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../Public/lib/respond.min.js"></script>
+
+    <![endif]-->
+    <link href="../Public/static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="../Public/static/h-ui.admin/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+    <link href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin" />
+    <link href="../Public/lib/jedate/skin/jedate.css" rel="stylesheet" type="text/css" />
+    <link href="../Public/lib/jquery.autocomplete/css/awesomplete.css" rel="stylesheet" type="text/css" />
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <title>学校食材编辑上报</title>
+</head>
+
+<body>
+    <!-- 当前位置 -->
+    <nav class="breadcrumb">
+        <i class="Hui-iconfont"></i> 首页 <span class="c-gray en">&gt;</span> 营养餐 <span class="c-gray en">&gt;</span> 食材汇总表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont"></i></a>
+    </nav>
+    <div class="page-container">
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table table-border table-bordered table-bg mb-30">
+                    <caption class="f-20 mb-30 pd-20" style="border-bottom: 1px dashed #7C7C7C;padding-top: 0">
+                        <span class="l" style="margin-left: -20px;width: 30%">
+                            <div class="btn-group cl">
+                                <span class="btn btn-primary radius l"><span class="Hui-iconfont mr-5">&#xe695;</span>选择区域</span>
+                                <span class="select-box radius l" style="width: 60%;border-top-left-radius: 0;border-left: 0;border-bottom-left-radius: 0;padding-top: 5px">
+                                    <select class="select" size="1" name="demo1">
+                                        <option value="0" selected>全局</option>
+                                        <option value="1">城南片区</option>
+                                        <option value="2">城东片区</option>
+                                        <option value="3">城北片区</option>
+                                    </select>
+                                </span>
+                            </div>
+<!--                           <a class="btn btn-primary radius" href="javascript:;" onclick="selecArea();">
+                              <i class="Hui-iconfont">&#xe61c;</i> 切换显示片区
+                          </a> -->
+                        </span>
+                        A片区食材汇总单
+                        <span class="r">
+                          <a class="btn btn-primary radius" href="javascript:;">
+                              <i class="Hui-iconfont">&#xe616;</i> 导出PDF文件
+                          </a>
+                          <a class="btn btn-primary radius" href="javascript:;">
+                              <i class="Hui-iconfont">&#xe636;</i> 导出EXCEL文件
+                          </a>
+                        </span>
+                    </caption>
+                    <thead>
+                        <tr>
+                            <td colspan="2">当前片区：<span>子阳东湖区</span>
+                            </td>
+                            <td colspan="4">配送公司：<span>紫云自治县华康商贸服务有限公司</span></td>
+                            <td>配送批号：<span>GBC35216</span></td>
+                            <td>学校总数：18（所）</td>
+                            <td>
+                                学生总数：
+                                <span>
+                          <input style="border: 0;cursor: pointer;width: 60px;line-height: 13px" height="" type="text" value="6750" readonly>
+                        </span>
+                            </td>
+                            <td>
+                                实际就餐人数：
+                                <span>
+                          <input style="border: 0;cursor: pointer;width: 60px;line-height: 13px" height="" type="text" value="5890" readonly>
+                        </span>
+                            </td>
+                            <td>状态：<span class="label label-success radius">待配送</span></td>
+                            <td class="text-c">配送日期：<span> 2017-7-1 </span></td>
+                        </tr>
+                        <tr>
+                            <th rowspan="2" colspan="2" class="text-c">序号</th>
+                            <th rowspan="2" colspan="2" class="text-c">食材名称</th>
+                            <th rowspan="2" colspan="2" class="text-c">食材单位</th>
+                            <th rowspan="2" colspan="2" class="text-c">食材总量</th>
+                            <th colspan="2" class="text-c">学校分量</th>
+                            <th rowspan="2" colspan="2" class="text-c">备注信息</th>
+                        </tr>
+                        <tr>
+                            <th class="text-c">学校名称</th>
+                            <th class="text-c">食材数量</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- 食材1（有N个学校有此类食材rowspan="N" ，对应的总tr数也是N个） -->
+                        <tr class="text-c">
+                            <td rowspan="8" colspan="2">1</td>
+                            <td rowspan="8" colspan="2">黄瓜</td>
+                            <td rowspan="8" colspan="2">公斤（kg）</td>
+                            <td rowspan="8" colspan="2">485</td>
+                            <td>猫营中学</td>
+                            <td>50</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr class="text-c">
+                            <td>狗场中学</td>
+                            <td>60</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr class="text-c">
+                            <td>板当中学</td>
+                            <td>55</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr class="text-c">
+                            <td>座马河中学</td>
+                            <td>40</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr class="text-c">
+                            <td>猴场中学</td>
+                            <td>85</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr class="text-c">
+                            <td>水塘中学</td>
+                            <td>55</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr class="text-c">
+                            <td>羊场中学</td>
+                            <td>75</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr class="text-c">
+                            <td>大营中学</td>
+                            <td>65</td>
+                            <td colspan="2"></td>
+                        </tr>
+
+                        <!-- 食材2（有N个学校有此类食材rowspan="N" ，对应的总tr数也是N个） -->
+                        <tr class="text-c">
+                            <td rowspan="4" colspan="2">2</td>
+                            <td rowspan="4" colspan="2">西蓝花</td>
+                            <td rowspan="4" colspan="2">公斤（kg）</td>
+                            <td rowspan="4" colspan="2">148</td>
+                            <td>四大寨中学</td>
+                            <td>25</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr class="text-c">
+                            <td>火花中学</td>
+                            <td>38</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr class="text-c">
+                            <td>羊场中学</td>
+                            <td>50</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr class="text-c">
+                            <td>猴场中学</td>
+                            <td>35</td>
+                            <td colspan="2"></td>
+                        </tr>
+
+                        <!-- 食材3（有N个学校有此类食材rowspan="N" ，对应的总tr数也是N个） -->
+                        <tr class="text-c">
+                            <td rowspan="10" colspan="2">3</td>
+                            <td rowspan="10" colspan="2">茄子</td>
+                            <td rowspan="10" colspan="2">公斤（kg）</td>
+                            <td rowspan="10" colspan="2">625</td>
+                            <td>猫营中学</td>
+                            <td>50</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr class="text-c">
+                            <td>狗场中学</td>
+                            <td>60</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr class="text-c">
+                            <td>板当中学</td>
+                            <td>55</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr class="text-c">
+                            <td>座马河中学</td>
+                            <td>40</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr class="text-c">
+                            <td>猴场中学</td>
+                            <td>85</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr class="text-c">
+                            <td>水塘中学</td>
+                            <td>55</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr class="text-c">
+                            <td>羊场中学</td>
+                            <td>75</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr class="text-c">
+                            <td>大营中学</td>
+                            <td>65</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr class="text-c">
+                            <td>白石岩小学</td>
+                            <td>75</td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr class="text-c">
+                            <td>达邦中学</td>
+                            <td>65</td>
+                            <td colspan="2"></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!--_footer 作为公共模版分离出去-->
+    <script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
+    <script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
+    <script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
+    <script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+    <script>
+    function tableSort(a) {
+        $(a).dataTable({
+            "aaSorting": [
+                [1, "desc"]
+            ], //默认第几个排序
+            "bStateSave": true, //状态保存
+            "aoColumnDefs": [
+                //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+                {
+                    "orderable": false,
+                    "aTargets": [0, 2]
+                } // 不参与排序的列
+            ]
+        });
+    }
+    tableSort('.table-sort')
+
+    function selecArea(){
+      layer.open({
+        title:'切换显示片区...',
+        type: 1,
+        skin: 'layui-layer-rim', //加上边框
+        area: ['420px', ''], //宽高
+        content: '<h4 class="text-c">请选择切换片区</h4> <span class="select-box" style="width:80%;margin-left:10%"><select class="select" size="1" name="demo1"><option value="" selected>全局</option><option value="1">A片区</option><option value="2">B片区</option></select></span> <h2 class="text-c"><button class="btn btn-primary radius btn-in">确认切换</button></h2> '
+      });
+    }
+
+
+    </script>
+</body>
+
+</html>
