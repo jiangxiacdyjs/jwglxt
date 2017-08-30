@@ -76,18 +76,18 @@
                     </tr>
                     <tr class="bg-body">
                         <th class="text-c">操作权限：</th>
-                        <td class="text-l">
+                        <td class="text-l" id="doAuthority">
                            <div class="mtb-5">
                                <span class="badge-danger badge">用户管理</span>：
-                               创建用户、删除用户、编辑用户、禁用用户
+                               <span>创建用户</span>、<span>删除用户</span>、<span>编辑用户</span>、<span>禁用用户</span>
                            </div>
                            <div class="mtb-5">
                                <span class="badge-danger badge">角色管理</span>：
-                               创建角色、删除角色
+                               <span>创建角色</span>、<span>删除角色</span>
                            </div>
                            <div class="mtb-5">
                                <span class="badge-danger badge">教师管理</span>：
-                               创建教师、编辑教师、删除教师
+                               <span>创建教师</span>、<span>编辑教师</span>、<span>删除教师</span>
                            </div>
                         </td>
                     </tr>
@@ -282,25 +282,29 @@
         $.Huifold("#Huifold1 .item h4", "#Huifold1 .item .info", "fast", 3, "click");
         /*5个参数顺序不可打乱，分别是：相应区,隐藏显示的内容,速度,类型,事件*/
         //  资源的删除操作
-        $('.source-panle').each(function () {
-            var ele = this;
-            $(this).click(function () {
-                var newB = $('<b class="Hui-iconfont ml-5">&#xe6a6;</b>');
-                if(!$(this).children().is('.Hui-iconfont')){
-                    $(this).append(newB)
-                }else{
-                    layer.confirm('确认删除该资源？', {
-                        btn: ['确认','取消'] //按钮
-                    }, function(){
-                        var $span = $(ele);
-                        $span.remove()
-                        layer.msg('已删除，可在右侧重新添加', {icon: 1});
-                    }, function(){
+        function delSource() {
+            $('.source-panle').each(function () {
+                var ele = this;
+                $(this).click(function () {
+                    var newB = $('<b class="Hui-iconfont ml-5">&#xe6a6;</b>');
+                    if(!$(this).children().is('.Hui-iconfont')){
+                        $(this).append(newB)
+                    }else{
+                        layer.confirm('确认删除该资源？', {
+                            btn: ['确认','取消'] //按钮
+                        }, function(){
+                            var $span = $(ele);
+                            $span.remove()
+                            layer.msg('已删除，可在右侧重新添加', {icon: 1});
+                        }, function(){
 
-                    });
-                }
-            })
-        });
+                        });
+                    }
+                })
+            });
+        };
+        delSource();
+
 
         /*区块全选和单行全选*/
         $(".permission-list dt input:checkbox").click(function () {
@@ -325,7 +329,16 @@
                     }
                     return txtAll;
                 };
-
+                var $oA = $('#ownAuthority');
+                var $dA = $('#doAuthority');
+                var newOa = '<span class="source-panle rel">'+arrChecked()[0]+'</span>' + " ";
+                var newDa = '<div class="mtb-5">' +
+                    '<span class="badge-danger badge">' +arrChecked()[0]+ '</span>' + " ：" +
+                    '<span>'+arrChecked()[1]+'</span>' +
+                    '</div>';
+                $oA.append(newOa);
+                $dA.append(newDa);
+                delSource()
                 /*ownAuthority*/
                 /*console.log(arrChecked()[0]);*/   //本行的行标文本
                 /*console.log(arrChecked());*/   //本行的所有文本
