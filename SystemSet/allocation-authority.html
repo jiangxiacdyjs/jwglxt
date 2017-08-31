@@ -1,0 +1,375 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../Public/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../Public/lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/style.css"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <!--/meta 作为公共模版分离出去-->
+    <title>添加角色</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <style>
+        .Huifold .item .info {
+            padding: 0
+        }
+
+        .permission-list > dd > dl:last-child {
+            border-bottom: 0;
+        }
+        .source-panle {
+            cursor: pointer;
+            display: inline-block;
+            height: 30px;
+            text-align: center;
+            line-height:30px;
+            padding: 0 5px;
+            color: #fff;
+            background-color: #228fbd;
+            margin-top: 10px;
+        }
+        .title {
+            background: url('../Public/static/h-ui.admin/images/divide.jpg') center no-repeat;
+            -webkit-background-size: cover;
+            background-size: cover;
+        }
+        .mtb-5{
+            margin:5px auto;
+        }
+    </style>
+</head>
+
+<body>
+<article class="page-container">
+    <form action="" method="post" class="form form-horizontal" id="form-admin-role-add">
+        <div class="row cl">
+            <div class="col-xs-6">
+                <h4 class="text-c f-22 title">当前角色</h4>
+                <table class="table table-border table-bordered">
+                    <tr class="bg-2">
+                        <th class="text-c" width="100">角色名称：</th>
+                        <td class="text-c" colspan="7"><span class="f-18">营养规划师</span></td>
+                    </tr>
+                    <tr class="bg-body">
+                        <th class="text-c">目录权限：</th>
+                        <td id="ownAuthority">
+                            <span class="source-panle rel">用户管理</span>
+                            <span class="source-panle rel">角色管理</span>
+                            <span class="source-panle rel">教师管理</span>
+                        </td>
+                    </tr>
+                    <tr class="bg-body">
+                        <th class="text-c">操作权限：</th>
+                        <td class="text-l" id="doAuthority">
+                           <div class="mtb-5">
+                               <span class="badge-danger badge">用户管理</span>：
+                               <span>创建用户</span>、<span>删除用户</span>、<span>编辑用户</span>、<span>禁用用户</span>
+                           </div>
+                           <div class="mtb-5">
+                               <span class="badge-danger badge">角色管理</span>：
+                               <span>创建角色</span>、<span>删除角色</span>
+                           </div>
+                           <div class="mtb-5">
+                               <span class="badge-danger badge">教师管理</span>：
+                               <span>创建教师</span>、<span>编辑教师</span>、<span>删除教师</span>
+                           </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="formControls col-xs-6">
+                <h4 class="text-c f-22 title">权限列表</h4>
+                <ul id="Huifold1" class="Huifold">
+                    <!-- 系統管理 -->
+                    <li class="item">
+                        <h4>系统设置<b>+</b>
+                        </h4>
+                        <div class="info" style="display: block;">
+                            <!-- 系统管理资源 -->
+                            <dl class="permission-list">
+                                <dt>
+                                    <label>
+                                        <input type="checkbox" value="" name="user-Character-0" id="user-Character-0">
+                                        勾选全部
+                                    </label>
+                                </dt>
+                                <dd>
+                                    <dl class="cl permission-list2">
+                                        <dt>
+                                            <label class="">
+                                                <input type="checkbox" value="" name="user-Character-0-0"
+                                                       id="user-Character-0-0"> <span>用户管理</span>
+                                            </label>
+                                        </dt>
+                                        <dd>
+                                            <label class="">
+                                                <input type="checkbox" value="" name="user-Character-0-0-0"
+                                                       id="user-Character-0-0-0"> <span>创建用户</span>
+                                            </label>
+                                            <label class="">
+                                                <input type="checkbox" value="" name="user-Character-0-0-0"
+                                                       id="user-Character-0-0-1">  <span>编辑用户</span>
+                                            </label>
+                                            <label class="">
+                                                <input type="checkbox" value="" name="user-Character-0-0-0"
+                                                       id="user-Character-0-0-2"> <span>删除用户</span>
+                                            </label>
+                                            <label class="">
+                                                <input type="checkbox" value="" name="user-Character-0-0-0"
+                                                       id="user-Character-0-0-3"> <span>禁用用户</span>
+                                            </label>
+                                        </dd>
+                                    </dl>
+                                    <dl class="cl permission-list2">
+                                        <dt>
+                                            <label class="">
+                                                <input type="checkbox" value="" name="user-Character-0-1"
+                                                       id="user-Character-0-1"> <span>角色管理</span>
+                                            </label>
+                                        </dt>
+                                        <dd>
+                                            <label class="">
+                                                <input type="checkbox" value="" name="user-Character-0-1-0"
+                                                       id="user-Character-0-1-0"> <span>创建角色</span>
+                                            </label>
+                                            <label class="">
+                                                <input type="checkbox" value="" name="user-Character-0-1-0"
+                                                       id="user-Character-0-1-1"> <span>删除角色</span>
+                                            </label>
+                                        </dd>
+                                    </dl>
+                                    <dl class="cl permission-list2">
+                                        <dt>
+                                            <label class="">
+                                                <input type="checkbox" value="" name="user-Character-0-2"
+                                                       id="user-Character-0-2"> <span>个人设置</span>
+                                            </label>
+                                        </dt>
+                                    </dl>
+                                </dd>
+                            </dl>
+                        </div>
+                    </li>
+                    <!-- 教务管理 -->
+                    <li class="item">
+                        <h4>教务管理<b>+</b></h4>
+                        <div class="info">
+                            <dl class="permission-list">
+                                <dt>
+                                    <label>
+                                        <input type="checkbox" value="" name="user-Character-1" id="user-Character-1">
+                                        勾选全部
+                                    </label>
+                                </dt>
+                                <dd>
+                                    <dl class="cl permission-list2">
+                                        <dt>
+                                            <label class="">
+                                                <input type="checkbox" value="" name="user-Character-1-0"
+                                                       id="user-Character-1-0"> <span>教师管理</span>
+                                            </label>
+                                        </dt>
+                                        <dd>
+                                            <label class="">
+                                                <input type="checkbox" value="" name="user-Character-1-0-0"
+                                                       id="user-Character-1-0-0"> <span>添加教师</span>
+                                            </label>
+                                            <label class="">
+                                                <input type="checkbox" value="" name="user-Character-1-2"
+                                                       id="user-Character-1-0-1"> <span>删除教师</span>
+                                            </label>
+                                        </dd>
+                                    </dl>
+                                    <dl class="cl permission-list2">
+                                        <dt>
+                                            <label class="">
+                                                <input type="checkbox" value="" name="user-Character-1-1"
+                                                       id="user-Character-1-1"> <span>学校管理</span>
+                                            </label>
+                                        </dt>
+                                        <dd>
+                                            <label class="">
+                                                <input type="checkbox" value="" name="user-Character-1-1-0"
+                                                       id="user-Character-1-1-0"> <span>添加学校</span>
+                                            </label>
+                                            <label class="">
+                                                <input type="checkbox" value="" name="user-Character-1-1-1"
+                                                       id="user-Character-1-1-1"> <span>删除学校</span>
+                                            </label>
+                                        </dd>
+                                    </dl>
+                                </dd>
+                            </dl>
+                        </div>
+                    </li>
+                    <!-- 营养改善 -->
+                    <li class="item">
+                        <h4>营养改善<b>+</b></h4>
+                        <div class="info">
+                            <dl class="permission-list">
+                                <dt>
+                                    <label>
+                                        <input type="checkbox" value="" name="user-Character-2" id="user-Character-2">
+                                        勾选全部
+                                    </label>
+                                </dt>
+                                <dd>
+                                    <dl class="cl permission-list2">
+                                        <dt>
+                                            <label>
+                                                <input type="checkbox" value="" name="user-Character-2-0"
+                                                       id="user-Character-2-0"> <span>食材管理</span>
+                                            </label>
+                                        </dt>
+                                        <dd>
+                                            <label class="">
+                                                <input type="checkbox" value="" name="user-Character-2-0-0"
+                                                       id="user-Character-2-0-0"> <span>食谱上报</span>
+                                            </label>
+                                            <label class="">
+                                                <input type="checkbox" value="" name="user-Character-2-0-1"
+                                                       id="user-Character-2-0-1"> <span>食材编辑</span>
+                                            </label>
+                                        </dd>
+                                    </dl>
+                                </dd>
+                            </dl>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-4 col-xs-offset-4">
+                <button style="width: 100%;margin-top: 30px;" type="submit" class="btn btn-success radius"
+                        id="admin-role-save" name="admin-role-save">确定
+                </button>
+            </div>
+        </div>
+    </form>
+</article>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
+<!--/_footer 作为公共模版分离出去-->
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="../Public/static/h-ui/js/jQuery.Huitab.js"></script>
+<script type="text/javascript" src="../Public/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="../Public/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="../Public/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        // 初始化tab
+        $.Huifold("#Huifold1 .item h4", "#Huifold1 .item .info", "fast", 3, "click");
+        /*5个参数顺序不可打乱，分别是：相应区,隐藏显示的内容,速度,类型,事件*/
+        //  资源的删除操作
+        function delSource() {
+            $('.source-panle').each(function () {
+                var ele = this;
+                $(this).click(function () {
+                    var newB = $('<b class="Hui-iconfont ml-5">&#xe6a6;</b>');
+                    if(!$(this).children().is('.Hui-iconfont')){
+                        $(this).append(newB)
+                    }else{
+                        layer.confirm('确认删除该资源？', {
+                            btn: ['确认','取消'] //按钮
+                        }, function(){
+                            var $span = $(ele);
+                            $span.remove()
+                            layer.msg('已删除，可在右侧重新添加', {icon: 1});
+                        }, function(){
+
+                        });
+                    }
+                })
+            });
+        };
+        delSource();
+
+        /*区块全选和单行全选*/
+        $(".permission-list dt input:checkbox").click(function () {
+            $(this).closest("dl").find("dd input:checkbox").prop("checked", $(this).prop("checked"));
+        });
+
+        /*每一行的子项选择事件*/
+        $(".permission-list2 dd input:checkbox").click(function () {
+            var l = $(this).parent().parent().find("input:checked").length;  //这一行所有选中子项的个数
+            var l2 = $(this).parents(".permission-list").find(".permission-list2 dd").find("input:checked").length;
+            if ($(this).prop("checked")) {
+                var ele = $(this);
+                $(this).closest("dl").find("dt input:checkbox").prop("checked", true);  //如果子项选中，则这一行的的第一个主项选中
+                $(this).parents(".permission-list").find("dt").first().find("input:checkbox").prop("checked", true);
+                /*获取本行所有被选中的input的对应span里面的值*/
+                var arrChecked = function () {
+                    var txtAll = [];
+                    var labs = ele.closest("dl").find('label');
+                    var chkLen = labs.find('input:checked').length;
+                    for (var i = 0 ; i<chkLen ; i++){
+                        txtAll[i] = labs.find('input:checked').eq(i).next().text();
+                    }
+                    return txtAll;
+                };
+                var $oA = $('#ownAuthority');
+                var $dA = $('#doAuthority');
+                var newOa = '<span class="source-panle rel">'+arrChecked()[0]+'</span>' + " ";
+                var newDa = '<div class="mtb-5">' +
+                    '<span class="badge-danger badge">' +arrChecked()[0]+ '</span>' + " ：" +
+                    '<span>'+arrChecked()[1]+'</span>' +
+                    '</div>';
+                $oA.append(newOa);
+                $dA.append(newDa);
+                delSource()
+                /*ownAuthority*/
+                /*console.log(arrChecked()[0]);*/   //本行的行标文本
+                /*console.log(arrChecked());*/   //本行的所有文本
+
+            } else {
+                if (l == 0) {
+                    $(this).closest("dl").find("dt input:checkbox").prop("checked", false);
+                }
+                if (l2 == 0) {
+                    $(this).parents(".permission-list").find("dt").first().find("input:checkbox").prop("checked", false);
+                }
+            }
+        });
+
+        $("#form-admin-role-add").validate({
+            rules: {
+                roleName: {
+                    required: true,
+                },
+            },
+            onkeyup: false,
+            focusCleanup: true,
+            success: "valid",
+            submitHandler: function (form) {
+                $(form).ajaxSubmit();
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+            }
+        });
+    });
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+
+</html>

@@ -1,0 +1,300 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <title>分配角色</title>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../Public/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../Public/lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/style.css"/>
+    <!-- fixedTable -->
+    <link href="../Public/lib/fixedheader/css/defaultTheme.css" rel="stylesheet" media="screen"/>
+    <link href="../Public/lib/fixedheader/demo/css/myTheme.css" rel="stylesheet" media="screen"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+
+    <style>
+        .fancyTable thead tr th, .fancyTable thead tr td, .fancyTable tfoot tr th, .fancyTable tfoot tr td {
+            background-color: #5eb95e;
+        }
+        .fancyTable tbody tr.odd td {
+             background-color: #f4ffe6;
+        }
+        .fancyTable tbody tr td {
+             background-color: transparent;
+        }
+        .title {
+            background: url('../Public/static/h-ui.admin/images/divide.jpg') center no-repeat;
+            -webkit-background-size: cover;
+            background-size: cover;
+        }
+        .source-panle {
+            cursor: pointer;
+            display: inline-block;
+            height: 30px;
+            text-align: center;
+            line-height:30px;
+            padding: 0 5px;
+            color: #fff;
+            background-color: #06b36b;
+            margin: 5px 6px;
+        }
+    </style>
+</head>
+<body>
+<div class="page-container pt-10">
+    <table class="table table-border table-bordered">
+        <tr class="success">
+            <th class="text-c" width="100" style="padding: 4px">当前用户：</th>
+            <th class="text-c" style="padding: 4px">角色列表</th>
+        </tr>
+        <tr class="bg-body">
+            <td class="text-c" style="line-height: 41px">admin</td>
+            <td class="text-l">
+                <span class="source-panle">系统管理</span>
+            </td>
+        </tr>
+    </table>
+    <div class="row cl mt-10">
+        <div class="col-xs-12 col-sm-6" style="margin-right: -15px">
+            <h4 class="text-c title">系统角色列表</h4>
+            <div>
+                <table class="fancyTable" id="myTable01" cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th class="text-c">
+                            <input type="checkbox" name="" value="">
+                        </th>
+                        <th class="text-c">ID</th>
+                        <th class="text-c">角色名</th>
+                        <th class="text-c">描述</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="text-c">
+                        <td>
+                            <input type="checkbox" value="1" name="subChk">
+                        </td>
+                        <td>1</td>
+                        <td>超级管理员</td>
+                        <td>拥有至高无上的权利</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td>
+                            <input type="checkbox" value="1" name="subChk">
+                        </td>
+                        <td>2</td>
+                        <td>总编</td>
+                        <td>具有添加、审核、发布、删除内容的权限</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td>
+                            <input type="checkbox" value="1" name="subChk">
+                        </td>
+                        <td>3</td>
+                        <td>学校管理员</td>
+                        <td>只对所在栏目具有添加、审核、发布、删除内容的权限</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td>
+                            <input type="checkbox" value="1" name="subChk">
+                        </td>
+                        <td>4</td>
+                        <td>学校管理员</td>
+                        <td>只对所在栏目具有添加、删除草稿等权利。</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td>
+                            <input type="checkbox" value="1" name="subChk">
+                        </td>
+                        <td>1</td>
+                        <td>超级管理员</td>
+                        <td>拥有至高无上的权利</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td>
+                            <input type="checkbox" value="1" name="subChk">
+                        </td>
+                        <td>2</td>
+                        <td>总编</td>
+                        <td>具有添加、审核、发布、删除内容的权限</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <h4 class="text-c title">自定义角色列表</h4>
+            <div>
+                <table class="fancyTable" id="myTable02" cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th class="text-c">
+                            <input type="checkbox" name="" value="">
+                        </th>
+                        <th class="text-c">ID</th>
+                        <th class="text-c">角色名</th>
+                        <th class="text-c">描述</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="text-c">
+                        <td>
+                            <input type="checkbox" value="1" name="subChk">
+                        </td>
+                        <td>1</td>
+                        <td>超级管理员</td>
+                        <td>拥有至高无上的权利</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td>
+                            <input type="checkbox" value="1" name="subChk">
+                        </td>
+                        <td>2</td>
+                        <td>总编</td>
+                        <td>具有添加、审核、发布、删除内容的权限</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td>
+                            <input type="checkbox" value="1" name="subChk">
+                        </td>
+                        <td>3</td>
+                        <td>学校管理员</td>
+                        <td>只对所在栏目具有添加、审核、发布、删除内容的权限</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td>
+                            <input type="checkbox" value="1" name="subChk">
+                        </td>
+                        <td>4</td>
+                        <td>学校管理员</td>
+                        <td>只对所在栏目具有添加、删除草稿等权利。</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td>
+                            <input type="checkbox" value="1" name="subChk">
+                        </td>
+                        <td>1</td>
+                        <td>超级管理员</td>
+                        <td>拥有至高无上的权利</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td>
+                            <input type="checkbox" value="1" name="subChk">
+                        </td>
+                        <td>1</td>
+                        <td>超级管理员</td>
+                        <td>拥有至高无上的权利</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td>
+                            <input type="checkbox" value="1" name="subChk">
+                        </td>
+                        <td>2</td>
+                        <td>总编</td>
+                        <td>具有添加、审核、发布、删除内容的权限</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td>
+                            <input type="checkbox" value="1" name="subChk">
+                        </td>
+                        <td>3</td>
+                        <td>学校管理员</td>
+                        <td>只对所在栏目具有添加、审核、发布、删除内容的权限</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td>
+                            <input type="checkbox" value="1" name="subChk">
+                        </td>
+                        <td>4</td>
+                        <td>学校管理员</td>
+                        <td>只对所在栏目具有添加、删除草稿等权利。</td>
+                    </tr>
+                    <tr class="text-c">
+                        <td>
+                            <input type="checkbox" value="1" name="subChk">
+                        </td>
+                        <td>1</td>
+                        <td>超级管理员</td>
+                        <td>拥有至高无上的权利</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row cl">
+        <div class="col-xs-4 col-xs-offset-4">
+            <button class="btn radius btn-success" style="width: 100%;margin-top: 30px;">确认分配</button>
+        </div>
+    </div>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
+<!--/_footer 作为公共模版分离出去-->
+<script src="../Public/lib/fixedheader/jquery.fixedheadertable.js"></script>
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript">
+    $(function () {
+        $('#myTable01,#myTable02').fixedHeaderTable({footer: true, altClass: 'odd', height: 300});
+        $('.fht-table').css('width','100%');
+        //  资源的删除操作
+        $('.source-panle').each(function () {
+            var ele = this;
+            $(this).click(function () {
+                var newB = $('<b class="Hui-iconfont ml-5">&#xe6a6;</b>');
+                if(!$(this).children().is('.Hui-iconfont')){
+                    $(this).append(newB)
+                }else{
+                    layer.confirm('确认删除该资源？', {
+                        btn: ['确认','取消'] //按钮
+                    }, function(){
+                        var $span = $(ele);
+                        $span.remove()
+                        layer.msg('已删除，可在右侧重新添加', {icon: 1});
+                    }, function(){
+
+                    });
+                }
+            })
+        });
+        // 左侧移入
+        $('.btn-in').click(function () {
+            layer.confirm('是否确认将该学校移入A片区', {
+                btn: ['确认', '取消'] //按钮
+            }, function () {
+                layer.msg('已移入A片区', {icon: 1});
+            }, function () {
+
+            });
+        });
+        // 右侧移出
+        $('.btn-out').click(function () {
+            layer.open({
+                title: '移动到...',
+                type: 1,
+                skin: 'layui-layer-rim', //加上边框
+                area: ['420px', ''], //宽高
+                content: '<h4 class="text-c">请选择移动至哪个片区</h4> <span class="select-box" style="width:80%;margin-left:10%"><select class="select" size="1" name="demo1"><option value="" selected>A片区</option><option value="1">B片区</option><option value="2">C片区</option></select></span> <h2 class="text-c"><button class="btn btn-primary radius btn-in">确认移动</button></h2> '
+            });
+        });
+    })
+</script>
+</body>
+</html>

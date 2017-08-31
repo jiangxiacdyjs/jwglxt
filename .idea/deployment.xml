@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData">
+  <component name="PublishConfigData" serverName="zy.jw.xiaoyut.cn">
     <serverData>
       <paths name="JinHaiJinFu">
         <serverdata>
@@ -23,10 +23,31 @@
           </mappings>
         </serverdata>
       </paths>
-      <paths name="xiaoyut">
+      <paths name="www.xiaoyut.cn">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="wx.xiaoyut.cn">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="xiaoyut.static">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="zy.jw.xiaoyut.cn">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/var/www/zyjw" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
