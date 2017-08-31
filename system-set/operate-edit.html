@@ -1,0 +1,175 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="../static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="../lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/skin/green/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/css/style.css"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <!--/meta 作为公共模版分离出去-->
+    <title>新增资源</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+</head>
+
+<body>
+<article class="page-container">
+    <form action="" method="post" class="form form-horizontal" id="form-admin-source-add">
+        <!--资源名称-->
+        <div class="row cl">
+            <div class="formControls col-xs-8 col-xs-offset-2">
+                <div class="row cl" style="margin-top: 0;">
+                    <div class="col-xs-3">
+                        操作名称：
+                    </div>
+                    <div class="col-xs-9">
+                        <input type="text" class="input-text" value="" placeholder="按功能命名" id="sName" name="sName">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--所属模块-->
+        <div class="row cl">
+            <div class="formControls col-xs-8 col-xs-offset-2">
+                <div class="row cl" style="margin-top: 0;">
+                    <div class="col-xs-3">
+                        所属模块：
+                    </div>
+                    <div class="col-xs-9">
+                        <div class="row cl" style="margin-top: 0">
+                            <div class="col-xs-12">
+                               <span class="select-box">
+                          <select id="ownModule" class="select" size="1" name="group">
+
+                          </select>
+                        </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--所属页面-->
+        <div class="row cl">
+            <div class="formControls col-xs-8 col-xs-offset-2">
+                <div class="row cl" style="margin-top: 0;">
+                    <div class="col-xs-3">
+                        所属页面：
+                    </div>
+                    <div class="col-xs-9">
+                        <div class="row cl" style="margin-top: 0">
+                            <div class="col-xs-12">
+                               <span class="select-box">
+                          <select id="ownPage" class="select" size="1" name="group">
+
+                          </select>
+                        </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--操作描述-->
+        <div class="row cl">
+            <div class="formControls col-xs-8 col-xs-offset-2">
+                <div class="row cl" style="margin-top: 0;">
+                    <div class="col-xs-3">
+                        操作描述：
+                    </div>
+                    <div class="col-xs-9">
+                        <input type="text" class="input-text" value="" placeholder="" name="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--确认新增-->
+        <div class="row cl">
+            <div class="col-xs-4 col-xs-offset-4">
+                <button type="submit" style="width: 100%;margin-top: 30px" class="btn btn-success radius"
+                        id="admin-role-save" name="admin-role-save"><i class="icon-ok"></i> 确定
+                </button>
+            </div>
+        </div>
+    </form>
+</article>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="../lib/jquery/1.9.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="../static/h-ui.admin/js/H-ui.admin.js"></script>
+<!--/_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="../lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="../lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="../lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#form-admin-source-add").validate({
+            rules: {
+                sName: {
+                    required: true,
+                },
+                sUrl: {
+                    required: true,
+                },
+            },
+            onkeyup: false,
+            focusCleanup: true,
+            success: "valid",
+            submitHandler: function (form) {
+                $(form).ajaxSubmit();
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+            }
+        });
+    });
+
+
+
+    var module = document.getElementById('ownModule');
+    var page = document.getElementById('ownPage');
+
+    //准备数据
+    var moList = ['系统设置', '紫云教务', '远程监控', '营养改善'];
+    var pageList = [];
+    pageList[0] = ['系统设置页面', '系统设置页面', '系统设置页面'];
+    pageList[1] = ['紫云教务页面', '紫云教务页面', '紫云教务页面', '紫云教务页面', '紫云教务页面'];
+    pageList[2] = ['远程监控页面', '远程监控页面'];
+    pageList[3] = ['营养改善页面','营养改善页面'];
+
+    //初始化  添加模块options
+    for (var i = 0; i < moList.length; i++) {
+        module.add(new Option(moList[i], i));
+    }
+
+    module.onchange = function() {
+        page.length = 0;
+        var inter = module.value;
+        var cityst = pageList[inter];
+        for (var i = 0; i < cityst.length; i++) {
+            page.add(new Option(cityst[i], i));
+        }
+    }
+    module.onchange();
+
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+
+</html>

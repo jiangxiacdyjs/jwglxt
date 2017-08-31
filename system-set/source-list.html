@@ -152,12 +152,12 @@
                         </td>
                         <td>1510</td>
                         <td>68</td>
-
-                        <td class="f-14 td-manage">
-                            <a class="btn btn-success" onClick="article_view('学校片区管理','../nutritious-meal/allot-school.html','100%','100%')"
-                               href="javascript:;" title="片区管理">片区管理</a>
-                            <a class="btn btn-primary" onClick="relevance()" href="javascript:;"
-                               title="关联配送公司">关联配送公司</a>
+                        <td class="f-14">
+                            <a title="编辑" href="javascript:;" onclick="source_add('编辑操作','operate-edit.html','800','500')"
+                               style="text-decoration:none">
+                                <i class="Hui-iconfont">&#xe6df;</i></a>
+                            <a title="删除" href="javascript:;" onclick="source_del(this,'1')" class="ml-5"
+                               style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
                         </td>
                     </tr>
                     </tbody>
@@ -276,8 +276,7 @@
         }
 
         tableSort('.table-sort0', 5)
-        tableSort('.table-sort1', 5)
-        tableSort('.table-sort2', 5)
+        tableSort('.table-sort1', 3)
     })
 
 </script>
