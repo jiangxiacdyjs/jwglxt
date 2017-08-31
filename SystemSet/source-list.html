@@ -49,23 +49,22 @@
 <div class="page-container">
     <div id="HuiTab-demo1" class="HuiTab">
         <div class="tabBar clearfix">
-            <span class="current">系统设置</span>
-            <span>教务管理</span>
-            <span>远程监控</span>
-            <span>营养改善</span>
+            <span class="current">资源列表</span>
+            <span>操作列表</span>
         </div>
-        <div class="cl pd-5 bg-1 bk-gray mt-20">
-            <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
-                <i class="Hui-iconfont">&#xe6a6;</i> 删除资源
-            </a>
-            <a class="btn btn-primary radius" href="javascript:;"
-               onclick="source_add('新增资源','source-add.html','800','500')">
-                <i class="Hui-iconfont">&#xe600;</i> 新增资源
-            </a>
-            <span class="r">共有数据：<strong>8</strong> 条</span>
-        </div>
+
         <!-- 系统设置 -->
         <div class="tabCon">
+            <div class="cl pd-5 bg-1 bk-gray mt-20">
+                <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
+                    <i class="Hui-iconfont">&#xe6a6;</i> 删除资源
+                </a>
+                <a class="btn btn-primary radius" href="javascript:;"
+                   onclick="source_add('新增资源','source-add.html','800','500')">
+                    <i class="Hui-iconfont">&#xe600;</i> 新增资源
+                </a>
+                <span class="r">共有数据：<strong>8</strong> 条</span>
+            </div>
             <div class="mt-20 rel">
                 <table class="table table-border table-bordered table-bg table-hover table-sort0">
                     <thead>
@@ -133,153 +132,38 @@
                 </table>
             </div>
         </div>
-        <!-- 教务管理 -->
+        <!-- 操作列表 -->
         <div class="tabCon">
+            <div class="cl pd-5 bg-1 bk-gray mt-20">
+                <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
+                    <i class="Hui-iconfont">&#xe6a6;</i> 删除资源
+                </a>
+                <a class="btn btn-primary radius" href="javascript:;"
+                   onclick="source_add('新增资源','source-add.html','800','500')">
+                    <i class="Hui-iconfont">&#xe600;</i> 新增资源
+                </a>
+                <span class="r">共有数据：<strong>8</strong> 条</span>
+            </div>
             <div class="mt-20 rel">
                 <table class="table table-border table-bordered table-bg table-hover table-sort1">
                     <thead>
                     <tr class="text-c">
-                        <th>
-                            <input type="checkbox" name="check0" value="">
-                        </th>
                         <th>编号</th>
-                        <th>学校名称</th>
-                        <th>学生数量</th>
-                        <th>教师数量</th>
-                        <th>关联配送公司</th>
-                        <th>操作</th>
+                        <th>操作控制名称</th>
+                        <th>操作描述</th>
+                        <th>排序权值</th>
+                        <th>状态</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="" name="">
-                        </td>
                         <td>1</td>
                         <td><span style="cursor:pointer" class="text-primary"
                                   onClick="school_show('紫云二小','../school-show.html','','300')" title="查看">紫云一小</span>
                         </td>
                         <td>1510</td>
                         <td>68</td>
-                        <td>
-                        </td>
-                        <td class="f-14 td-manage">
-                            <a class="btn btn-success" onClick="article_view('学校片区管理','../nutritious-meal/allot-school.html','100%','100%')"
-                               href="javascript:;" title="片区管理">片区管理</a>
-                            <a class="btn btn-primary" onClick="relevance()" href="javascript:;"
-                               title="关联配送公司">关联配送公司</a>
-                        </td>
-                    </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="" name="">
-                        </td>
-                        <td>1</td>
-                        <td><span style="cursor:pointer" class="text-primary"
-                                  onClick="school_show('紫云二小','../school-show.html','','300')" title="查看">紫云一小</span>
-                        </td>
-                        <td>1510</td>
-                        <td>68</td>
-                        <td>
-                        </td>
-                        <td class="f-14 td-manage">
-                            <a class="btn btn-success" onClick="article_view('学校片区管理','../nutritious-meal/allot-school.html','100%','100%')"
-                               href="javascript:;" title="片区管理">片区管理</a>
-                            <a class="btn btn-primary" onClick="relevance()" href="javascript:;"
-                               title="关联配送公司">关联配送公司</a>
-                        </td>
-                    </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="" name="">
-                        </td>
-                        <td>1</td>
-                        <td><span style="cursor:pointer" class="text-primary"
-                                  onClick="school_show('紫云二小','../school-show.html','','300')" title="查看">紫云一小</span>
-                        </td>
-                        <td>1510</td>
-                        <td>68</td>
-                        <td>
-                        </td>
-                        <td class="f-14 td-manage">
-                            <a class="btn btn-success" onClick="article_view('学校片区管理','../nutritious-meal/allot-school.html','100%','100%')"
-                               href="javascript:;" title="片区管理">片区管理</a>
-                            <a class="btn btn-primary" onClick="relevance()" href="javascript:;"
-                               title="关联配送公司">关联配送公司</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <!-- 远程监控 -->
-        <div class="tabCon">
-            <div class="mt-20 rel">
-                <table class="table table-border table-bordered table-bg table-hover table-sort2">
-                    <thead>
-                    <tr class="text-c">
-                        <th>
-                            <input type="checkbox" name="check0" value="">
-                        </th>
-                        <th>编号</th>
-                        <th>学校名称</th>
-                        <th>学生数量</th>
-                        <th>教师数量</th>
-                        <th>关联配送公司</th>
-                        <th>操作</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="" name="">
-                        </td>
-                        <td>1</td>
-                        <td><span style="cursor:pointer" class="text-primary"
-                                  onClick="school_show('紫云二小','../school-show.html','','300')" title="查看">紫云一小</span>
-                        </td>
-                        <td>1510</td>
-                        <td>68</td>
-                        <td>
-                        </td>
-                        <td class="f-14 td-manage">
-                            <a class="btn btn-success" onClick="article_view('学校片区管理','../nutritious-meal/allot-school.html','100%','100%')"
-                               href="javascript:;" title="片区管理">片区管理</a>
-                            <a class="btn btn-primary" onClick="relevance()" href="javascript:;"
-                               title="关联配送公司">关联配送公司</a>
-                        </td>
-                    </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="" name="">
-                        </td>
-                        <td>1</td>
-                        <td><span style="cursor:pointer" class="text-primary"
-                                  onClick="school_show('紫云二小','../school-show.html','','300')" title="查看">紫云一小</span>
-                        </td>
-                        <td>1510</td>
-                        <td>68</td>
-                        <td>
-                        </td>
-                        <td class="f-14 td-manage">
-                            <a class="btn btn-success" onClick="article_view('学校片区管理','../nutritious-meal/allot-school.html','100%','100%')"
-                               href="javascript:;" title="片区管理">片区管理</a>
-                            <a class="btn btn-primary" onClick="relevance()" href="javascript:;"
-                               title="关联配送公司">关联配送公司</a>
-                        </td>
-                    </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="" name="">
-                        </td>
-                        <td>1</td>
-                        <td><span style="cursor:pointer" class="text-primary"
-                                  onClick="school_show('紫云二小','../school-show.html','','300')" title="查看">紫云一小</span>
-                        </td>
-                        <td>1510</td>
-                        <td>68</td>
-                        <td>
-                        </td>
+
                         <td class="f-14 td-manage">
                             <a class="btn btn-success" onClick="article_view('学校片区管理','../nutritious-meal/allot-school.html','100%','100%')"
                                href="javascript:;" title="片区管理">片区管理</a>

@@ -1,22 +1,3 @@
-/*!
- * jquery.fixedHeaderTable. The jQuery fixedHeaderTable plugin
- *
- * Copyright (c) 2013 Mark Malek
- * http://fixedheadertable.com
- *
- * Licensed under MIT
- * http://www.opensource.org/licenses/mit-license.php
- *
- * http://docs.jquery.com/Plugins/Authoring
- * jQuery authoring guidelines
- *
- * Launch  : October 2009
- * Version : 1.3
- * Released: May 9th, 2011
- *
- *
- * all CSS sizing (width,height) is done in pixels (px)
- */
 
 (function ($) {
 
@@ -335,7 +316,7 @@
 
             $fixedColumns.find('.fht-tbody table')
               .css({
-                  'margin-top': -$self.scrollTop()
+                  'margin-top': -$self.scrollTop(),
               });
           }
 
@@ -381,7 +362,7 @@
         } else {
           $obj.each(function() {
             $(this).css({
-              'width': width == undefined ? $(this).parent().width() + tableProps.border : width + tableProps.border
+              'width': width == undefined ? $(this).parent().width() + tableProps.border: width + tableProps.border
             });
           });
         }
@@ -612,7 +593,7 @@
           if (!$(this).closest('.fht-tbody').length && $(this).is(':last-child') && !$(this).closest('.fht-fixed-column').length) {
             var padding = Math.max((($(this).innerWidth() - $(this).width()) / 2), settings.scrollbarOffset);
             $(this).css({
-              'padding-right': parseInt($(this).css('padding-right')) + padding + 'px'
+              'padding-right': parseInt($(this).css('padding-right')) + padding-12 + 'px'
             });
           }
         });

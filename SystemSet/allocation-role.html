@@ -35,9 +35,6 @@
         .fancyTable tbody tr td {
              background-color: transparent;
         }
-        .fancyTable td, .fancyTable th {
-            border: 1px solid #646464;
-        }
         .title {
             background: url('../Public/static/h-ui.admin/images/divide.jpg') center no-repeat;
             -webkit-background-size: cover;
@@ -64,16 +61,9 @@
             <th class="text-c" style="padding: 4px">角色列表</th>
         </tr>
         <tr class="bg-body">
-            <td class="text-c">admin</td>
+            <td class="text-c" style="line-height: 41px">admin</td>
             <td class="text-l">
-                <span class="source-panle">系统管理员</span>
-                <span class="source-panle">系统管理员</span>
-                <span class="source-panle">系统管理员</span>
-                <span class="source-panle">系统管理员</span>
-                <span class="source-panle">系统管理员</span>
-                <span class="source-panle">系统管理员</span>
-                <span class="source-panle">系统管理员</span>
-                <span class="source-panle">系统管理员</span>
+                <span class="source-panle">系统管理</span>
             </td>
         </tr>
     </table>
@@ -140,54 +130,6 @@
                         <td>2</td>
                         <td>总编</td>
                         <td>具有添加、审核、发布、删除内容的权限</td>
-                    </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="1" name="subChk">
-                        </td>
-                        <td>3</td>
-                        <td>学校管理员</td>
-                        <td>只对所在栏目具有添加、审核、发布、删除内容的权限</td>
-                    </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="1" name="subChk">
-                        </td>
-                        <td>4</td>
-                        <td>学校管理员</td>
-                        <td>只对所在栏目具有添加、删除草稿等权利。</td>
-                    </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="1" name="subChk">
-                        </td>
-                        <td>1</td>
-                        <td>超级管理员</td>
-                        <td>拥有至高无上的权利</td>
-                    </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="1" name="subChk">
-                        </td>
-                        <td>2</td>
-                        <td>总编</td>
-                        <td>具有添加、审核、发布、删除内容的权限</td>
-                    </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="1" name="subChk">
-                        </td>
-                        <td>3</td>
-                        <td>学校管理员</td>
-                        <td>只对所在栏目具有添加、审核、发布、删除内容的权限</td>
-                    </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="1" name="subChk">
-                        </td>
-                        <td>4</td>
-                        <td>学校管理员</td>
-                        <td>只对所在栏目具有添加、删除草稿等权利。</td>
                     </tr>
                     </tbody>
                 </table>
@@ -310,7 +252,8 @@
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript">
     $(function () {
-        $('#myTable01,#myTable02').fixedHeaderTable({footer: true, altClass: 'odd', height: 270});
+        $('#myTable01,#myTable02').fixedHeaderTable({footer: true, altClass: 'odd', height: 300});
+        $('.fht-table').css('width','100%');
         //  资源的删除操作
         $('.source-panle').each(function () {
             var ele = this;
@@ -330,7 +273,7 @@
                     });
                 }
             })
-        })
+        });
         // 左侧移入
         $('.btn-in').click(function () {
             layer.confirm('是否确认将该学校移入A片区', {
@@ -340,7 +283,7 @@
             }, function () {
 
             });
-        })
+        });
         // 右侧移出
         $('.btn-out').click(function () {
             layer.open({
@@ -350,8 +293,7 @@
                 area: ['420px', ''], //宽高
                 content: '<h4 class="text-c">请选择移动至哪个片区</h4> <span class="select-box" style="width:80%;margin-left:10%"><select class="select" size="1" name="demo1"><option value="" selected>A片区</option><option value="1">B片区</option><option value="2">C片区</option></select></span> <h2 class="text-c"><button class="btn btn-primary radius btn-in">确认移动</button></h2> '
             });
-        })
-
+        });
     })
 </script>
 </body>
