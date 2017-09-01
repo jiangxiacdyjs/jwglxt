@@ -70,8 +70,6 @@
                         <th class="text-c">目录权限：</th>
                         <td id="ownAuthority">
                             <span class="source-panle rel">用户管理</span>
-                            <span class="source-panle rel">角色管理</span>
-                            <span class="source-panle rel">教师管理</span>
                         </td>
                     </tr>
                     <tr class="bg-body">
@@ -81,14 +79,6 @@
                                <span class="badge-danger badge">用户管理</span>：
                                <span>创建用户</span>、<span>删除用户</span>、<span>编辑用户</span>、<span>禁用用户</span>
                            </div>
-                           <div class="mtb-5">
-                               <span class="badge-danger badge">角色管理</span>：
-                               <span>创建角色</span>、<span>删除角色</span>
-                           </div>
-                           <div class="mtb-5">
-                               <span class="badge-danger badge">教师管理</span>：
-                               <span>创建教师</span>、<span>编辑教师</span>、<span>删除教师</span>
-                           </div>
                         </td>
                     </tr>
                 </table>
@@ -96,19 +86,13 @@
             <div class="formControls col-xs-6">
                 <h4 class="text-c f-22 title">权限列表</h4>
                 <ul id="Huifold1" class="Huifold">
-                    <!-- 系統管理 -->
+<!--                    &lt;!&ndash; 系統管理 &ndash;&gt;
                     <li class="item">
                         <h4>系统设置<b>+</b>
                         </h4>
-                        <div class="info" style="display: block;">
-                            <!-- 系统管理资源 -->
+                        <div class="info">
+                            &lt;!&ndash; 系统管理资源 &ndash;&gt;
                             <dl class="permission-list">
-                                <dt>
-                                    <label>
-                                        <input type="checkbox" value="" name="user-Character-0" id="user-Character-0">
-                                        勾选全部
-                                    </label>
-                                </dt>
                                 <dd>
                                     <dl class="cl permission-list2">
                                         <dt>
@@ -166,17 +150,11 @@
                             </dl>
                         </div>
                     </li>
-                    <!-- 教务管理 -->
+                    &lt;!&ndash; 教务管理 &ndash;&gt;
                     <li class="item">
                         <h4>教务管理<b>+</b></h4>
                         <div class="info">
                             <dl class="permission-list">
-                                <dt>
-                                    <label>
-                                        <input type="checkbox" value="" name="user-Character-1" id="user-Character-1">
-                                        勾选全部
-                                    </label>
-                                </dt>
                                 <dd>
                                     <dl class="cl permission-list2">
                                         <dt>
@@ -218,17 +196,11 @@
                             </dl>
                         </div>
                     </li>
-                    <!-- 营养改善 -->
+                    &lt;!&ndash; 营养改善 &ndash;&gt;
                     <li class="item">
                         <h4>营养改善<b>+</b></h4>
                         <div class="info">
                             <dl class="permission-list">
-                                <dt>
-                                    <label>
-                                        <input type="checkbox" value="" name="user-Character-2" id="user-Character-2">
-                                        勾选全部
-                                    </label>
-                                </dt>
                                 <dd>
                                     <dl class="cl permission-list2">
                                         <dt>
@@ -251,7 +223,7 @@
                                 </dd>
                             </dl>
                         </div>
-                    </li>
+                    </li>-->
                 </ul>
             </div>
         </div>
@@ -275,12 +247,128 @@
 <script type="text/javascript" src="../Public/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
 <script type="text/javascript" src="../Public/lib/jquery.validation/1.14.0/validate-methods.js"></script>
 <script type="text/javascript" src="../Public/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+
 <script type="text/javascript">
+    function getCatlogOperate() {
+        $.ajax({
+            type: 'POST',
+            url: 'http://test.xiaoyut.cn/SystemSet/getCatlogOperate.html',
+            dataType: 'json',
+            data: {
+                hasChild:1
+            },
+            success: function (data) {
+                console.log(data);
+                if(data.status == 'success'){
+                    moList = data.module;
+                    pageList = data.pageList;
+                    operateList = data.catlogOperate;
+                    makeOperateCatlogList(moList,pageList,operateList);
+                    $.Huifold("#Huifold1 .item h4", "#Huifold1 .item .info", "fast", 3, "click");
+                    /*获取本行所有被选中的input的对应span里面的值*/
+                    function getSpanArr(ele) {
+                        var txtSm = [];
+                        var txtS;
+                        var labSmLen = ele.find('input:checked').length;
+                        for (var i = 0 ; i<labSmLen ; i++){
+                            txtSm[i] = ddSm.find('input:checked').eq(i).next().text();
+                        };
+                        return txtAll;
+                        var txtJson = {
+                            tit:txtS,
+                            con:txtSm
+                        };
+                        return txtJson;
+                    };
+
+                    /*区块全选和单行全选*/
+                    $(".permission-list dt input:checkbox").click(function () {
+                        $(this).closest("dl").find("dd input:checkbox").prop("checked", $(this).prop("checked"));
+                        console.log(getSpanArr($(this)))
+                    });
+                    /*每一行总分类的点击事件*/
+                    $(".permission-list2 dt input:checkbox").click(function () {
+                        if($(this).is(':checked')){   // 选中操作
+                            $('#ownAuthority').append($('<span/>').addClass('source-panle').addClass('rel').html($(this).next().html()).attr('menu_id',$(this).next().attr('id')));
+                            $('#doAuthority').append($('<div/>').addClass('mtb-5')
+                                .attr('menu_id',$(this).next().attr('id'))
+                                .append($('<span/>').addClass('badge-danger').addClass('badge').html($(this).next().html()))
+                                .append($('<span/>').html('：')));
+                        }
+                        if(!$(this).is(':checked')){  // 取消选中操作
+                            $('#ownAuthority').find('span[menu_id='+$(this).next().attr('id')+']').remove();
+                            $('#doAuthority').find('div[menu_id='+$(this).next().attr('id')+']').remove();
+                        }
+                    });
+                    /*每一行子分类的点击事件*/
+                    $(".permission-list2 dd input:checkbox").click(function () {
+                        var menu_dt_input = $(this).closest('dl').find('dt').find('input:checkbox');
+                        var oChecked = $(this).closest('dd').find("input:checked");
+                        if($(this).is(':checked')) {  // 选中操作
+                            if(!menu_dt_input.is(':checked')){
+                                menu_dt_input.prop("checked", true);
+                            };  //设置本行的总分类选框选中
+
+                            var div = $('#doAuthority').find('div[menu_id='+menu_dt_input.next().attr('id')+']');
+                            if(div.find('span').length > 2){
+                                div.append(
+                                    $('<span/>').attr('operate_id',$(this).next().attr('operate_id'))
+                                        .html('、'+$(this).next().html())
+                                );
+                            }else{
+                                div.append(
+                                    $('<span/>').attr('operate_id',$(this).next().attr('operate_id'))
+                                        .html($(this).next().html())
+                                );
+                            }
+                        }
+                        if(!$(this).is(':checked')) {  // 取消选中操作:本行是否全未选？取消总分的选择
+                            var oCheckedLen = oChecked.length;
+                            if(oCheckedLen  == 0){
+                                menu_dt_input.attr("checked", false);
+                            };
+                            $('#doAuthority').find('div[menu_id='+menu_dt_input.next().attr('id')+']').find('span[operate_id='+$(this).next().attr('operate_id')+']').remove();
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    function makeOperateCatlogList(moList,pageList,operateList) {
+
+        var modUl = $('#Huifold1').empty();
+
+        $.each(moList, function(name, value) {
+
+            var modLi = $('<li/>').addClass('item').append('<h4>'+value+'<b>+</b></h4>').attr('id',name).appendTo(modUl);
+            var divInfo = $('<div/>').addClass('info').appendTo(modLi);
+            var dl = $('<dl/>').addClass('permission-list').appendTo(divInfo);//<dl class="permission-list">
+            var dd = $('<dd/>').appendTo(dl);
+
+            var pages = pageList[name];
+            if(!pages) return ;
+            $.each(pages, function(name, value) {
+                var dl_Page = $('<dl/>').addClass('cl').addClass('permission-list2').append($('<dt/>')).appendTo(dd);
+                dl_Page.find('dt').append($('<input/>').attr('type','checkbox')).append($('<span/>').html(value).attr('id',name));
+                dl_Page.append($('<dd>'));
+
+                var operates = operateList[name];
+                if(!operates) return true;
+                $.each(operates, function(name, value) {
+                    var label = $('<label/>').appendTo(dl_Page.find('dd'));
+                    label.append($('<input/>').attr('type','checkbox')).append($('<span/>').html(value).attr('operate_id',name));
+                });
+            });
+
+        });
+
+    }
 
     $(function () {
         // 初始化tab
-        $.Huifold("#Huifold1 .item h4", "#Huifold1 .item .info", "fast", 3, "click");
-        /*5个参数顺序不可打乱，分别是：相应区,隐藏显示的内容,速度,类型,事件*/
+        getCatlogOperate();
+
         //  资源的删除操作
         function delSource() {
             $('.source-panle').each(function () {
@@ -305,20 +393,19 @@
         };
         delSource();
 
-        /*区块全选和单行全选*/
-        $(".permission-list dt input:checkbox").click(function () {
-            $(this).closest("dl").find("dd input:checkbox").prop("checked", $(this).prop("checked"));
-        });
+/*        $(".permission-list2 dt input:checkbox").click(function () {
+            alert( $(this).nextSbiling().attr('id') + "  " +  $(this).nextSbiling().html());
+        });*/
 
         /*每一行的子项选择事件*/
-        $(".permission-list2 dd input:checkbox").click(function () {
+/*        $(".permission-list2 dd input:checkbox").click(function () {
             var l = $(this).parent().parent().find("input:checked").length;  //这一行所有选中子项的个数
             var l2 = $(this).parents(".permission-list").find(".permission-list2 dd").find("input:checked").length;
             if ($(this).prop("checked")) {
                 var ele = $(this);
                 $(this).closest("dl").find("dt input:checkbox").prop("checked", true);  //如果子项选中，则这一行的的第一个主项选中
                 $(this).parents(".permission-list").find("dt").first().find("input:checkbox").prop("checked", true);
-                /*获取本行所有被选中的input的对应span里面的值*/
+                /!*获取本行所有被选中的input的对应span里面的值*!/
                 var arrChecked = function () {
                     var txtAll = [];
                     var labs = ele.closest("dl").find('label');
@@ -338,9 +425,9 @@
                 $oA.append(newOa);
                 $dA.append(newDa);
                 delSource()
-                /*ownAuthority*/
-                /*console.log(arrChecked()[0]);*/   //本行的行标文本
-                /*console.log(arrChecked());*/   //本行的所有文本
+                /!*ownAuthority*!/
+                /!*console.log(arrChecked()[0]);*!/   //本行的行标文本
+                /!*console.log(arrChecked());*!/   //本行的所有文本
 
             } else {
                 if (l == 0) {
@@ -350,26 +437,11 @@
                     $(this).parents(".permission-list").find("dt").first().find("input:checkbox").prop("checked", false);
                 }
             }
-        });
+        });*/
 
-        $("#form-admin-role-add").validate({
-            rules: {
-                roleName: {
-                    required: true,
-                },
-            },
-            onkeyup: false,
-            focusCleanup: true,
-            success: "valid",
-            submitHandler: function (form) {
-                $(form).ajaxSubmit();
-                var index = parent.layer.getFrameIndex(window.name);
-                parent.layer.close(index);
-            }
-        });
     });
 </script>
-<!--/请在上方写此页面业务相关的脚本-->
+
 </body>
 
 </html>
