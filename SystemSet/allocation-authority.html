@@ -42,7 +42,7 @@
             padding: 0 5px;
             color: #fff;
             background-color: #228fbd;
-            margin-top: 10px;
+            margin: 3px;
         }
         .title {
             background: url('../Public/static/h-ui.admin/images/divide.jpg') center no-repeat;
@@ -68,18 +68,11 @@
                     </tr>
                     <tr class="bg-body">
                         <th class="text-c">目录权限：</th>
-                        <td id="ownAuthority">
-                            <span class="source-panle rel">用户管理</span>
-                        </td>
+                        <td id="ownAuthority"></td>
                     </tr>
                     <tr class="bg-body">
                         <th class="text-c">操作权限：</th>
-                        <td class="text-l" id="doAuthority">
-                           <div class="mtb-5">
-                               <span class="badge-danger badge">用户管理</span>：
-                               <span>创建用户</span>、<span>删除用户</span>、<span>编辑用户</span>、<span>禁用用户</span>
-                           </div>
-                        </td>
+                        <td class="text-l" id="doAuthority"></td>
                     </tr>
                 </table>
             </div>
@@ -247,7 +240,10 @@
 <script type="text/javascript" src="../Public/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
 <script type="text/javascript" src="../Public/lib/jquery.validation/1.14.0/validate-methods.js"></script>
 <script type="text/javascript" src="../Public/lib/jquery.validation/1.14.0/messages_zh.js"></script>
-
+<!--var txtSm =[];
+for(var i=0;i<oChecked.length;i++){
+txtSm[i]= oChecked.eq(i).next().text()
+}; //console.log(txtSm)-->
 <script type="text/javascript">
     function getCatlogOperate() {
         $.ajax({
@@ -265,69 +261,76 @@
                     operateList = data.catlogOperate;
                     makeOperateCatlogList(moList,pageList,operateList);
                     $.Huifold("#Huifold1 .item h4", "#Huifold1 .item .info", "fast", 3, "click");
-                    /*获取本行所有被选中的input的对应span里面的值*/
-                    function getSpanArr(ele) {
-                        var txtSm = [];
-                        var txtS;
-                        var labSmLen = ele.find('input:checked').length;
-                        for (var i = 0 ; i<labSmLen ; i++){
-                            txtSm[i] = ddSm.find('input:checked').eq(i).next().text();
-                        };
-                        return txtAll;
-                        var txtJson = {
-                            tit:txtS,
-                            con:txtSm
-                        };
-                        return txtJson;
-                    };
 
-                    /*区块全选和单行全选*/
-                    $(".permission-list dt input:checkbox").click(function () {
-                        $(this).closest("dl").find("dd input:checkbox").prop("checked", $(this).prop("checked"));
-                        console.log(getSpanArr($(this)))
-                    });
+                    var $doAuthority = $('#doAuthority'),$ownAuthority = $('#ownAuthority');
+
                     /*每一行总分类的点击事件*/
                     $(".permission-list2 dt input:checkbox").click(function () {
                         if($(this).is(':checked')){   // 选中操作
-                            $('#ownAuthority').append($('<span/>').addClass('source-panle').addClass('rel').html($(this).next().html()).attr('menu_id',$(this).next().attr('id')));
+                            $('#ownAuthority').append($('<span/>').addClass('source-panle').addClass('rel').html($(this).next().html()).attr('catalog_id',$(this).next().attr('id')));
                             $('#doAuthority').append($('<div/>').addClass('mtb-5')
                                 .attr('menu_id',$(this).next().attr('id'))
                                 .append($('<span/>').addClass('badge-danger').addClass('badge').html($(this).next().html()))
-                                .append($('<span/>').html('：')));
+                                );
                         }
                         if(!$(this).is(':checked')){  // 取消选中操作
-                            $('#ownAuthority').find('span[menu_id='+$(this).next().attr('id')+']').remove();
-                            $('#doAuthority').find('div[menu_id='+$(this).next().attr('id')+']').remove();
+                            $ownAuthority.find('span[catalog_id='+$(this).next().attr('id')+']').remove();
+                            $doAuthority.find('div[menu_id='+$(this).next().attr('id')+']').remove();
+                            $(this).parent().siblings('dd').find('input:checkbox').prop("checked",false);
                         }
                     });
+
                     /*每一行子分类的点击事件*/
                     $(".permission-list2 dd input:checkbox").click(function () {
                         var menu_dt_input = $(this).closest('dl').find('dt').find('input:checkbox');
                         var oChecked = $(this).closest('dd').find("input:checked");
+                        var tLab = $(this).next().text();  //某个子权限
+                        var tTit = $(this).closest('dd').siblings('dt').find('span').text();  //本行标题
+                        var div = $('#doAuthority').find('div[menu_id='+menu_dt_input.next().attr('id')+']');
+
+                        var mid = menu_dt_input.next().attr('id');
+                        var opid = $(this).next().attr("operate_id");
+
+
                         if($(this).is(':checked')) {  // 选中操作
                             if(!menu_dt_input.is(':checked')){
-                                menu_dt_input.prop("checked", true);
-                            };  //设置本行的总分类选框选中
-
-                            var div = $('#doAuthority').find('div[menu_id='+menu_dt_input.next().attr('id')+']');
-                            if(div.find('span').length > 2){
+                                menu_dt_input.prop("checked", true);//设置本行的总分类选框选中
+                            };
+                            /*检测左侧表格中是否存在该项*/
+                            function checkExist() {
+                                if(div.find('span').length >=1){
+                                    return true;
+                                }else{
+                                    return false;
+                                }
+                            };
+                            if(checkExist()){
                                 div.append(
-                                    $('<span/>').attr('operate_id',$(this).next().attr('operate_id'))
-                                        .html('、'+$(this).next().html())
+                                    $('<span/>').addClass('ml-5').attr('show_operate_id',opid)
+                                        .html(tLab)
                                 );
                             }else{
-                                div.append(
-                                    $('<span/>').attr('operate_id',$(this).next().attr('operate_id'))
-                                        .html($(this).next().html())
+                                /*分别定义show_id、show_operate_id、catalog_id*/
+                                var box = $('<div/>').addClass('mtb-5').attr('menu_id',mid);
+                                box.append(
+                                    $('<span/>').addClass('badge-danger badge mr-5').attr('show_id',mid)
+                                        .html(tTit)
+                                );
+                                box.append(
+                                    $('<span/>').attr('show_operate_id',opid)
+                                        .html(tLab)
+                                );
+                                $doAuthority.append(box);
+                                $ownAuthority.append(
+                                    $('<span/>').addClass('source-panle').attr('catalog_id',mid).html(tTit)
                                 );
                             }
                         }
-                        if(!$(this).is(':checked')) {  // 取消选中操作:本行是否全未选？取消总分的选择
-                            var oCheckedLen = oChecked.length;
-                            if(oCheckedLen  == 0){
-                                menu_dt_input.attr("checked", false);
-                            };
-                            $('#doAuthority').find('div[menu_id='+menu_dt_input.next().attr('id')+']').find('span[operate_id='+$(this).next().attr('operate_id')+']').remove();
+                        if(!$(this).is(':checked')) {  // 取消选中操作
+
+                            div.find('span[show_operate_id='+opid+']').remove();
+
+
                         }
                     });
                 }
@@ -350,14 +353,14 @@
             if(!pages) return ;
             $.each(pages, function(name, value) {
                 var dl_Page = $('<dl/>').addClass('cl').addClass('permission-list2').append($('<dt/>')).appendTo(dd);
-                dl_Page.find('dt').append($('<input/>').attr('type','checkbox')).append($('<span/>').html(value).attr('id',name));
+                dl_Page.find('dt').append($('<input/>').addClass('mr-5').attr('type','checkbox')).append($('<span/>').html(value).attr('id',name));
                 dl_Page.append($('<dd>'));
 
                 var operates = operateList[name];
                 if(!operates) return true;
                 $.each(operates, function(name, value) {
                     var label = $('<label/>').appendTo(dl_Page.find('dd'));
-                    label.append($('<input/>').attr('type','checkbox')).append($('<span/>').html(value).attr('operate_id',name));
+                    label.append($('<input/>').addClass('mr-5').attr('type','checkbox')).append($('<span/>').html(value).attr('operate_id',name));
                 });
             });
 
@@ -368,76 +371,6 @@
     $(function () {
         // 初始化tab
         getCatlogOperate();
-
-        //  资源的删除操作
-        function delSource() {
-            $('.source-panle').each(function () {
-                var ele = this;
-                $(this).click(function () {
-                    var newB = $('<b class="Hui-iconfont ml-5">&#xe6a6;</b>');
-                    if(!$(this).children().is('.Hui-iconfont')){
-                        $(this).append(newB)
-                    }else{
-                        layer.confirm('确认删除该资源？', {
-                            btn: ['确认','取消'] //按钮
-                        }, function(){
-                            var $span = $(ele);
-                            $span.remove()
-                            layer.msg('已删除，可在右侧重新添加', {icon: 1});
-                        }, function(){
-
-                        });
-                    }
-                })
-            });
-        };
-        delSource();
-
-/*        $(".permission-list2 dt input:checkbox").click(function () {
-            alert( $(this).nextSbiling().attr('id') + "  " +  $(this).nextSbiling().html());
-        });*/
-
-        /*每一行的子项选择事件*/
-/*        $(".permission-list2 dd input:checkbox").click(function () {
-            var l = $(this).parent().parent().find("input:checked").length;  //这一行所有选中子项的个数
-            var l2 = $(this).parents(".permission-list").find(".permission-list2 dd").find("input:checked").length;
-            if ($(this).prop("checked")) {
-                var ele = $(this);
-                $(this).closest("dl").find("dt input:checkbox").prop("checked", true);  //如果子项选中，则这一行的的第一个主项选中
-                $(this).parents(".permission-list").find("dt").first().find("input:checkbox").prop("checked", true);
-                /!*获取本行所有被选中的input的对应span里面的值*!/
-                var arrChecked = function () {
-                    var txtAll = [];
-                    var labs = ele.closest("dl").find('label');
-                    var chkLen = labs.find('input:checked').length;
-                    for (var i = 0 ; i<chkLen ; i++){
-                        txtAll[i] = labs.find('input:checked').eq(i).next().text();
-                    }
-                    return txtAll;
-                };
-                var $oA = $('#ownAuthority');
-                var $dA = $('#doAuthority');
-                var newOa = '<span class="source-panle rel">'+arrChecked()[0]+'</span>' + " ";
-                var newDa = '<div class="mtb-5">' +
-                    '<span class="badge-danger badge">' +arrChecked()[0]+ '</span>' + " ：" +
-                    '<span>'+arrChecked()[1]+'</span>' +
-                    '</div>';
-                $oA.append(newOa);
-                $dA.append(newDa);
-                delSource()
-                /!*ownAuthority*!/
-                /!*console.log(arrChecked()[0]);*!/   //本行的行标文本
-                /!*console.log(arrChecked());*!/   //本行的所有文本
-
-            } else {
-                if (l == 0) {
-                    $(this).closest("dl").find("dt input:checkbox").prop("checked", false);
-                }
-                if (l2 == 0) {
-                    $(this).parents(".permission-list").find("dt").first().find("input:checkbox").prop("checked", false);
-                }
-            }
-        });*/
 
     });
 </script>
