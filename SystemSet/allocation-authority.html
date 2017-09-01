@@ -52,6 +52,13 @@
         .mtb-5{
             margin:5px auto;
         }
+        .label, .badge{
+            position: relative;
+            top: -2px;
+        }
+        i.c-999{
+            font-style: normal;
+        }
     </style>
 </head>
 
@@ -72,151 +79,14 @@
                     </tr>
                     <tr class="bg-body">
                         <th class="text-c">操作权限：</th>
-                        <td class="text-l" id="doAuthority"></td>
+                        <td class="text-l" id="doAuthority">
+                        </td>
                     </tr>
                 </table>
             </div>
             <div class="formControls col-xs-6">
                 <h4 class="text-c f-22 title">权限列表</h4>
                 <ul id="Huifold1" class="Huifold">
-<!--                    &lt;!&ndash; 系統管理 &ndash;&gt;
-                    <li class="item">
-                        <h4>系统设置<b>+</b>
-                        </h4>
-                        <div class="info">
-                            &lt;!&ndash; 系统管理资源 &ndash;&gt;
-                            <dl class="permission-list">
-                                <dd>
-                                    <dl class="cl permission-list2">
-                                        <dt>
-                                            <label class="">
-                                                <input type="checkbox" value="" name="user-Character-0-0"
-                                                       id="user-Character-0-0"> <span>用户管理</span>
-                                            </label>
-                                        </dt>
-                                        <dd>
-                                            <label class="">
-                                                <input type="checkbox" value="" name="user-Character-0-0-0"
-                                                       id="user-Character-0-0-0"> <span>创建用户</span>
-                                            </label>
-                                            <label class="">
-                                                <input type="checkbox" value="" name="user-Character-0-0-0"
-                                                       id="user-Character-0-0-1">  <span>编辑用户</span>
-                                            </label>
-                                            <label class="">
-                                                <input type="checkbox" value="" name="user-Character-0-0-0"
-                                                       id="user-Character-0-0-2"> <span>删除用户</span>
-                                            </label>
-                                            <label class="">
-                                                <input type="checkbox" value="" name="user-Character-0-0-0"
-                                                       id="user-Character-0-0-3"> <span>禁用用户</span>
-                                            </label>
-                                        </dd>
-                                    </dl>
-                                    <dl class="cl permission-list2">
-                                        <dt>
-                                            <label class="">
-                                                <input type="checkbox" value="" name="user-Character-0-1"
-                                                       id="user-Character-0-1"> <span>角色管理</span>
-                                            </label>
-                                        </dt>
-                                        <dd>
-                                            <label class="">
-                                                <input type="checkbox" value="" name="user-Character-0-1-0"
-                                                       id="user-Character-0-1-0"> <span>创建角色</span>
-                                            </label>
-                                            <label class="">
-                                                <input type="checkbox" value="" name="user-Character-0-1-0"
-                                                       id="user-Character-0-1-1"> <span>删除角色</span>
-                                            </label>
-                                        </dd>
-                                    </dl>
-                                    <dl class="cl permission-list2">
-                                        <dt>
-                                            <label class="">
-                                                <input type="checkbox" value="" name="user-Character-0-2"
-                                                       id="user-Character-0-2"> <span>个人设置</span>
-                                            </label>
-                                        </dt>
-                                    </dl>
-                                </dd>
-                            </dl>
-                        </div>
-                    </li>
-                    &lt;!&ndash; 教务管理 &ndash;&gt;
-                    <li class="item">
-                        <h4>教务管理<b>+</b></h4>
-                        <div class="info">
-                            <dl class="permission-list">
-                                <dd>
-                                    <dl class="cl permission-list2">
-                                        <dt>
-                                            <label class="">
-                                                <input type="checkbox" value="" name="user-Character-1-0"
-                                                       id="user-Character-1-0"> <span>教师管理</span>
-                                            </label>
-                                        </dt>
-                                        <dd>
-                                            <label class="">
-                                                <input type="checkbox" value="" name="user-Character-1-0-0"
-                                                       id="user-Character-1-0-0"> <span>添加教师</span>
-                                            </label>
-                                            <label class="">
-                                                <input type="checkbox" value="" name="user-Character-1-2"
-                                                       id="user-Character-1-0-1"> <span>删除教师</span>
-                                            </label>
-                                        </dd>
-                                    </dl>
-                                    <dl class="cl permission-list2">
-                                        <dt>
-                                            <label class="">
-                                                <input type="checkbox" value="" name="user-Character-1-1"
-                                                       id="user-Character-1-1"> <span>学校管理</span>
-                                            </label>
-                                        </dt>
-                                        <dd>
-                                            <label class="">
-                                                <input type="checkbox" value="" name="user-Character-1-1-0"
-                                                       id="user-Character-1-1-0"> <span>添加学校</span>
-                                            </label>
-                                            <label class="">
-                                                <input type="checkbox" value="" name="user-Character-1-1-1"
-                                                       id="user-Character-1-1-1"> <span>删除学校</span>
-                                            </label>
-                                        </dd>
-                                    </dl>
-                                </dd>
-                            </dl>
-                        </div>
-                    </li>
-                    &lt;!&ndash; 营养改善 &ndash;&gt;
-                    <li class="item">
-                        <h4>营养改善<b>+</b></h4>
-                        <div class="info">
-                            <dl class="permission-list">
-                                <dd>
-                                    <dl class="cl permission-list2">
-                                        <dt>
-                                            <label>
-                                                <input type="checkbox" value="" name="user-Character-2-0"
-                                                       id="user-Character-2-0"> <span>食材管理</span>
-                                            </label>
-                                        </dt>
-                                        <dd>
-                                            <label class="">
-                                                <input type="checkbox" value="" name="user-Character-2-0-0"
-                                                       id="user-Character-2-0-0"> <span>食谱上报</span>
-                                            </label>
-                                            <label class="">
-                                                <input type="checkbox" value="" name="user-Character-2-0-1"
-                                                       id="user-Character-2-0-1"> <span>食材编辑</span>
-                                            </label>
-                                        </dd>
-                                    </dl>
-                                </dd>
-                            </dl>
-                        </div>
-                    </li>-->
                 </ul>
             </div>
         </div>
@@ -240,6 +110,7 @@
 <script type="text/javascript" src="../Public/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
 <script type="text/javascript" src="../Public/lib/jquery.validation/1.14.0/validate-methods.js"></script>
 <script type="text/javascript" src="../Public/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+
 <!--var txtSm =[];
 for(var i=0;i<oChecked.length;i++){
 txtSm[i]= oChecked.eq(i).next().text()
@@ -264,13 +135,20 @@ txtSm[i]= oChecked.eq(i).next().text()
 
                     var $doAuthority = $('#doAuthority'),$ownAuthority = $('#ownAuthority');
 
-                    /*每一行总分类的点击事件*/
+                    /*模块名称绑定点击事件*/
+                    $('dt').children('span').css('cursor','pointer').on('click',function () {
+                        var theIpt = $(this).prev('input:checkbox');
+                        theIpt.click();
+                    });
+
+                    /*模块checkbox点击事件*/
                     $(".permission-list2 dt input:checkbox").click(function () {
                         if($(this).is(':checked')){   // 选中操作
-                            $('#ownAuthority').append($('<span/>').addClass('source-panle').addClass('rel').html($(this).next().html()).attr('catalog_id',$(this).next().attr('id')));
+                            $('#ownAuthority').append($('<span/>').addClass('source-panle rel').html($(this).next().html()).attr('catalog_id',$(this).next().attr('id')));
                             $('#doAuthority').append($('<div/>').addClass('mtb-5')
                                 .attr('menu_id',$(this).next().attr('id'))
-                                .append($('<span/>').addClass('badge-danger').addClass('badge').html($(this).next().html()))
+                                .append($('<span/>').addClass('badge-danger badge').html($(this).next().html()))
+                                .append($('<i/>').addClass('c-999 ml-5').html('仅查看！'))
                                 );
                         }
                         if(!$(this).is(':checked')){  // 取消选中操作
@@ -280,7 +158,7 @@ txtSm[i]= oChecked.eq(i).next().text()
                         }
                     });
 
-                    /*每一行子分类的点击事件*/
+                    /*操作权限checkbox点击事件*/
                     $(".permission-list2 dd input:checkbox").click(function () {
                         var menu_dt_input = $(this).closest('dl').find('dt').find('input:checkbox');
                         var oChecked = $(this).closest('dd').find("input:checked");
@@ -296,6 +174,7 @@ txtSm[i]= oChecked.eq(i).next().text()
                             if(!menu_dt_input.is(':checked')){
                                 menu_dt_input.prop("checked", true);//设置本行的总分类选框选中
                             };
+                            div.children('i').remove();  //移除“仅查看！”
                             /*检测左侧表格中是否存在该项*/
                             function checkExist() {
                                 if(div.find('span').length >=1){
@@ -328,6 +207,10 @@ txtSm[i]= oChecked.eq(i).next().text()
                         }
                         if(!$(this).is(':checked')) {  // 取消选中操作
                             div.find('span[show_operate_id='+opid+']').remove();
+                            var cheLen = $(this).closest('dd').find('input:checked').length;
+                            if(cheLen == 0){
+                                div.append($('<i/>').addClass('c-999 ml-5').html('仅查看！'))
+                            }
                         }
                     });
                 }
@@ -340,7 +223,6 @@ txtSm[i]= oChecked.eq(i).next().text()
         var modUl = $('#Huifold1').empty();
 
         $.each(moList, function(name, value) {
-
             var modLi = $('<li/>').addClass('item').append('<h4>'+value+'<b>+</b></h4>').attr('id',name).appendTo(modUl);
             var divInfo = $('<div/>').addClass('info').appendTo(modLi);
             var dl = $('<dl/>').addClass('permission-list').appendTo(divInfo);//<dl class="permission-list">
@@ -360,7 +242,6 @@ txtSm[i]= oChecked.eq(i).next().text()
                     label.append($('<input/>').addClass('mr-5').attr('type','checkbox')).append($('<span/>').html(value).attr('operate_id',name));
                 });
             });
-
         });
 
     }
