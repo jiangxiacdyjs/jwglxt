@@ -108,6 +108,15 @@
         .active .add-name.Hui-iconfont {
             display: block;
         }
+        @media screen and (max-width: 1150px) {
+            form.w100{
+                position: relative!important;
+                margin-bottom: 10px;
+            }
+            #search_button{
+                margin-right: auto!important;
+            }
+        }
     </style>
     <title>学校食材编辑上报</title>
 </head>
@@ -126,10 +135,10 @@
                 <div style="display:table;margin:auto;">
                     批次号：
                     <input type="text" placeholder="请输入批次号" class="input-text ac_input mr-5" name="search_text" value=""
-                           id="num" autocomplete="off" style="width:90px">
+                           id="num" autocomplete="off" style="width:100px">
                     采购时间：
                     <input type="text" placeholder="创建时间" class="input-text ac_input mr-5" name="search_text" value=""
-                           id="tim" autocomplete="off" style="width:90px;cursor: pointer;" readonly>
+                           id="tim" autocomplete="off" style="width:100px;cursor: pointer;" readonly>
                     状态：
                     <span class="select-box mr-5" style="width: 90px">
                     <select class="select" size="1" name="demo1">
