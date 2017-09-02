@@ -44,13 +44,19 @@
         <div class="tabs-container mt-20">
             <div class="tab-content" style="display:block;">
                 <form method="" action="" class="search_form">
-                    片区名称：
-                    <input type="text" placeholder="请输入片区名" class="input-text ac_input mr-10" name="search_text"
-                           value=""
-                           id="num0" autocomplete="off" style="width:120px">
+
                     采购时间：
-                    <input type="text" placeholder="创建订单时间" class="input-text ac_input mr-10" name="search_text" value=""
+                    <input type="text" placeholder="创建订单时间" class="input-text ac_input mr-10" name="search_text"
+                           value=""
                            id="tim0" autocomplete="off" style="width:120px;cursor: pointer;" readonly>
+                    所属片区：
+                    <span class="select-box mr-10" style="width: 100px">
+            <select class="select" size="1" name="demo0">
+                <option value="" selected="">A</option>
+                <option value="1">B</option>
+                <option value="2">C</option>
+            </select>
+                    </span>
                     所属状态：
                     <span class="select-box mr-10" style="width: 100px">
             <select class="select" size="1" name="demo1">
@@ -142,7 +148,8 @@
                            value=""
                            id="num1" autocomplete="off" style="width:120px">
                     采购时间：
-                    <input type="text" placeholder="创建食材单时间" class="input-text ac_input mr-10" name="search_text" value=""
+                    <input type="text" placeholder="创建食材单时间" class="input-text ac_input mr-10" name="search_text"
+                           value=""
                            id="tim1" autocomplete="off" style="width:120px;cursor: pointer;" readonly>
                     所属状态：
                     <span class="select-box mr-10" style="width: 100px">

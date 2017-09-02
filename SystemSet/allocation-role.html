@@ -92,46 +92,6 @@
                         <td>超级管理员</td>
                         <td>拥有至高无上的权利</td>
                     </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="1" name="subChk">
-                        </td>
-                        <td>2</td>
-                        <td>总编</td>
-                        <td>具有添加、审核、发布、删除内容的权限</td>
-                    </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="1" name="subChk">
-                        </td>
-                        <td>3</td>
-                        <td>学校管理员</td>
-                        <td>只对所在栏目具有添加、审核、发布、删除内容的权限</td>
-                    </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="1" name="subChk">
-                        </td>
-                        <td>4</td>
-                        <td>学校管理员</td>
-                        <td>只对所在栏目具有添加、删除草稿等权利。</td>
-                    </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="1" name="subChk">
-                        </td>
-                        <td>1</td>
-                        <td>超级管理员</td>
-                        <td>拥有至高无上的权利</td>
-                    </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="1" name="subChk">
-                        </td>
-                        <td>2</td>
-                        <td>总编</td>
-                        <td>具有添加、审核、发布、删除内容的权限</td>
-                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -151,78 +111,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="1" name="subChk">
-                        </td>
-                        <td>1</td>
-                        <td>超级管理员</td>
-                        <td>拥有至高无上的权利</td>
-                    </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="1" name="subChk">
-                        </td>
-                        <td>2</td>
-                        <td>总编</td>
-                        <td>具有添加、审核、发布、删除内容的权限</td>
-                    </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="1" name="subChk">
-                        </td>
-                        <td>3</td>
-                        <td>学校管理员</td>
-                        <td>只对所在栏目具有添加、审核、发布、删除内容的权限</td>
-                    </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="1" name="subChk">
-                        </td>
-                        <td>4</td>
-                        <td>学校管理员</td>
-                        <td>只对所在栏目具有添加、删除草稿等权利。</td>
-                    </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="1" name="subChk">
-                        </td>
-                        <td>1</td>
-                        <td>超级管理员</td>
-                        <td>拥有至高无上的权利</td>
-                    </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="1" name="subChk">
-                        </td>
-                        <td>1</td>
-                        <td>超级管理员</td>
-                        <td>拥有至高无上的权利</td>
-                    </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="1" name="subChk">
-                        </td>
-                        <td>2</td>
-                        <td>总编</td>
-                        <td>具有添加、审核、发布、删除内容的权限</td>
-                    </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="1" name="subChk">
-                        </td>
-                        <td>3</td>
-                        <td>学校管理员</td>
-                        <td>只对所在栏目具有添加、审核、发布、删除内容的权限</td>
-                    </tr>
-                    <tr class="text-c">
-                        <td>
-                            <input type="checkbox" value="1" name="subChk">
-                        </td>
-                        <td>4</td>
-                        <td>学校管理员</td>
-                        <td>只对所在栏目具有添加、删除草稿等权利。</td>
-                    </tr>
                     <tr class="text-c">
                         <td>
                             <input type="checkbox" value="1" name="subChk">
@@ -400,6 +288,7 @@
     $(function () {
 
         $('#myTable01,#myTable02').fixedHeaderTable({footer: true, altClass: 'odd', height: 270});
+        $('.fht-table').css('width','100%')
         //  角色的删除操作
         $('.source-panle.bg-primary').each(function () {
             var ele = $(this);
