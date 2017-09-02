@@ -195,7 +195,6 @@ function layer_show(title,url,w,h){
 	};
 	layer.open({
 		type: 2,
-        skin: 'layui-layer-molv' ,//样式类名
 		area: [w+'px', h +'px'],
 		fix: false, //不固定
 		maxmin: true,
@@ -203,27 +202,6 @@ function layer_show(title,url,w,h){
 		title: title,
 		content: url
 	});
-}
-/*dataTable*/
-/*
-	参数解释：
-	a	表格对于的类名
-	b	不参与排序的列
-*/
-function tableSort(a,b){
-    $(a).dataTable({
-        "aaSorting": [
-            [1, "desc"]
-        ], //默认第几个排序
-        "bStateSave": true, //状态保存
-        "aoColumnDefs": [
-            //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-            {
-                "orderable": false,
-                "aTargets": b
-            } // 不参与排序的列
-        ]
-    });
 }
 
 /*关闭弹出框口*/

@@ -17,6 +17,7 @@
     <link href="../Public/static/h-ui.admin/css/H-ui.admin.css" rel="stylesheet" type="text/css"/>
     <link href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
+    <link rel="stylesheet" type="text/css" href="../Public/mySrc/css/style.css"/>
     <!--[if IE 6]>
     <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
@@ -29,7 +30,6 @@
     <div class="f-20 mb-30 pb-20 text-c" style="border-bottom: 1px dashed #7C7C7C"><span class="Hui-iconfont mr-10">&#xe627;</span>第一周食材汇总
     </div>
     <div class="row">
-        <div class="col-sm-12">
             <table class="table table-border table-bordered table-bg table-hover table-sort">
                 <thead>
                 <tr>
@@ -61,33 +61,15 @@
                 </tbody>
             </table>
         </div>
-    </div>
 </div>
 <script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
 <script>
-
-
-    function tableSort(a) {
-        $(a).dataTable({
-            "aaSorting": [
-                [1, "desc"]
-            ], //默认第几个排序
-            "bStateSave": true, //状态保存
-            "aoColumnDefs": [
-                //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-                {
-                    "orderable": false,
-                    "aTargets": [0, 2]
-                } // 不参与排序的列
-            ]
-        });
-    }
-
-    tableSort('.table-sort')
+    tableSort('.table-sort',[3])
 </script>
 </body>
 

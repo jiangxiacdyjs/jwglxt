@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="../Public/static/h-ui/css/H-ui.min.css"/>
     <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css"/>
     <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
-    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/mySrc/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="../Public/lib/jedate/skin/jedate.css"/>
     <!--[if IE 6]>
     <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
@@ -23,24 +23,8 @@
     <title>通知列表</title>
 </head>
 <body>
-<!-- 位置 -->
-<nav class="breadcrumb">
-    <i class="Hui-iconfont">&#xe67f;</i>
-    首页 <span class="c-gray en">&gt;</span>
-    紫云教务 <span class="c-gray en">&gt;</span>
-    教务管理
-    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
-       href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
-</nav>
+
 <div class="page-container">
-    <div class="text-c">
-        <span class="wstxt">开始日期：</span>
-        <input type="text" class="workinput input-text" id="inpstart" style="width: 120px" readonly>
-        <span class="wstxt">结束日期：</span>
-        <input type="text" class="workinput input-text" id="inpend" style="width: 120px" readonly>
-        <input type="text" name="" placeholder=" 通知关键字" style="width:250px" class="input-text">
-        <button name="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜教务通知</button>
-    </div>
     <div class="cl pd-5 bg-1 bk-gray mt-20">
         <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
             <i class="Hui-iconfont">&#xe6e2;</i> 批量删除
@@ -52,7 +36,21 @@
         </a>
         <span class="r">共有数据：<strong>54</strong> 条</span></div>
     <div class="mt-20">
-        <table class="table table-border table-bordered table-bg table-hover table-sort">
+        <form method="" action="" class="search_form">
+            起始时间：
+            <input type="text" placeholder="创建时间" class="input-text ac_input mr-10" name="search_text" value=""
+                   id="inpstart" autocomplete="off" style="width:120px;cursor: pointer;" readonly>
+            结束时间：
+            <input type="text" placeholder="创建时间" class="input-text ac_input mr-10" name="search_text" value=""
+                   id="inpend" autocomplete="off" style="width:120px;cursor: pointer;" readonly>
+            关键字：
+            <input type="text" name="" placeholder="通知关键字" style="width:100px" class="input-text">
+            <button type="submit" class="btn btn-success" id="search_button">
+                <i class="Hui-iconfont">&#xe665;</i>
+                搜索
+            </button>
+        </form>
+        <table class="table table-border table-bordered table-bg table-hover table-sort rel">
             <thead>
             <tr class="text-c">
                 <th width="25"><input type="checkbox" name="" value=""></th>
@@ -116,12 +114,9 @@
 <script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
-<!--/_footer 作为公共模版分离出去-->
-
-<!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../Public/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript" src="../Public/lib/jedate/jquery.jedate.min.js"></script>
+<script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
 <script type="text/javascript">
     var start = {
         format: 'YYYY-MM-DD',
@@ -152,14 +147,8 @@
     }
     $('#inpstart').jeDate(start);
     $('#inpend').jeDate(end);
-    $('.table-sort').dataTable({
-        "aaSorting": [[1, "desc"]],//默认第几个排序
-        "bStateSave": true,//状态保存
-        "aoColumnDefs": [
-            //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-            {"orderable": false, "aTargets": [0, 8]}// 不参与排序的列
-        ]
-    });
+
+    tableSort('.table-sort',[0,7,8])
     /*通知-添加*/
     function send_email(title, url, w, h) {
         var index = layer.open({
@@ -223,21 +212,6 @@
             $(obj).remove();
             layer.msg('已下架!', {icon: 5, time: 1000});
         });
-    }
-    /*通知-发布*/
-    function article_start(obj, id) {
-        layer.confirm('确认要发布吗？', function (index) {
-            $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="article_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
-            $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已发布</span>');
-            $(obj).remove();
-            layer.msg('已发布!', {icon: 6, time: 1000});
-        });
-    }
-    /*通知-申请上线*/
-    function article_shenqing(obj, id) {
-        $(obj).parents("tr").find(".td-status").html('<span class="label label-default radius">待审核</span>');
-        $(obj).parents("tr").find(".td-manage").html("");
-        layer.msg('已提交申请，耐心等待审核!', {icon: 1, time: 2000});
     }
 
 </script>

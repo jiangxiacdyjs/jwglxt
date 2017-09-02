@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css"/>
     <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
     <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin" />
-    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/mySrc/css/style.css"/>
     <!--[if IE 6]>
     <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
@@ -36,41 +36,19 @@
             line-height: 30px
         }
 
-        /*datatable*/
-        .dataTables_wrapper .dataTables_length {
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .dataTables_wrapper .dataTables_filter {
-            position: absolute;
-            top: 0;
-            right: 15px;
-        }
-
-        .dataTables_wrapper .dataTables_filter .input-text {
-            width: auto;
-            margin-left: 10px
-        }
-
     </style>
     <!--TODO: 这个页面逻辑要改，学校当前点入片区管理要显示当前学校-->
     <title>分配学校</title>
 </head>
 <body>
 <div class="page-container">
-
-    <div class="">
         <p style="background-color: #DEE6F5"><i class="f-30">说明：</i>左侧表格展示的是当前片区之外的所有学校列表(可分配的学校)，如需给当前片区分配学校，只需在左侧表格中选择好学校并点击该学校对应的操作按钮；
         </p>
 
-    </div>
     <div class="mt-20 row cl">
         <div class="col-xs-12 col-sm-6">
+            <span class="f-20" style="float: left">其他片区学校列表</span>
             <table class="table table-border table-bordered table-bg table-hover table-sort0">
-                <caption class="f-20 text-l mb-10">其他片区学校列表</caption>
                 <thead>
                 <tr style="background-color: #5eb95e;">
                     <td colspan="2" class="c-white">片区数量：<span>3</span></td>
@@ -219,8 +197,8 @@
             </table>
         </div>
         <div class="col-xs-12 col-sm-6">
+            <span class="f-20" style="float: left">A片区学校列表</span>
             <table class="table table-border table-bordered table-bg table-hover table-sort1">
-                <caption class="f-20 text-l mb-10">A片区学校列表</caption>
                 <thead>
                 <tr style="background-color: #5eb95e;">
                     <td colspan="2" class="c-white">片区名称：<span>A片区</span></td>
@@ -356,20 +334,16 @@
                 </tbody>
             </table>
         </div>
-
     </div>
-
-
 </div>
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
-<!--/_footer 作为公共模版分离出去-->
 
-<!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
 <script type="text/javascript">
     $(function () {
         tableSort('.table-sort0',[5])

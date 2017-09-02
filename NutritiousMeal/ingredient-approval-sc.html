@@ -17,9 +17,7 @@
     <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
     <link href="../Public/lib/jedate/skin/jedate.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
-    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/style.css"/>
-
-
+    <link rel="stylesheet" type="text/css" href="../Public/mySrc/css/style.css"/>
     <!--[if IE 6]>
     <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
@@ -50,24 +48,21 @@
             </a>
         </div>
         <div class="mt-20">
-            <form method="" action="" class="w100"
-                  style="position: absolute;left:50%;-webkit-transform: translateX(-50%);-moz-transform: translateX(-50%);-ms-transform: translateX(-50%);-o-transform: translateX(-50%);transform: translateX(-50%);">
-                <div style="display:table;margin:auto;">
+            <form method="" action="" class="search_form">
                     创建时间：
-                    <input type="text" placeholder="创建时间" class="input-text ac_input mr-5" name="search_text" value=""
-                           id="tim" autocomplete="off" style="width:90px;cursor: pointer;" readonly>
+                    <input type="text" placeholder="创建时间" class="input-text ac_input mr-10" name="search_text" value=""
+                           id="tim" autocomplete="off" style="width:120px;cursor: pointer;" readonly>
                     状态：
-                    <span class="select-box mr-5" style="width:100px">
+                    <span class="select-box mr-10" style="width:100px">
                     <select class="select" size="1" name="demo1">
                         <option value="" selected="">已通过</option>
                         <option value="1">待审核</option>
                     </select>
 				</span>
-                    <button type="submit" class="btn btn-success" id="search_button" style="margin-right: 150px">
-                        <i class="Hui-iconfont">&#xe665;</i>
-                        搜索
-                    </button>
-                </div>
+                <button type="submit" class="btn btn-success" id="search_button">
+                    <i class="Hui-iconfont">&#xe665;</i>
+                    搜索
+                </button>
             </form>
             <table class="table table-border table-bordered table-bg table-hover table-sort0">
                 <thead>
@@ -114,6 +109,7 @@
 <script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
 <script type="text/javascript" src="../Public/lib/jedate/jquery.jedate.min.js"></script>
 <script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
 <script type="text/javascript">
     /*预览*/
     function article_view(title, url, w, h) {

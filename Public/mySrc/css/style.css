@@ -1,0 +1,53 @@
+@charset "utf-8";
+/* 你自己的样式 */
+
+/*dataTable*/
+.dataTables_wrapper{
+    position: relative;
+}
+.showCount{
+    position: absolute;
+    bottom: -53px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.showSearch{
+    display: table;
+    float: right;
+    padding-bottom: 15px!important;
+    overflow: hidden;
+}
+/*dataTable--end*/
+
+/*搜索组件*/
+.search_form{
+    display:table;float: left;position: relative;z-index: 1;
+}
+
+label{cursor: pointer;}
+.check{float: left;margin-right: 15px}
+.checkboxBg{cursor: pointer;display: inline-block;margin:-5px 2px;width: 19px;height: 19px;background: url(../../static/h-ui/images/iCheck/blue.png) -19px 0}
+.checkedBg{background-position: -40px 0}
+.label, .badge{
+    position: relative;
+    top: -2px;
+}
+.bg-primary{
+    background-color: #5a98de!important;
+}
+.bg-danger,bg-red{
+    background-color: #dd514c!important;
+}
+.p-0{
+    padding: 0!important;
+}
+.border-0{
+    border: 0!important;
+}
+.w100{
+    width: 100% !important;
+}

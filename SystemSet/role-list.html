@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css"/>
     <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
     <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin" />
-    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/mySrc/css/style.css"/>
     <!--[if IE 6]>
     <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
@@ -23,108 +23,102 @@
     <title>角色管理</title>
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span
-        class="c-gray en">&gt;</span> 角色管理 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
-                                              href="javascript:location.replace(location.href);" title="刷新"><i
-        class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
     <div class="cl pd-5 bg-1 bk-gray"><span class="l"> <a href="javascript:;" onclick="datadel()"
                                                           class="btn btn-danger radius"><i
             class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" href="javascript:;"
                                                           onclick="role_edit('角色编辑','role-add.html','750','550')"><i
             class="Hui-iconfont">&#xe600;</i> 添加角色</a> </span> <span class="r">共有数据：<strong>54</strong> 条</span></div>
-    <table class="table table-border table-bordered table-hover table-bg">
-        <thead>
-        <tr>
-            <th scope="col" colspan="6">角色管理</th>
-        </tr>
-        <tr class="text-c">
-            <th><input type="checkbox" value="" name=""></th>
-            <th>ID</th>
-            <th>角色名</th>
-            <th>用户列表</th>
-            <th>描述</th>
-            <th>操作</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="text-c">
-            <td><input type="checkbox" value="0" name="subChk"></td>
-            <td>1</td>
-            <td>超级管理员</td>
-            <td><a href="#">admin</a></td>
-            <td>拥有至高无上的权利</td>
-            <td class="f-14">
-                <a title="分配权限" href="javascript:;"
-                   onclick="article_view('分配权限','allocation-authority.html','100%','100%')"
-                   style="text-decoration:none">分配权限</a>
-                <a title="编辑" href="javascript:;" onclick="role_edit('角色编辑','role-add.html','750','550')"
-                   style="text-decoration:none">编辑</a>
-                <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5"
-                   style="text-decoration:none">删除</a>
-            </td>
-        </tr>
-        <tr class="text-c">
-            <td><input type="checkbox" value="1" name="subChk"></td>
-            <td>2</td>
-            <td>总编</td>
-            <td><a href="#">张三</a></td>
-            <td>具有添加、审核、发布、删除内容的权限</td>
-            <td class="f-14">
-                <a title="分配权限" href="javascript:;"
-                   onclick="article_view('分配权限','allocation-authority.html','100%','100%')"
-                   style="text-decoration:none">分配权限</a>
-                <a title="编辑" href="javascript:;" onclick="role_edit('角色编辑','role-add.html','750','550')"
-                   style="text-decoration:none">编辑</a>
-                <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5"
-                   style="text-decoration:none">删除</a>
-            </td>
-        </tr>
-        <tr class="text-c">
-            <td><input type="checkbox" value="2" name="subChk"></td>
-            <td>3</td>
-            <td>学校管理员</td>
-            <td><a href="#">李四</a>，<a href="#">王五</a></td>
-            <td>只对所在栏目具有添加、审核、发布、删除内容的权限</td>
-            <td class="f-14">
-                <a title="分配权限" href="javascript:;"
-                   onclick="article_view('分配权限','allocation-authority.html','100%','100%')"
-                   style="text-decoration:none">分配权限</a>
-                <a title="编辑" href="javascript:;" onclick="role_edit('角色编辑','role-add.html','750','550')"
-                   style="text-decoration:none">编辑</a>
-                <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5"
-                   style="text-decoration:none">删除</a>
-            </td>
-        </tr>
-        <tr class="text-c">
-            <td><input type="checkbox" value="3" name="subChk"></td>
-            <td>4</td>
-            <td>学校管理员</td>
-            <td><a href="#">赵六</a>，<a href="#">钱七</a></td>
-            <td>只对所在栏目具有添加、删除草稿等权利。</td>
-            <td class="f-14">
-                <a title="分配权限" href="javascript:;"
-                   onclick="article_view('分配权限','allocation-authority.html','100%','100%')"
-                   style="text-decoration:none">分配权限</a>
-                <a title="编辑" href="javascript:;" onclick="role_edit('角色编辑','role-add.html','750','550')"
-                   style="text-decoration:none">编辑</a>
-                <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5"
-                   style="text-decoration:none">删除</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="mt-20">
+        <table class="table table-border table-bordered table-hover table-bg table-sort">
+            <thead>
+            <tr class="text-c">
+                <th><input type="checkbox" value="" name=""></th>
+                <th>ID</th>
+                <th>角色名</th>
+                <th>用户列表</th>
+                <th>描述</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="text-c">
+                <td><input type="checkbox" value="0" name="subChk"></td>
+                <td>1</td>
+                <td>超级管理员</td>
+                <td><a href="#">admin</a></td>
+                <td>拥有至高无上的权利</td>
+                <td class="f-14">
+                    <a title="分配权限" href="javascript:;"
+                       onclick="article_view('分配权限','allocation-authority.html','100%','100%')"
+                       style="text-decoration:none">分配权限</a>
+                    <a title="编辑" href="javascript:;" onclick="role_edit('角色编辑','role-add.html','750','550')"
+                       style="text-decoration:none">编辑</a>
+                    <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5"
+                       style="text-decoration:none">删除</a>
+                </td>
+            </tr>
+            <tr class="text-c">
+                <td><input type="checkbox" value="1" name="subChk"></td>
+                <td>2</td>
+                <td>总编</td>
+                <td><a href="#">张三</a></td>
+                <td>具有添加、审核、发布、删除内容的权限</td>
+                <td class="f-14">
+                    <a title="分配权限" href="javascript:;"
+                       onclick="article_view('分配权限','allocation-authority.html','100%','100%')"
+                       style="text-decoration:none">分配权限</a>
+                    <a title="编辑" href="javascript:;" onclick="role_edit('角色编辑','role-add.html','750','550')"
+                       style="text-decoration:none">编辑</a>
+                    <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5"
+                       style="text-decoration:none">删除</a>
+                </td>
+            </tr>
+            <tr class="text-c">
+                <td><input type="checkbox" value="2" name="subChk"></td>
+                <td>3</td>
+                <td>学校管理员</td>
+                <td><a href="#">李四</a>，<a href="#">王五</a></td>
+                <td>只对所在栏目具有添加、审核、发布、删除内容的权限</td>
+                <td class="f-14">
+                    <a title="分配权限" href="javascript:;"
+                       onclick="article_view('分配权限','allocation-authority.html','100%','100%')"
+                       style="text-decoration:none">分配权限</a>
+                    <a title="编辑" href="javascript:;" onclick="role_edit('角色编辑','role-add.html','750','550')"
+                       style="text-decoration:none">编辑</a>
+                    <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5"
+                       style="text-decoration:none">删除</a>
+                </td>
+            </tr>
+            <tr class="text-c">
+                <td><input type="checkbox" value="3" name="subChk"></td>
+                <td>4</td>
+                <td>学校管理员</td>
+                <td><a href="#">赵六</a>，<a href="#">钱七</a></td>
+                <td>只对所在栏目具有添加、删除草稿等权利。</td>
+                <td class="f-14">
+                    <a title="分配权限" href="javascript:;"
+                       onclick="article_view('分配权限','allocation-authority.html','100%','100%')"
+                       style="text-decoration:none">分配权限</a>
+                    <a title="编辑" href="javascript:;" onclick="role_edit('角色编辑','role-add.html','750','550')"
+                       style="text-decoration:none">编辑</a>
+                    <a title="删除" href="javascript:;" onclick="admin_role_del(this,'1')" class="ml-5"
+                       style="text-decoration:none">删除</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
-
-<!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
 <script type="text/javascript">
-
+    tableSort('.table-sort',[0,4,5])
     /*批量删除 */
     function datadel() {
         var checkedNum = $("input[name='subChk']:checked").length;

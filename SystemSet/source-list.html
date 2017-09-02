@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css"/>
     <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
     <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin" />
-    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/mySrc/css/style.css"/>
     <!--[if IE 6]>
     <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
@@ -39,13 +39,6 @@
 </head>
 
 <body>
-<!-- 位置 -->
-<nav class="breadcrumb">
-    <i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 学生营养餐 <span
-        class="c-gray en">&gt;</span> 学校片区管理
-    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
-       href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
-</nav>
 <div class="page-container">
     <div id="HuiTab-demo1" class="HuiTab">
         <div class="tabBar clearfix">
@@ -63,7 +56,6 @@
                    onclick="source_add('新增资源','source-add.html','800','500')">
                     <i class="Hui-iconfont">&#xe600;</i> 新增资源
                 </a>
-                <span class="r">共有数据：<strong>8</strong> 条</span>
             </div>
             <div class="mt-20 rel">
                 <table class="table table-border table-bordered table-bg table-hover table-sort0">
@@ -183,11 +175,8 @@
 <script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui/js/jQuery.Huitab.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
-<!--/_footer 作为公共模版分离出去-->
-<!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript" src="../Public/lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../Public/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
 <script type="text/javascript">
 
     /*批量删除 */
@@ -269,25 +258,8 @@
         // 初始化tab
         $("#HuiTab-demo1").Huitab({index: 0});
 
-        // datatables
-        function tableSort(a, b) {
-            $(a).dataTable({
-                "aaSorting": [
-                    [1, "desc"]
-                ], //默认第几个排序
-                "bStateSave": true, //状态保存
-                "aoColumnDefs": [
-                    //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-                    {
-                        "orderable": false,
-                        "aTargets": [0, b]
-                    } // 不参与排序的列
-                ]
-            });
-        }
-
-        tableSort('.table-sort0', 5)
-        tableSort('.table-sort1', 3)
+        tableSort('.table-sort0', [5])
+        tableSort('.table-sort1', [3])
     })
 
 </script>

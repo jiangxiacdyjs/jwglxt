@@ -15,7 +15,7 @@
 <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css" />
 <link rel="stylesheet" type="text/css" href="../Public/lib/jedate/skin/jedate.css" />
 <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/default/skin.css" id="skin" />
-<link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../Public/mySrc/css/style.css" />
 <!--[if IE 6]>
 	<script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
 	<script>DD_belatedPNG.fix('*');</script>
@@ -26,10 +26,13 @@
 <body>
 <div class="page-container">
 	<div class="mt-20">
-		<form method="" action=""
-			  style="position: absolute;left:50%;-webkit-transform: translateX(-50%);-moz-transform: translateX(-50%);-ms-transform: translateX(-50%);-o-transform: translateX(-50%);transform: translateX(-50%);">
-			<span class="wstxt">开始日期：</span><input type="text" class="input-text workinput wicon mr-10" id="inpstart" readonly style="max-width: 100px;">
-			<span class="wstxt">结束日期：</span><input type="text" class="input-text workinput wicon mr-10" id="inpend" readonly style="max-width: 100px;">
+		<form method="" action="" class="search_form">
+			起始时间：
+			<input type="text" placeholder="创建时间" class="input-text ac_input mr-10" name="search_text" value=""
+				   id="inpstart" autocomplete="off" style="width:120px;cursor: pointer;" readonly>
+			结束时间：
+			<input type="text" placeholder="创建时间" class="input-text ac_input mr-10" name="search_text" value=""
+				   id="inpend" autocomplete="off" style="width:120px;cursor: pointer;" readonly>
 			<button type="submit" class="btn btn-success" id="search_button">
 				<i class="Hui-iconfont">&#xe665;</i>
 				搜索
@@ -79,6 +82,7 @@
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../Public/lib/jedate/jquery.jedate.min.js"></script>
+<script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
 <script type="text/javascript">
 
 var start = {
@@ -108,16 +112,8 @@ function endDates() {
 $('#inpstart').jeDate(start);
 $('#inpend').jeDate(end);
 
-$(function(){
-	$('.table-sort').dataTable({
-		"aaSorting": [[ 1, "desc" ]],//默认第几个排序
-		"bStateSave": true,//状态保存
-		"aoColumnDefs": [
-		  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-		  {"orderable":false,"aTargets":[0,2,4]}// 制定列不参与排序
-		]
-	});
-});
+tableSort('.table-sort',[0,2,4])
+
 /*用户-添加*/
 function member_add(title,url,w,h){
 	layer_show(title,url,w,h);

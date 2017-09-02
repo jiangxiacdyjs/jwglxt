@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css" />
 <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css" />
 <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/default/skin.css" id="skin" />
-<link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/style.css" />
+<link rel="stylesheet" type="text/css" href="../Public/mySrc/css/style.css" />
 <!--[if IE 6]>
 	<script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
 	<script>DD_belatedPNG.fix('*');</script>
@@ -22,19 +22,8 @@
 <title>教师列表</title>
 </head>
 <body>
-	<nav class="breadcrumb">
-		<i class="Hui-iconfont">&#xe67f;</i> 首页 
-		<span class="c-gray en">&gt;</span> 紫云教务 
-		<span class="c-gray en">&gt;</span> 教师管理 
-		<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a>
-	</nav>
 	<div class="page-container">
-		<!-- 搜索区域 -->
-		<div class="text-c">
-			<input type="text" name="" id="" placeholder="输入教师名字" style="width:250px" class="input-text">
-			<button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索教师</button>
-		</div>
-		<div class="cl pd-5 bg-1 bk-gray mt-20">
+		<div class="cl pd-5 bg-1 bk-gray">
 			<span class="l">
 				<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
 					<i class="Hui-iconfont">&#xe6e2;</i> 批量删除
@@ -43,9 +32,24 @@
 					<i class="Hui-iconfont">&#xe600;</i> 添加教师
 				</a>
 			</span> 
-			<span class="r">共有数据：<strong>358</strong> 条</span> 
 		</div>
 		<div class="mt-20">
+			<form method="" action="" class="search_form">
+				姓名：
+				<input type="text" placeholder="" class="input-text ac_input mr-10" name="search_text" value=""
+					   id="num" autocomplete="off" style="width:120px">
+				所属学校：
+				<span class="select-box mr-10" style="width: 100px">
+                    <select class="select" size="1" name="demo1">
+                        <option value="" selected="">紫云一小</option>
+                        <option value="1">紫云二小</option>
+                    </select>
+				</span>
+				<button type="submit" class="btn btn-success" id="search_button">
+					<i class="Hui-iconfont">&#xe665;</i>
+					搜索
+				</button>
+			</form>
 			<table class="table table-border table-bordered table-bg table-hover table-sort">
 				<thead>
 					<tr class="text-c">
@@ -161,50 +165,35 @@
 <script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
-<!--/_footer 作为公共模版分离出去-->
-
-<!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript" src="../Public/lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../Public/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
 <script type="text/javascript">
-$('.table-sort').dataTable({
-	"aaSorting": [[ 1, "desc" ]],//默认第几个排序
-	"bStateSave": true,//状态保存
-	"aoColumnDefs": [
-	  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-	  {"orderable":false,"aTargets":[0,8]}// 不参与排序的列
-	]
-});
-
-/*教师-添加*/
-function teacher_add(title,url,w,h){
-	layer_show(title,url,w,h);
-}
-/*教师-编辑*/
-function teacher_edit(title,url,w,h){
-	layer_show(title,url,w,h);
-}
-/*教师-删除*/
-function teacher_del(obj,id){
-	layer.confirm('确认要删除吗？',function(index){
-		$.ajax({
-			type: 'POST',
-			url: '',
-			dataType: 'json',
-			success: function(data){
-				$(obj).parents("tr").remove();
-				layer.msg('已删除!',{icon:1,time:1000});
-			},
-			error:function(data) {
-				console.log(data.msg);
-			},
-		});		
-	});
-}
-
-
-
-</script> 
+	tableSort('.table-sort',[0,8,9])
+	/*教师-添加*/
+	function teacher_add(title,url,w,h){
+		layer_show(title,url,w,h);
+	}
+	/*教师-编辑*/
+	function teacher_edit(title,url,w,h){
+		layer_show(title,url,w,h);
+	}
+	/*教师-删除*/
+	function teacher_del(obj,id){
+		layer.confirm('确认要删除吗？',function(index){
+			$.ajax({
+				type: 'POST',
+				url: '',
+				dataType: 'json',
+				success: function(data){
+					$(obj).parents("tr").remove();
+					layer.msg('已删除!',{icon:1,time:1000});
+				},
+				error:function(data) {
+					console.log(data.msg);
+				},
+			});
+		});
+	}
+</script>
 </body>
 </html>
