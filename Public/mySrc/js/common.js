@@ -7,6 +7,7 @@
 function tableSort(a,b){
     $(a).dataTable({
         "sDom": '<"showCount"l><"showSearch"f>tipr',
+        // "sDom": 'fti<"showCount"l>pr',
         "aaSorting": [
             [1, "desc"]
         ], //默认第几个排序
