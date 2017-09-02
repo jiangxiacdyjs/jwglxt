@@ -60,15 +60,6 @@
     <title>分配学校</title>
 </head>
 <body>
-<!-- 位置 -->
-<nav class="breadcrumb">
-    <i class="Hui-iconfont">&#xe67f;</i>
-    首页 <span class="c-#5eb95e en">&gt;</span>
-    营养餐 <span class="c-#5eb95e en">&gt;</span>
-    分配学校
-    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
-       href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
-</nav>
 <div class="page-container">
 
     <div class="">
@@ -380,26 +371,9 @@
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
-    function tableSort(a, b) {
-        $(a).dataTable({
-            "aaSorting": [
-                [1, "desc"]
-            ], //默认第几个排序
-            "bStateSave": true, //状态保存
-            "aoColumnDefs": [
-                //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-                {
-                    "orderable": false,
-                    "aTargets": [b]
-                } // 不参与排序的列
-            ]
-        });
-    }
-    tableSort('.table-sort0', 5)
-    tableSort('.table-sort1', 4)
-
-
     $(function () {
+        tableSort('.table-sort0',[5])
+        tableSort('.table-sort1',[4])
         // 左侧移入
         $('.btn-in').click(function () {
             layer.confirm('是否确认将该学校移入A片区', {

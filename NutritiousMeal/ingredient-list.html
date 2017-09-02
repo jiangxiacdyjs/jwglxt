@@ -25,12 +25,6 @@
 </head>
 
 <body>
-    <!-- 位置 -->
-    <nav class="breadcrumb">
-        <i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 营养餐 <span class="c-gray en">&gt;</span> 食材审核
-        <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
-    </nav>
-
     <div class="page-container">
 	    <div id="HuiTab-demo1" class="HuiTab">
 	        <div class="tabBar clearfix">
@@ -161,7 +155,7 @@
 	        <div class="tabCon">
 
 			    <div class="tabs mt-20">
-			    	<ul class="tabs-list"s>
+			    	<ul class="tabs-list">
 			    		<li class="active"><a href="javascript:;">单个学校展示</a></li>
 			    		<li><a href="javascript:;">汇总合成展示</a></li>
 			    	</ul>
@@ -270,35 +264,17 @@
     <script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
     <!--/_footer 作为公共模版分离出去-->
     <!--请在下方写此页面业务相关的脚本-->
-    <script type="text/javascript" src="../Public/lib/My97DatePicker/4.8/WdatePicker.js"></script>
     <script type="text/javascript" src="../Public/lib/responsiveTab/js/responsive.tabs.js"></script>
     <script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="../Public/lib/laypage/1.2/laypage.js"></script>
     <script type="text/javascript">
 
 	$("#HuiTab-demo1").Huitab({ index:0 });
 	$('.tabs').respTabs();
 
-	function tableSort(a,b){
-	    $(a).dataTable({
-	        "aaSorting": [
-	            [1, "desc"]
-	        ], //默认第几个排序
-	        "bStateSave": true, //状态保存
-	        "aoColumnDefs": [
-	            //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-	            {
-	                "orderable": false,
-	                "aTargets": [0, b]
-	            } // 不参与排序的列
-	        ]
-	    });		
-	}
+
 	tableSort('.table-sort0',6)
 	tableSort('.table-sort1',6)
 	tableSort('.table-sort2',5)
-	tableSort('.table-sort3',6)
-	tableSort('.table-sort4',6)
 
 
     /*学校-查看*/

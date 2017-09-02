@@ -15,9 +15,10 @@
     <link rel="stylesheet" type="text/css" href="../Public/static/h-ui/css/H-ui.min.css"/>
     <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css"/>
     <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link href="../Public/lib/jedate/skin/jedate.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
     <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/style.css"/>
-    <link href="../Public/lib/jedate/skin/jedate.css" rel="stylesheet" type="text/css"/>
+
 
     <!--[if IE 6]>
     <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
@@ -25,7 +26,6 @@
     <![endif]-->
     <title>食材审核</title>
 </head>
-
 <body>
 <div class="page-container">
     <!-- 待审核 -->
@@ -95,7 +95,6 @@
             </table>
         </div>
     </div>
-
 </div>
 <script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
@@ -105,45 +104,8 @@
 <script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
 
-    /* 获取当前时间*/
-    var d = new Date();
-    var str = d.getFullYear() + "-" + ((d.getMonth() + 1) < 10 ? "0" : "") + (d.getMonth() + 1) + "-" + (d.getDate() < 10 ? "0" : "") + d.getDate();
-    var date = $("#date");
-    date.html(str);
-
-    //初始化日期搜索jedate
-    $('#tim').jeDate({
-        format: 'YYYY-MM-DD',
-        minDate: '2014-06-16', //设定最小日期为当前日期
-        maxDate: str //最大日期
-    });
-
     /*用户-查看*/
     function member_show(title, url, id, w, h) {
-        layer_show(title, url, w, h);
-    }
-
-    function tableSort(a) {
-        $(a).dataTable({
-            "aaSorting": [
-                [1, "desc"]
-            ], //默认第几个排序
-            "bStateSave": true, //状态保存
-            "aoColumnDefs": [
-                //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-                {
-                    "orderable": false,
-                    "aTargets": [0, 6]
-                } // 不参与排序的列
-            ]
-        });
-    }
-
-    tableSort('.table-sort0')
-
-
-    /*学校-查看*/
-    function school_show(title, url, id, w, h) {
         layer_show(title, url, w, h);
     }
 
@@ -203,6 +165,23 @@
                 });
             });
     }
+
+    $(function () {
+        /* 获取当前时间*/
+        var d = new Date();
+        var str = d.getFullYear() + "-" + ((d.getMonth() + 1) < 10 ? "0" : "") + (d.getMonth() + 1) + "-" + (d.getDate() < 10 ? "0" : "") + d.getDate();
+        var date = $("#date");
+        date.html(str);
+        //初始化日期搜索jedate
+        $('#tim').jeDate({
+            format: 'YYYY-MM-DD',
+            minDate: '2014-06-16', //设定最小日期为当前日期
+            maxDate: str //最大日期
+        });
+        //初始化dataTable
+        tableSort('.table-sort0', [0, 6])
+    })
+
 
 </script>
 </body>
