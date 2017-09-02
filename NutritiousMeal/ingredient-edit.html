@@ -697,6 +697,13 @@
         var date = $("#date");
         date.html(str);
 
+        //初始化日期搜索jedate
+        $('#tim').jeDate({
+            format: 'YYYY-MM-DD',
+            minDate: '2014-06-16', //设定最小日期为当前日期
+            maxDate: str //最大日期
+        });
+
         /*滚动窗口事件*/
         $(window).scroll(function () {
             var _top = $(window).scrollTop();
@@ -707,17 +714,14 @@
             }
         });
 
-        //初始化日期搜索jedate
-        $('#tim').jeDate({
-            format: 'YYYY-MM-DD',
-            minDate: '2014-06-16', //设定最小日期为当前日期
-            maxDate: str //最大日期
-        });
+
 
         /*食材名称列表tab */
         $('.tabs').respTabs({
             responsive: false
         });
+        /* 表格tab默认项 */
+        $("#HuiTab-demo1").Huitab({index: 0});
         /* 菜谱增删改 */
         $('#togList').click(function () {
             $(this).parent().siblings('.panel-body').slideToggle()
@@ -772,29 +776,8 @@
             });
         })
 
-
-        /* 表格tab默认项 */
-        $("#HuiTab-demo1").Huitab({index: 0});
-
-        /* tablesort排序 */
-        function tableSort(a) {
-            $(a).dataTable({
-                "aaSorting": [
-                    [1, "desc"]
-                ], //默认第几个排序
-                "bStateSave": true, //状态保存
-                "aoColumnDefs": [
-                    //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
-                    {
-                        "orderable": false,
-                        "aTargets": [0, 2]
-                    } // 不参与排序的列
-                ]
-            });
-        }
-
-        tableSort('.table-sort1');
-        tableSort('.table-sort2');
+        tableSort('.table-sort1',[0,4,5]);
+        tableSort('.table-sort2',[0,4,5]);
 
         /*食材编辑表格*/
         var source = [];  //  每一行  输入框名称跟值的映射
