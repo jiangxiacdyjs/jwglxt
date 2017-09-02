@@ -107,6 +107,15 @@
         .active .add-name.Hui-iconfont {
             display: block;
         }
+
+
+        /*datatable*/
+/*        .dataTables_wrapper .dataTables_length {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }*/
     </style>
     <title>学校食材编辑上报</title>
 </head>
@@ -383,7 +392,7 @@
         <div class="tabCon mt-20">
             <div class="row">
                 <div class="col-sm-5">
-                    <div class="panel panel-success">
+                    <div class="panel panel-success panerFix">
                         <div class="panel-header pos-r">食材选择列表
                             <button id="addKind" class="btn btn-success pos-a" type="button"
                                     style="top: 0;left: 110px;height: 100%;background-color:#429842;border-color: #429842">
@@ -628,7 +637,7 @@
                     </div>
                 </div>
                 <div class="col-sm-7">
-                        <div class="panel panel-success">
+                    <div class="panel panel-success">
                             <div class="panel-header pos-r">
                                 <table>
                                     <tr class="c-white">
@@ -662,7 +671,6 @@
                                 </table>
                             </div>
                         </div>
-
                     <p class="text-c">
                         <input class="btn btn-primary radius mt-30" type="submit" value="确认上报">
                     </p>
@@ -692,9 +700,9 @@
         $(window).scroll(function () {
             var _top = $(window).scrollTop();
             if (_top > 70) {
-                $('.panel-success').addClass('fix-top');
+                $('.panerFix').addClass('fix-top');
             } else {
-                $('.panel-success').removeClass('fix-top');
+                $('.panerFix').removeClass('fix-top');
             }
         });
 
