@@ -30,7 +30,8 @@
             text-align: center;
             padding: 3px 10px;
         }
-        .fix-top{
+
+        .fix-top {
             position: fixed;
             top: 0;
             width: 39%;
@@ -118,6 +119,12 @@
         </div>
         <!--往期食材单 -->
         <div class="tabCon mt-20">
+            <form method="" action=""
+                  style="position: absolute;left:50%;-webkit-transform: translateX(-50%);-moz-transform: translateX(-50%);-ms-transform: translateX(-50%);-o-transform: translateX(-50%);transform: translateX(-50%);">
+                <input type="text" placeholder="请输入关键词" class="input-text ac_input" name="search_text" value=""
+                       id="search_text" autocomplete="off" style="width:300px">
+                <button type="submit" class="btn btn-default" id="search_button">搜索</button>
+            </form>
             <table class="table table-border table-bordered table-bg table-hover table-sort1">
                 <thead>
                 <tr class="text-c">
@@ -370,10 +377,12 @@
                     <div class="panel panel-success">
                         <div class="panel-header pos-r">食材选择列表
                             <button id="addKind" class="btn btn-success pos-a" type="button"
-                                    style="top: 0;left: 110px;height: 100%;background-color:#429842;border-color: #429842">+&nbsp;&nbsp;新增食材分类
+                                    style="top: 0;left: 110px;height: 100%;background-color:#429842;border-color: #429842">
+                                +&nbsp;&nbsp;新增食材分类
                             </button>
                             <button id="togList" class="btn btn-success pos-a" type="button"
-                                    style="top: 0;right: 0px;height: 100%;background-color:#429842;border-color: #429842;">-
+                                    style="top: 0;right: 0px;height: 100%;background-color:#429842;border-color: #429842;">
+                                -
                             </button>
                         </div>
                         <div class="panel-body">
@@ -618,7 +627,8 @@
                             <td>
                                 应就餐人数：
                                 <span>
-                                    <input class="c-primary" style="border: 0;cursor: pointer;width: 60px;line-height: 13px" height=""
+                                    <input class="c-primary"
+                                           style="border: 0;cursor: pointer;width: 60px;line-height: 13px" height=""
                                            type="text" value="750">
                                   </span>
                             </td>
@@ -664,7 +674,7 @@
 <script>
 
     $(function () {
-        $(window).scroll(function() {
+        $(window).scroll(function () {
             var _top = $(window).scrollTop();
             if (_top > 70) {
                 $('.panel-success').addClass('fix-top');
