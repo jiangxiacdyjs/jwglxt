@@ -52,6 +52,9 @@
         .mtb-5{
             margin:5px auto;
         }
+        .mlr-5{
+            margin:0 5px;
+        }
         .label, .badge{
             position: relative;
             top: -2px;
@@ -111,10 +114,6 @@
 <script type="text/javascript" src="../Public/lib/jquery.validation/1.14.0/validate-methods.js"></script>
 <script type="text/javascript" src="../Public/lib/jquery.validation/1.14.0/messages_zh.js"></script>
 
-<!--var txtSm =[];
-for(var i=0;i<oChecked.length;i++){
-txtSm[i]= oChecked.eq(i).next().text()
-}; //console.log(txtSm)-->
 <script type="text/javascript">
     function getCatlogOperate() {
         $.ajax({
@@ -143,17 +142,19 @@ txtSm[i]= oChecked.eq(i).next().text()
 
                     /*模块checkbox点击事件*/
                     $(".permission-list2 dt input:checkbox").click(function () {
+                        var moduleId = $(this).next().attr('id');
+                        var moduleTxt = $(this).next().html();
                         if($(this).is(':checked')){   // 选中操作
-                            $('#ownAuthority').append($('<span/>').addClass('source-panle rel').html($(this).next().html()).attr('catalog_id',$(this).next().attr('id')));
-                            $('#doAuthority').append($('<div/>').addClass('mtb-5')
-                                .attr('menu_id',$(this).next().attr('id'))
-                                .append($('<span/>').addClass('badge-danger badge').html($(this).next().html()))
-                                .append($('<i/>').addClass('c-999 ml-5').html('仅查看！'))
+                            $ownAuthority.append($('<span/>').addClass('source-panle rel').html(moduleTxt).attr('catalog_id',moduleId));
+                            $doAuthority.append($('<div/>').addClass('mtb-5')
+                                .attr('menu_id',moduleId)
+                                .append($('<span/>').addClass('badge-danger badge mr-5').html(moduleTxt))
+                                .append($('<i/>').addClass('c-999 mlr-5').html('仅查看！'))
                                 );
                         }
                         if(!$(this).is(':checked')){  // 取消选中操作
-                            $ownAuthority.find('span[catalog_id='+$(this).next().attr('id')+']').remove();
-                            $doAuthority.find('div[menu_id='+$(this).next().attr('id')+']').remove();
+                            $ownAuthority.find('span[catalog_id='+moduleId+']').remove();
+                            $doAuthority.find('div[menu_id='+moduleId+']').remove();
                             $(this).parent().siblings('dd').find('input:checkbox').prop("checked",false);
                         }
                     });
@@ -161,15 +162,11 @@ txtSm[i]= oChecked.eq(i).next().text()
                     /*操作权限checkbox点击事件*/
                     $(".permission-list2 dd input:checkbox").click(function () {
                         var menu_dt_input = $(this).closest('dl').find('dt').find('input:checkbox');
-                        var oChecked = $(this).closest('dd').find("input:checked");
                         var tLab = $(this).next().text();  //某个子权限
                         var tTit = $(this).closest('dd').siblings('dt').find('span').text();  //本行标题
                         var div = $('#doAuthority').find('div[menu_id='+menu_dt_input.next().attr('id')+']');
-
                         var mid = menu_dt_input.next().attr('id');
                         var opid = $(this).next().attr("operate_id");
-
-
                         if($(this).is(':checked')) {  // 选中操作
                             if(!menu_dt_input.is(':checked')){
                                 menu_dt_input.prop("checked", true);//设置本行的总分类选框选中
@@ -185,7 +182,7 @@ txtSm[i]= oChecked.eq(i).next().text()
                             };
                             if(checkExist()){
                                 div.append(
-                                    $('<span/>').addClass('ml-5').attr('show_operate_id',opid)
+                                    $('<span/>').addClass('mlr-5').attr('show_operate_id',opid)
                                         .html(tLab)
                                 );
                             }else{
@@ -196,7 +193,7 @@ txtSm[i]= oChecked.eq(i).next().text()
                                         .html(tTit)
                                 );
                                 box.append(
-                                    $('<span/>').attr('show_operate_id',opid)
+                                    $('<span/>').addClass('mlr-5').attr('show_operate_id',opid)
                                         .html(tLab)
                                 );
                                 $doAuthority.append(box);
@@ -219,15 +216,12 @@ txtSm[i]= oChecked.eq(i).next().text()
     }
 
     function makeOperateCatlogList(moList,pageList,operateList) {
-
         var modUl = $('#Huifold1').empty();
-
         $.each(moList, function(name, value) {
             var modLi = $('<li/>').addClass('item').append('<h4>'+value+'<b>+</b></h4>').attr('id',name).appendTo(modUl);
             var divInfo = $('<div/>').addClass('info').appendTo(modLi);
             var dl = $('<dl/>').addClass('permission-list').appendTo(divInfo);//<dl class="permission-list">
             var dd = $('<dd/>').appendTo(dl);
-
             var pages = pageList[name];
             if(!pages) return ;
             $.each(pages, function(name, value) {
@@ -239,7 +233,7 @@ txtSm[i]= oChecked.eq(i).next().text()
                 if(!operates) return true;
                 $.each(operates, function(name, value) {
                     var label = $('<label/>').appendTo(dl_Page.find('dd'));
-                    label.append($('<input/>').addClass('mr-5').attr('type','checkbox')).append($('<span/>').html(value).attr('operate_id',name));
+                    label.append($('<input/>').addClass('mlr-5').attr('type','checkbox')).append($('<span/>').html(value).attr('operate_id',name));
                 });
             });
         });
@@ -249,7 +243,6 @@ txtSm[i]= oChecked.eq(i).next().text()
     $(function () {
         // 初始化tab
         getCatlogOperate();
-
     });
 </script>
 
