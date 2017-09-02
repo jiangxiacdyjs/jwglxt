@@ -24,22 +24,17 @@
 <title>消息列表</title>
 </head>
 <body>
-
-<!-- 位置 -->
-<nav class="breadcrumb">
-    <i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 消息列表
-    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i class="Hui-iconfont">&#xe68f;</i></a>
-</nav>
-
 <div class="page-container">
-	<div class="text-c">
-		<span class="wstxt">开始日期：</span><input type="text" class="input-text workinput wicon" id="inpstart" readonly style="max-width: 150px;">
-		<span class="wstxt">结束日期：</span><input type="text" class="input-text workinput wicon" id="inpend" readonly style="max-width: 150px;">
-		<input type="text" class="input-text" style="width:250px" placeholder="输入关键词" id="" name="">
-		<button type="submit" class="btn btn-success radius" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
-	</div>
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> </span> <span class="r">共有数据：<strong>88</strong> 条</span> </div>
 	<div class="mt-20">
+		<form method="" action=""
+			  style="position: absolute;left:50%;-webkit-transform: translateX(-50%);-moz-transform: translateX(-50%);-ms-transform: translateX(-50%);-o-transform: translateX(-50%);transform: translateX(-50%);">
+			<span class="wstxt">开始日期：</span><input type="text" class="input-text workinput wicon mr-10" id="inpstart" readonly style="max-width: 100px;">
+			<span class="wstxt">结束日期：</span><input type="text" class="input-text workinput wicon mr-10" id="inpend" readonly style="max-width: 100px;">
+			<button type="submit" class="btn btn-success" id="search_button">
+				<i class="Hui-iconfont">&#xe665;</i>
+				搜索
+			</button>
+		</form>
 		<table class="table table-border table-bordered table-hover table-bg table-sort">
 			<thead>
 				<tr class="text-c">
@@ -56,11 +51,7 @@
 					<td><input type="checkbox" value="1" name=""></td>
 					<td>1</td>
 					<td>
-						<a href="javascript:;" onclick="member_show('陈浩','member-show.html','10001','360','400')">
-							<i class="avatar size-L radius">
-								<img alt="" src="../Public/static/h-ui/images/ucnter/avatar.jpg">
-							</i>
-						</a>
+						freshzxf
 					</td>
 					<td class="text-l">
 						食材明细单中猪肉数量不符合规定要求，请认真核准再次上报！
@@ -88,7 +79,6 @@
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../Public/lib/jedate/jquery.jedate.min.js"></script>
-<script type="text/javascript" src="../Public/lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">
 
 var start = {
