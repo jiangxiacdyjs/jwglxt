@@ -44,11 +44,12 @@
             if (v.type === 'delete') {
                 var td = $("<td/>").appendTo(insertRow);
                 return;
-            }
+            };
             if (v.type === 'edit') {
                 var td = $("<td/>")
-                    .html('<button class="btn btn-success">' + '新增' + '</button>')
+                    .html('<button class="btn btn-success w100">' + '新增' + '</button>')
                     .attr('data-tabullet-type', 'save')
+                    .attr('colspan', '2')
                     .appendTo(insertRow);
                 td.find('button').click(function (event) {
                     // 添加验证第1个input是否为空，为空不能新增

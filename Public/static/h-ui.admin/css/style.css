@@ -4,9 +4,22 @@ label{cursor: pointer;}
 .check{float: left;margin-right: 15px}
 .checkboxBg{cursor: pointer;display: inline-block;margin:-5px 2px;width: 19px;height: 19px;background: url(../../h-ui/images/iCheck/blue.png) -19px 0}
 .checkedBg{background-position: -40px 0}
+.label, .badge{
+    position: relative;
+    top: -2px;
+}
 .bg-primary{
     background-color: #5a98de!important;
 }
 .bg-danger,bg-red{
     background-color: #dd514c!important;
+}
+.p-0{
+    padding: 0!important;
+}
+.border-0{
+    border: 0!important;
+}
+.w100{
+    width: 100% !important;
 }

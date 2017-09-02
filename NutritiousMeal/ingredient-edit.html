@@ -18,6 +18,7 @@
     <link href="../Public/lib/jedate/skin/jedate.css" rel="stylesheet" type="text/css"/>
     <link href="../Public/lib/responsiveTab/css/responsive.tabs.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
+    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/style.css"/>
     <!--[if IE 6]>
     <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
@@ -635,45 +636,47 @@
                 </div>
                 <div class="col-sm-7">
                     <div class="panel panel-success">
-                            <div class="panel-header pos-r">
-                                <table>
-                                    <tr class="c-white">
-                                        <td class="c-white"><span>紫云县第二小学家长学校</span></td>
-                                        <td class="c-white"><span>A片区</span></td>
-                                        <td class="c-white text-c">
-                                            应就餐人数：
-                                            <input class="input-text radius size-MINI" style="width: 50px" type="text" value="750">
-                                        </td>
-                                        <td class="c-white text-c">
-                                            实际就餐人数：
-                                            <input class="input-text radius size-MINI" style="width: 50px" type="text" value="720">
-                                        </td>
-                                        <td class="c-white text-r">当前日期：<span id="date"></span></td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="panel-body">
-                                <table class="table table-border table-bordered table-bg table-hover" id="table">
-                                    <thead>
-                                    <tr data-tabullet-map="id">
-                                        <th width="50" data-tabullet-map="_index" data-tabullet-readonly="true">编号</th>
-                                        <th data-tabullet-map="name">食材名称</th>
-                                        <th data-tabullet-map="unit">食材单位</th>
-                                        <th data-tabullet-map="amount">食材数量</th>
-                                        <th data-tabullet-map="mark">备注信息</th>
-                                        <th width="50" data-tabullet-type="edit"></th>
-                                        <th width="50" data-tabullet-type="delete"></th>
-                                    </tr>
-                                    </thead>
-                                </table>
-                            </div>
+                        <div class="panel-header">
+                            <table>
+                                <tr class="c-white">
+                                    <td class="c-white"><span>紫云县第二小学家长学校</span></td>
+                                    <td class="c-white"><span>A片区</span></td>
+                                    <td class="c-white text-c">
+                                        应就餐人数：
+                                        <input class="input-text radius size-MINI" style="width: 50px" type="text"
+                                               value="750">
+                                    </td>
+                                    <td class="c-white text-c">
+                                        实际就餐人数：
+                                        <input class="input-text radius size-MINI" style="width: 50px" type="text"
+                                               value="720">
+                                    </td>
+                                    <td class="c-white text-r">当前日期：<span id="date"></span></td>
+                                </tr>
+                            </table>
                         </div>
+                        <div class="panel-body p-0">
+                            <table class="table table-border table-bordered table-bg table-hover border-0 w100" id="table">
+                                <thead>
+                                <tr class="text-c w100" data-tabullet-map="id">
+                                    <th width="50" data-tabullet-map="_index" data-tabullet-readonly="true">编号</th>
+                                    <th data-tabullet-map="name">食材名称</th>
+                                    <th data-tabullet-map="unit">食材单位</th>
+                                    <th data-tabullet-map="amount">食材数量</th>
+                                    <th data-tabullet-map="mark">备注信息</th>
+                                    <th width="50" data-tabullet-type="edit">编辑</th>
+                                    <th width="50" data-tabullet-type="delete">删除</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
                     <p class="text-c">
                         <input class="btn btn-primary radius mt-30" type="submit" value="确认上报">
                     </p>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </div>
 <script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
