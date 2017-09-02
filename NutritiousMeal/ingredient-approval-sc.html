@@ -39,23 +39,24 @@
             </a>
         </div>
         <div class="mt-20">
-            <form method="" action=""
+            <form method="" action="" class="w100"
                   style="position: absolute;left:50%;-webkit-transform: translateX(-50%);-moz-transform: translateX(-50%);-ms-transform: translateX(-50%);-o-transform: translateX(-50%);transform: translateX(-50%);">
-                创建时间：
-                <input type="text" placeholder="创建时间" class="input-text ac_input mr-10" name="search_text" value=""
-                       id="tim" autocomplete="off" style="width:150px;cursor: pointer;" readonly>
-                状态：
-                <span class="select-box mr-10" style="width: 150px">
+                <div style="display:table;margin:-5px auto 0;">
+                    创建时间：
+                    <input type="text" placeholder="创建时间" class="input-text ac_input mr-10" name="search_text" value=""
+                           id="tim" autocomplete="off" style="width:150px;cursor: pointer;" readonly>
+                    状态：
+                    <span class="select-box mr-10" style="width: 150px">
                     <select class="select" size="1" name="demo1">
                         <option value="" selected="">已通过</option>
                         <option value="1">待审核</option>
                     </select>
 				</span>
-
-                <button type="submit" class="btn btn-success" id="search_button">
-                    <i class="Hui-iconfont">&#xe665;</i>
-                    搜索
-                </button>
+                    <button type="submit" class="btn btn-success" id="search_button" style="margin-right: 100px">
+                        <i class="Hui-iconfont">&#xe665;</i>
+                        搜索
+                    </button>
+                </div>
             </form>
             <table class="table table-border table-bordered table-bg table-hover table-sort0">
                 <thead>
