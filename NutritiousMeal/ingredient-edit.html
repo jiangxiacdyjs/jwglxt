@@ -121,9 +121,18 @@
         <div class="tabCon mt-20">
             <form method="" action=""
                   style="position: absolute;left:50%;-webkit-transform: translateX(-50%);-moz-transform: translateX(-50%);-ms-transform: translateX(-50%);-o-transform: translateX(-50%);transform: translateX(-50%);">
-                <input type="text" placeholder="请输入关键词" class="input-text ac_input" name="search_text" value=""
-                       id="search_text" autocomplete="off" style="width:300px">
-                <button type="submit" class="btn btn-default" id="search_button">搜索</button>
+
+                <input type="text" placeholder="请输入批次号" class="input-text ac_input" name="search_text" value=""
+                       id="num" autocomplete="off" style="width:150px">
+                <input type="text" placeholder="请输入采购时间" class="input-text ac_input" name="search_text" value=""
+                       id="tim" autocomplete="off" style="width:150px">
+                <input type="text" placeholder="请输入状态" class="input-text ac_input" name="search_text" value=""
+                       id="sta" autocomplete="off" style="width:150px">
+
+                <button type="submit" class="btn btn-success" id="search_button">
+                    <i class="Hui-iconfont">&#xe665;</i>
+                    搜索
+                </button>
             </form>
             <table class="table table-border table-bordered table-bg table-hover table-sort1">
                 <thead>
@@ -619,44 +628,44 @@
                     </div>
                 </div>
                 <div class="col-sm-7">
-                    <table class="table table-border table-bordered table-bg table-hover" id="table">
-                        <thead>
-                        <tr>
-                            <td colspan="2"><span>紫云县第二小学家长学校</span></td>
-                            <td><span>A片区</span></td>
-                            <td>
-                                应就餐人数：
-                                <span>
-                                    <input class="c-primary"
-                                           style="border: 0;cursor: pointer;width: 60px;line-height: 13px" height=""
-                                           type="text" value="750">
-                                  </span>
-                            </td>
-                            <td>
-                                实际就餐人数：
-                                <span>
-                                    <input class="c-primary"
-                                           style="border: 0;cursor: pointer;width: 60px;line-height: 13px" height=""
-                                           type="text" value="720">
-                                  </span>
-                            </td>
-                            <td colspan="2">当前日期：<span id="date"></span></td>
-                        </tr>
-                        <tr data-tabullet-map="id">
-                            <th width="50" data-tabullet-map="_index" data-tabullet-readonly="true">编号</th>
-                            <th data-tabullet-map="name">食材名称</th>
-                            <th data-tabullet-map="unit">食材单位</th>
-                            <th data-tabullet-map="amount">食材数量</th>
-                            <th data-tabullet-map="mark">备注信息</th>
-                            <th width="50" data-tabullet-type="edit"></th>
-                            <th width="50" data-tabullet-type="delete"></th>
-                        </tr>
-                        </thead>
-                    </table>
+                        <div class="panel panel-success">
+                            <div class="panel-header pos-r">
+                                <table>
+                                    <tr class="c-white">
+                                        <td class="c-white"><span>紫云县第二小学家长学校</span></td>
+                                        <td class="c-white"><span>A片区</span></td>
+                                        <td class="c-white text-c">
+                                            应就餐人数：
+                                            <input class="input-text radius size-MINI" style="width: 50px" type="text" value="750">
+                                        </td>
+                                        <td class="c-white text-c">
+                                            实际就餐人数：
+                                            <input class="input-text radius size-MINI" style="width: 50px" type="text" value="720">
+                                        </td>
+                                        <td class="c-white text-r">当前日期：<span id="date"></span></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-border table-bordered table-bg table-hover" id="table">
+                                    <thead>
+                                    <tr data-tabullet-map="id">
+                                        <th width="50" data-tabullet-map="_index" data-tabullet-readonly="true">编号</th>
+                                        <th data-tabullet-map="name">食材名称</th>
+                                        <th data-tabullet-map="unit">食材单位</th>
+                                        <th data-tabullet-map="amount">食材数量</th>
+                                        <th data-tabullet-map="mark">备注信息</th>
+                                        <th width="50" data-tabullet-type="edit"></th>
+                                        <th width="50" data-tabullet-type="delete"></th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+
                     <p class="text-c">
                         <input class="btn btn-primary radius mt-30" type="submit" value="确认上报">
                     </p>
-                </div>
             </div>
         </div>
     </div>
@@ -672,8 +681,14 @@
 <script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
 <script>
-
     $(function () {
+        /* 获取当前时间*/
+        var d = new Date();
+        var str = d.getFullYear() + "-" + ((d.getMonth() + 1) < 10 ? "0" : "") + (d.getMonth() + 1) + "-" + (d.getDate() < 10 ? "0" : "") + d.getDate();
+        var date = $("#date");
+        date.html(str);
+
+        /*滚动窗口事件*/
         $(window).scroll(function () {
             var _top = $(window).scrollTop();
             if (_top > 70) {
@@ -682,6 +697,14 @@
                 $('.panel-success').removeClass('fix-top');
             }
         });
+
+        //初始化日期搜索jedate
+        $('#tim').jeDate({
+            format: 'YYYY-MM-DD',
+            minDate: '2014-06-16', //设定最小日期为当前日期
+            maxDate: str //最大日期
+        });
+
         /*食材名称列表tab */
         $('.tabs').respTabs({
             responsive: false
@@ -740,11 +763,6 @@
             });
         })
 
-        /* 获取当前时间*/
-        var d = new Date();
-        var str = d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
-        var date = $("#date");
-        date.html(str);
 
         /* 表格tab默认项 */
         $("#HuiTab-demo1").Huitab({index: 0});
