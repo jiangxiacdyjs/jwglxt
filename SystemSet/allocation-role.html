@@ -62,7 +62,7 @@
         </tr>
         <tr class="bg-body">
             <td class="text-c" style="line-height: 41px">admin</td>
-            <td class="text-l">
+            <td class="text-l" id="ownRoles">
                 <span class="source-panle bg-primary">系统管理</span>
                 <span class="source-panle">自定义角色</span>
             </td>
@@ -72,7 +72,7 @@
         <div class="col-xs-12 col-sm-6" style="margin-right: -15px">
             <h4 class="text-c title">系统角色列表</h4>
             <div>
-                <table class="fancyTable" id="myTable01" cellpadding="0" cellspacing="0">
+                <table class="fancyTable roleTable" id="myTable01" cellpadding="0" cellspacing="0">
                     <thead>
                     <tr>
                         <th class="text-c">
@@ -89,7 +89,7 @@
                             <input type="checkbox" value="1" name="subChk">
                         </td>
                         <td>1</td>
-                        <td>超级管理员</td>
+                        <td><span roleId="00">超级管理员</span></td>
                         <td>拥有至高无上的权利</td>
                     </tr>
                     </tbody>
@@ -99,7 +99,7 @@
         <div class="col-xs-12 col-sm-6">
             <h4 class="text-c title">自定义角色列表</h4>
             <div>
-                <table class="fancyTable" id="myTable02" cellpadding="0" cellspacing="0">
+                <table class="fancyTable roleTable" id="myTable02" cellpadding="0" cellspacing="0">
                     <thead>
                     <tr>
                         <th class="text-c">
@@ -116,7 +116,7 @@
                             <input type="checkbox" value="1" name="subChk">
                         </td>
                         <td>1</td>
-                        <td>超级管理员</td>
+                        <td><span roleId="10">自定义管理员</span></td>
                         <td>拥有至高无上的权利</td>
                     </tr>
                     </tbody>
@@ -289,7 +289,8 @@
 
         $('#myTable01,#myTable02').fixedHeaderTable({footer: true, altClass: 'odd', height: 270});
         $('.fht-table').css('width','100%');
-        //  角色的删除操作
+
+        /* 角色的删除操作*/
         $('.source-panle.bg-primary').each(function () {
             var ele = $(this);
             $(this).click(function () {
@@ -309,6 +310,32 @@
                     });
                 }
             })
+        });
+
+        /* 角色checkbox点击事件*/
+        $(".roleTable td input:checkbox").click(function () {
+            var theRole = $(this).parent().siblings('td').children('span');//角色容器span
+            var tLab = theRole.text();  //角色名称
+            var tPid = theRole.attr("roleId");//角色自定义roleId值
+            var $ownRoles = $('#ownRoles');//角色对应显示值
+            var showSpan = $ownRoles.find('span[roleId='+tPid+']');//角色对应显示值
+            if($(this).is(':checked')) {  // 选中操作
+                /*检测左侧表格中是否存在该项*/
+                function checkExist() {
+                    return showSpan>0?true:false;
+                };
+                if(!checkExist()){
+                    $ownRoles.append(
+                        $('<span/>').addClass('mlr-5 source-panle').attr('roleId',tPid)
+                            .html(tLab)
+                    );
+                }else{
+
+                }
+            }
+            if(!$(this).is(':checked')) {  // 取消选中操作
+                showSpan.remove();
+            }
         });
 
         $('.btn').click(function () {
