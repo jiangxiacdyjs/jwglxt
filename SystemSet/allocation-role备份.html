@@ -17,12 +17,24 @@
     <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
     <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin" />
     <link rel="stylesheet" type="text/css" href="../Public/mySrc/css/style.css"/>
+    <!-- fixedTable -->
+    <link href="../Public/lib/fixedheader/css/defaultTheme.css" rel="stylesheet" media="screen"/>
+    <link href="../Public/lib/fixedheader/demo/css/myTheme.css" rel="stylesheet" media="screen"/>
     <!--[if IE 6]>
     <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
 
     <style>
+        .fancyTable thead tr th, .fancyTable thead tr td, .fancyTable tfoot tr th, .fancyTable tfoot tr td {
+            background-color: #5eb95e;
+        }
+        .fancyTable tbody tr.odd td {
+             background-color: #f4ffe6;
+        }
+        .fancyTable tbody tr td {
+             background-color: transparent;
+        }
         .title {
             background: url('../Public/static/h-ui.admin/images/divide.jpg') center no-repeat;
             -webkit-background-size: cover;
@@ -52,99 +64,64 @@
             <td class="text-c" style="line-height: 41px">admin</td>
             <td class="text-l" id="ownRoles">
                 <span class="source-panle bg-primary">系统管理</span>
+                <span class="source-panle">自定义角色</span>
             </td>
         </tr>
     </table>
     <div class="row cl mt-10">
         <div class="col-xs-12 col-sm-6" style="margin-right: -15px">
             <h4 class="text-c title">系统角色列表</h4>
-            <table class="table table-border table-bordered table-bg table-sort0">
-                <thead>
-                <tr class="text-c">
-                    <th>操作</th>
-                    <th>ID</th>
-                    <th>角色名称</th>
-                    <th>角色描述</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="text-c">
-                    <td><input type="checkbox" value="" name=""></td>
-                    <td>00</td>
-                    <td><span roleId="00">超级管理员</span></td>
-                    <td>角色简要说明</td>
-                </tr>
-                <tr class="text-c">
-                    <td><input type="checkbox" value="" name=""></td>
-                    <td>01</td>
-                    <td><span roleId="01">超级管理员</span></td>
-                    <td>角色简要说明</td>
-                </tr>
-                <tr class="text-c">
-                    <td><input type="checkbox" value="" name=""></td>
-                    <td>02</td>
-                    <td><span roleId="02">超级管理员</span></td>
-                    <td>角色简要说明</td>
-                </tr>
-                <tr class="text-c">
-                    <td><input type="checkbox" value="" name=""></td>
-                    <td>03</td>
-                    <td><span roleId="03">超级管理员</span></td>
-                    <td>角色简要说明</td>
-                </tr>
-                <tr class="text-c">
-                    <td><input type="checkbox" value="" name=""></td>
-                    <td>04</td>
-                    <td><span roleId="04">超级管理员</span></td>
-                    <td>角色简要说明</td>
-                </tr>
-                </tbody>
-            </table>
+            <div>
+                <table class="fancyTable roleTable" id="myTable01" cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th class="text-c">
+                            <input type="checkbox" name="" value="">
+                        </th>
+                        <th class="text-c">ID</th>
+                        <th class="text-c">角色名</th>
+                        <th class="text-c">描述</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="text-c">
+                        <td>
+                            <input type="checkbox" value="1" name="subChk">
+                        </td>
+                        <td>1</td>
+                        <td><span roleId="00">超级管理员</span></td>
+                        <td>拥有至高无上的权利</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
         <div class="col-xs-12 col-sm-6">
             <h4 class="text-c title">自定义角色列表</h4>
-            <table class="table table-border table-bordered table-bg table-sort1">
-                <thead>
-                <tr class="text-c">
-                    <th>操作</th>
-                    <th>ID</th>
-                    <th>角色名称</th>
-                    <th>角色描述</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr class="text-c">
-                    <td><input type="checkbox" value="" name=""></td>
-                    <td>10</td>
-                    <td><span roleId="10">超级管理员</span></td>
-                    <td>角色简要说明</td>
-                </tr>
-                <tr class="text-c">
-                    <td><input type="checkbox" value="" name=""></td>
-                    <td>11</td>
-                    <td><span roleId="11">超级管理员</span></td>
-                    <td>角色简要说明</td>
-                </tr>
-                <tr class="text-c">
-                    <td><input type="checkbox" value="" name=""></td>
-                    <td>12</td>
-                    <td><span roleId="12">超级管理员</span></td>
-                    <td>角色简要说明</td>
-                </tr>
-                <tr class="text-c">
-                    <td><input type="checkbox" value="" name=""></td>
-                    <td>13</td>
-                    <td><span roleId="13">超级管理员</span></td>
-                    <td>角色简要说明</td>
-                </tr>
-                <tr class="text-c">
-                    <td><input type="checkbox" value="" name=""></td>
-                    <td>14</td>
-                    <td><span roleId="14">超级管理员</span></td>
-                    <td>角色简要说明</td>
-                </tr>
-                </tbody>
-            </table>
+            <div>
+                <table class="fancyTable roleTable" id="myTable02" cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th class="text-c">
+                            <input type="checkbox" name="" value="">
+                        </th>
+                        <th class="text-c">ID</th>
+                        <th class="text-c">角色名</th>
+                        <th class="text-c">描述</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="text-c">
+                        <td>
+                            <input type="checkbox" value="1" name="subChk">
+                        </td>
+                        <td>1</td>
+                        <td><span roleId="10">自定义管理员</span></td>
+                        <td>拥有至高无上的权利</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     <div class="row cl">
@@ -158,8 +135,10 @@
 <script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
-<script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
+<!--/_footer 作为公共模版分离出去-->
+<script src="../Public/lib/fixedheader/jquery.fixedheadertable.js"></script>
+
+<!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript">
 
 /*    var index = window.location.search.indexOf('=') ;
@@ -307,8 +286,9 @@
     }*/
 
     $(function () {
-        tableSort('.table-sort0',[0,2,3]);
-        tableSort('.table-sort1',[0,2,3]);
+
+        $('#myTable01,#myTable02').fixedHeaderTable({footer: true, altClass: 'odd', height: 270});
+        $('.fht-table').css('width','100%');
 
         /* 角色的删除操作*/
         $('.source-panle.bg-primary').each(function () {
@@ -333,7 +313,7 @@
         });
 
         /* 角色checkbox点击事件*/
-        $(".table td input:checkbox").css({'position':'relative','z-index':'-1'}).click(function () {
+        $(".roleTable td input:checkbox").click(function () {
             var theRole = $(this).parent().siblings('td').children('span');//角色容器span
             var tLab = theRole.text();  //角色名称
             var tPid = theRole.attr("roleId");//角色自定义roleId值
@@ -357,9 +337,6 @@
                 showSpan.remove();
             }
         });
-        $(".table td input:checkbox").parent('td').css('cursor','pointer').click(function () {
-            $(this).children('input:checkbox').click();
-        })
 
         $('.btn').click(function () {
 
