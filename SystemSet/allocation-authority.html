@@ -152,7 +152,8 @@
                                     $span.remove();
                                     layer.msg('已删除，可在右侧重新添加', {icon: 1});
                                 }, function(){
-
+                                    ele.children('b').remove();
+                                    ele.removeClass('bg-danger').addClass('bg-primary');
                                 });
                             }
                         })
