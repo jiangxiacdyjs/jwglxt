@@ -45,6 +45,10 @@ label{cursor: pointer;}
 .p-0{
     padding: 0!important;
 }
+.mlr-0{
+    margin-left: 0!important;
+    margin-right: 0!important;
+}
 .border-0{
     border: 0!important;
 }

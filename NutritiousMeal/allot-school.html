@@ -20,48 +20,24 @@
     <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
-
-    <style>
-        .btn-in {
-            background-color: #5496F0;
-            border-color: #5496F0;
-            height: 30px;
-            line-height: 30px
-        }
-
-        .btn-out {
-            background-color: #F55E7D;
-            border-color: #F55E7D;
-            height: 30px;
-            line-height: 30px
-        }
-
-    </style>
-    <!--TODO: 这个页面逻辑要改，学校当前点入片区管理要显示当前学校-->
     <title>分配学校</title>
 </head>
 <body>
 <div class="page-container">
-        <p style="background-color: #DEE6F5"><i class="f-30">说明：</i>左侧表格展示的是当前片区之外的所有学校列表(可分配的学校)，如需给当前片区分配学校，只需在左侧表格中选择好学校并点击该学校对应的操作按钮；
-        </p>
-
-    <div class="mt-20 row cl">
+<!--    <p class="pb-10 pt-10 pl-5" style="background-color: #DEE6F5"><i class="Hui-iconfont c-red">&#xe6e0;</i>：左侧表格展示的是当前片区之外的所有学校列表(可分配的学校)，如需给当前片区分配学校，只需在左侧表格中点击相应学校所在行的移入按钮。
+    </p>-->
+    <div class="Huialert Huialert-info"><i class="Hui-iconfont">&#xe6a6;</i>左侧表格展示的是当前片区之外的所有学校列表(可分配的学校)，如需给当前片区分配学校，只需在左侧表格中点击相应学校所在行的移入按钮。</div>
+    <div class="row cl">
         <div class="col-xs-12 col-sm-6">
+            <div class="Huialert Huialert-success row clearfix mlr-0">
+                <div class="col-sm-3 col-xs-6">片区：<span>3</span></div>
+                <div class="col-sm-3 col-xs-6">学校：<span>32</span></div>
+                <div class="col-sm-3 col-xs-6">学生：<span>35000</span></div>
+                <div class="col-sm-3 col-xs-6">教师：<span>5000</span></div>
+            </div>
             <span class="f-20" style="float: left">其他片区学校列表</span>
             <table class="table table-border table-bordered table-bg table-hover table-sort0">
                 <thead>
-                <tr style="background-color: #5eb95e;">
-                    <td colspan="2" class="c-white">片区数量：<span>3</span></td>
-                    <td colspan="2" class="c-white">学校数量：<span>32</span></td>
-                    <td class="c-white">
-                        学生人数：
-                        <span>35000</span>
-                    </td>
-                    <td class="c-white">
-                        教师人数：
-                        <span>5000</span>
-                    </td>
-                </tr>
                 <tr class="text-c">
                     <th>编号</th>
                     <th>学校名称</th>
@@ -79,7 +55,7 @@
                     <td>50</td>
                     <td>B片区</td>
                     <td>
-                        <button class="btn btn-primary radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
+                        <button class="btn btn-primary-outline size-MINI radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
                         </button>
                     </td>
                 </tr>
@@ -90,106 +66,117 @@
                     <td>50</td>
                     <td>C片区</td>
                     <td>
-                        <button class="btn btn-primary radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
+                        <button class="btn btn-primary-outline size-MINI radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
                         </button>
                     </td>
                 </tr>
                 <tr class="text-c">
-                    <td>3</td>
+                    <td>1</td>
                     <td>紫云二小</td>
                     <td>700</td>
                     <td>50</td>
                     <td>B片区</td>
                     <td>
-                        <button class="btn btn-primary radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
+                        <button class="btn btn-primary-outline size-MINI radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
                         </button>
                     </td>
                 </tr>
                 <tr class="text-c">
-                    <td>3</td>
+                    <td>2</td>
+                    <td>紫云二小</td>
+                    <td>700</td>
+                    <td>50</td>
+                    <td>C片区</td>
+                    <td>
+                        <button class="btn btn-primary-outline size-MINI radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
+                        </button>
+                    </td>
+                </tr>
+                <tr class="text-c">
+                    <td>1</td>
                     <td>紫云二小</td>
                     <td>700</td>
                     <td>50</td>
                     <td>B片区</td>
                     <td>
-                        <button class="btn btn-primary radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
+                        <button class="btn btn-primary-outline size-MINI radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
                         </button>
                     </td>
                 </tr>
                 <tr class="text-c">
-                    <td>3</td>
+                    <td>2</td>
+                    <td>紫云二小</td>
+                    <td>700</td>
+                    <td>50</td>
+                    <td>C片区</td>
+                    <td>
+                        <button class="btn btn-primary-outline size-MINI radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
+                        </button>
+                    </td>
+                </tr>
+                <tr class="text-c">
+                    <td>1</td>
                     <td>紫云二小</td>
                     <td>700</td>
                     <td>50</td>
                     <td>B片区</td>
                     <td>
-                        <button class="btn btn-primary radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
+                        <button class="btn btn-primary-outline size-MINI radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
                         </button>
                     </td>
                 </tr>
                 <tr class="text-c">
-                    <td>3</td>
+                    <td>2</td>
+                    <td>紫云二小</td>
+                    <td>700</td>
+                    <td>50</td>
+                    <td>C片区</td>
+                    <td>
+                        <button class="btn btn-primary-outline size-MINI radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
+                        </button>
+                    </td>
+                </tr>
+                <tr class="text-c">
+                    <td>1</td>
                     <td>紫云二小</td>
                     <td>700</td>
                     <td>50</td>
                     <td>B片区</td>
                     <td>
-                        <button class="btn btn-primary radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
+                        <button class="btn btn-primary-outline size-MINI radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
                         </button>
                     </td>
                 </tr>
                 <tr class="text-c">
-                    <td>3</td>
+                    <td>2</td>
+                    <td>紫云二小</td>
+                    <td>700</td>
+                    <td>50</td>
+                    <td>C片区</td>
+                    <td>
+                        <button class="btn btn-primary-outline size-MINI radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
+                        </button>
+                    </td>
+                </tr>
+                <tr class="text-c">
+                    <td>1</td>
                     <td>紫云二小</td>
                     <td>700</td>
                     <td>50</td>
                     <td>B片区</td>
                     <td>
-                        <button class="btn btn-primary radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
+                        <button class="btn btn-primary-outline size-MINI radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
                         </button>
                     </td>
                 </tr>
                 <tr class="text-c">
-                    <td>3</td>
+                    <td>2</td>
                     <td>紫云二小</td>
                     <td>700</td>
                     <td>50</td>
-                    <td>B片区</td>
+                    <td>C片区</td>
                     <td>
-                        <button class="btn btn-primary radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
-                        </button>
-                    </td>
-                </tr>
-                <tr class="text-c">
-                    <td>3</td>
-                    <td>紫云二小</td>
-                    <td>700</td>
-                    <td>50</td>
-                    <td>B片区</td>
-                    <td>
-                        <button class="btn btn-primary radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
-                        </button>
-                    </td>
-                </tr>
-                <tr class="text-c">
-                    <td>3</td>
-                    <td>紫云二小</td>
-                    <td>700</td>
-                    <td>50</td>
-                    <td>B片区</td>
-                    <td>
-                        <button class="btn btn-primary radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
-                        </button>
-                    </td>
-                </tr>
-                <tr class="text-c">
-                    <td>3</td>
-                    <td>紫云二小</td>
-                    <td>700</td>
-                    <td>50</td>
-                    <td>B片区</td>
-                    <td>
-                        <button class="btn btn-primary radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
+                        <button class="btn btn-primary-outline size-MINI radius btn-in">移入A片区&nbsp;&nbsp;<span class="Hui-iconfont">&#xe63d;</span>
                         </button>
                     </td>
                 </tr>
@@ -197,21 +184,14 @@
             </table>
         </div>
         <div class="col-xs-12 col-sm-6">
-            <span class="f-20" style="float: left">A片区学校列表</span>
+            <div class="Huialert Huialert-success row clearfix mlr-0">
+                <div class="col-xs-4">学校：<span>8</span></div>
+                <div class="col-xs-4">学生：<span>35000</span></div>
+                <div class="col-xs-4">教师：<span>5000</span></div>
+            </div>
+            <span class="f-20" style="float: left;padding: 0 5px;border-radius: 50px;border: 1px solid #5eb95e">A片区学校列表</span>
             <table class="table table-border table-bordered table-bg table-hover table-sort1">
                 <thead>
-                <tr style="background-color: #5eb95e;">
-                    <td colspan="2" class="c-white">片区名称：<span>A片区</span></td>
-                    <td class="c-white">
-                        学生人数：
-                        <span>5000</span>
-                    </td>
-                    <td class="c-white">
-                        教师人数：
-                        <span>500</span>
-                    </td>
-                    <td class="c-white">创建日期：<span> 2017-7-1 </span></td>
-                </tr>
                 <tr class="text-c">
                     <th>编号</th>
                     <th>学校名称</th>
@@ -227,7 +207,7 @@
                     <td>700</td>
                     <td>50</td>
                     <td>
-                        <button class="btn btn-danger radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
+                        <button class="btn btn-danger-outline size-MINI radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
                         </button>
                     </td>
                 </tr>
@@ -237,97 +217,107 @@
                     <td>700</td>
                     <td>50</td>
                     <td>
-                        <button class="btn btn-danger radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
+                        <button class="btn btn-danger-outline size-MINI radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
                         </button>
                     </td>
                 </tr>
                 <tr class="text-c">
-                    <td>3</td>
+                    <td>1</td>
                     <td>紫云二小</td>
                     <td>700</td>
                     <td>50</td>
                     <td>
-                        <button class="btn btn-danger radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
+                        <button class="btn btn-danger-outline size-MINI radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
                         </button>
                     </td>
                 </tr>
                 <tr class="text-c">
-                    <td>3</td>
+                    <td>2</td>
                     <td>紫云二小</td>
                     <td>700</td>
                     <td>50</td>
                     <td>
-                        <button class="btn btn-danger radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
+                        <button class="btn btn-danger-outline size-MINI radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
                         </button>
                     </td>
                 </tr>
                 <tr class="text-c">
-                    <td>3</td>
+                    <td>1</td>
                     <td>紫云二小</td>
                     <td>700</td>
                     <td>50</td>
                     <td>
-                        <button class="btn btn-danger radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
+                        <button class="btn btn-danger-outline size-MINI radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
                         </button>
                     </td>
                 </tr>
                 <tr class="text-c">
-                    <td>3</td>
+                    <td>2</td>
                     <td>紫云二小</td>
                     <td>700</td>
                     <td>50</td>
                     <td>
-                        <button class="btn btn-danger radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
+                        <button class="btn btn-danger-outline size-MINI radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
                         </button>
                     </td>
                 </tr>
                 <tr class="text-c">
-                    <td>3</td>
+                    <td>1</td>
                     <td>紫云二小</td>
                     <td>700</td>
                     <td>50</td>
                     <td>
-                        <button class="btn btn-danger radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
+                        <button class="btn btn-danger-outline size-MINI radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
                         </button>
                     </td>
                 </tr>
                 <tr class="text-c">
-                    <td>3</td>
+                    <td>2</td>
                     <td>紫云二小</td>
                     <td>700</td>
                     <td>50</td>
                     <td>
-                        <button class="btn btn-danger radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
+                        <button class="btn btn-danger-outline size-MINI radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
                         </button>
                     </td>
                 </tr>
                 <tr class="text-c">
-                    <td>3</td>
+                    <td>1</td>
                     <td>紫云二小</td>
                     <td>700</td>
                     <td>50</td>
                     <td>
-                        <button class="btn btn-danger radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
+                        <button class="btn btn-danger-outline size-MINI radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
                         </button>
                     </td>
                 </tr>
                 <tr class="text-c">
-                    <td>3</td>
+                    <td>2</td>
                     <td>紫云二小</td>
                     <td>700</td>
                     <td>50</td>
                     <td>
-                        <button class="btn btn-danger radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
+                        <button class="btn btn-danger-outline size-MINI radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
                         </button>
                     </td>
                 </tr>
                 <tr class="text-c">
-                    <td>3</td>
+                    <td>1</td>
                     <td>紫云二小</td>
                     <td>700</td>
                     <td>50</td>
                     <td>
-                        <button class="btn btn-danger radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
+                        <button class="btn btn-danger-outline size-MINI radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
+                        </button>
+                    </td>
+                </tr>
+                <tr class="text-c">
+                    <td>2</td>
+                    <td>紫云二小</td>
+                    <td>700</td>
+                    <td>50</td>
+                    <td>
+                        <button class="btn btn-danger-outline size-MINI radius btn-out"><span class="Hui-iconfont">&#xe67d;</span>&nbsp;&nbsp;移出A片区
                         </button>
                     </td>
                 </tr>
@@ -346,8 +336,25 @@
 <script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
 <script type="text/javascript">
     $(function () {
-        tableSort('.table-sort0',[5])
-        tableSort('.table-sort1',[4])
+        function tableSort0(a,b){
+            $(a).dataTable({
+                "sDom": '<"showSearch"f>tipr',
+                "lengthMenu": [6, 10, 15],
+                "aaSorting": [
+                    [1, "desc"]
+                ], //默认第几个排序
+                "bStateSave": true, //状态保存
+                "aoColumnDefs": [
+                    //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+                    {
+                        "orderable": false,
+                        "aTargets": b
+                    } // 不参与排序的列
+                ]
+            });
+        }
+        tableSort0('.table-sort0',[5])
+        tableSort0('.table-sort1',[4])
         // 左侧移入
         $('.btn-in').click(function () {
             layer.confirm('是否确认将该学校移入A片区', {

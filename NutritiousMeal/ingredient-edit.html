@@ -112,7 +112,7 @@
     <title>学校食材编辑上报</title>
 </head>
 <body>
-<div class="page-container">
+<div class="page-container" style="height: 1000px">
     <div id="HuiTab-demo1" class="HuiTab">
         <div class="tabBar clearfix">
             <span class="current">往期食材单</span>
@@ -423,7 +423,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-7">
+                <div class="col-sm-7 p-0">
                     <div class="panel panel-success">
                         <div class="panel-header">
                             <table>
@@ -460,6 +460,7 @@
                             </table>
                         </div>
                     </div>
+                    <div class="pos-f bg-1 w100" id="tTop">fsdfds</div>
                     <p class="text-c">
                         <input class="btn btn-primary radius mt-30" type="submit" value="确认上报">
                     </p>
@@ -499,12 +500,13 @@
             var _top = $(window).scrollTop();
             if (_top > 70) {
                 $('.panerFix').addClass('fix-top');
+               /* $('#tTop').append($('[data-tabullet-id="-1"]').eq(0).clone(true))*/
+
+            /*<tr data-tabullet-id="-1"><td></td><td><input type="text" name="name" class="input-text"></td><td><input type="text" name="unit" class="input-text"></td><td><input type="text" name="amount" class="input-text"></td><td><input type="text" name="mark" class="input-text"></td><td data-tabullet-type="save" colspan="2"><button class="btn btn-success w100">新增</button></td><td></td></tr>*/
             } else {
                 $('.panerFix').removeClass('fix-top');
             }
         });
-
-
 
         /*食材名称列表tab */
         $('.tabs').respTabs({
