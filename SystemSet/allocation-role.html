@@ -60,11 +60,11 @@
             <h4 class="text-c title">系统角色列表</h4>
             <table class="table table-border table-bordered table-bg table-sort0">
                 <thead>
-                <tr class="text-c">
-                    <th>操作</th>
-                    <th>ID</th>
-                    <th>角色名称</th>
-                    <th>角色描述</th>
+                <tr>
+                    <th class="text-c">操作</th>
+                    <th class="text-c">ID</th>
+                    <th class="text-c">角色名称</th>
+                    <th class="text-c">角色描述</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -316,7 +316,7 @@
         function tableSort0(a,b){
             $(a).dataTable({
                 "sDom": '<"showCount"l><"showSearch"f>tipr',
-                "lengthMenu": [5, 10,15, "全部"],
+                "lengthMenu": [5,10,15],
                 "aaSorting": [
                     [1, "desc"]
                 ],
