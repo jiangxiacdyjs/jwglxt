@@ -98,6 +98,12 @@
                     <td><span roleId="04">超级管理员</span></td>
                     <td>角色简要说明</td>
                 </tr>
+                <tr class="text-c">
+                    <td><input type="checkbox" value="" name=""></td>
+                    <td>05</td>
+                    <td><span roleId="05">超级管理员</span></td>
+                    <td>角色简要说明</td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -307,8 +313,24 @@
     }*/
 
     $(function () {
-        tableSort('.table-sort0',[0,2,3]);
-        tableSort('.table-sort1',[0,2,3]);
+        function tableSort0(a,b){
+            $(a).dataTable({
+                "sDom": '<"showCount"l><"showSearch"f>tipr',
+                "lengthMenu": [5, 10,15, "全部"],
+                "aaSorting": [
+                    [1, "desc"]
+                ],
+                "bStateSave": true,
+                "aoColumnDefs": [
+                    {
+                        "orderable": false,
+                        "aTargets": b
+                    }
+                ]
+            });
+        }
+        tableSort0('.table-sort0',[0,2,3]);
+        tableSort0('.table-sort1',[0,2,3]);
 
         /* 角色的删除操作*/
         $('.source-panle.bg-primary').each(function () {
