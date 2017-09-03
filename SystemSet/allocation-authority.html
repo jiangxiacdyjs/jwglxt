@@ -41,7 +41,7 @@
             line-height:30px;
             padding: 0 5px;
             color: #fff;
-            background-color: #228fbd;
+            background-color: #06b36b;
             margin: 3px;
         }
         .title {
@@ -78,7 +78,9 @@
                     </tr>
                     <tr class="bg-body">
                         <th class="text-c">目录权限：</th>
-                        <td id="ownAuthority"></td>
+                        <td id="ownAuthority">
+                            <span class="source-panle bg-primary">默认权限</span>
+                        </td>
                     </tr>
                     <tr class="bg-body">
                         <th class="text-c">操作权限：</th>
@@ -133,6 +135,28 @@
                     $.Huifold("#Huifold1 .item h4", "#Huifold1 .item .info", "fast", 3, "click");
 
                     var $doAuthority = $('#doAuthority'),$ownAuthority = $('#ownAuthority');
+
+                    /*默认权限名点击事件*/
+                    $('.source-panle.bg-primary').each(function () {
+                        var ele = $(this);
+                        $(this).click(function () {
+                            var newB = $('<b class="Hui-iconfont ml-5">&#xe6a6;</b>');
+                            if(!ele.children().is('.Hui-iconfont')){
+                                $(this).append(newB);
+                                ele.removeClass('bg-primary').addClass('bg-danger')
+                            }else {
+                                layer.confirm('确认删除该默认角色？', {
+                                    btn: ['确认','取消'] //按钮
+                                }, function(){
+                                    var $span = ele;
+                                    $span.remove();
+                                    layer.msg('已删除，可在右侧重新添加', {icon: 1});
+                                }, function(){
+
+                                });
+                            }
+                        })
+                    });
 
                     /*模块名称绑定点击事件*/
                     $('dt').children('span').css('cursor','pointer').on('click',function () {
