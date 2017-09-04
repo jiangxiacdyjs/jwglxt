@@ -42,6 +42,9 @@ label{cursor: pointer;}
 .bg-danger,bg-red{
     background-color: #dd514c!important;
 }
+.bg-green{
+    background-color: #06b36b!important;
+}
 .p-0{
     padding: 0!important;
 }
