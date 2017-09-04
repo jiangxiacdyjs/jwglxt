@@ -44,6 +44,7 @@
             color: #fff;
             display: inline-block;
             margin-top: 10px;
+            -moz-user-select:none;
         }
 
         .fname-sc {
@@ -108,16 +109,18 @@
         .active .add-name.Hui-iconfont {
             display: block;
         }
+        .active a{
+            padding:8px 40px 8px 0!important;
+        }
 
         .tabs-vertical-left .tabs-list li a, .tabs-vertical-right .tabs-list li a{
             width: 110px!important;
-            padding:8px 40px 8px 0;
         }
     </style>
     <title>学校食材编辑上报</title>
 </head>
 <body>
-<div class="page-container" style="height: 1000px">
+<div class="page-container"> <!--style="height: 1000px"-->
     <div id="HuiTab-demo1" class="HuiTab">
         <div class="tabBar clearfix">
             <span class="current">往期食材单</span>
@@ -190,12 +193,15 @@
                                     style="top: 0;left: 110px;height: 100%;background-color:#429842;border-color: #429842">
                                 +&nbsp;&nbsp;新增食材分类
                             </button>
-                            <button id="togList" class="btn btn-success pos-a" type="button"
+                            <!--<button id="togList" class="btn btn-success pos-a" type="button"
                                     style="top: 0;right: 0px;height: 100%;background-color:#429842;border-color: #429842;">
                                 -
-                            </button>
+                            </button>-->
                         </div>
                         <div class="panel-body">
+                            <div class="Huialert Huialert-success">
+                                <span>操作说明：</span><span class="c-red">双击</span>下方食材名称即可快速新增食材，新增后在右侧表格中编辑单位及数量！
+                            </div>
                             <div class="tabs tabs-vertical-left">
                                 <ul id="list1" class="tabs-list">
                                     <li class="active">
@@ -465,7 +471,6 @@
                             </table>
                         </div>
                     </div>
-                    <div class="pos-f bg-1 w100" id="tTop">fsdfds</div>
                     <p class="text-c">
                         <input class="btn btn-primary radius mt-30" type="submit" value="确认上报">
                     </p>
@@ -619,10 +624,28 @@
         }
 
         resetTabullet();
-        $('.fname').click(function (event) {
-            $("[data-tabullet-id='-1']").find('input').eq(0).val($(this).text());
-            $("[data-tabullet-id='-1']").find('input').eq(1).val('千克（kg）');
-        });
+
+        /*食材选择*/
+        !function () {
+            function scrollToEnd(){//滚动到底部
+                var h = $(document).height()-$(window).height();
+                $(document).scrollTop(h);
+            }
+            $('.fname').on('click',function (event) {
+                $("[data-tabullet-id='-1']").find('input').eq(0).val($(this).text());
+                $("[data-tabullet-id='-1']").find('input').eq(1).val('千克（kg）');
+            });
+            $('.fname').on('dblclick',function (event) {
+                var $editTr = $("[data-tabullet-id='-1']");
+                $editTr.find('input').eq(0).val($(this).text());
+                $editTr.find('input').eq(1).val('千克（kg）');
+                $editTr.children('td[data-tabullet-type="save"]').children('button').trigger('click');
+                scrollToEnd();
+
+                $(this).addClass('bg-danger');
+            });
+        }();
+
     });
 
     /*预览*/
