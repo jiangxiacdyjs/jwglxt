@@ -29,36 +29,19 @@
     <![endif]-->
     <title>学校食材编辑上报</title>
     <style>
-        .dataTables_wrapper .dataTables_paginate .paginate_button {
-            border: 1px solid #ccc;
-            cursor: pointer;
-            display: inline-block;
-            margin-left: 2px;
-            text-align: center;
-            text-decoration: none;
-            color: #666;
-            height: auto;
-            line-height: 26px;
-            text-decoration: none;
-            margin: 0 0 6px 6px;
-            padding: 0 10px;
-            font-size: 14px;
-        }
         th, td { white-space: nowrap;text-align: center!important;}
-        div.dataTables_wrapper {
-            /*width: 1200px;*/
-            margin: 0 auto;
-        }
     </style>
 </head>
 
 <body>
 <div class="page-container">
     <!--标题-->
-    <div class="f-20 pd-20 mb-20 text-c" style="font-weight: bold;border-bottom: 1px solid #c7c7c7">
+    <div class="f-20 pb-10 mb-10 text-c" style="font-weight: bold;border-bottom: 1px solid #c7c7c7">
         <div class="f-l f-18">
-            <span style="font-weight: normal;color: #838383">学校: </span><span style="font-weight: normal;margin-left: 5px">猴场镇猫场小学</span>
-            <span style="font-weight: normal;margin-left: 20px;color: #838383">时间：</span><span style="font-weight: normal;margin-left: 5px">2017年09月</span>
+            <span style="font-weight: normal;color: #838383">学校: </span><span
+                style="font-weight: normal;margin-left: 5px">猴场镇猫场小学</span>
+            <span style="font-weight: normal;margin-left: 20px;color: #838383">时间：</span><span
+                style="font-weight: normal;margin-left: 5px">2017年09月</span>
         </div>
         食材出入库汇总表
         <div class="f-r f-18">
@@ -68,7 +51,7 @@
             <a class="btn btn-primary radius" href="javascript:;">
                 <i class="Hui-iconfont">&#xe636;</i> 导出EXCEL文件
             </a></div>
-        </div>
+    </div>
     <!--表格区域-->
     <table id="table" class="stripe row-border order-column" cellspacing="0" width="100%">
         <thead>
@@ -716,7 +699,7 @@
 <script>
     $(function () {
         var table = $('#table').DataTable( {
-            scrollY:        "400px",
+            scrollY:        "350px",
             scrollX:        true,
             scrollCollapse: true,
             paging:         false,
