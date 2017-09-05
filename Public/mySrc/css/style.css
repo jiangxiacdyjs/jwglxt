@@ -29,6 +29,7 @@
 }
 
 label{cursor: pointer;}
+.f-normal{font-weight: normal!important;}
 .check{float: left;margin-right: 15px}
 .checkboxBg{cursor: pointer;display: inline-block;margin:-5px 2px;width: 19px;height: 19px;background: url(../../static/h-ui/images/iCheck/blue.png) -19px 0}
 .checkedBg{background-position: -40px 0}

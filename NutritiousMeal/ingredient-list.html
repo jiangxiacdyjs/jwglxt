@@ -212,6 +212,7 @@
     function school_show(title, url, id, w, h) {
         layer_show(title, url, w, h);
     }
+
     /*食材预览*/
     function article_view(title, url, w, h) {
         var index = layer.open({
@@ -222,6 +223,7 @@
         });
         layer.full(index);
     }
+
     /*删除*/
     function article_del(obj, id) {
         layer.confirm('确认要删除吗？', function (index) {
@@ -242,27 +244,28 @@
             });
         });
     }
+
     $(function () {
-    /* 获取当前时间*/
-    var d = new Date();
-    var str = d.getFullYear() + "-" + ((d.getMonth() + 1) < 10 ? "0" : "") + (d.getMonth() + 1) + "-" + (d.getDate() < 10 ? "0" : "") + d.getDate();
-    var date = $("#date");
-    date.html(str);
+        /* 获取当前时间*/
+        var d = new Date();
+        var str = d.getFullYear() + "-" + ((d.getMonth() + 1) < 10 ? "0" : "") + (d.getMonth() + 1) + "-" + (d.getDate() < 10 ? "0" : "") + d.getDate();
+        var date = $("#date");
+        date.html(str);
 
-    //初始化日期搜索jedate
-    $('#tim0,#tim1').jeDate({
-        format: 'YYYY-MM-DD',
-        minDate: '2014-06-16', //设定最小日期为当前日期
-        maxDate: str //最大日期
-    });
+        //初始化日期搜索jedate
+        $('#tim0,#tim1').jeDate({
+            format: 'YYYY-MM-DD',
+            minDate: '2014-06-16', //设定最小日期为当前日期
+            maxDate: str //最大日期
+        });
 
-    $('.tabs').respTabs({
-        responsive: false
-    });
+        $('.tabs').respTabs({
+            responsive: false
+        });
 
-    tableSort('.table-sort0', [0,5])
-    tableSort('.table-sort1', [0,5])
-})
+        tableSort('.table-sort0', [0, 5])
+        tableSort('.table-sort1', [0, 5])
+    })
 </script>
 </body>
 
