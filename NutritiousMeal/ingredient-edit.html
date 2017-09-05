@@ -631,7 +631,7 @@
                 var h = $(document).height()-$(window).height();
                 $(document).scrollTop(h);
             }
-            $('.fname').on('click',function (event) {
+            $('.fname').attr('onselectstart','return false').on('click',function (event) {
                 $("[data-tabullet-id='-1']").find('input').eq(0).val($(this).text());
                 $("[data-tabullet-id='-1']").find('input').eq(1).val('千克（kg）');
             });
