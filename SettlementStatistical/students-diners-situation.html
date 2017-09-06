@@ -1,0 +1,288 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../Public/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../Public/lib/respond.min.js"></script>
+
+    <![endif]-->
+    <link href="../Public/static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../Public/static/h-ui.admin/css/H-ui.admin.css" rel="stylesheet" type="text/css"/>
+    <link href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
+    <link href="../Public/lib/jedate/skin/jedate.css" rel="stylesheet" type="text/css"/>
+
+    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+    <link href="https://cdn.datatables.net/fixedcolumns/3.2.2/css/fixedColumns.dataTables.min.css" rel="stylesheet"
+          type="text/css"/>
+
+    <link href="../Public/mySrc/css/style.css" rel="stylesheet" type="text/css"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <title>学校食材编辑上报</title>
+    <style>
+        th, td {
+            white-space: nowrap;
+            text-align: center !important;
+        }
+    </style>
+</head>
+
+<body>
+<div class="page-container">
+    <!--标题-->
+    <div class="f-20 pb-10 mb-10 text-c" style="font-weight: bold;border-bottom: 1px solid #c7c7c7">
+        学生人数及就餐人数情况
+        <div class="f-r f-18">
+            <a class="btn btn-primary radius" href="javascript:;">
+                <i class="Hui-iconfont">&#xe616;</i> 导出PDF文件
+            </a>
+            <a class="btn btn-primary radius" href="javascript:;">
+                <i class="Hui-iconfont">&#xe636;</i> 导出EXCEL文件
+            </a>
+        </div>
+    </div>
+    <!--表格区域-->
+    <table id="table" class="stripe row-border order-column" cellspacing="0" width="100%">
+        <thead>
+        <!--1row-->
+        <tr>
+            <th colspan="3">基本信息</th>
+            <th colspan="4">学校：紫云二小</th>
+            <th colspan="5">登记日期：2017-08-09</th>
+        </tr>
+        <!--1row-->
+        <tr>
+            <th rowspan="3">序号</th>
+            <th rowspan="3">学段</th>
+            <th rowspan="3">年（班）级</th>
+
+            <th colspan="3">学生数（人）</th>
+            <th colspan="5">就餐人数（人）</th>
+
+            <th rowspan="3">备注信息</th>
+        </tr>
+        <!--2row-->
+        <tr>
+            <th rowspan="2">总人数</th>
+            <th colspan="2">其中</th>
+
+            <th colspan="2">早餐</th>
+            <th rowspan="2">中餐</th>
+            <th colspan="2">晚餐</th>
+        </tr>
+        <!--3row-->
+        <tr>
+            <th>寄宿生</th>
+            <th>走读生</th>
+
+            <th>享受寄宿生补助</th>
+            <th>自费生人数</th>
+
+            <th>享受寄宿生补助</th>
+            <th>自费生人数</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>学前教育阶段小计：</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>义务教育阶段小计：</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>学前</td>
+
+                <th>1</th>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>义教</td>
+
+                <th>1</th>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>义教</td>
+
+                <th>1</th>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>义教</td>
+
+                <th>1</th>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>义教</td>
+
+                <th>1</th>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>义教</td>
+
+                <th>1</th>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>义教</td>
+
+                <th>1</th>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>义教</td>
+
+                <th>1</th>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>义教</td>
+
+                <th>1</th>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
+
+<script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/fixedcolumns/3.2.2/js/dataTables.fixedColumns.min.js"></script>
+<script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
+<script>
+    $(function () {
+        var table = $('#table').dataTable({
+            scrollY: "290px",
+            scrollX: true,
+            scrollCollapse: true,
+            paging: false,
+            fixedColumns: {
+                leftColumns: 0,
+                rightColumns: 0
+            }
+        });
+    })
+</script>
+</body>
+
+</html>
