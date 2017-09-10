@@ -152,24 +152,31 @@
                 <dt><i class="Hui-iconfont">&#xe64a;</i> 营养改善<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
                 <dd>
                     <ul>
-                        <li>
-                            <a data-href="../NutritiousMeal/ingredient-edit.html" data-title="食材编辑上报" href="javascript:void(0)">食材上报</a>
+
+                        <li>  <!--营养办每个月下发一批食材的单价：主体信息包括：id  定制单价批次号 执行年月  定价单入库日期  定价操作人  定价审核人  状态---> <!-- 明细信息：就是每种食材的单价  -->
+                            <a data-href="../NutritiousDetail/nutritious-price/nutritious-price-list.html" data-title="每月执行菜价制定" href="javascript:void(0)">食材定价</a>
                         </li>
-                        <li>
-                            <a data-href="../NutritiousMeal/ingredient-approval-sc.html" data-title="学校领导审核" href="javascript:void(0)">本校审核</a>
+
+                        <li><!---每个学校根据学校规模和库存情况下订菜单：主体字段信息包括:id 学校 订购批次号 订购负责人 校审核人  局办审核人 订购单入库日期 订购拟供应开始日期 订购拟供应结束日期  状态-->
+                             <!-- 点击具体的一条记录 展示二级页面： 订购的食材列表和数量 预算金额--->  <!--具有新增采购单操作  和 查看操作-->
+                            <a data-href="../NutritiousMeal/ingredient-edit.html" data-title="食材编辑上报" href="javascript:void(0)">食材订购</a>
                         </li>
-                        <li>
-                            <a data-href="../NutritiousMeal/ingredient-approval.html" data-title="营养办审核" href="javascript:void(0)">局办审核</a>
+
+                        <li><!---根据食材的订购单生成实际采购单：主体字段信息包括:id 学校 采购批次号 采购负责人 配送负责人 采购日期  订购单批次号 采购预算  状态-->
+                            <!-- 点击具体的一条记录 展示二级页面： 订购的食材列表、学校订购的数量、实际采购的数量、执行单价  金额--->
+                            <a data-href="../NutritiousMeal/ingredient-edit.html" data-title="食材编辑上报" href="javascript:void(0)">食材采购</a>
                         </li>
+
                         <li>
-                            <a data-href="../NutritiousMeal/ingredient-list.html" data-title="采购配送列表" href="javascript:void(0)">采购配送</a>
+                            <!---有了订菜单具有校审资格的人可以看见订菜单进行审核：主体字段信息包括:id 学校 订购批次号 订购负责人 校审核人  局办审核人 订购单入库日期 订购拟供应开始日期 订购拟供应结束日期  状态-->
+                            <!-- 点击具体的一条记录 展示二级页面： 订购的食材列表和数量 预算金额--->   <!--具有审核操作 和查看操作-->
+                            <a data-href="../NutritiousMeal/ingredient-approval-sc.html" data-title="学校领导审核" href="javascript:void(0)">订菜单校审</a>
                         </li>
-                        <li>
-                            <a data-href="../NutritiousMeal/firm-admin.html" data-title="配送运输公司管理" href="javascript:void(0)">配送公司</a>
+                        <li><!---具有订菜单局办审核的人可以看见校审后的订菜单进行审核：主体字段信息包括:id 学校 订购批次号 订购负责人 校审核人  局办审核人 订购单入库日期 订购拟供应开始日期 订购拟供应结束日期  状态-->
+                            <!-- 点击具体的一条记录 展示二级页面： 订购的食材列表和数量 预算金额--->   <!--具有审核操作 和查看操作-->
+                            <a data-href="../NutritiousMeal/ingredient-approval.html" data-title="营养办审核" href="javascript:void(0)">订菜单送审</a>
                         </li>
-                        <li>
-                            <a data-href="../NutritiousMeal/area-admin.html" data-title="学校片区划分" href="javascript:void(0)">片区划分</a>
-                        </li>
+
                         <li>
                             <a data-href="../NutritiousMeal/recipes-edit.html" data-title="每周食谱编辑" href="javascript:void(0)">食谱编辑</a>
                         </li>
@@ -198,31 +205,17 @@
                 <dt><i class="Hui-iconfont">&#xe72d;</i> 营养明细<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
                 <dd>
                     <ul>
-                        <li>
-                            <a data-href="../NutritiousMeal/ingredient-edit.html" data-title="食材编辑上报" href="javascript:void(0)">菜单明细</a>
-                        </li>
-                        <li>
-                            <a data-href="../NutritiousDetail/nutritious-price/nutritious-price-list.html" data-title="每月执行菜价制定" href="javascript:void(0)">定价明细</a>
-                        </li>
-                        <li>
-                            <a data-href="../NutritiousMeal/ingredient-edit.html" data-title="食材编辑上报" href="javascript:void(0)">订购明细</a>
+
+                        <li>  <!---  主体信息：食材验收单 ,id  学校 验收批次号  订购单批次号  采购单批次号 验收负责人 申请验收人 配送公司  验收单创建时间  验收时间 状态--->
+                              <!--  单击具体记录查看每一笔验收单下的每种食材验收的量   -->
+                            <a data-href="../NutritiousMeal/ingredient-edit.html" data-title="食材编辑上报" href="javascript:void(0)">食材验收(入库)</a>
                         </li>
 
-                        <li>
-                            <a data-href="../NutritiousMeal/ingredient-approval-sc.html" data-title="学校领导审核" href="javascript:void(0)">菜单校审</a>
+                        <li><!---  主体信息：食材使用的主体信息：id  学校 食材使用日期  使用上报人  --->
+                            <!---单击具体的记录看 这一次使用的每种食材的使用的量 -->
+                            <a data-href="../NutritiousMeal/ingredient-edit.html" data-title="食材编辑上报" href="javascript:void(0)">食材使用(出库)</a>
                         </li>
-                        <li>
-                            <a data-href="../NutritiousMeal/ingredient-approval.html" data-title="营养办审核" href="javascript:void(0)">菜单送审</a>
-                        </li>
-                        <li>
-                            <a data-href="../NutritiousDetail/nutritious-in-list.html" data-title="营养食材入库明细单列表" href="javascript:void(0)">入库明细</a>
-                        </li>
-                        <li>
-                            <a data-href="../NutritiousDetail/nutritious-out-list.html" data-title="营养食材出库明细单列表" href="javascript:void(0)">出库明细</a>
-                        </li>
-                        <li>
-                            <a data-href="../NutritiousDetail/nutritious-out-in-list.html" data-title="营养食材出入库汇总单列表" href="javascript:void(0)">出入库汇总</a>
-                        </li>
+
                     </ul>
                 </dd>
             </dl>
@@ -231,8 +224,11 @@
                 <dt><i class="Hui-iconfont">&#xe687;</i> 物资库存<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
                 <dd>
                     <ul>
-                        <li>
-                            <a data-href="../NutritiousMeal/ingredient-edit.html" data-title="食材编辑上报" href="javascript:void(0)">食材上报</a>
+                        <li>  <!--  主体字段属性：  id  学校  库存年月  库存经办人  库存局办审核人  结余量金额   -->    <!--  具体 明细信息点击进去是这个学校在这个具体月份的食材库存情况 -->
+                            <a data-href="../NutritiousMeal/ingredient-edit.html" data-title="食材编辑上报" href="javascript:void(0)">学校库存</a>
+                        </li>
+                        <li><!-- 主体字段属性： id  学校  当前日期  厨房负责人  结余量金额  -->  <!--  具体 明细信息点击进去是这个学校现在的食材库存情况 -->
+                            <a data-href="../NutritiousMeal/ingredient-edit.html" data-title="食材编辑上报" href="javascript:void(0)">实时库存</a>
                         </li>
                     </ul>
                 </dd>
@@ -242,7 +238,7 @@
                 <dt><i class="Hui-iconfont">&#xe692;</i> 结算统计<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
                 <dd>
                     <ul>
-                        <li>
+                        <li>  <!-- 每一个都有主体信息 然后才是这种明细信息 -->
                             <a data-href="../SettlementStatistical/duty-allot-settlement-view.html" data-title="中小学食堂食品原材料配送结算单" href="javascript:void(0)">午餐结算统计</a>
                         </li>
                         <li>
