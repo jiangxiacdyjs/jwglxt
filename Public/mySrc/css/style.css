@@ -5,6 +5,13 @@
 .dataTables_wrapper{
     position: relative;
 }
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    /* box-sizing: border-box; */
+    /* display: inline-block; */
+    /* min-width: 1.5em; */
+    box-sizing: content-box!important;
+    min-width: auto!important;
+}
 .showCount{
     position: absolute;
     bottom: -53px;
