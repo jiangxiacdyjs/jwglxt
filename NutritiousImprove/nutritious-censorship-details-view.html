@@ -28,7 +28,7 @@
     <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
-    <title>食品原材料订单校审详情表</title>
+    <title>食品原材料订购详情表（送审）</title>
     <style>
         th, td {
             white-space: nowrap;
@@ -45,7 +45,7 @@
             <a onClick="article_shenhe(this,'10001')" href="javascript:;" title="审核" class="btn btn-primary radius">一键审核</a>
             <a id="send" class="btn btn-success radius" href="javascript:;">生成并发送采购单</a>
         </div>
-        <span class="c">食品原材料订单校审详情表</span>
+        <span class="c">食品原材料订购详情表</span>
         <div class="f-r f-18">
             <a class="btn btn-primary radius" href="javascript:;">
                 <i class="Hui-iconfont">&#xe616;</i> 导出PDF文件
@@ -65,14 +65,13 @@
             <th>学校名称:<span class="ml-5 c-green">紫云二小</span></th>
             <th>订购负责人:<span class="ml-5 c-green">freshzxf</span></th>
             <th colspan="4">校审核人:<span class="ml-5 c-green">freshfish</span></th>
-
         </tr>
         <tr class="bg-1">
             <th>局办审核人:<span class="ml-5 c-green">Jack</span></th>
             <th>订购单入库日期:<span class="ml-5 c-green">2017-09-10</span></th>
             <th>订购拟开始供应日期:<span class="ml-5 c-green">2017-09-11</span></th>
             <th>订购拟结束供应日期:<span class="ml-5 c-green">2017-09-13</span></th>
-            <th colspan="4">当前状态:<span class="ml-5 label label-success radius td-status">已通过</span></th>
+            <th colspan="4">当前状态:<span class="ml-5 label label-warning radius td-status">待审核</span></th>
         </tr>
         <!--1row-->
         <tr>
@@ -260,6 +259,7 @@
                 /*rightColumns: 1*/
             }
         });
+
         $('#send').on('click',sendBill);
         function sendBill() {
             var state = $(".td-status").html();

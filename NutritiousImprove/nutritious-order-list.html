@@ -22,12 +22,13 @@
     <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
-    <title>营养食材月度定价明细列表</title>
+    <title>营养食材订购单列表</title>
 </head>
 
 <body>
 <div class="page-container">
-    <ul class="tabs-list cl pd-5 bg-1 bk-gray">
+    <div class="tabs-list cl pd-5 bg-1 bk-gray">
+        <span class="Hui-iconfont c-red f-18 mr-5">&#xe6df;</span>营养食材订购单列表
         <span class="r">
             <a class="btn btn-success radius" href="javascript:;">
                 <i class="Hui-iconfont">&#xe647;</i> 导出PDF
@@ -36,7 +37,7 @@
                 <i class="Hui-iconfont">&#xe647;</i> 导出EXCEL
             </a>
         </span>
-    </ul>
+    </div>
     <div class="mt-20">
         <form method="" action="" class="search_form">
             学校名称：
@@ -68,7 +69,7 @@
                 <th>编号</th>
                 <th>ID</th>
                 <th>学校名称</th>
-               <th>订购批次号</th>
+                <th>订购批次号</th>
                 <th>订购负责人</th>
                 <th>校审核人</th>
                 <th>局办审核人</th>
@@ -99,8 +100,11 @@
                     <a style="text-decoration:none" onClick="article_shenhe(this,'10001')"
                        href="javascript:;" title="审核">审核</a>
                     <a style="text-decoration:none" class="ml-5"
-                       onClick="article_view('食品原材料定价详情单','nutritious-price-detail-view.html','100%','100%')"
+                       onClick="article_view('食品原材料订购详情单','nutritious-order-detail-view.html','100%','100%')"
                        href="javascript:;" title="反馈">查看</a>
+                    <a style="text-decoration:none" class="ml-5"
+                       onClick="article_view('食品原材料订购详情单','nutritious-order-detail-view.html','100%','100%')"
+                       href="javascript:;" title="反馈">生成并发送采购单</a>
                     <a style="text-decoration:none" class="ml-5" onClick="article_del(this,'10001')"
                        href="javascript:;" title="删除">删除</a>
                 </td>

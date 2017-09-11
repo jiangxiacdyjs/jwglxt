@@ -148,6 +148,7 @@
                     </ul>
                 </dd>
             </dl>
+            <!--营养改善-->
             <dl>
                 <dt><i class="Hui-iconfont">&#xe64a;</i> 营养改善<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
                 <dd>
@@ -162,19 +163,20 @@
                             <a data-href="../nutritiousImprove/nutritious-order-list.html" data-title="食材订购单列表" href="javascript:void(0)">食材订购</a>
                         </li>
 
-                        <li><!---根据食材的订购单生成实际采购单：主体字段信息包括:id 学校 采购批次号 采购负责人 配送负责人 采购日期  订购单批次号 采购预算  状态-->
-                            <!-- 点击具体的一条记录 展示二级页面： 订购的食材列表、学校订购的数量、实际采购的数量、执行单价  金额--->
-                            <a data-href="../nutritiousImprove/nutritious-purchase-list.html" data-title="食材采购单列表" href="javascript:void(0)">食材采购</a>
-                        </li>
-
                         <li>
                             <!---有了订菜单具有校审资格的人可以看见订菜单进行审核：主体字段信息包括:id 学校 订购批次号 订购负责人 校审核人  局办审核人 订购单入库日期 订购拟供应开始日期 订购拟供应结束日期  状态-->
                             <!-- 点击具体的一条记录 展示二级页面： 订购的食材列表和数量 预算金额--->   <!--具有审核操作 和查看操作-->
                             <a data-href="../nutritiousImprove/nutritious-setMenu-proofreading-list.html" data-title="定菜单校审列表" href="javascript:void(0)">订菜单校审</a>
                         </li>
+
                         <li><!---具有订菜单局办审核的人可以看见校审后的订菜单进行审核：主体字段信息包括:id 学校 订购批次号 订购负责人 校审核人  局办审核人 订购单入库日期 订购拟供应开始日期 订购拟供应结束日期  状态-->
                             <!-- 点击具体的一条记录 展示二级页面： 订购的食材列表和数量 预算金额--->   <!--具有审核操作 和查看操作-->
                             <a data-href="../nutritiousImprove/nutritious-setMenu-censorship-list.html" data-title="定菜单送审列表" href="javascript:void(0)">订菜单送审</a>
+                        </li>
+
+                        <li><!---根据食材的订购单生成实际采购单：主体字段信息包括:id 学校 采购批次号 采购负责人 配送负责人 采购日期  订购单批次号 采购预算  状态-->
+                            <!-- 点击具体的一条记录 展示二级页面： 订购的食材列表、学校订购的数量、实际采购的数量、执行单价  金额--->
+                            <a data-href="../nutritiousImprove/nutritious-purchase-list.html" data-title="食材采购单列表" href="javascript:void(0)">食材采购</a>
                         </li>
 
                         <li>
@@ -210,7 +212,6 @@
                               <!--  单击具体记录查看每一笔验收单下的每种食材验收的量   -->
                             <a data-href="../NutritiousDetail/nutritious-in-list.html" data-title="食材验收入库单列表" href="javascript:void(0)">食材验收(入库)</a>
                         </li>
-
                         <li><!---  主体信息：食材使用的主体信息：id  学校 食材使用日期  使用上报人  --->
                             <!---单击具体的记录看 这一次使用的每种食材的使用的量 -->
                             <a data-href="../NutritiousDetail/nutritious-out-list.html" data-title="食材使用出库单列表" href="javascript:void(0)">食材使用(出库)</a>
