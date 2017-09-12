@@ -94,6 +94,9 @@
                         <li class="hide">
                             <a data-href="../Edu/schools-total-info-view.html" data-title="学校信息总览" href="javascript:void(0)"><span id="triSchool">消息列表</span></a>
                         </li>
+                        <li class="hide">
+                            <a data-href="../Edu/files-upload.html" data-title="教务文件上传" href="javascript:void(0)"><span id="triFileUp">消息列表</span></a>
+                        </li>
                         <!--/隐藏链接，用于模拟点击-->
                         <li>
                             <a data-href="../SystemSet/admin-list.html" data-title="用户管理" href="javascript:void(0)">用户管理</a>
@@ -118,7 +121,7 @@
                             <a data-href="../Edu/education-admin.html" data-title="教务管理" href="javascript:void(0)">教务通知</a>
                         </li>
                         <li>
-                            <a data-href="../Edu/files-ud.html" data-title="文件中心" href="javascript:void(0)">教务文件</a>
+                            <a data-href="../Edu/edu-files-list.html" data-title="文件中心" href="javascript:void(0)">教务文件</a>
                         </li>
                         <li>
                             <a data-href="../Edu/school-admin.html" data-title="学校管理" href="javascript:void(0)">学校管理</a>
@@ -304,7 +307,7 @@
               $(this).find('.badge').remove()
               $('#triNotice').click();
           });
-      })
+      });
       /*个人信息*/
       function myselfinfo() {
           layer.open({

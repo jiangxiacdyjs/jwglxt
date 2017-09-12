@@ -5,13 +5,6 @@
 .dataTables_wrapper{
     position: relative;
 }
-.dataTables_wrapper .dataTables_paginate .paginate_button {
-    /* box-sizing: border-box; */
-    /* display: inline-block; */
-    /* min-width: 1.5em; */
-    box-sizing: content-box!important;
-    min-width: auto!important;
-}
 .showCount{
     position: absolute;
     bottom: -53px;
@@ -27,6 +20,11 @@
     float: right;
     padding-bottom: 15px!important;
     overflow: hidden;
+}
+.leftSearch{
+    position: absolute;
+    left: 0;
+    top: -62px;
 }
 /*dataTable--end*/
 
@@ -75,4 +73,16 @@ label{cursor: pointer;}
     -ms-transform: translate(-50%,-50%);
     -o-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
+}
+th, td {
+    white-space: nowrap!important;
+    text-align: center !important;
+}
+.bg-1 th{
+    border-left: 0!important;
+    background-color: #fff4bd !important;
+}
+.bg-1 th:first-child{
+    border-left: 1px solid #ddd!important;
+    background-color: #fff4bd !important;
 }
