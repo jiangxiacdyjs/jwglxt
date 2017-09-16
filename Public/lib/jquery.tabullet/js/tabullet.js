@@ -17,9 +17,9 @@
             }
         };
         options = $.extend(defaults, options);
-        var columns = $(this).find('thead > tr th');
-        var idMap = $(this).find('thead > tr').eq(1).attr('data-tabullet-map');
-        var metadata = [];   // 记录每一列的特性
+        var columns = $(this).find('thead > tr th'); //所有th
+        var idMap = $(this).find('thead > tr').eq(0).attr('data-tabullet-map'); //记录第一行（th父）的data-tabullet-map属性值
+        var metadata = [];   // 记录每一列的特性 [{map:'',readonly:'',type:''},{},{},{}... ...]
         columns.each(function (i, v) {
             metadata.push({
                 map: $(v).attr('data-tabullet-map'),
@@ -28,7 +28,7 @@
             });
         });
 
-        var data = options.data;
+        var data = options.data; //表格的数据
         //  这几行代码没什么卵用  如果_index改为id  下面重建表的时候就可以不用idNum
         var index = 1;
         $(data).each(function (i, v) {
