@@ -264,7 +264,7 @@
         screenW > 1366 ? mLengthMenu = 10: mLengthMenu = 8;
         function tableSort0(a,b){
             $(a).dataTable({
-                "sDom": '<"showCount"l><"leftSearch"f>tipr',
+                "sDom": '<"leftSearch"f>ti<"show"l>pr',
                 "lengthMenu": [[mLengthMenu, 15, 20, -1], [mLengthMenu, 15, 20, 50, "All"]],
                 "aaSorting": [
                     [1, "desc"]
