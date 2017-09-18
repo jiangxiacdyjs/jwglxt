@@ -106,7 +106,6 @@
                         .attr('data-tabullet-type', mv.type)
                         .appendTo(tr);
                     td.find('button').click(function (event) {
-
                         if ($(this).attr('data-mode') === 'edit') {  // 如果当前行是编辑状态start  按钮其实  保存两个字
                             var editData = [];
                             var rowParent = td.closest('tr');

@@ -78,6 +78,9 @@ th, td {
     white-space: nowrap!important;
     text-align: center !important;
 }
+.table th, .table td{
+    line-height: 18px!important;
+}
 .bg-1 th{
     border-left: 0!important;
     background-color: #fff4bd !important;
@@ -89,4 +92,10 @@ th, td {
 .dataTables_length{
     margin-top: 9px;
     margin-left: 12px;
+}
+/*表格标题*/
+.tit{
+    font-weight: bold;
+    border-bottom: 1px solid #c7c7c7;
+    overflow: hidden;
 }
