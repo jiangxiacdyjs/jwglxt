@@ -119,11 +119,11 @@
     <title>学校食材编辑上报</title>
 </head>
 <body>
-<div class="page-container"> <!--style="height: 1000px"-->
+<div class="page-container" style="height: 1500px"> <!--style="height: 1000px"-->
     <div id="HuiTab-demo1" class="HuiTab">
         <div class="tabBar clearfix">
-            <span class="current">往期食材单</span>
-            <span>我要编辑上报</span>
+            <span>往期食材单</span>
+            <span class="current">我要编辑上报</span>
         </div>
         <!--往期食材单 -->
         <div class="tabCon mt-20">
@@ -184,9 +184,9 @@
         </div>
         <!-- 食材上报 -->
         <div class="tabCon mt-20">
-            <div class="row">
+            <div class="row clearfix">
                 <div class="col-sm-5">
-                    <div class="panel panel-success panerFix">
+                    <div class="panel panel-success panerFix clearfix">
                         <div class="panel-header pos-r">食材选择列表
                             <button id="addKind" class="btn btn-success pos-a" type="button"
                                     style="top: 0;left: 110px;height: 100%;background-color:#429842;border-color: #429842">
@@ -375,7 +375,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-7 p-0">
+                <div class="col-sm-7">
                     <div class="panel panel-success">
                         <div class="panel-header">
                             <table>
@@ -448,6 +448,7 @@
         });
 
         /*滚动窗口事件*/
+
         $(window).scroll(function () {
             var _top = $(window).scrollTop();
             if (_top > 70) {
@@ -462,7 +463,7 @@
             responsive: false
         });
         /* 表格tab默认项 */
-        $("#HuiTab-demo1").Huitab({index: 0});
+        $("#HuiTab-demo1").Huitab({index: 1});
         tableSort('.table-sort1', [0, 4, 5]);
         tableSort('.table-sort2', [0, 4, 5]);
 
