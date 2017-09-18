@@ -6,7 +6,7 @@
 */
 function tableSort(a,b){
     $(a).dataTable({
-        "sDom": '<"showCount"l><"showSearch"f>tipr',
+        "sDom": '<"showSearch"f>ti<"show"l>pr',
         /*"lengthMenu": [[8, 20, 50, -1], [8, 20, 50, "All"]],*/
         "aaSorting": [
             [1, "desc"]

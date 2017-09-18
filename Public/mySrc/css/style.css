@@ -86,3 +86,7 @@ th, td {
     border-left: 1px solid #ddd!important;
     background-color: #fff4bd !important;
 }
+.dataTables_length{
+    margin-top: 9px;
+    margin-left: 12px;
+}
