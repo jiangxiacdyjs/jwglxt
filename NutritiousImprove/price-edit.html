@@ -324,7 +324,12 @@
                             <table>
                                 <tr class="c-white">
                                     <td class="c-white"><span>紫云县食材定价表</span></td>
-                                    <td class="c-white">当前日期：<span id="date"></span></td>
+                                    <td class="c-white">
+                                        执行月份：
+                                        <input type="text" placeholder="价单执行年月" class="input-text ac_input mr-10" name="search_text"
+                                               value=""
+                                               id="date" autocomplete="off" style="cursor: pointer;font-weight: normal;width: 100px;text-align: center" readonly>
+                                    </td>
                                 </tr>
                             </table>
                         </div>
@@ -435,13 +440,12 @@
         /* 获取当前时间*/
         var d = new Date();
         var str = d.getFullYear() + "-" + ((d.getMonth() + 1) < 10 ? "0" : "") + (d.getMonth() + 1) + "-" + (d.getDate() < 10 ? "0" : "") + d.getDate();
-        var date = $("#date");
-        date.html(str);
 
         //初始化日期搜索jedate
-        $('#tim').jeDate({
-            format: 'YYYY-MM-DD',
-            minDate: '2014-06-16', //设定最小日期为当前日期
+        $('#date').jeDate({
+            isinitVal:true,
+            format: 'YYYY-MM',
+            minDate: '2014-06', //设定最小日期为当前日期
             maxDate: str //最大日期
         });
 
