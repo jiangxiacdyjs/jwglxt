@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css" />
     <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css" />
     <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin" />
+    <!--自定义样式-->
     <link rel="stylesheet" type="text/css" href="../Public/mySrc/css/style.css" />
     <!--[if IE 6]>
     <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
@@ -28,22 +29,9 @@
         <div class="navbar navbar-fixed-top">
             <div class="container-fluid cl">
                 <a class="logo navbar-logo f-l mr-10 hidden-xs" href="javascript:void(0);">紫云远程教务管理云平台</a>
-                <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">紫云教务</a>
+                <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="index1.html">紫云教务</a>
                 <span class="logo navbar-slogan f-l mr-10 hidden-xs">v1.0</span>
                 <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
-                <!-- 新增操作快速入口
-                <nav class="nav navbar-nav">
-                    <ul class="cl">
-                        <li class="dropDown dropDown_hover"><a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
-                            <ul class="dropDown-menu menu radius box-shadow">
-                                <li><a href="javascript:;" onclick="add('添加用户','system-set/admin-add.html','800')"><i class="Hui-iconfont">&#xe60d;</i>用户</a></li>
-                                <li><a href="javascript:;" onclick="add('添加角色','system-set/role-add.html','800')"><i class="Hui-iconfont">&#xe68e;</i> 角色</a></li>
-                                <li><a href="javascript:;" onclick="add('添加学校','school-add.html','800')"><i class="Hui-iconfont">&#xe616;</i> 学校</a></li>
-                                <li><a href="javascript:;" onclick="add('添加教师','teacher-add.html','800')"><i class="Hui-iconfont">&#xe702;</i> 教师</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>-->
                 <nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
                     <ul class="cl">
                         <li><img src="../Public/static/h-ui/images/ucnter/avatar.jpg" class="avatar size-L radius mr-15" /></li>
@@ -94,15 +82,6 @@
                         <li class="hide">
                             <a data-href="../Edu/schools-total-info-view.html" data-title="学校信息总览" href="javascript:void(0)"><span id="triSchool">消息列表</span></a>
                         </li>
-                        <li class="hide">
-                            <a data-href="../Edu/files-upload.html" data-title="教务文件上传" href="javascript:void(0)"><span id="triFileUp">消息列表</span></a>
-                        </li>
-                        <li class="hide">
-                            <a data-href="../NutritiousImprove/price-edit.html" data-title="食材定价" href="javascript:void(0)"><span id="triPriceEdit">食材定价</span></a>
-                        </li>
-                        <li class="hide">
-                            <a data-href="../NutritiousImprove/ingredient-edit.html" data-title="食材订购" href="javascript:void(0)"><span id="inOrder">食材订购</span></a>
-                        </li>
                         <!--/隐藏链接，用于模拟点击-->
                         <li>
                             <a data-href="../SystemSet/admin-list.html" data-title="用户管理" href="javascript:void(0)">用户管理</a>
@@ -143,16 +122,16 @@
                 <dd>
                     <ul>
                         <li>
-                            <a data-href="../Video/zyex.html" data-title="紫云二小" href="javascript:void(0)">紫云一小</a>
+                            <a data-href="../onlineVideo/zyex.html" data-title="紫云二小" href="javascript:void(0)">紫云一小</a>
                         </li>
                         <li>
-                            <a data-href="../Video/zyex.html" data-title="紫云二小" href="javascript:void(0)">紫云二小</a>
+                            <a data-href="../onlineVideo/zyex.html" data-title="紫云二小" href="javascript:void(0)">紫云二小</a>
                         </li>
                         <li>
-                            <a data-href="../Video/zyex.html" data-title="紫云二小" href="javascript:void(0)">紫云三小</a>
+                            <a data-href="../onlineVideo/zyex.html" data-title="紫云二小" href="javascript:void(0)">紫云三小</a>
                         </li>
                         <li>
-                            <a data-href="../Video/zyex.html" data-title="紫云二小" href="javascript:void(0)">紫云四小</a>
+                            <a data-href="../onlineVideo/zyex.html" data-title="紫云二小" href="javascript:void(0)">紫云四小</a>
                         </li>
                     </ul>
                 </dd>
@@ -301,13 +280,12 @@
             <li id="closeall">关闭全部 </li>
         </ul>
     </div>
-    <!--_footer 作为公共模版分离出去-->
     <script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
     <script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
     <script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
     <script type="text/javascript">
-      // 模拟点击
+      /*为实现在框架内部打开新消息页面，模拟点击事件*/
       $(function() {
           $('#Hui-msg').click(function(event) {
               $(this).find('.badge').remove()
@@ -319,13 +297,9 @@
           layer.open({
               type: 2,
               title: '个人信息',
-              area: ['400px', '300px'],
+              area: ['600px', '320px'],
               content: ['member-show.html'], //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
           });
-      }
-      /*管理员-角色-添加*/
-      function add(title,url,w,h){
-          layer_show(title,url,w,h);
       }
     </script>
 </body>

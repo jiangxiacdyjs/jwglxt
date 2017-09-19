@@ -9,17 +9,17 @@
           content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="../Public/lib/html5shiv.js"></script>
-    <script type="text/javascript" src="../Public/lib/respond.min.js"></script>
+    <script type="text/javascript" src="../../Public/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../../Public/lib/respond.min.js"></script>
     <![endif]-->
-    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui/css/H-ui.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css"/>
-    <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
-    <link href="../Public/lib/jedate/skin/jedate.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
-    <link rel="stylesheet" type="text/css" href="../Public/mySrc/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../../Public/static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../Public/static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="../../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link href="../../Public/lib/jedate/skin/jedate.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="../../Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
+    <link rel="stylesheet" type="text/css" href="../../Public/mySrc/css/style.css"/>
     <!--[if IE 6]>
-    <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script type="text/javascript" src="../../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
     <title>教务文件列表</title>
@@ -30,7 +30,7 @@
     <div class="tabs-list cl pd-5 bg-1 bk-gray">
         <span class="Hui-iconfont c-red f-18 mr-5">&#xe6df;</span>教务文件列表
         <span class="r">
-            <a id="fileUp" class="btn btn-success radius" href="javascript:;">
+            <a class="btn btn-success radius" href="javascript:;"onClick=" article_view('文件上传','files-upload.html','100%','100%')">
                 <i class="Hui-iconfont">&#xe647;</i> 我要上传
             </a>
         </span>
@@ -99,14 +99,13 @@
         </table>
     </div>
 </div>
-<!--_footer 作为公共模版分离出去-->
-<script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
-<script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
-<script type="text/javascript" src="../Public/lib/jedate/jquery.jedate.min.js"></script>
-<script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
+<script type="text/javascript" src="../../Public/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../Public/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../../Public/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="../../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="../../Public/lib/jedate/jquery.jedate.min.js"></script>
+<script type="text/javascript" src="../../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../Public/mySrc/js/common.js"></script>
 <script type="text/javascript">
     /*预览*/
     function article_view(title, url, w, h) {
@@ -166,11 +165,6 @@
     }
 
     $(function () {
-        //模拟点击事件
-        var triFileUp = $(window.parent.document.getElementById('triFileUp'));
-        $('#fileUp').click(function () {
-            triFileUp.click()
-        });
         /* 获取当前时间*/
         var d = new Date();
         var str = d.getFullYear() + "-" + ((d.getMonth() + 1) < 10 ? "0" : "") + (d.getMonth() + 1) + "-" + (d.getDate() < 10 ? "0" : "") + d.getDate();

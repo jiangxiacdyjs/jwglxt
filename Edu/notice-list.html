@@ -28,10 +28,10 @@
 	<div class="mt-20">
 		<form method="" action="" class="search_form">
 			起始时间：
-			<input type="text" placeholder="创建时间" class="input-text ac_input mr-10" name="search_text" value=""
+			<input type="text" placeholder="" class="input-text ac_input mr-10" name="search_text" value=""
 				   id="inpstart" autocomplete="off" style="width:120px;cursor: pointer;" readonly>
 			结束时间：
-			<input type="text" placeholder="创建时间" class="input-text ac_input mr-10" name="search_text" value=""
+			<input type="text" placeholder="" class="input-text ac_input mr-10" name="search_text" value=""
 				   id="inpend" autocomplete="off" style="width:120px;cursor: pointer;" readonly>
 			<button type="submit" class="btn btn-success" id="search_button">
 				<i class="Hui-iconfont">&#xe665;</i>
@@ -63,8 +63,11 @@
 						<span class="label label-success radius">已阅读</span>
 					</td>
 					<td class="td-manage">
-					<a title="反馈" href="javascript:;" onclick="member_edit('反馈','feedback.html','4','','510')" style="text-decoration:none">
-						<i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="member_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i>
+					<a title="反馈" href="javascript:;" onclick="member_edit('反馈','../index/feedback.html','4','','510')">
+						反馈
+					</a>
+					<a title="删除" href="javascript:;" class="ml-5 del">
+						删除
 					</a>
 					</td>
 				</tr>
@@ -72,100 +75,51 @@
 		</table>
 	</div>
 </div>
-
-<!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer /作为公共模版分离出去-->
-
-<!--请在下方写此页面业务相关的脚本-->
+<!--dataTable数据表格-->
 <script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<!--jedate日期-->
 <script type="text/javascript" src="../Public/lib/jedate/jquery.jedate.min.js"></script>
+<!--自定义js-->
 <script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
 <script type="text/javascript">
-
-var start = {
-    format: 'YYYY-MM-DD',
-    minDate: '2010-06-16', //设定最小日期为当前日期
-    isinitVal:false,
-    ishmsVal:false,
-    maxDate: $.nowDate({DD:0}), //最大日期
-    choosefun: function(elem, val, date){
-        end.minDate = date; //开始日选好后，重置结束日的最小日期
-        endDates();
-    }
-};
-var end = {
-    format: 'YYYY-MM-DD',
-    maxDate: $.nowDate({DD:0}), //最大日期
-    choosefun: function(elem, val, date){
-        start.maxDate = date; //将结束日的初始值设定为开始日的最大日期
-    }
-};
-//这里是日期联动的关键        
-function endDates() {
-    //将结束日期的事件改成 false 即可
-    end.trigger = false;
-    $("#inpend").jeDate(end);
-}
-$('#inpstart').jeDate(start);
-$('#inpend').jeDate(end);
-
-tableSort('.table-sort',[0,2,4])
-
-/*用户-添加*/
-function member_add(title,url,w,h){
-	layer_show(title,url,w,h);
-}
-/*用户-查看*/
-function member_show(title,url,id,w,h){
-	layer_show(title,url,w,h);
-}
-/*用户-停用*/
-function member_stop(obj,id){
-	layer.confirm('确认要停用吗？',function(index){
-		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
-		$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
-		$(obj).remove();
-		layer.msg('已停用!',{icon: 5,time:1000});
-	});
-}
-
-/*用户-启用*/
-function member_start(obj,id){
-	layer.confirm('确认要启用吗？',function(index){
-		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
-		$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
-		$(obj).remove();
-		layer.msg('已启用!',{icon: 6,time:1000});
-	});
-}
-/*用户-编辑*/
-function member_edit(title,url,id,w,h){
-	layer_show(title,url,w,h);
-}
-/*密码-修改*/
-function change_password(title,url,id,w,h){
-	layer_show(title,url,w,h);	
-}
-/*用户-删除*/
-function member_del(obj,id){
-	layer.confirm('确认要删除吗？',function(index){
-		$.ajax({
-			type: 'POST',
-			url: '',
-			dataType: 'json',
-			success: function(data){
-				$(obj).parents("tr").remove();
-				layer.msg('已删除!',{icon:1,time:1000});
-			},
-			error:function(data) {
-				console.log(data.msg);
-			},
-		});		
-	});
-}
+    /*用户-编辑*/
+    function member_edit(title,url,id,w,h){
+        layer_show(title,url,w,h);
+    };
+	$(function () {
+	    /*起始结束日期筛选*/
+        var start = {
+            format: 'YYYY-MM-DD',
+            minDate: '2010-06-16', //设定最小日期为当前日期
+            isinitVal:false,
+            ishmsVal:false,
+            maxDate: $.nowDate({DD:0}), //最大日期
+            choosefun: function(elem, val, date){
+                end.minDate = date; //开始日选好后，重置结束日的最小日期
+                endDates();
+            }
+        };
+        var end = {
+            format: 'YYYY-MM-DD',
+            maxDate: $.nowDate({DD:0}), //最大日期
+            choosefun: function(elem, val, date){
+                start.maxDate = date; //将结束日的初始值设定为开始日的最大日期
+            }
+        };
+        function endDates() {
+            //将结束日期的事件改成 false 即可
+            end.trigger = false;
+            $("#inpend").jeDate(end);
+        }
+        $('#inpstart').jeDate(start);
+        $('#inpend').jeDate(end);
+        /*dataTable初始化*/
+        tableSort('.table-sort',[0,2,4]);
+    })
 </script>
 </body>
 </html>

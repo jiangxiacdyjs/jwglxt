@@ -1,5 +1,8 @@
 @charset "utf-8";
-/* 你自己的样式 */
+
+a{
+    text-decoration: none!important;
+}
 
 /*dataTable*/
 .dataTables_wrapper{
@@ -98,4 +101,14 @@ th, td {
     font-weight: bold;
     border-bottom: 1px solid #c7c7c7;
     overflow: hidden;
+}
+.source-panle {
+    cursor: pointer;
+    display: inline-block;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    padding: 0 5px;
+    color: #fff;
+    margin: 5px;
 }
