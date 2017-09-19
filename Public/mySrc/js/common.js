@@ -65,7 +65,7 @@ function article_view(title, url, w, h) {
     layer.full(index);
 };
 /*审核弹层*/
-function article_shenhe(tit,obj, id) {
+function article_shenhe(tit,obj) {
     layer.confirm('审核'+tit+'？', {
             btn: ['通过', '不通过', '取消'],
             shade: false,

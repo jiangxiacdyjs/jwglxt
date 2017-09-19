@@ -77,6 +77,10 @@ label{cursor: pointer;}
     -o-transform: translate(-50%,-50%);
     transform: translate(-50%,-50%);
 }
+.tx-l{
+    width: 100px;
+    height: 100px;
+}
 th, td {
     white-space: nowrap!important;
     text-align: center !important;

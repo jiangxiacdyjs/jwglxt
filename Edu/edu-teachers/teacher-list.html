@@ -1,0 +1,103 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+    <script type="text/javascript" src="../../Public/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../../Public/lib/respond.min.js"></script>
+    <![endif]-->
+<link rel="stylesheet" type="text/css" href="../../Public/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="../../Public/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="../../Public/lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="../../Public/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="../../Public/mySrc/css/style.css" />
+<!--[if IE 6]>
+    <script type="text/javascript" src="../../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+<title>教师列表</title>
+</head>
+<body>
+	<div class="page-container">
+		<div class="cl pd-5 bg-1 bk-gray">
+			<span class="l">
+				<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
+					<i class="Hui-iconfont">&#xe6e2;</i> 批量删除
+				</a> 
+				<a class="btn btn-primary radius" data-title="添加教师" onclick="layer_show('添加学校','teacher-add.html','800','')" href="javascript:;">
+					<i class="Hui-iconfont">&#xe600;</i> 添加教师
+				</a>
+			</span> 
+		</div>
+		<div class="mt-20">
+			<form method="" action="" class="search_form">
+				姓名：
+				<input type="text" placeholder="" class="input-text ac_input mr-10" name="search_text" value=""
+					   id="num" autocomplete="off" style="width:120px">
+				所属学校：
+				<span class="select-box mr-10" style="width: 100px">
+                    <select class="select" size="1" name="demo1">
+                        <option value="" selected="">紫云一小</option>
+                        <option value="1">紫云二小</option>
+                    </select>
+				</span>
+				<button type="submit" class="btn btn-success" id="search_button">
+					<i class="Hui-iconfont">&#xe665;</i>
+					搜索
+				</button>
+			</form>
+			<table class="table table-border table-bordered table-bg table-hover table-sort">
+				<thead>
+					<tr class="text-c">
+						<th><input type="checkbox" name="" value=""></th>
+						<th>姓名</th>
+						<th>性别</th>
+						<th>年龄</th>
+						<th>教龄</th>
+						<th>主教课程</th>
+						<th>所属学校</th>
+						<th>联系方式</th>
+						<th>家庭住址</th>
+						<th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="text-c">
+						<td><input type="checkbox" value="" name=""></td>
+						<td><u style="cursor:pointer" class="text-primary" onClick="layer_show('张涵','teacher-show.html','350','')" title="查看">张涵</u></td>
+						<td>男</td>
+						<td>29</td>
+						<td>6</td>
+						<td>数学</td>
+						<td>紫云二小</td>
+						<td>13879388898</td>
+						<td>紫云县火花乡十里铺24号</td>
+						<td class="f-14 td-manage">
+							<a class="ml-5" onClick="layer_show('教师编辑','teacher-add.html','800','')" href="javascript:;" title="教师编辑">
+								编辑
+							</a> 
+							<a class="ml-5 del" href="javascript:;" title="教师删除">
+								删除
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="../../Public/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../Public/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../../Public/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="../../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="../../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../Public/mySrc/js/common.js"></script>
+<script type="text/javascript">
+	tableSort('.table-sort',[0,8,9])
+</script>
+</body>
+</html>

@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="../../Public/static/h-ui/css/H-ui.min.css"/>
     <link rel="stylesheet" type="text/css" href="../../Public/static/h-ui.admin/css/H-ui.admin.css"/>
     <link rel="stylesheet" type="text/css" href="../../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
-    <link rel="stylesheet" type="text/css" href="../../Public/static/h-ui.admin/skin/default/skin.css" id="skin"/>
+    <link rel="stylesheet" type="text/css" href="../../Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
     <link rel="stylesheet" type="text/css" href="../../Public/mySrc/css/style.css"/>
     <!--[if IE 6]>
     <script type="text/javascript" src="../../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
@@ -60,8 +60,9 @@
             <tr class="text-c">
                 <td><input type="checkbox" value="1" name=""></td>
                 <td>1</td>
-                <td><u style="cursor:pointer" class="text-primary"
-                       onclick="school_show('紫云二小信息','school-show.html','','300')">紫云二小</u></td>
+                <td>
+                    <span style="cursor:pointer" class="text-primary" onclick="layer_show('紫云二小信息','school-show.html','500','')">紫云二小</span>
+                </td>
                 <td>韦洪铭</td>
                 <td>13000000000</td>
                 <td>25</td>
@@ -76,7 +77,7 @@
                         删除
                     </a>
                     <a title="发送通知" href="javascript:;"
-                       onclick="layer_show('消息发送','../../index/feedback.html','500','400')" class="ml-5">
+                       onclick="article_view('消息发送','../send-email.html','100%','100%')" class="ml-5">
                         发送消息
                     </a>
                     <a title="远程查看" href="javascript:;"
@@ -97,51 +98,6 @@
 <script type="text/javascript" src="../../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../../Public/mySrc/js/common.js"></script>
 <script type="text/javascript">
-    /*学校-停用*/
-    function school_stop(obj, id) {
-        layer.confirm('确认要停用吗？', function (index) {
-            $.ajax({
-                type: 'POST',
-                url: '',
-                dataType: 'json',
-                success: function (data) {
-                    $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="school_start(this,id)" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe6e1;</i></a>');
-                    $(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
-                    $(obj).remove();
-                    layer.msg('已停用!', {icon: 5, time: 1000});
-                },
-                error: function (data) {
-                    console.log(data.msg);
-                },
-            });
-        });
-    }
-
-    /*用户-启用*/
-    function school_start(obj, id) {
-        layer.confirm('确认要启用吗？', function (index) {
-            $.ajax({
-                type: 'POST',
-                url: '',
-                dataType: 'json',
-                success: function (data) {
-                    $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="school_stop(this,id)" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a>');
-                    $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
-                    $(obj).remove();
-                    layer.msg('已启用!', {icon: 6, time: 1000});
-                },
-                error: function (data) {
-                    console.log(data.msg);
-                },
-            });
-        });
-    }
-
-    /*学校-编辑*/
-    function school_edit(title, url, id, w, h) {
-        layer_show(title, url, w, h);
-    }
-
     tableSort('.table-sort', [0, 8])
 </script>
 </body>
