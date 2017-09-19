@@ -30,7 +30,7 @@
     <div class="tabs-list cl pd-5 bg-1 bk-gray">
         <span class="Hui-iconfont c-red f-18 mr-5">&#xe6df;</span>营养食材月度定价明细列表
         <span class="r">
-            <a id="priceEdit" class="btn btn-success radius" href="javascript:;">
+            <a class="btn btn-success radius" href="javascript:;" onClick="article_view('食材定价','price-edit.html','100%','100%')">
                 <i class="Hui-iconfont">&#xe647;</i> 食材定价
             </a>
         </span>
@@ -170,11 +170,6 @@
     }
 
     $(function () {
-        //模拟点击事件
-        var triPriceEdit = $(window.parent.document.getElementById('triPriceEdit'));
-        $('#priceEdit').click(function () {
-            triPriceEdit.click()
-        });
         /* 获取当前时间*/
         var d = new Date();
         var str = d.getFullYear() + "-" + ((d.getMonth() + 1) < 10 ? "0" : "") + (d.getMonth() + 1) + "-" + (d.getDate() < 10 ? "0" : "") + d.getDate();

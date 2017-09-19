@@ -30,7 +30,7 @@
     <div class="tabs-list cl pd-5 bg-1 bk-gray">
         <span class="Hui-iconfont c-red f-18 mr-5">&#xe6df;</span>营养食材订购单列表
         <span class="r">
-            <a id="nuOrder" class="btn btn-success radius" href="javascript:;">
+            <a class="btn btn-success radius" href="javascript:;" onClick="article_view('食材订购','ingredient-edit.html','100%','100%')">
                 <i class="Hui-iconfont">&#xe647;</i> 食材订购
             </a>
         </span>
@@ -177,11 +177,6 @@
     }
 
     $(function () {
-        //模拟点击事件
-        var inOrder = $(window.parent.document.getElementById('inOrder'));
-        $('#nuOrder').click(function () {
-            inOrder.click()
-        });
         /* 获取当前时间*/
         var d = new Date();
         var str = d.getFullYear() + "-" + ((d.getMonth() + 1) < 10 ? "0" : "") + (d.getMonth() + 1) + "-" + (d.getDate() < 10 ? "0" : "") + d.getDate();
