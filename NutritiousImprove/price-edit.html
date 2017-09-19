@@ -440,13 +440,14 @@
         /* 获取当前时间*/
         var d = new Date();
         var str = d.getFullYear() + "-" + ((d.getMonth() + 1) < 10 ? "0" : "") + (d.getMonth() + 1) + "-" + (d.getDate() < 10 ? "0" : "") + d.getDate();
-
+        var minTime = d.getFullYear() + "-" + ((d.getMonth() + 1) < 10 ? "0" : "") + d.getMonth() + "-" + (d.getDate() < 10 ? "0" : "") + d.getDate();
+        console.log(minTime)
         //初始化日期搜索jedate
         $('#date').jeDate({
             isinitVal:true,
             format: 'YYYY-MM',
-            minDate: '2014-06', //设定最小日期为当前日期
-            maxDate: str //最大日期
+            minDate: minTime //设定最小日期为当前日期
+            /*maxDate:  //最大日期*/
         });
 
         /*滚动窗口事件*/
