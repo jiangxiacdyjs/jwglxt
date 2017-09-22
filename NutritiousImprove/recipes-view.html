@@ -5,17 +5,18 @@
     <meta charset="utf-8">
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <!--[if lt IE 9]>
     <script type="text/javascript" src="../Public/lib/html5shiv.js"></script>
     <script type="text/javascript" src="../Public/lib/respond.min.js"></script>
 
     <![endif]-->
-    <link href="../Public/static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-    <link href="../Public/static/h-ui.admin/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
-    <link href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin" />
+    <link href="../Public/static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../Public/static/h-ui.admin/css/H-ui.admin.css" rel="stylesheet" type="text/css"/>
+    <link href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
     <!--[if IE 6]>
     <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
@@ -24,66 +25,83 @@
 </head>
 
 <body>
-  <div class="page-container">
-      <div class="row">
-          <div class="col-sm-12">
-              <table id="recipes" class="table table-border table-bordered table-bg table-hover">
-                  <caption class="f-20 mb-30 pb-20" style="border-bottom: 1px dashed #7C7C7C"><span class="Hui-iconfont mr-10">&#xe64a;</span>每周食谱</caption>
-                  <thead>
-                      <tr>
-                          <th>时间</th>
-                          <th>早餐</th>
-                          <th>中餐</th>
-                          <th>晚餐</th>
-                          <th>备注信息</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>周一</td>
-                      <td>三鲜包，皮蛋瘦肉粥</td>
-                      <td>红烧牛肉，鸡蛋肉饼汤</td>
-                      <td>青椒炒蛋，清蒸鲫鱼</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>周二</td>
-                      <td>三鲜包，皮蛋瘦肉粥</td>
-                      <td>红烧牛肉，鸡蛋肉饼汤</td>
-                      <td>青椒炒蛋，清蒸鲫鱼</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>周三</td>
-                      <td>三鲜包，皮蛋瘦肉粥</td>
-                      <td>红烧牛肉，鸡蛋肉饼汤</td>
-                      <td>青椒炒蛋，清蒸鲫鱼</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>周四</td>
-                      <td>三鲜包，皮蛋瘦肉粥</td>
-                      <td>红烧牛肉，鸡蛋肉饼汤</td>
-                      <td>青椒炒蛋，清蒸鲫鱼</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>周五</td>
-                      <td>三鲜包，皮蛋瘦肉粥</td>
-                      <td>红烧牛肉，鸡蛋肉饼汤</td>
-                      <td>青椒炒蛋，清蒸鲫鱼</td>
-                      <td></td>
-                    </tr>
-                  </tbody>
-              </table>
-          </div>
-      </div>
-  </div>
-  <script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
-  <script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
-  <script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
-  <script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
-  <script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
+<div class="page-container">
+    <div class="f-20 pb-20 text-c" style="border-bottom: 1px dashed #7C7C7C;padding-bottom: 0"><span class="Hui-iconfont mr-10">&#xe64a;</span>每周食谱</div>
+    <div class="Huialert Huialert-success mt-10">
+        <table>
+            <tr>
+                <td class="text-l"><span>学校名称：</span><span>紫云二小</span></td>
+                <td class="text-c">
+                    <span>食谱周次：</span>
+                    <span>第3周</span>
+                </td>
+                <td class="text-r"><span>发布日期：</span><span id="date"></span></td>
+            </tr>
+        </table>
+    </div>
+    <table id="recipes" class="table table-border table-bordered table-bg table-hover">
+        <thead>
+        <tr>
+            <th>时间</th>
+            <th>早餐</th>
+            <th>中餐</th>
+            <th>晚餐</th>
+            <th>备注信息</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>周一</td>
+            <td>三鲜包，皮蛋瘦肉粥</td>
+            <td>红烧牛肉，鸡蛋肉饼汤</td>
+            <td>青椒炒蛋，清蒸鲫鱼</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>周二</td>
+            <td>三鲜包，皮蛋瘦肉粥</td>
+            <td>红烧牛肉，鸡蛋肉饼汤</td>
+            <td>青椒炒蛋，清蒸鲫鱼</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>周三</td>
+            <td>三鲜包，皮蛋瘦肉粥</td>
+            <td>红烧牛肉，鸡蛋肉饼汤</td>
+            <td>青椒炒蛋，清蒸鲫鱼</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>周四</td>
+            <td>三鲜包，皮蛋瘦肉粥</td>
+            <td>红烧牛肉，鸡蛋肉饼汤</td>
+            <td>青椒炒蛋，清蒸鲫鱼</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>周五</td>
+            <td>三鲜包，皮蛋瘦肉粥</td>
+            <td>红烧牛肉，鸡蛋肉饼汤</td>
+            <td>青椒炒蛋，清蒸鲫鱼</td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
+<script>
+    $(function () {
+        /*-------新增获取当前时间-------*/
+        var d = new Date();
+        var str = d.getFullYear() + "-" + ((d.getMonth() + 1) < 10 ? "0" : "") + (d.getMonth() + 1) + "-" + (d.getDate() < 10 ? "0" : "") + d.getDate();
+        var date = $("#date");
+        date.html(str);
+    })
+</script>
 </body>
 
 </html>
