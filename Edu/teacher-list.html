@@ -23,15 +23,13 @@
 </head>
 <body>
 	<div class="page-container">
-		<div class="cl pd-5 bg-1 bk-gray">
-			<span class="l">
-				<a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
-					<i class="Hui-iconfont">&#xe6e2;</i> 批量删除
-				</a> 
-				<a class="btn btn-primary radius" data-title="添加教师" onclick="layer_show('添加学校','teacher-add.html','800','')" href="javascript:;">
-					<i class="Hui-iconfont">&#xe600;</i> 添加教师
-				</a>
-			</span> 
+		<div class="tabs-list cl pd-5 bg-1 bk-gray">
+			<span class="Hui-iconfont c-red f-18 mr-5">&#xe6df;</span>教师列表
+			<span class="r">
+            <a class="btn btn-success radius" href="javascript:;" onClick="article_view('新增教师','teacher-add.html','100%','100%')">
+                <i class="Hui-iconfont">&#xe647;</i> 新增教师
+            </a>
+        </span>
 		</div>
 		<div class="mt-20">
 			<form method="" action="" class="search_form">
@@ -77,6 +75,9 @@
 						<td>13879388898</td>
 						<td>紫云县火花乡十里铺24号</td>
 						<td class="f-14 td-manage">
+							<a href="javascript:;" onClick="layer_show('张涵','teacher-show.html','350','')" title="学校信息">
+								查看
+							</a>
 							<a class="ml-5" onClick="layer_show('教师编辑','teacher-add.html','800','')" href="javascript:;" title="教师编辑">
 								编辑
 							</a> 

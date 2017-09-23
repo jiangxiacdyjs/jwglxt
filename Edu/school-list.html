@@ -25,12 +25,13 @@
 <body>
 <!-- 表格区域 -->
 <div class="page-container">
-    <div class="cl pd-5 bg-1 bk-gray">
-        <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>
-            批量删除</a>
-        <a href="javascript:;" onclick="layer_show('添加学校','school-add.html','800','')" class="btn btn-primary radius">
-            <i class="Hui-iconfont">&#xe600;</i> 添加学校
-        </a>
+    <div class="tabs-list cl pd-5 bg-1 bk-gray">
+        <span class="Hui-iconfont c-red f-18 mr-5">&#xe6df;</span>学校列表
+        <span class="r">
+            <a class="btn btn-success radius" href="javascript:;" onClick="article_view('新增学校','school-add.html','100%','100%')">
+                <i class="Hui-iconfont">&#xe647;</i> 新增学校
+            </a>
+        </span>
     </div>
     <div class="mt-20">
         <form method="" action="" class="search_form">
@@ -69,20 +70,20 @@
                 <td>681</td>
                 <td>25</td>
                 <td class="td-manage">
+                    <a title="发送通知" href="javascript:;"
+                       onclick="article_view('消息发送','notice-add.html','100%','100%')" class="ml-5">
+                        发送通知
+                    </a>
+                    <a title="远程查看" href="javascript:;"
+                       onclick="article_view('远程监控','../onlineVideo/zyex.html','100%','100%')" class="ml-5">
+                        查看监控
+                    </a>
                     <a title="编辑" href="javascript:;" onclick="layer_show('编辑','school-add.html','800','')"
                        class="ml-5">
                         编辑
                     </a>
                     <a title="删除" href="javascript:;" class="ml-5 del">
                         删除
-                    </a>
-                    <a title="发送通知" href="javascript:;"
-                       onclick="article_view('消息发送','../send-email.html','100%','100%')" class="ml-5">
-                        发送消息
-                    </a>
-                    <a title="远程查看" href="javascript:;"
-                       onclick="article_view('远程监控','../../onlineVideo/zyex.html','100%','100%')" class="ml-5">
-                        查看监控
                     </a>
                 </td>
             </tr>

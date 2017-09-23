@@ -115,6 +115,19 @@
         .tabs-vertical-left .tabs-list li a, .tabs-vertical-right .tabs-list li a {
             width: 110px !important;
         }
+
+        /*新增input，select的特殊样式*/
+        .se-input{
+            width:100px;
+            cursor: pointer;
+            font-weight: normal;
+            border: 0;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        .se-input select{
+            background-color: transparent;
+        }
+        /*新增input，select的特殊样式结束/*/
     </style>
     <title>学校食材编辑上报</title>
 </head>
@@ -317,37 +330,41 @@
                 <div class="panel-header">
                     <!--------------新增表格内容--------------->
                     <table>
-                        <tr class="c-white">
+                        <tr class="c-white" style="border-bottom: 1px dotted #abcfde">
                             <td colspan="2" class="c-white pb-10" style="text-align: left!important;"><span>单位：</span><span>紫云县第二小学家长学校</span></td>
                             <td colspan="2" class="c-white pb-10" style="text-align: right!important;"><span>当前日期：</span><span id="date"></span></td>
                         </tr>
-                        <tr class="c-white">
-                            <td class="c-white">
+                        <tr>
+                            <td class="c-white pt-10" style="text-align: left!important;">
                                 <!--新增选择餐别-->
-                                <span class="select-box p-0" style="width: 120px">
-                                        <select class="select" style="height: 31px;">
-                                            <option value="">--选择餐别--</option>
-                                            <option value="1">早餐</option>
-                                            <option value="2">中餐</option>
-                                            <option value="3">晚餐</option>
-                                        </select>
-                                    </span>
+                                <span>餐别：</span>
+                                <span class="select-box p-0 se-input">
+                                    <select class="select" style="height: 31px;">
+                                        <option value="">--选择餐别--</option>
+                                        <option value="1">早餐</option>
+                                        <option value="2">中餐</option>
+                                        <option value="3">晚餐</option>
+                                    </select>
+                                </span>
                             </td>
-                            <td>
-                                <input type="text" placeholder="供应起始时间" class="input-text ac_input text-c"
+                            <td class="c-white pt-10">
+                                <span>起始：</span>
+                                <input type="text" placeholder="供应起始时间" class="input-text ac_input text-c se-input"
                                        name="search_text" value=""
-                                       id="inpstart" autocomplete="off" style="width:120px;cursor: pointer;" readonly>
+                                       id="inpstart" autocomplete="off" readonly>
                             </td>
-                            <td>
-                                <input type="text" placeholder="供应结束时间" class="input-text ac_input text-c"
+                            <td class="c-white pt-10">
+                                <span>结束：</span>
+                                <input type="text" placeholder="供应结束时间" class="input-text ac_input text-c se-input"
                                        name="search_text" value=""
-                                       id="inpend" autocomplete="off" style="width:120px;cursor: pointer;" readonly>
+                                       id="inpend" autocomplete="off" readonly>
                             </td>
-                            <td class="c-white text-c">
+                            <td class="c-white pt-10" style="text-align: right!important;">
                                 <!--新增选择定价单-->
-                                <span class="select-box p-0" style="width: 120px">
-                                        <select class="select" style="height: 31px;width: 120px">
-                                            <option value="">--选择定价单--</option>
+                                <span>定价单：</span>
+                                <span class="select-box p-0 se-input">
+                                        <select class="select" style="height: 31px;width: 100px">
+                                            <option value="">--选择价单--</option>
                                             <option value="1">A定价单</option>
                                             <option value="2">A定价单</option>
                                             <option value="3">A定价单</option>
@@ -393,11 +410,8 @@
 <script>
     $(function () {
         /* 获取当前时间*/
-        var d = new Date();
-        var str = d.getFullYear() + "-" + ((d.getMonth() + 1) < 10 ? "0" : "") + (d.getMonth() + 1) + "-" + (d.getDate() < 10 ? "0" : "") + d.getDate();
-        var date = $("#date");
-        date.html(str);
-
+        var $date = $("#date");
+        $date.html($.nowDate({DD:"00"},'YYYY-MM-DD'));
         /*------------新增起始结束日期选择---------------*/
         var start = {
             format: 'YYYY-MM-DD',
