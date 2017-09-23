@@ -11,40 +11,43 @@
     <!--[if lt IE 9]>
     <script type="text/javascript" src="../Public/lib/html5shiv.js"></script>
     <script type="text/javascript" src="../Public/lib/respond.min.js"></script>
+
     <![endif]-->
-    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui/css/H-ui.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css"/>
-    <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link href="../Public/static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../Public/static/h-ui.admin/css/H-ui.admin.css" rel="stylesheet" type="text/css"/>
+    <link href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
+    <!---------------------新增引入style.css-->
     <link rel="stylesheet" type="text/css" href="../Public/mySrc/css/style.css"/>
     <!--[if IE 6]>
     <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
-    <!--TODO:新增的项目保存时候仍然是保存全部一样的-->
-    <title>配送运输公司管理</title>
+    <title>学校每周食谱安排</title>
 </head>
 
 <body>
 <div class="page-container">
-    <div>
-        <table class="table table-border table-bordered table-bg table-hover" id="table">
-            <caption class="f-20 mb-30" style="border-bottom: 1px dashed #7C7C7C;padding-bottom: 10px"><span
-                    class="Hui-iconfont mr-10 c-success">&#xe669;</span>配送运输公司管理
-            </caption>
-            <thead>
-            <tr class="text-c" data-tabullet-map="id">
-                <th width="50" data-tabullet-map="_index" data-tabullet-readonly="true">编号</th>
-                <th data-tabullet-map="firmName">运输公司名称</th>
-                <th data-tabullet-map="firmOwner">法人代表</th>
-                <th data-tabullet-map="firmTel">联系方式</th>
-                <th data-tabullet-map="mark">备注信息</th>
-                <th width="50" data-tabullet-type="edit">编辑</th>
-                <th width="50" data-tabullet-type="delete">删除</th>
-            </tr>
-            </thead>
-        </table>
+    <div class="f-20 pd-20 text-c" style="border-bottom: 1px dashed #7C7C7C;padding-top: 0">
+        <span class="Hui-iconfont mr-10">&#xe669;</span>配送公司编辑
+        <span class="f-r c-333 f-16" id="date"></span>
     </div>
+    <table id="table" class="table table-border table-bordered table-bg table-hover mt-20">
+        <thead>
+        <tr class="text-c" data-tabullet-map="id">
+            <th width="50" data-tabullet-map="_index" data-tabullet-readonly="true">编号</th>
+            <th data-tabullet-map="firmName">运输公司名称</th>
+            <th data-tabullet-map="firmOwner">法人代表</th>
+            <th data-tabullet-map="firmTel">联系方式</th>
+            <th data-tabullet-map="mark">备注信息</th>
+            <th width="50" data-tabullet-type="edit">编辑</th>
+            <th width="50" data-tabullet-type="delete">删除</th>
+        </tr>
+        </thead>
+    </table>
+    <p class="text-c">
+        <input class="btn btn-primary radius mt-30" type="submit" value="确认修改">
+    </p>
 </div>
 <script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
@@ -53,6 +56,12 @@
 <script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
 <script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
 <script>
+    /*-------新增获取当前时间-------*/
+    var d = new Date();
+    var str = d.getFullYear() + "-" + ((d.getMonth() + 1) < 10 ? "0" : "") + (d.getMonth() + 1) + "-" + (d.getDate() < 10 ? "0" : "") + d.getDate();
+    var $date = $("#date");
+    $date.html(str);
+
     $(function () {
         var source = [{
             id: 1,
