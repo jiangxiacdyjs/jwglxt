@@ -16,8 +16,6 @@
 			hidenContent	: false					// 默认隐藏Accordions内容，只在accordions模式有效
         }
         var options = $.extend(defaults, options);
-		
-		
 		//核心部分代码
 		return this.each(function() {
 	        var self = $(this);			
@@ -49,7 +47,6 @@
 			showTabs = function(index){				
 				tabListItem.eq(index).addClass(options.activeClass).siblings('li').removeClass('active '+options.activeClass);
 				tabContent.eq(index).show().siblings('.tab-content').hide();
-				
 				//高亮响应式Tab当前点击
 				if( options.responsive ){
 					accordionHandle = self.children().children('.accordion-handle');
@@ -60,7 +57,6 @@
 				accordionHandle = options.model == 'accordions' ? self.children('.accordion-handle') : self.children().children('.accordion-handle');
 				accordionHandle.eq(index).addClass(options.activeClass).siblings('.accordion-handle').removeClass('active '+options.activeClass);
 				tabContent.eq(index).slideDown().siblings('.tab-content, .accordion-content').slideUp();
-				
 				//高亮响应式Tab当前点击
 				if( options.responsive && tabListItem.length ){
 					tabListItem.eq(index).addClass(options.activeClass).siblings('li').removeClass('active '+options.activeClass);
@@ -87,8 +83,6 @@
 				tabContent.hide();
 				accordionHandle.removeClass('active '+options.activeClass);
 			}
-			
-			
 			//初始化函数
 			_init = function(){
 				if( options.model == 'tabs' ){
@@ -105,13 +99,12 @@
 					if( options.hidenContent ) hideAccordingContent();
 				}			
 			}
-			_init();			
-			
+			_init();
 			tabListItem.bind( options.fnEvent, function(){
 				var currentIndex = tabListItem.index($(this));
 				showTabs(currentIndex);
+				console.log(currentIndex)
 			});
-			
 			accordionHandle.bind( 'click', function(){
 				var currentIndex = accordionHandle.index($(this));		
 				
@@ -121,9 +114,6 @@
 					showAccording(currentIndex);
 				}
 			});
-			
-	        
 	    });//end this.each
-		
 	}
 })(jQuery);

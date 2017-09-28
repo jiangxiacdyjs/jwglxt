@@ -82,7 +82,7 @@ label{cursor: pointer;}
     height: 100px;
 }
 th, td {
-    white-space: nowrap!important;
+    /*white-space: nowrap!important;*/
     text-align: center !important;
 }
 .table th, .table td{
