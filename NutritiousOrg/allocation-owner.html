@@ -136,14 +136,16 @@
         var userVal = $user.html(); //用户登录名
         var nameVal = $name.html(); //用户真实姓名
         var $owner = $('#owner'); //存放配送公司当前负责人的td
+        var newPanel = $('<span/>').addClass('source-panle bg-primary').html(userVal+"（"+nameVal+"）").attr('data-id',userVal);
 
         if ($checkboxBg.hasClass('checkedBg')) {
             $checkboxBg.removeClass('checkedBg');
-            $owner.children('[data-id='+userVal+']').remove();
+            $owner.empty();
         } else {
             $checkboxBg.addClass('checkedBg').parent('.check').siblings().children('span').removeClass('checkedBg');
-            var newPanel = $('<span/>').addClass('source-panle bg-primary').html(userVal+"（"+nameVal+"）").attr('data-id',userVal);
-            $owner.append(newPanel);
+            if(!$('[data-id='+userVal+']').length){
+                $owner.append(newPanel);
+            }
         }
     });
 </script>
