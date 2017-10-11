@@ -81,10 +81,10 @@ label{cursor: pointer;}
     width: 100px;
     height: 100px;
 }
-th, td {
+/*th, td {
     white-space: nowrap!important;
     text-align: center !important;
-}
+}*/
 .table th, .table td{
     line-height: 18px!important;
 }
