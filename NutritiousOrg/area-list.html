@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="../Public/static/h-ui/css/H-ui.min.css"/>
     <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css"/>
     <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link href="../Public/lib/jedate/skin/jedate.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
     <link rel="stylesheet" type="text/css" href="../Public/mySrc/css/style.css"/>
     <!--[if IE 6]>
@@ -26,15 +27,29 @@
 <div class="page-container">
     <div class="tabs-list cl pd-5 bg-1 bk-gray">
         <span class="Hui-iconfont c-red f-18 mr-5">&#xe6df;</span>片区管理列表
+        <span class="r">
+            <a class="btn btn-success radius" href="javascript:;" onClick="article_view('新增片区','area-add.html','100%','100%')">
+                <i class="Hui-iconfont">&#xe647;</i> 新增片区
+            </a>
+        </span>
     </div>
     <div class="mt-20" style="display:block;">
         <form method="" action="" class="search_form">
-            片区名称：
+            创建日期：
             <input type="text" placeholder="" class="input-text ac_input mr-10" name="search_text"
-                   value="" autocomplete="off" style="width:120px;cursor: pointer;">
-            <button type="submit" class="btn btn-success" id="search_button0">
-                +&nbsp;
-                确认新增
+                   value=""
+                   id="tim0" autocomplete="off" style="width:100px;cursor: pointer;" readonly>
+            所属状态：
+            <span class="select-box mr-10" style="width: 100px">
+                <select class="select" size="1" name="demo1">
+                    <option value="" selected="">已通过</option>
+                    <option value="1">待审核</option>
+                    <option value="2">已完成</option>
+                </select>
+            </span>
+            <button type="submit" class="btn btn-success" id="search_button1">
+                <i class="Hui-iconfont">&#xe665;</i>
+                搜索
             </button>
         </form>
         <table class="table table-border table-bordered table-bg table-hover table-sort0">
@@ -84,6 +99,7 @@
 <script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="../Public/lib/jedate/jquery.jedate.min.js"></script>
 <script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
 <script type="text/javascript">
@@ -98,10 +114,13 @@
         });
     };
     $(function () {
-        /* 获取当前时间*/
-        var d = new Date();
-        var str = d.getFullYear() + "-" + ((d.getMonth() + 1) < 10 ? "0" : "") + (d.getMonth() + 1) + "-" + (d.getDate() < 10 ? "0" : "") + d.getDate();
-        tableSort('.table-sort0', [0,1])
+        //初始化日期搜索jedate
+        $('#tim0').jeDate({
+            format: 'YYYY-MM-DD',
+            minDate: '2014-06-20', //设定最小日期为当前日期
+            maxDate: $.nowDate({DD: 0}) //最大日期
+        });
+        tableSort('.table-sort0', [0,7,8])
     })
 </script>
 </body>
