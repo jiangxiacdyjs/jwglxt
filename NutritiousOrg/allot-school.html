@@ -197,7 +197,8 @@
                     </tr>
                 </table>
             </div>
-            <span class="f-20" style="float: left;padding: 0 5px;border-radius: 50px;border: 1px solid #5eb95e">A片区学校列表</span>
+            <input id="areaName" class="f-20 left text-c" style="border-radius: 50px;border: 1px solid #5eb95e" value="A片区学校列表" readonly>
+            <a href="javascript:;" class="ml-15" id="editName">修改</a>
             <table class="table table-border table-bordered table-bg table-hover table-sort1">
                 <thead>
                 <tr class="text-c">
@@ -271,8 +272,20 @@
                 ]
             });
         }
-        tableSort0('.table-sort0',[5])
-        tableSort0('.table-sort1',[4])
+        tableSort0('.table-sort0',[5]);
+        tableSort0('.table-sort1',[4]);
+        // 修改片区名称
+        $('#editName').click(function () {
+            var txt = $(this).text();
+            if(txt === '修改'){
+                $('#areaName').attr("readonly",false).focus();
+                $(this).text('确认');
+            }else if(txt === '确认'){
+                $('#areaName').attr("readonly",true).blur();
+                $(this).text('修改');
+            }
+
+        })
         // 左侧移入
         $('.btn-in').click(function () {
             layer.confirm('是否确认将该学校移入A片区', {
