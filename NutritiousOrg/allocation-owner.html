@@ -1,0 +1,154 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../Public/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../Public/lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
+    <link rel="stylesheet" type="text/css" href="../Public/mySrc/css/style.css"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <!--/meta 作为公共模版分离出去-->
+    <title>添加角色</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <style>
+        .Huifold .item .info {
+            padding: 0
+        }
+
+        .permission-list > dd > dl:last-child {
+            border-bottom: 0;
+        }
+
+        .source-panle {
+            cursor: pointer;
+            display: inline-block;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            padding: 0 5px;
+            color: #fff;
+            background-color: #06b36b;
+            margin: 3px;
+        }
+
+        .title {
+            background: url('../Public/static/h-ui.admin/images/divide.jpg') center no-repeat;
+            -webkit-background-size: cover;
+            background-size: cover;
+        }
+
+        .mtb-5 {
+            margin: 5px auto;
+        }
+
+        .mlr-5 {
+            margin: 0 5px;
+        }
+
+        .check {
+            float: left;
+            margin: 10px 15px
+        }
+    </style>
+</head>
+<body>
+<article class="page-container">
+    <form action="" method="post" class="form form-horizontal" id="form-admin-role-add">
+        <div class="row cl">
+            <div class="col-xs-6">
+                <h4 class="text-c f-22 title">配送公司</h4>
+                <table class="table table-border table-bordered">
+                    <tr>
+                        <th class="text-c" width="100">公司名称：</th>
+                        <td class="text-c" colspan="7">
+                            <div class="f-18 pt-10 pb-10">安顺市紫阳商贸有限责任公司</div>
+                        </td>
+                    </tr>
+                    <tr class="bg-body">
+                        <th class="text-c">公司负责人：</th>
+                        <td id="owner" style="height: 36px">
+                            <!--<span class="source-panle bg-primary">默认权限</span>-->
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="formControls col-xs-6">
+                <h4 class="text-c f-22 title">可设置用户</h4>
+                <table class="table table-border table-bordered">
+                    <tr class="bg-body">
+                        <th class="text-c">公司负责人：</th>
+                        <td>
+                            <div class="clearfix">
+                                <div class="check">
+                                    <span class="checkboxBg" id="freshzxf"></span>
+                                    <label for="freshzxf"><span class="user">freshzxf</span>（<span class="name">朱咸锋</span>）</label>
+                                </div>
+                                <div class="check">
+                                    <span class="checkboxBg" id="cautou"></span>
+                                    <label for="cautou"><span class="user">cautou</span>（<span class="name">林南</span>）</label>
+                                </div>
+                                <div class="check">
+                                    <span class="checkboxBg" id="watoh"></span>
+                                    <label for="watoh"><span class="user">watoh</span>（<span class="name">程向东</span>）</label>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="row cl">
+                <div class="col-xs-4 col-xs-offset-4">
+                    <button style="width: 100%;margin-top: 30px;" type="submit" class="btn btn-success radius"
+                            id="admin-role-save" name="admin-role-save">确定
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</article>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
+
+<script type="text/javascript">
+    // span点击事件
+    $(".check").click(function () {
+        var $checkboxBg = $(this).children('.checkboxBg'); //勾选图标
+        var $label = $(this).children('label'); //label标签
+        var $user = $label.children('.user'); //存放用户名的标签
+        var $name = $label.children('.name'); //存放用户真实姓名的标签
+        var userVal = $user.html(); //用户登录名
+        var nameVal = $name.html(); //用户真实姓名
+        var $owner = $('#owner'); //存放配送公司当前负责人的td
+        var newPanel = $('<span/>').addClass('source-panle bg-primary').html(userVal+"（"+nameVal+"）").attr('data-id',userVal);
+
+        if ($checkboxBg.hasClass('checkedBg')) {
+            $checkboxBg.removeClass('checkedBg');
+            $owner.empty();
+        } else {
+            $checkboxBg.addClass('checkedBg').parent('.check').siblings().children('span').removeClass('checkedBg');
+            if(!$('[data-id='+userVal+']').length){
+                $owner.append(newPanel);
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
