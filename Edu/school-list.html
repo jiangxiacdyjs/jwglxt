@@ -28,8 +28,8 @@
     <div class="tabs-list cl pd-5 bg-1 bk-gray">
         <span class="Hui-iconfont c-red f-18 mr-5">&#xe6df;</span>学校列表
         <span class="r">
-            <a class="btn btn-success radius" href="javascript:;" onClick="article_view('新增学校','school-add.html','100%','100%')">
-                <i class="Hui-iconfont">&#xe647;</i> 新增学校
+            <a id="loadData" class="btn btn-success radius" href="javascript:;">
+                <i class="Hui-iconfont">&#xe68f;</i> <span id="loadTxt">更新学校</span>
             </a>
         </span>
     </div>
@@ -99,7 +99,55 @@
 <script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
 <script type="text/javascript">
-    tableSort('.table-sort', [0, 8])
+   $(function () {
+       /*dataTable初始化*/
+       tableSort('.table-sort', [0, 8])
+       /*定义loading弹层方法*/
+       function LoadWait(WaitText){
+           WaitText=''+WaitText;
+           var Mti=arguments[1]||10;//自动关闭时间
+           index=layer.msg(
+               '<div>'+WaitText+'</div>'//样式需要你自己定义，或者直接写内容
+               ,{
+                   zIndex:20171016//更改窗口层次
+                   ,icon: 16
+                   ,time:0//不自动关闭
+                   ,anim:1
+                   ,shade:[0.3,'#000']
+                   ,shadeClose:false
+                   ,skin:'layer_my_msg_load'
+               }
+           );
+           return index;  //返回弹层索引号，如需关闭此弹层，执行
+       };
+        /*绑定更新学校事件*/
+       $('#loadData').click(function () {
+           $.ajax({
+               type: 'post',
+               url: "",
+               data: "",
+               dataType: 'json',
+               beforeSend: function (xhr, options) {
+                   $('#loadTxt').html('数据加载中...');
+                   var index=LoadWait('系统正在加载最新学校数据，请您耐心等待...');
+               },
+               complete: function (XHR, TS) {
+                 //  $('#loadTxt').html('更新学校');
+                //  layer.close(index);
+               },
+               success: function (data) {
+                   if (data['success']) {
+
+                   } else {
+
+                   }
+               },
+               error: function () {
+
+               }
+           });
+       });
+   });
 </script>
 </body>
 </html>
