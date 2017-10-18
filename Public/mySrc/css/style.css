@@ -3,7 +3,38 @@
 a{
     text-decoration: none!important;
 }
-
+/*最小宽度*/
+.minw-30{
+    min-width: 30px;
+}
+.minw-50{
+  min-width: 50px;
+}
+.minw-100{
+  min-width: 100px;
+}
+.minw-150{
+    min-width: 150px;
+}
+.minw-200{
+    min-width: 200px;
+}
+.minw-250{
+    min-width: 250px;
+}
+.minw-300{
+    min-width: 300px;
+}
+/*最大宽度*/
+.maxw-200{
+    max-width: 200px;
+}
+.maxw-250{
+    max-width: 250px;
+}
+.maxw-300{
+    max-width: 300px;
+}
 /*dataTable*/
 .dataTables_wrapper{
     position: relative;
