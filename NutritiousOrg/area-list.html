@@ -28,7 +28,8 @@
     <div class="tabs-list cl pd-5 bg-1 bk-gray">
         <span class="Hui-iconfont c-red f-18 mr-5">&#xe6df;</span>片区管理列表
         <span class="r">
-            <a class="btn btn-success radius" href="javascript:;" onClick="article_view('新增片区','area-add.html','100%','100%')">
+            <a class="btn btn-success radius" href="javascript:;"
+               onClick="article_view('新增片区','area-add.html','100%','100%')">
                 <i class="Hui-iconfont">&#xe647;</i> 新增片区
             </a>
         </span>
@@ -85,7 +86,7 @@
                        href="javascript:;" title="审核" class="mr-5">审核</a>
                     <a onClick="article_view('片区管理','allot-school.html','100%','100%')"
                        href="javascript:;" title="片区管理" class="mr-5">管理片区</a>
-                    <a onClick="relevance()" href="javascript:;"
+                    <a onClick="article_view('关联配送公司','area-relation.html','100%','100%')" href="javascript:;"
                        title="关联配送公司" class="mr-5">关联公司</a>
                     <a class="ml-5 del" href="javascript:;" title="删除">删除</a>
                 </td>
@@ -94,6 +95,8 @@
         </table>
     </div>
 </div>
+
+
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
@@ -103,16 +106,7 @@
 <script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
 <script type="text/javascript">
-    // 关联配送
-    function relevance() {
-        layer.open({
-            title: '关联至...',
-            type: 1,
-            skin: 'layui-layer-rim', //加上边框
-            area: ['420px', ''], //宽高
-            content: '<h4 class="text-c">请选择关联配送运输公司</h4> <span class="select-box" style="width:80%;margin-left:10%"><select class="select" size="1" name="demo1"><option value="" selected>贵州城东商贸有限公司</option><option value="1">配送商贸公司1</option><option value="2">配送商贸公司1</option></select></span> <h2 class="text-c"><button class="btn btn-primary radius btn-in">确认关联</button></h2> '
-        });
-    };
+
     $(function () {
         //初始化日期搜索jedate
         $('#tim0').jeDate({
@@ -120,7 +114,7 @@
             minDate: '2014-06-20', //设定最小日期为当前日期
             maxDate: $.nowDate({DD: 0}) //最大日期
         });
-        tableSort('.table-sort0', [0,7,8])
+        tableSort('.table-sort0', [0, 7, 8])
     })
 </script>
 </body>

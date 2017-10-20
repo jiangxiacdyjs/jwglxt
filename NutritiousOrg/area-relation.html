@@ -1,0 +1,152 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport"
+		  content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+	<meta http-equiv="Cache-Control" content="no-siteapp"/>
+	<!--[if lt IE 9]>
+	<script type="text/javascript" src="../Public/lib/html5shiv.js"></script>
+	<script type="text/javascript" src="../Public/lib/respond.min.js"></script>
+	<![endif]-->
+	<link rel="stylesheet" type="text/css" href="../Public/static/h-ui/css/H-ui.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css"/>
+	<link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
+	<link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
+	<link rel="stylesheet" type="text/css" href="../Public/mySrc/css/style.css"/>
+	<!--[if IE 6]>
+	<script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
+	<script>DD_belatedPNG.fix('*');</script>
+	<![endif]-->
+	<!--/meta 作为公共模版分离出去-->
+	<title>关联配送公司</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<style>
+		.Huifold .item .info {
+			padding: 0
+		}
+
+		.permission-list > dd > dl:last-child {
+			border-bottom: 0;
+		}
+
+		.source-panle {
+			cursor: pointer;
+			display: inline-block;
+			width: 70px;
+			text-align: center;
+			color: #fff;
+			background-color: #228fbd;
+		}
+
+		.title {
+			background: url('../Public/static/h-ui.admin/images/divide.jpg') center no-repeat;
+			-webkit-background-size: cover;
+			background-size: cover;
+		}
+
+	</style>
+</head>
+
+<body>
+<article class="page-container">
+	<form action="" method="post" class="form form-horizontal" id="form-admin-role-add">
+		<div class="row cl">
+			<div class="formControls col-xs-8 col-xs-offset-2">
+				<h4 class="text-c f-22 title">关联配送公司</h4>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="formControls col-xs-6 col-xs-offset-3">
+				<div class="row clearfix">
+					<div class="text-r pr-20" style="box-sizing:border-box;width: 20%;float: left;">已关联：</div>
+					<div class="select-box" style="width: 80%;float: right">
+						<select id="yeSel" class="select" size="1" name="demo1" disabled style="color: #bbb">
+							<option value="0" selected>安顺市紫金商贸有限公司</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="formControls col-xs-6 col-xs-offset-3">
+				<div class="row clearfix">
+					<div class="text-r pr-20" style="box-sizing:border-box;width: 20%;float: left;">关联至：</div>
+					<div class="select-box" style="width: 80%;float: right">
+						<select id="noSel" class="select" size="1" name="demo1">
+							<option value="">请选择关联配送公司</option>
+							<option value="0">贵州城东商贸有限公司0</option>
+							<option value="1">贵州城东商贸有限公司1</option>
+							<option value="2">贵州城东商贸有限公司2</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row cl">
+			<div class="formControls col-xs-6 col-xs-offset-3">
+				<div class="row clearfix">
+					<div class="text-r pr-20" style="box-sizing:border-box;width: 20%;float: left;">备注：</div>
+					<div style="width: 80%;float: right">
+                		<textarea name="beizhu" cols="" rows="" class="textarea" placeholder="不超过100字"
+						  onKeyUp="$.Huitextarealength(this,100)"></textarea>
+						<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row cl">
+			<div class="col-xs-6 col-xs-offset-3">
+				<button style="width: 80%;margin-top: 30px;" type="submit" class="btn btn-success radius r"
+						id="admin-role-save" name="admin-role-save">确定
+				</button>
+			</div>
+		</div>
+	</form>
+</article>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="../Public/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="../Public/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="../Public/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        /*$('#noSel').change(function () {
+            var $ckd = $(this).find("option:selected");
+			var val = $ckd.val();
+			var txt = $ckd.text();
+			if(! val == ""){
+			    var $yeCkd = $('#yeSel').find("option:selected");
+                $yeCkd.text(txt).val(val)
+			}
+        });*/
+
+        $("#form-admin-role-add").validate({
+            rules: {
+                areaName: {
+                    required: true,
+                }
+            },
+            onkeyup: false,
+            focusCleanup: true,
+            success: "valid",
+            submitHandler: function (form) {
+                $(form).ajaxSubmit();
+                var index = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(index);
+            }
+        });
+    });
+</script>
+</body>
+
+</html>
