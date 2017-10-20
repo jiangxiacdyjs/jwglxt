@@ -54,7 +54,7 @@
 
 <body>
 <article class="page-container">
-	<form action="" method="post" class="form form-horizontal" id="form-admin-role-add">
+	<form action="" method="post" class="form form-horizontal" id="relationFirm">
 		<div class="row cl">
 			<div class="formControls col-xs-8 col-xs-offset-2">
 				<h4 class="text-c f-22 title">关联配送公司</h4>
@@ -65,7 +65,7 @@
 				<div class="row clearfix">
 					<div class="text-r pr-20" style="box-sizing:border-box;width: 20%;float: left;">已关联：</div>
 					<div class="select-box" style="width: 80%;float: right">
-						<select id="yeSel" class="select" size="1" name="demo1" disabled style="color: #bbb">
+						<select id="yeSel" class="select" size="1" name="yeSel" disabled style="color: #bbb">
 							<option value="0" selected>安顺市紫金商贸有限公司</option>
 						</select>
 					</div>
@@ -77,7 +77,7 @@
 				<div class="row clearfix">
 					<div class="text-r pr-20" style="box-sizing:border-box;width: 20%;float: left;">关联至：</div>
 					<div class="select-box" style="width: 80%;float: right">
-						<select id="noSel" class="select" size="1" name="demo1">
+						<select id="noSel" class="select" size="1" name="noSel">
 							<option value="">请选择关联配送公司</option>
 							<option value="0">贵州城东商贸有限公司0</option>
 							<option value="1">贵州城东商贸有限公司1</option>
@@ -118,7 +118,6 @@
 <script type="text/javascript" src="../Public/lib/jquery.validation/1.14.0/validate-methods.js"></script>
 <script type="text/javascript" src="../Public/lib/jquery.validation/1.14.0/messages_zh.js"></script>
 <script type="text/javascript">
-
     $(function () {
         /*$('#noSel').change(function () {
             var $ckd = $(this).find("option:selected");
@@ -130,11 +129,14 @@
 			}
         });*/
 
-        $("#form-admin-role-add").validate({
+        $("#relationFirm").validate({
             rules: {
-                areaName: {
+                yeSel: {
                     required: true,
-                }
+                },
+                noSel: {
+                    required: true,
+                },
             },
             onkeyup: false,
             focusCleanup: true,
