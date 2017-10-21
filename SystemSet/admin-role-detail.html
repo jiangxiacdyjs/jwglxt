@@ -1,0 +1,381 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <title>系统角色管理</title>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../Public/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../Public/lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="../Public/mySrc/css/style.css"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+
+    <style>
+        .title {
+            background: url('../Public/static/h-ui.admin/images/divide.jpg') center no-repeat;
+            -webkit-background-size: cover;
+            background-size: cover;
+        }
+        .source-panle {
+            cursor: pointer;
+            display: inline-block;
+            height: 30px;
+            text-align: center;
+            line-height:30px;
+            padding: 0 5px;
+            color: #fff;
+            background-color: #06b36b;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="page-container pt-10">
+    <div class="row cl mt-10">
+        <div class="col-xs-12 col-sm-6" style="margin-right: -15px">
+            <h4 class="text-c title">当前操作角色</h4>
+            <div class="Huialert Huialert-success f-12" style="margin-bottom:10px!important;"><span class="c-black">说明：</span>在右侧系统角色（附带特定权限的角色）列表中为当前角色分配角色</div>
+            <table class="table table-border table-bordered table-bg">
+                <thead>
+                    <tr>
+                        <th class="text-c" width="100" style="padding: 4px">角色类别</th>
+                        <th class="text-c" width="100" style="padding: 4px">角色名称</th>
+                        <th class="text-c" style="padding: 4px">拥有系统角色</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <td class="text-c">用户角色</td>
+                    <td class="text-c" style="line-height: 41px!important;">教务主任</td>
+                    <td class="text-l" id="ownRoles">
+                        <span class="source-panle bg-primary">系统管理</span>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <h4 class="text-c title">系统角色列表</h4>
+            <table class="table table-border table-bordered table-bg table-sort0">
+                <thead>
+                <tr class="text-c">
+                    <th>操作</th>
+                    <th>ID</th>
+                    <th>角色名称</th>
+                    <th>角色描述</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="text-c">
+                    <td><input type="checkbox" value="" name=""></td>
+                    <td>10</td>
+                    <td><span roleId="10">超级管理员</span></td>
+                    <td>角色简要说明</td>
+                </tr>
+                <tr class="text-c">
+                    <td><input type="checkbox" value="" name=""></td>
+                    <td>11</td>
+                    <td><span roleId="11">超级管理员</span></td>
+                    <td>角色简要说明</td>
+                </tr>
+                <tr class="text-c">
+                    <td><input type="checkbox" value="" name=""></td>
+                    <td>12</td>
+                    <td><span roleId="12">超级管理员</span></td>
+                    <td>角色简要说明</td>
+                </tr>
+                <tr class="text-c">
+                    <td><input type="checkbox" value="" name=""></td>
+                    <td>13</td>
+                    <td><span roleId="13">超级管理员</span></td>
+                    <td>角色简要说明</td>
+                </tr>
+                <tr class="text-c">
+                    <td><input type="checkbox" value="" name=""></td>
+                    <td>14</td>
+                    <td><span roleId="14">超级管理员</span></td>
+                    <td>角色简要说明</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row cl">
+        <div class="col-xs-4 col-xs-offset-4">
+            <button class="btn radius btn-success" style="width: 100%;margin-top: 30px;">确认分配</button>
+        </div>
+    </div>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
+<script type="text/javascript">
+
+/*    var index = window.location.search.indexOf('=') ;
+    var userid = window.location.search.substring(index + 1 );
+
+    function getUserRoles() {
+        $.ajax({
+            type: 'POST',
+            url: 'getUserRoles.html',
+            dataType: 'json',
+            data: {
+                "userid":userid
+            },
+            success: function (data) {
+                makeUserSpan(data);
+            }
+        });
+    }
+
+    function makeUserSpan(data) {
+
+        var td_role_list = $('.roleList .bg-body .text-l');
+        td_role_list.empty();
+
+        if(data.status == 'fail' || data.data.length == 0) {
+            return;
+        }
+        data = data.data;
+        for(var index = 0,size = data.length; index < size; index ++) {
+            var span = $('<span/>').addClass('source-panle').attr('id', data[index].id).html(data[index].rolename).attr('status','old')
+                .appendTo(td_role_list).click(function () {
+
+                    var ele = this;
+                    var newB = $('<b class="Hui-iconfont ml-5">&#xe6a6;</b>');
+                    if(!$(this).children().is('.Hui-iconfont')){
+                        $(this).append(newB)
+                    }else {
+                        layer.confirm('确认删除该资源？', {btn: ['确认','取消']}, function(){
+
+                            $(ele).attr('status','del');
+                            $(ele).addClass('badge-danger').addClass('badge');
+                            $(ele).css('background-color','#dd514c');
+                            layer.msg('已删除，可在右侧重新添加', {icon: 1});
+                        }, function(){
+
+                        });
+                    }
+
+                });
+        }
+    }
+
+    function getSystemRole() {
+        $.ajax({
+            type: 'POST',
+            url: 'getSystemRole.html',
+            dataType: 'json',
+            data: {
+                "userid":userid
+            },
+            success: function (data) {
+                makeSystemRoleTable(data);
+            }
+        });
+    }
+
+    function makeSystemRoleTable(data) {
+
+        var tbody_role_list = $('#myTable01 tbody');
+        tbody_role_list.empty();
+        if(data.status == 'fail' || data.data.length == 0) {
+            return;
+        }
+        data = data.data;
+        for(var index = 0,size = data.length; index < size; index ++) {
+            var tr = $('<tr/>').addClass('text-c'),
+                td = $('<td/>').html('<input type="checkbox" value="' + data[index]['id'] + '" name="subChk">').appendTo(tr);
+            $('<td/>').html(index + 1).appendTo(tr);
+            $('<td/>').html(data[index]['rolename']).appendTo(tr);
+            $('<td/>').html(data[index]['remark']).appendTo(tr);
+
+            td.find('input').click(function () {
+                var td_role_list = $('.roleList .bg-body .text-l');
+                var attr_ids = new Array();
+                $.each($(td_role_list).find('span'),function (index,elment) {
+                    attr_ids[$(elment).attr('id')] = $(elment).attr('id');
+                });
+                var selected_id = $(this).val();
+                if(attr_ids[selected_id]){
+                    $(td_role_list).find('span[id='+selected_id+']').remove();
+                    return;
+                }
+                $('<span/>').addClass('source-panle').attr('id', selected_id).attr('status','new').html($(this).closest('td').siblings().eq(1).html()).appendTo(td_role_list);
+            });
+
+            tr.appendTo(tbody_role_list);
+        }
+    }
+
+    function getCustomRoles() {
+        $.ajax({
+            type: 'POST',
+            url: 'getCustomRole.html',
+            dataType: 'json',
+            data: {
+                "userid":userid
+            },
+            success: function (data) {
+                makeCustomRoleTable(data);
+            }
+        });
+    }
+
+    function makeCustomRoleTable(data){
+
+        var tbody_role_list = $('#myTable02 tbody');
+        tbody_role_list.empty();
+        if(data.status == 'fail' || data.data.length == 0) {
+            return;
+        }
+        data = data.data;
+        for(var index = 0,size = data.length; index < size; index ++) {
+            var tr = $('<tr/>').addClass('text-c'),
+                td = $('<td/>').html('<input type="checkbox" value="' + data[index]['id'] + '" name="subChk">').appendTo(tr);
+            $('<td/>').html(index + 1).appendTo(tr);
+            $('<td/>').html(data[index]['rolename']).appendTo(tr);
+            $('<td/>').html(data[index]['remark']).appendTo(tr);
+
+            td.find('input').click(function () {
+                var td_role_list = $('.roleList .bg-body .text-l');
+                var attr_ids = new Array();
+                $.each($(td_role_list).find('span'),function (index,elment) {
+                    attr_ids[$(elment).attr('id')] = $(elment).attr('id');
+                });
+                var selected_id = $(this).val();
+                if(attr_ids[selected_id]){
+                    $(td_role_list).find('span[id='+selected_id+']').remove();
+                    return;
+                }
+                $('<span/>').addClass('source-panle').attr('id', selected_id).html($(this).closest('td').siblings().eq(1).html()).appendTo(td_role_list);
+            });
+            tr.appendTo(tbody_role_list);
+        }
+
+    }*/
+
+    $(function () {
+        function tableSort0(a,b){
+            $(a).dataTable({
+                "sDom": '<"showCount"l><"showSearch"f>tipr',
+                "lengthMenu": [5,10,15],
+                "aaSorting": [
+                    [1, "desc"]
+                ],
+                "bStateSave": true,
+                "aoColumnDefs": [
+                    {
+                        "orderable": false,
+                        "aTargets": b
+                    }
+                ]
+            });
+        }
+        tableSort0('.table-sort0',[0,2,3]);
+
+        /* 角色的删除操作*/
+        $('.source-panle.bg-primary').each(function () {
+            var ele = $(this);
+            $(this).click(function () {
+                var newB = $('<b class="Hui-iconfont ml-5">&#xe6a6;</b>');
+                if(!ele.children().is('.Hui-iconfont')){
+                    $(this).append(newB);
+                    ele.removeClass('bg-primary').addClass('bg-danger')
+                }else {
+                    layer.confirm('确认删除该默认角色？', {
+                        btn: ['确认','取消'] //按钮
+                    }, function(){
+                        var $span = ele;
+                        $span.remove();
+                        layer.msg('已删除，可在右侧重新添加', {icon: 1});
+                    }, function(){
+                        ele.children('b').remove();
+                        ele.removeClass('bg-danger').addClass('bg-primary');
+                    });
+                }
+            })
+        });
+
+        /* 角色checkbox点击事件*/
+        $(".table td input:checkbox").css({'position':'relative','z-index':'-1'}).click(function () {
+            var theRole = $(this).parent().siblings('td').children('span');//角色容器span
+            var tLab = theRole.text();  //角色名称
+            var tPid = theRole.attr("roleId");//角色自定义roleId值
+            var $ownRoles = $('#ownRoles');//角色对应显示值
+            var showSpan = $ownRoles.find('span[roleId='+tPid+']');//角色对应显示值
+            if($(this).is(':checked')) {  // 选中操作
+                /*检测左侧表格中是否存在该项*/
+                function checkExist() {
+                    return showSpan>0?true:false;
+                };
+                if(!checkExist()){
+                    $ownRoles.append(
+                        $('<span/>').addClass('mlr-5 source-panle').attr('roleId',tPid)
+                            .html(tLab)
+                    );
+                }else{
+
+                }
+            }
+            if(!$(this).is(':checked')) {  // 取消选中操作
+                showSpan.remove();
+            }
+        });
+        $(".table td input:checkbox").parent('td').css('cursor','pointer').click(function () {
+            $(this).children('input:checkbox').click();
+        })
+
+        $('.btn').click(function () {
+
+            var td_role_list = $('.roleList .bg-body .text-l');
+
+            var new_attr_ids = new Array(),del_attr_ids = new Array();
+            $.each($(td_role_list).find('span[status="new"]'),function (index,elment) {
+                new_attr_ids.push($(elment).attr('id'));
+            });
+
+            $.each($(td_role_list).find('span[status="del"]'),function (index,elment) {
+                del_attr_ids.push($(elment).attr('id'));
+            });
+
+            $.ajax({
+                type: 'POST',
+                url: 'allocateUserRoles.html',
+                dataType: 'json',
+                data: {
+                    "user_id":userid,
+                    "new_role_ids":new_attr_ids,
+                    "del_attr_ids":del_attr_ids
+                },
+                success: function (data) {
+                    layer.msg(data.msg,{icon:1,time:2000});
+                }
+            });
+
+        });
+    /**
+     * getUserRoles();
+     * getSystemRole();
+     *getCustomRoles();*/
+    });
+</script>
+</body>
+</html>
