@@ -22,7 +22,7 @@
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
     <!--/meta 作为公共模版分离出去-->
-    <title>添加角色</title>
+    <title>新增出餐</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <style>
@@ -60,17 +60,24 @@
     <form action="" method="post" class="form form-horizontal" id="form-admin-role-add">
         <div class="row cl">
             <div class="formControls col-xs-6 col-xs-offset-3">
-                <h4 class="text-c f-22 title">创建配送公司</h4>
+                <h4 class="text-c f-22 title">新增出餐信息</h4>
             </div>
         </div>
         <div class="row cl">
             <div class="formControls col-xs-6 col-xs-offset-3">
-                <input type="text" class="input-text" value="" placeholder="公司名称" id="firmName" name="firmName">
+               <span class="select-box">
+                  <select class="select" size="1" name="demo1">
+                    <option value="" selected>---请选择餐别---</option>
+                    <option value="0">早餐</option>
+                    <option value="1">中餐</option>
+                    <option value="2">晚餐</option>
+                  </select>
+               </span>
             </div>
         </div>
         <div class="row cl">
             <div class="formControls col-xs-6 col-xs-offset-3">
-                <input type="text" class="input-text" value="" placeholder="法人代表" id="firmOwner" name="firmOwner">
+                <input type="text" class="input-text" value="" placeholder="请输入菜品名称" id="foodName" name="foodName">
             </div>
         </div>
         <div class="row cl">
@@ -78,14 +85,6 @@
                 <input type="text" class="input-text" value="" placeholder="联系方式" id="firmTel" name="firmTel">
             </div>
         </div>
-        <div class="row cl">
-            <div class="formControls col-xs-6 col-xs-offset-3">
-                <textarea name="beizhu" cols="" rows="" class="textarea" placeholder="备注信息"
-                          onKeyUp="$.Huitextarealength(this,100)"></textarea>
-                <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
-            </div>
-        </div>
-        <div class="row cl">
             <div class="col-xs-4 col-xs-offset-4">
                 <button style="width: 100%;margin-top: 30px;" type="submit" class="btn btn-success radius"
                         id="admin-role-save" name="admin-role-save">确定
