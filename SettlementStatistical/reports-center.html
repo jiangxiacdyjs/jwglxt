@@ -15,15 +15,19 @@
   <link rel="stylesheet" type="text/css" href="../Public/static/h-ui/css/H-ui.min.css"/>
   <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css"/>
   <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
-  <link rel="stylesheet" type="text/css" href="../Public/lib/jedate/skin/jedate.css"/>
+  <link rel="stylesheet" type="text/css" href="../Public/lib/jedate-6.5.0/skin/jedate.css"/>
   <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
   <link rel="stylesheet" type="text/css" href="../Public/mySrc/css/style.css"/>
   <!--[if IE 6]>
   <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
   <script>DD_belatedPNG.fix('*');</script>
   <![endif]-->
-  <title>营养食材订购单列表</title>
+  <title>出入库汇总表</title>
   <style>
+    .inline {
+      display: inline-block
+    }
+
     .table {
 
       table-layout: fixed; /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
@@ -41,30 +45,53 @@
 <body>
 <div class="page-container">
   <div class="tabs-list cl pd-5 bg-1 bk-gray">
-    <span class="Hui-iconfont c-red f-18 mr-5">&#xe6df;</span>营养食材订购单列表
+    <span class="Hui-iconfont c-red f-18 mr-5">&#xe6df;</span>出入库汇总列表
     <div class="btn-group r">
       <a href="javascript:window.location.reload();" class="btn btn-default radius"><i class="Hui-iconfont">&#xe68f;</i></a>
-      <span class="btn btn-success radius" onClick="article_view('食材订购','nutritious-edit.html','100%','100%')">
-        <i class="Hui-iconfont">&#xe647;</i>&nbsp;食材订购</span>
     </div>
   </div>
   <div class="mt-20">
     <form method="" action="" class="search_form">
-      学校名称：
-      <input type="text" placeholder="学校名称搜素" class="input-text ac_input mr-10" name="search_text"
-             value="" autocomplete="off" style="width:120px;">
-      订单入库时间：
-      <input type="text" placeholder="创建食材单时间" class="input-text ac_input mr-10" name="search_text"
-             value=""
-             id="tim1" autocomplete="off" style="width:120px;cursor: pointer;" readonly>
-      所属状态：
-      <span class="select-box mr-10" style="width: 100px">
-        <select class="select" size="1" name="demo1">
-            <option value="" selected="">已通过</option>
-            <option value="1">待审核</option>
-            <option value="2">已完成</option>
-        </select>
-    </span>
+      <!--统计模式：
+      <input type="text" value="学校统计" class="input-text ac_input mr-10" name="search_text"
+             value="" autocomplete="off" style="width:120px;">-->
+      <div class="inline">
+        <span>汇总模式：</span>
+        <div class="select-box mr-10" style="width: 100px">
+          <select class="model-select" size="1" name="demo1">
+            <option value="0" selected="">片区汇总</option>
+            <option value="1">学校汇总</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="inline area-choose">
+        <span>片区选择：</span>
+        <div class="select-box mr-10" style="width: 100px">
+          <select class="model-select" size="1" name="demo1">
+            <option value="0" selected="">全县区域</option>
+            <option value="1">A片区</option>
+            <option value="2">B片区</option>
+            <option value="3">C片区</option>
+            <option value="4">D片区</option>
+          </select>
+        </div>
+      </div>
+
+
+      <div class="inline school-choose hidden">
+        <span>学校名称：</span>
+        <input type="text" placeholder="学校名称搜素" class="input-text ac_input mr-10" name="search_text"
+               value="" autocomplete="off" style="width:120px;">
+      </div>
+
+      <div class="inline">
+        <span>汇总月份：</span>
+        <input type="text" placeholder="选择汇总月份" class="input-text ac_input mr-10" name="search_text"
+               value=""
+               id="tim1" autocomplete="off" style="width:120px;cursor: pointer;" readonly>
+      </div>
+
       <button type="submit" class="btn btn-success" id="search_button1">
         <i class="Hui-iconfont">&#xe665;</i>
         搜索
@@ -73,52 +100,30 @@
     <table class="table table-border table-bordered table-bg table-hover table-sort0">
       <thead>
       <tr class="text-c">
-        <!--<th>
-          <input type="checkbox" name="check1" value="">
-        </th>-->
         <th width="40">编号</th>
-        <!--<th>ID</th>-->
-        <th width="150">学校名称</th>
-        <th>订购批次号</th>
-        <th>订购负责人</th>
-        <th>校审核人</th>
-        <th>局办审核人</th>
-        <th>订购单入库日期</th>
-        <th>订购拟供应开始日期</th>
-        <th>订购拟供应结束日期</th>
-        <th>所处状态</th>
+        <th width="150">汇总对象</th>
+        <th>汇总年月</th>
+        <th>起始日期</th>
+        <th>截止日期</th>
+        <th>汇总金额</th>
+        <th>汇总批号</th>
         <th width="150">操作</th>
       </tr>
       </thead>
       <tbody>
       <tr class="text-c">
-        <!--<td>
-          <input type="checkbox" value="" name="">
-        </td>-->
         <td>1</td>
-        <!--<td><span title="2017093853201709385320170938532017093853">2017093853201709385320170938532017093853</span></td>-->
-        <td><span title="紫云县羊场中学">紫云县羊场中学</span></td>
+        <td><span title="紫云县羊场中学">A片区</span></td>
+        <td><span title="王明成">2018-03</span></td>
+        <td><span title="张明天">2018-03-01</span></td>
+        <td><span title="张明天">2018-03-31</span></td>
+        <td><span title="freshzxf">38321.8</span></td>
         <td><span title="2017093853201709385320170938532017093853">2017093853201709385320170938532017093853</span></td>
-        <td><span title="王明成">王明成</span></td>
-        <td><span title="张明天">张明天</span></td>
-        <td><span title="freshzxf">freshzxf</span></td>
-        <td><span title="2017-09-26">2017-09-06</span></td>
-        <td><span title="2017-09-26">2017-09-07</span></td>
-        <td><span title="2017-09-26">2017-09-10</span></td>
-        <td class="td-status">
-          <span class="label label-warning radius">待审核</span>
-        </td>
         <td class="f-14 td-manage">
-          <a onClick="article_shenhe('食材单',this,'10001')"
-             href="javascript:;" title="审核">审核</a>
           <a class="ml-5"
-             onClick="article_view('食品原材料订购详情单','nutritious-order-detail-view.html','100%','100%')"
-             href="javascript:;" title="查看">查看</a>
-          <!--<a class="ml-5"
-             onClick="article_view('食品原材料订购详情单','nutritious-order-detail-view.html','100%','100%')"
-             href="javascript:;" title="反馈">发送</a>-->
-          <a class="ml-5 del" onClick="article_del(this,'10001')"
-             href="javascript:;" title="删除">删除</a>
+             href="javascript:article_view('出入库汇总表','nutritious-out-in-detail-view.html','100%','100%');" title="查看">查看</a>
+          <a href="" class="ml-5">下载</a>
+          <a class="ml-5 del" href="javascript:article_del(this,'10001');" title="删除">删除</a>
         </td>
       </tr>
       </tbody>
@@ -129,24 +134,37 @@
 <script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
-<script type="text/javascript" src="../Public/lib/jedate/jquery.jedate.min.js"></script>
+<script type="text/javascript" src="../Public/lib/jedate-6.5.0/dist/jedate.min.js"></script>
 <script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
 <script type="text/javascript">
   $(function () {
+
     /* 获取当前时间*/
     var d = new Date();
     var str = d.getFullYear() + "-" + ((d.getMonth() + 1) < 10 ? "0" : "") + (d.getMonth() + 1) + "-" + (d.getDate() < 10 ? "0" : "") + d.getDate();
-    var date = $("#date");
-    date.html(str);
+
+    $('.model-select').change(function (e) {
+      if ($(this).val() == 0) {
+        $('.area-choose').removeClass('hidden');
+        $('.school-choose').addClass('hidden');
+      } else {
+        $('.area-choose').addClass('hidden');
+        $('.school-choose').removeClass('hidden');
+      }
+    })
 
     //初始化日期搜索jedate
-    $('#tim1').jeDate({
-      format: 'YYYY-MM-DD',
-      minDate: '2014-06-16', //设定最小日期为当前日期
+    jeDate('#tim1', {
+      onClose: false,
+      format: 'YYYY-MM',
+      isinitVal: true,
+      initDate: [{MM: "-1"}, true], //初始化日期减1个月
+      minDate: '2014-06-01', //设定最小日期为当前日期
       maxDate: str //最大日期
     });
-    tableSort('.table-sort0', [0, 8, 9])
+
+    tableSort('.table-sort0', [0,1,6,7]);
   })
 </script>
 </body>

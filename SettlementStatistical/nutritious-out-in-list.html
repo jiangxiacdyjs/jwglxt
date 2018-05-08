@@ -1,0 +1,333 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="renderer" content="webkit|ie-comp|ie-stand">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="../Public/lib/html5shiv.js"></script>
+  <script type="text/javascript" src="../Public/lib/respond.min.js"></script>
+  <![endif]-->
+  <link rel="stylesheet" type="text/css" href="../Public/static/h-ui/css/H-ui.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css"/>
+  <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
+  <link rel="stylesheet" type="text/css" href="../Public/lib/jedate-6.5.0/skin/jedate.css"/>
+  <link rel="stylesheet" type="text/css" href="../Public/lib/jquery-searchableSelect/jquery.searchableSelect.css"/>
+  <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
+  <link rel="stylesheet" type="text/css" href="../Public/mySrc/css/style.css"/>
+  <!--[if IE 6]>
+  <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
+  <script>DD_belatedPNG.fix('*');</script>
+  <![endif]-->
+  <title>出入库汇总表</title>
+  <style>
+    .inline {
+      display: inline-block
+    }
+
+    .disabled {
+      cursor: pointer
+    }
+
+    /*局部小loading*/
+    .animated {
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+      -webkit-animation-fill-mode: both;
+      animation-fill-mode: both;
+      -webkit-animation-timing-function: linear;
+      animation-timing-function: linear;
+    }
+
+    .animated.infinite {
+      -webkit-animation-iteration-count: infinite;
+      animation-iteration-count: infinite;
+    }
+
+    .animated.hinge {
+      -webkit-animation-duration: 2s;
+      animation-duration: 2s;
+    }
+
+    @-webkit-keyframes rotate {
+      0% {
+        -webkit-transform-origin: center;
+        transform-origin: center;
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+      }
+      100% {
+        -webkit-transform-origin: center;
+        transform-origin: center;
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg)
+      }
+    }
+
+    @keyframes rotate {
+      0% {
+        -webkit-transform-origin: center;
+        -ms-transform-origin: center;
+        transform-origin: center;
+        -webkit-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        transform: rotate(0deg)
+      }
+      100% {
+        -webkit-transform-origin: center;
+        -ms-transform-origin: center;
+        transform-origin: center;
+        -webkit-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        transform: rotate(360deg)
+      }
+    }
+
+    .rotate {
+      -webkit-animation-name: rotate;
+      animation-name: rotate
+    }
+
+    .table {
+
+      table-layout: fixed; /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+    }
+
+    .table td {
+      width: 100%;
+      word-break: keep-all; /* 不换行 */
+      white-space: nowrap; /* 不换行 */
+      overflow: hidden; /* 内容超出宽度时隐藏超出部分的内容 */
+      text-overflow: ellipsis; /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+    }
+  </style>
+</head>
+<body>
+<div class="page-container">
+  <div class="tabs-list cl pd-5 bg-1 bk-gray">
+    <span class="Hui-iconfont c-red f-18 mr-5">&#xe6df;</span>出入库汇总列表
+    <div class="btn-group r">
+      <a href="javascript:window.location.reload();" class="btn btn-default radius"><i class="Hui-iconfont">&#xe68f;</i></a>
+    </div>
+  </div>
+  <div class="mt-20">
+    <form method="" action="" class="search_form">
+      <!--统计模式：
+      <input type="text" value="学校统计" class="input-text ac_input mr-10" name="search_text"
+             value="" autocomplete="off" style="width:120px;">-->
+      <div class="inline">
+        <span>汇总模式：</span>
+        <select class="model-select" name="" id="modelSelect">
+          <option value="0" selected="">片区汇总</option>
+          <option value="1">学校汇总</option>
+        </select>
+      </div>
+
+      <div class="inline area-select">
+        <span class="ml-5">片区选择：</span>
+        <select class="" name="" id="areaSelect">
+          <option value="0" selected="">全县区域</option>
+          <option value="1">A片区</option>
+          <option value="2">B片区</option>
+          <option value="3">C片区</option>
+          <option value="4">D片区</option>
+        </select>
+      </div>
+
+      <div class="inline school-select hidden">
+        <span class="ml-5">学校名称：</span>
+        <select class="" id="schoolSelect">
+          <option value="0">羊场中学</option>
+          <option value="1">火花中学</option>
+          <option value="2">平坝中学</option>
+          <option value="3">水池中学</option>
+        </select>
+      </div>
+
+      <div class="inline">
+        <span class="ml-5">汇总月份：</span>
+        <input type="text" placeholder="选择汇总月份" class="input-text ac_input mr-10" name="search_text"
+               value=""
+               id="tim1" autocomplete="off" style="width:120px;cursor: pointer;" readonly>
+      </div>
+
+      <button type="button" class="btn btn-success" id="searchBtn">
+        <i class="Hui-iconfont inline f-18">&#xe709;</i>
+        <span>查询/生成汇总表</span>
+      </button>
+    </form>
+    <table class="table table-border table-bordered table-bg table-hover table-sort0">
+      <thead>
+      <tr class="text-c">
+        <th width="40">编号</th>
+        <th width="150">汇总对象</th>
+        <th>汇总年月</th>
+        <th>起始日期</th>
+        <th>截止日期</th>
+        <th>汇总金额</th>
+        <th>汇总批号</th>
+        <th width="150">操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="text-c">
+        <td>1</td>
+        <td><span title="紫云县羊场中学">A片区</span></td>
+        <td><span title="王明成">2018-03</span></td>
+        <td><span title="张明天">2018-03-01</span></td>
+        <td><span title="张明天">2018-03-31</span></td>
+        <td><span title="freshzxf">38321.8</span></td>
+        <td><span title="2017093853201709385320170938532017093853">2017093853201709385320170938532017093853</span></td>
+        <td class="f-14 td-manage">
+          <a class="ml-5"
+             href="javascript:article_view('食材出入库汇总表','nutritious-out-in-detail-view.html','100%','100%');"
+             title="查看">查看</a>
+          <a href="" class="ml-5">下载</a>
+          <a class="ml-5 del" href="javascript:article_del(this,'10001');" title="删除">删除</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="../Public/lib/jedate-6.5.0/dist/jedate.min.js"></script>
+<script type="text/javascript" src="../Public/lib/jquery-searchableSelect/jquery.searchableSelect.js"></script>
+<script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
+<script type="text/javascript">
+
+  /*切换设置按钮状态*/
+  function setBtnState(ele, state) {
+    switch (state) {
+      case 'loading':
+        $(ele).addClass('disabled btn-default').removeClass('btn-success').prop('disabled', true)
+          .children('i').html('&#xe68f;').addClass(' animated rotate infinite')
+          .siblings('span').html('数据正在加载中');
+        break;
+      case 'normal':
+        $(ele).removeClass('disabled btn-default').addClass('btn-success').prop('disabled', false)
+          .children('i').html('&#xe709;').removeClass(' animated rotate infinite')
+          .siblings('span').html('查询/生成汇总表');
+        break;
+
+    }
+  }
+
+  /*定义loading弹层方法*/
+  function LoadWait(WaitText) {
+    WaitText = '' + WaitText;
+    var Mti = arguments[1] || 10;//自动关闭时间
+    var index = layer.msg(
+      '<div>' + WaitText + '</div>'//样式需要你自己定义，或者直接写内容
+      , {
+        zIndex: 20171016//更改窗口层次
+        , icon: 16
+        , time: 0//不自动关闭
+        , anim: 1
+        , shade: [0.3, '#000']
+        , shadeClose: false
+        , skin: 'layer_my_msg_load'
+      }
+    );
+    return index;  //返回弹层索引号，如需关闭此弹层，执行
+  };
+
+  $(function () {
+
+    $('#modelSelect').searchableSelect({
+      afterSelectItem: function () {
+        //console.log(this.holder.text());
+        if (this.holder.data("value") == 0) {
+          $('.area-select').removeClass('hidden');
+          $('.school-select').addClass('hidden');
+        } else {
+          $('.area-select').addClass('hidden');
+          $('.school-select').removeClass('hidden');
+        }
+      }
+    });
+    $('#areaSelect').searchableSelect({
+      afterSelectItem: function () {
+        //console.log(this.holder.text());
+        //console.log(this.holder.data("value"));
+      }
+    });
+    $('#schoolSelect').searchableSelect({
+      afterSelectItem: function () {
+        //console.log(this.holder.text());
+        //console.log(this.holder.data("value"));
+      }
+    });
+
+    $('#searchBtn').on('click', function () {
+      var ele = this;
+      setBtnState(ele, 'loading')
+      var timer = setTimeout(function () {
+        setBtnState(ele, 'normal');
+        var index1 = layer.confirm('暂无该汇总表，是否需要系统生成该报表？', {
+          btn: ['需要生成', '不需要'] //按钮
+        }, function () {
+          layer.close(index1);
+
+          $.ajax({
+            type: 'post',
+            url: "https://www.easy-mock.com/mock/5aeda6bbc7cbfb7872a17605/example/success",
+            data: "",
+            dataType: 'json',
+            beforeSend: function (xhr, options) {
+              var index = LoadWait('系统正在生成报表，请勿关闭此页面...');
+            },
+            complete: function (XHR, TS) {
+               layer.close(index);
+            },
+            success: function (data) {
+              if(data.success){
+                layer.msg('报表已生成', {icon: 1});
+              }else{
+                layer.msg('生成失败', {icon: 2});
+              }
+            },
+            error: function () {
+              layer.msg('生成失败', {icon: 2});
+            }
+          });
+
+
+          //var index2 = layer.load(0,{shade:0.3}); //又换了种风格，并且设定最长等待10秒
+          //layer.msg('正在生成', {icon: 1});
+        }, function () {
+        });
+      }, 100)
+      // $(ele).children('i').html('&#xe606;').addClass(' animated rotate infinite')
+    })
+
+
+    /* 获取当前时间*/
+    var d = new Date();
+    var str = d.getFullYear() + "-" + ((d.getMonth() + 1) < 10 ? "0" : "") + (d.getMonth() + 1) + "-" + (d.getDate() < 10 ? "0" : "") + d.getDate();
+
+    //初始化日期搜索jedate
+    jeDate('#tim1', {
+      onClose: false,
+      format: 'YYYY-MM',
+      isinitVal: true,
+      initDate: [{MM: "-1"}, true], //初始化日期减1个月
+      minDate: '2014-06-01', //设定最小日期为当前日期
+      maxDate: str //最大日期
+    });
+
+    tableSort('.table-sort0', [0, 1, 6, 7]);
+  })
+</script>
+</body>
+
+</html>

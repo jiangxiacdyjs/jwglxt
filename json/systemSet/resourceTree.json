@@ -1,0 +1,39 @@
+[{
+  "id": 1,
+  "text": "系统设置",
+  "state": "closed",
+  "checked":false,
+  "levelId":1,
+  "children": [{
+    "id": 11,
+    "levelId":2,
+    "text": "资源管理"
+  },{
+    "id": 12,
+    "levelId":2,
+    "text": "用户管理"
+  },{
+    "id": 13,
+    "levelId":2,
+    "text": "角色管理"
+  }]
+},{
+  "id": 2,
+  "text": "保函管理",
+  "state": "open",
+  "checked":false,
+  "levelId":1,
+  "children": [{
+    "id": 21,
+    "levelId":2,
+    "text": "保函查阅"
+  },{
+    "id": 22,
+    "levelId":2,
+    "text": "保函下载"
+  },{
+    "id": 23,
+    "levelId":2,
+    "text": "保函删除"
+  }]
+}]
