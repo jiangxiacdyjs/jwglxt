@@ -1,0 +1,366 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="renderer" content="webkit|ie-comp|ie-stand">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="../Public/lib/html5shiv.js"></script>
+  <script type="text/javascript" src="../Public/lib/respond.min.js"></script>
+  <![endif]-->
+  <link href="../Public/static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css"/>
+  <link href="../Public/static/h-ui.admin/css/H-ui.admin.css" rel="stylesheet" type="text/css"/>
+  <link href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css"/>
+
+  <!--dataTable-->
+  <link href="../Public/lib/datatables/1.10.16/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+  <link href="../Public/lib/datatables/1.10.16/fixedColumns.dataTables.min.css" rel="stylesheet"
+        type="text/css"/>
+  <!--<link href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css"/>-->
+
+  <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
+  <link href="../Public/mySrc/css/style.css" rel="stylesheet" type="text/css"/>
+  <title>食材配送结算表(早餐)</title>
+  <style>
+    /* Ensure that the demo table scrolls */
+    th, td {
+      white-space: nowrap;
+    }
+
+    div.dataTables_wrapper {
+      width: 100%;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+<div class="page-container" style="padding-top: 70px">
+  <div class="" style="position: absolute;z-index: 1;left: 20px;top: 20px">
+    <div class="btn-group f-l">
+      <span class="btn btn-primary radius">导出Excel</span>
+      <span class="btn btn-danger radius">导出Pdf</span>
+      <span class="btn btn-success radius">打印报表</span>
+    </div>
+    <div class="btn btn-default-outline radius f-l ml-10" style="line-height: 22px" >
+      数据单位：<span class="c-green mr-10">羊场中学</span>
+      结算月份及天数：<span class="c-green">2018年03月 <span class="c-black">(2018-02-28至2018-03-26)</span>/ <span class="c-red">30天</span>  </span>
+    </div>
+  </div>
+  <table id="example" class="stripe row-border order-column">
+    <thead>
+    <tr>
+      <th rowspan="2">序号</th>
+      <th>学校:</th>
+
+      <th>紫云一小</th>
+      <th>马场小学</th>
+      <th>城南中心小学</th>
+      <th>紫云二小</th>
+      <th>哈拉小学</th>
+      <th>紫云一小</th>
+      <th>马场小学</th>
+      <th>城南中心小学</th>
+      <th>紫云二小</th>
+      <th>哈拉小学</th>
+      <th>紫云二小</th>
+      <th>城南中心小学</th>
+
+      <th>合计</th>
+      <th>备注</th>
+    </tr>
+    <!--2row-->
+    <tr>
+      <th>编号:</th>
+
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>10</th>
+      <th>11</th>
+      <th>12</th>
+
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <!--决算意见-->
+    <tfoot>
+    <tr>
+      <th colspan="2">决算意见</th>
+      <th colspan="4">配送公司意见及盖章：</th>
+      <th colspan="5">中心学校（独立中学）意见及盖章：</th>
+      <th colspan="5">局营养办意见及盖章：</th>
+    </tr>
+    </tfoot>
+    <tbody>
+    <!--学生就餐人数-->
+    <tr>
+      <td>1</td>
+      <td>学生就餐人数</td>
+
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>10</th>
+      <th>11</th>
+      <th>12</th>
+
+      <th></th>
+      <th></th>
+    </tr>
+    <!--学生就餐人次-->
+    <tr>
+      <td>2</td>
+      <td>学生就餐人次</td>
+
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>10</th>
+      <th>11</th>
+      <th>12</th>
+
+      <th></th>
+      <th></th>
+    </tr>
+    <!--教师就餐人数-->
+    <tr>
+      <td>3</td>
+      <td>教师就餐人数</td>
+
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>10</th>
+      <th>11</th>
+      <th>12</th>
+
+      <th></th>
+      <th></th>
+    </tr>
+    <!--教师就餐人次-->
+    <tr>
+      <td>4</td>
+      <td>教师就餐人次</td>
+
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>10</th>
+      <th>11</th>
+      <th>12</th>
+
+      <th></th>
+      <th></th>
+    </tr>
+    <!--配送次数-->
+    <tr>
+      <td>5</td>
+      <td>配送次数</td>
+
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>10</th>
+      <th>11</th>
+      <th>12</th>
+
+      <th></th>
+      <th></th>
+    </tr>
+    <!--食品原材料配送金额-->
+    <tr>
+      <td>6</td>
+      <td class="c-green">食品原材料配送金额</td>
+
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+      <td>12</td>
+
+      <td></td>
+      <td></td>
+    </tr>
+    <!--自费生金额-->
+    <tr>
+      <td>6</td>
+      <td class="c-green">自费生金额</td>
+
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+      <td>12</td>
+
+      <td></td>
+      <td></td>
+    </tr>
+    <!--教师陪餐金额-->
+    <tr>
+      <td>7</td>
+      <td class="c-green">教师陪餐金额</td>
+
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+      <td>12</td>
+
+      <td></td>
+      <td></td>
+    </tr>
+    <!--小计-->
+    <tr>
+      <td>8</td>
+      <td class="c-green">小计</td>
+
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+      <td>12</td>
+
+      <td></td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
+
+<!--dataTable-->
+<script type="text/javascript" src="../Public/lib/datatables/1.10.16/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../Public/lib/datatables/1.10.16/dataTables.fixedColumns.min.js"></script>
+<!--<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>-->
+<!--<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>-->
+<!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>-->
+<!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>-->
+<!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>-->
+<!--<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>-->
+<!--<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>-->
+
+<script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
+
+<script>
+
+  function returnScrollHeight() {
+    var screenW = screen.width;
+    var screenH = document.documentElement.clientHeight;
+    // console.log(returnScrollHeight())
+    return screenH;
+  }
+
+  $(function () {
+    var table = $('#example').DataTable({
+      language: {
+        "sProcessing": "处理中...",
+        "sLengthMenu": "显示 _MENU_ 项结果",
+        "sZeroRecords": "没有匹配结果",
+        "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+        "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+        "sInfoPostFix": "",
+        "sSearch": "搜索:",
+        "sUrl": "",
+        "sEmptyTable": "表中数据为空",
+        "sLoadingRecords": "载入中...",
+        "sInfoThousands": ",",
+        "oPaginate": {
+          "sFirst": "首页",
+          "sPrevious": "上页",
+          "sNext": "下页",
+          "sLast": "末页"
+        },
+        "oAria": {
+          "sSortAscending": ": 以升序排列此列",
+          "sSortDescending": ": 以降序排列此列"
+        }
+      },
+      dom: 'Bfrtip',
+      buttons: [
+        'copy', 'csv', 'excel', 'pdf', 'print'
+      ],
+      scrollY: (returnScrollHeight()-250) + "px",
+      scrollX: true,
+      scrollCollapse: true,
+      paging: false,
+      fixedColumns: {
+        leftColumns: 2
+      }
+    });
+  })
+</script>
+</body>
+
+</html>

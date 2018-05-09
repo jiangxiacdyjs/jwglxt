@@ -9,28 +9,34 @@
           content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <!--[if lt IE 9]>
-    <script type="text/javascript" src="../Public/lib/html5shiv.js"></script>
-    <script type="text/javascript" src="../Public/lib/respond.min.js"></script>
+    <script type="text/javascript" src="../../Public/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../../Public/lib/respond.min.js"></script>
 
     <![endif]-->
-    <link href="../Public/static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css"/>
-    <link href="../Public/static/h-ui.admin/css/H-ui.admin.css" rel="stylesheet" type="text/css"/>
-    <link href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css"/>
-    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
-    <link href="../Public/lib/jedate/skin/jedate.css" rel="stylesheet" type="text/css"/>
-    <link href="../Public/mySrc/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="../../Public/static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../../Public/static/h-ui.admin/css/H-ui.admin.css" rel="stylesheet" type="text/css"/>
+    <link href="../../Public/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="../../Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
+    <link href="../../Public/lib/jedate/skin/jedate.css" rel="stylesheet" type="text/css"/>
+    <link href="../../Public/mySrc/css/style.css" rel="stylesheet" type="text/css"/>
     <!--[if IE 6]>
-    <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script type="text/javascript" src="../../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
     <title>学校食材编辑上报</title>
+    <style>
+        th, td {
+            white-space: nowrap;
+            text-align: center !important;
+        }
+    </style>
 </head>
 
 <body>
 <div class="page-container">
     <!--标题-->
     <div class="f-20 pb-10 mb-10 text-c pos-r clearfix" style="font-weight: bold;border-bottom: 1px solid #c7c7c7">
-        <span class="c">学前教育食材配送结算单</span>
+        <span class="c">中小学食堂食品原材料配送结算单（早餐）</span>
         <div class="f-r f-18">
             <a class="btn btn-primary radius" href="javascript:;">
                 <i class="Hui-iconfont">&#xe616;</i> 导出PDF文件
@@ -44,7 +50,7 @@
     <table class="table table-border table-bordered table-bg table-hover mt-20 table-sort0" cellspacing="0" width="100%">
         <thead>
         <!--1row-->
-        <tr>
+        <tr class="bg-1">
             <th colspan="2">基本信息</th>
             <th colspan="6">片区：城南片区</th>
             <th colspan="8">结算月份及天数：2017年08月、09月（合计：46天）</th>
@@ -206,10 +212,31 @@
             <th></th>
             <th></th>
         </tr>
-        <!--学前教育营养餐金额-->
+        <!--食品原材料配送金额-->
         <tr>
             <td>6</td>
-            <td class="c-green">学前教育营养餐金额</td>
+            <td class="c-green">食品原材料配送金额</td>
+
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+
+            <td></td>
+            <td></td>
+        </tr>
+        <!--自费生金额-->
+        <tr>
+            <td>7</td>
+            <td class="c-green">自费生金额</td>
 
             <td>1</td>
             <td>2</td>
@@ -229,7 +256,7 @@
         </tr>
         <!--教师陪餐金额-->
         <tr>
-            <td>7</td>
+            <td>8</td>
             <td class="c-green">教师陪餐金额</td>
 
             <td>1</td>
@@ -273,12 +300,12 @@
     </table>
 </div>
 
-<script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
-<script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="../../Public/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../Public/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../../Public/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="../../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
 
-<script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <!--<script type="text/javascript" src="../../Public/mySrc/js/common.js"></script>-->
 <script>
     $(function () {

@@ -14,6 +14,7 @@
   <link rel="stylesheet" type="text/css" href="../Public/static/h-ui/css/H-ui.min.css"/>
   <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css"/>
   <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
+  <link rel="stylesheet" type="text/css" href="../Public/lib/responsiveTab/css/responsive.tabs.css"/>
   <link rel="stylesheet" type="text/css" href="../Public/lib/jedate-6.5.0/skin/jedate.css"/>
   <link rel="stylesheet" type="text/css" href="../Public/lib/jquery-searchableSelect/jquery.searchableSelect.css"/>
   <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
@@ -22,7 +23,7 @@
   <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
   <script>DD_belatedPNG.fix('*');</script>
   <![endif]-->
-  <title>食材出入库汇总列表</title>
+  <title>就餐情况统计表</title>
   <style>
     .inline {
       display: inline-block
@@ -107,98 +108,106 @@
 </head>
 <body>
 <div class="page-container">
-  <div class="tabs-list cl pd-5 bg-1 bk-gray">
-    <span class="Hui-iconfont c-red f-18 mr-5">&#xe6df;</span>食材出入库汇总列表
-    <div class="btn-group r">
-      <a href="javascript:window.location.reload();" class="btn btn-default radius"><i class="Hui-iconfont">&#xe68f;</i></a>
-    </div>
+  <div class="tabs">
+    <ul class="tabs-list cl pd-5 bg-1 bk-gray">
+      <li class="active"><a href="javascript:;">学生就餐情况统计表</a></li>
+      <li class=""><a href="javascript:;">就餐基本情况统计表</a></li>
+      <div class="btn-group r">
+        <a href="javascript:window.location.reload();" class="btn btn-default radius"><i class="Hui-iconfont">&#xe68f;</i></a>
+      </div>
+    </ul>
   </div>
-  <div class="mt-20">
-    <form method="" action="" class="search_form">
-      <!--统计模式：
-      <input type="text" value="学校统计" class="input-text ac_input mr-10" name="search_text"
-             value="" autocomplete="off" style="width:120px;">-->
-      <div class="inline">
-        <span>汇总模式：</span>
-        <select class="model-select" name="" id="modelSelect">
-          <option value="1" selected="">学校汇总</option>
-          <option value="0">片区汇总</option>
-        </select>
-      </div>
 
-      <div class="inline area-select hidden">
-        <span class="ml-5">片区选择：</span>
-        <select class="" name="" id="areaSelect">
-          <option value="0" selected="">全县区域</option>
-          <option value="1">A片区</option>
-          <option value="2">B片区</option>
-          <option value="3">C片区</option>
-          <option value="4">D片区</option>
-        </select>
-      </div>
+  <div class="tabs-container mt-20">
+    <div class="tab-content" style="display:block;">
+      <form method="" action="" class="search_form">
+        <!--统计模式：
+        <input type="text" value="学校统计" class="input-text ac_input mr-10" name="search_text"
+               value="" autocomplete="off" style="width:120px;">-->
+        <div class="inline">
+          <span>汇总模式：</span>
+          <select class="model-select" name="" id="modelSelect">
+            <option value="1" selected="">学校汇总</option>
+            <option value="0">片区汇总</option>
+          </select>
+        </div>
 
-      <div class="inline school-select">
-        <span class="ml-5">学校名称：</span>
-        <select class="" id="schoolSelect">
-          <option value="0">羊场中学</option>
-          <option value="1">火花中学</option>
-          <option value="2">平坝中学</option>
-          <option value="3">水池中学</option>
-          <option value="4">马布里中学</option>
-          <option value="5">奥尼雅中学</option>
-          <option value="6">广村中学</option>
-          <option value="7">凌平中学</option>
-        </select>
-      </div>
+        <div class="inline area-select hidden">
+          <span class="ml-5">片区选择：</span>
+          <select class="" name="" id="areaSelect">
+            <option value="0" selected="">全县区域</option>
+            <option value="1">A片区</option>
+            <option value="2">B片区</option>
+            <option value="3">C片区</option>
+            <option value="4">D片区</option>
+          </select>
+        </div>
 
-      <div class="inline">
-        <span class="ml-5">汇总月份：</span>
-        <input type="text" placeholder="选择汇总月份" class="input-text ac_input mr-10" name="search_text"
-               value=""
-               id="tim1" autocomplete="off" style="width:120px;cursor: pointer;" readonly>
-      </div>
+        <div class="inline school-select">
+          <span class="ml-5">学校名称：</span>
+          <select class="" id="schoolSelect">
+            <option value="0">羊场中学</option>
+            <option value="1">火花中学</option>
+            <option value="2">平坝中学</option>
+            <option value="3">水池中学</option>
+            <option value="4">马布里中学</option>
+            <option value="5">奥尼雅中学</option>
+            <option value="6">广村中学</option>
+            <option value="7">凌平中学</option>
+          </select>
+        </div>
 
-      <button type="button" class="btn btn-success" id="searchBtn">
-        <i class="Hui-iconfont inline f-18">&#xe709;</i>
-        <span>查询/生成汇总表</span>
-      </button>
-    </form>
-    <table class="table table-border table-bordered table-bg table-hover table-sort0">
-      <thead>
-      <tr class="text-c">
-        <th width="40">编号</th>
-        <th width="150">汇总对象</th>
-        <th width="150">所属片区</th>
-        <th>汇总年月</th>
-        <th>起始日期</th>
-        <th>截止日期</th>
-        <th>出库总额</th>
-        <th>入库总额</th>
-        <th>报表批号</th>
-        <th width="150">操作</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr class="text-c">
-        <td>1</td>
-        <td><span title="">羊场中学</span></td>
-        <td><span title="A片区">A片区</span></td>
-        <td><span title="2018-03">2018-03</span></td>
-        <td><span title="2018-03-01">2018-03-01</span></td>
-        <td><span title="2018-03-31">2018-03-31</span></td>
-        <td><span title="38321.8">38321.8</span></td>
-        <td><span title="40987.2">40987.2</span></td>
-        <td><span title="2017093853201709385320170938532017093853">2017093853201709385320170938532017093853</span></td>
-        <td class="f-14 td-manage">
-          <a class="ml-5"
-             href="javascript:article_view('食材出入库汇总表','nutritious-out-in-detail-view.html','100%','100%');"
-             title="查看">查看</a>
-          <a href="" class="ml-5">下载</a>
-          <a class="ml-5 del" href="javascript:article_del(this,'10001');" title="删除">删除</a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+        <div class="inline">
+          <span class="ml-5">汇总月份：</span>
+          <input type="text" placeholder="选择汇总月份" class="input-text ac_input mr-10" name="search_text"
+                 value=""
+                 id="tim1" autocomplete="off" style="width:120px;cursor: pointer;" readonly>
+        </div>
+
+        <button type="button" class="btn btn-success" id="searchBtn">
+          <i class="Hui-iconfont inline f-18">&#xe709;</i>
+          <span>查询/生成汇总表</span>
+        </button>
+      </form>
+      <table class="table table-border table-bordered table-bg table-hover table-sort0">
+        <thead>
+        <tr class="text-c">
+          <th width="40">编号</th>
+          <th width="150">汇总对象</th>
+          <th width="150">所属片区</th>
+          <th>汇总年月</th>
+          <th>起始日期</th>
+          <th>截止日期</th>
+          <th>学生就餐人数/次</th>
+          <th>教师陪餐人数/次</th>
+          <th>配送金额</th>
+          <th>报表批号</th>
+          <th width="150">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="text-c">
+          <td>1</td>
+          <td><span title="">羊场中学</span></td>
+          <td><span title="A片区">A片区</span></td>
+          <td><span title="2018-03">2018-03</span></td>
+          <td><span title="2018-03-01">2018-03-01</span></td>
+          <td><span title="2018-03-31">2018-03-31</span></td>
+          <td><span title="40987.2">789/1453</span></td>
+          <td><span title="40987.2">122/234</span></td>
+          <td><span title="40987.2">18923.5</span></td>
+          <td><span title="2017093853201709385320170938532017093853">2017093853201709385320170938532017093853</span></td>
+          <td class="f-14 td-manage">
+            <a class="ml-5"
+               href="javascript:article_view('学生人数及就餐人数情况统计表','dining-persons-detail-view.html','100%','100%');"
+               title="查看">查看</a>
+            <a href="" class="ml-5">下载</a>
+            <a class="ml-5 del" href="javascript:article_del(this,'10001');" title="删除">删除</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -206,12 +215,12 @@
 <script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
 <script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="../Public/lib/responsiveTab/js/responsive.tabs.js"></script>
 <script type="text/javascript" src="../Public/lib/jedate-6.5.0/dist/jedate.min.js"></script>
 <script type="text/javascript" src="../Public/lib/jquery-searchableSelect/jquery.searchableSelect.js"></script>
 <script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
 <script type="text/javascript">
-
   /*切换设置按钮状态*/
   function setBtnState(ele, state) {
     switch (state) {
@@ -250,6 +259,12 @@
 
   $(function () {
 
+    // 初始化tab切换早餐、中餐、晚餐结算单
+    $('.tabs').respTabs({
+      responsive: false
+    });
+
+    // 统计模式选择
     $('#modelSelect').searchableSelect({
       afterSelectItem: function () {
         //console.log(this.holder.text());
@@ -262,12 +277,16 @@
         }
       }
     });
+
+    // 片区选择
     $('#areaSelect').searchableSelect({
       afterSelectItem: function () {
         //console.log(this.holder.text());
         //console.log(this.holder.data("value"));
       }
     });
+
+    // 学校选择
     $('#schoolSelect').searchableSelect({
       afterSelectItem: function () {
         //console.log(this.holder.text());
@@ -294,7 +313,7 @@
               var index = LoadWait('系统正在生成报表，请勿关闭此页面...');
             },
             complete: function (XHR, TS) {
-               layer.close(index);
+              layer.close(index);
             },
             success: function (data) {
               if(data.success){
@@ -307,16 +326,10 @@
               layer.msg('生成失败', {icon: 2});
             }
           });
-
-
-          //var index2 = layer.load(0,{shade:0.3}); //又换了种风格，并且设定最长等待10秒
-          //layer.msg('正在生成', {icon: 1});
         }, function () {
         });
       }, 100)
-      // $(ele).children('i').html('&#xe606;').addClass(' animated rotate infinite')
     })
-
 
     /* 获取当前时间*/
     var d = new Date();
@@ -332,7 +345,7 @@
       maxDate: str //最大日期
     });
 
-    tableSort('.table-sort0', [0, 1, 2, 8, 9]);
+    tableSort('.table-sort0', [0, 1, 2, 9, 10]);
   })
 </script>
 </body>
