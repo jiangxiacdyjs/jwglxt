@@ -1,256 +1,410 @@
 ﻿<!DOCTYPE HTML>
 <html>
-
 <head>
-    <meta charset="utf-8">
-    <meta name="renderer" content="webkit|ie-comp|ie-stand">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
-    <!--[if lt IE 9]>
-    <script type="text/javascript" src="../Public/lib/html5shiv.js"></script>
-    <script type="text/javascript" src="../Public/lib/respond.min.js"></script>
-    <![endif]-->
-    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui/css/H-ui.min.css" />
-    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css" />
-    <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css" />
-    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/default/skin.css" id="skin" />
-    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/style.css" />
-    <!--[if IE 6]>
-    <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
-    <script>DD_belatedPNG.fix('*');</script>
-    <![endif]-->
-    <title>我的桌面</title>
+  <meta charset="utf-8">
+  <meta name="renderer" content="webkit|ie-comp|ie-stand">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="../Public/lib/html5shiv.js"></script>
+  <script type="text/javascript" src="../Public/lib/respond.min.js"></script>
+  <![endif]-->
+  <link rel="stylesheet" type="text/css" href="../Public/static/h-ui/css/H-ui.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css"/>
+  <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
+  <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/default/skin.css" id="skin"/>
+  <!--[if IE 6]>
+  <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
+  <script>DD_belatedPNG.fix('*');</script>
+  <![endif]-->
+  <title>我的桌面</title>
+  <style>
+    .bg-blue {
+      background: #5a98de;
+    }
+
+    .bg-red {
+      background: #dd514c;
+    }
+
+    .bg-green {
+      background: #5eb95e;
+    }
+
+    .bg-yellow {
+      background: #f37b1d;
+    }
+
+    .bg-g-blue {
+      background: #5a98de url('../Public/mySrc/img/powerBg.svg') no-repeat 10%;
+      -webkit-background-size: 100%;
+      background-size: 100%;
+    }
+
+    .bg-g-red {
+      background: #dd514c url('../Public/mySrc/img/powerBg.svg') no-repeat 10%;
+      -webkit-background-size: 80%;
+      background-size: 80%;
+    }
+
+    .bg-g-green {
+      background: #5eb95e url('../Public/mySrc/img/powerBg.svg') no-repeat 10%;
+      -webkit-background-size: 60%;
+      background-size: 60%;
+    }
+
+    .bg-g-yellow {
+      background: #f37b1d url('../Public/mySrc/img/powerBg.svg') no-repeat 10%;
+      -webkit-background-size: 40%;
+      background-size: 40%;
+    }
+
+    .bg-g-purple {
+      background: #d079ff url('../Public/mySrc/img/powerBg.svg') no-repeat 10%;
+      -webkit-background-size: 40%;
+      background-size: 40%;
+    }
+
+    .bg-g-can {
+      background: #84bd83 url('../Public/mySrc/img/powerBg.svg') no-repeat 10%;
+      -webkit-background-size: 40%;
+      background-size: 40%;
+    }
+
+    .bg-t1 {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .hide-a {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+    }
+
+    .view {
+      color: #fff;
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .view-head {
+      padding: 10px;
+      border-bottom-width: 5px;
+      border-bottom-style: solid;
+    }
+
+    .view-body {
+      line-height: 50px;
+      text-align: center;
+      font-size: 30px;
+      letter-spacing: 2px;
+    }
+
+    .box {
+      border: 1px solid #e2e2e2;
+      border-radius: 6px;
+      height: 70px;
+      padding-bottom: 8px;
+      position: relative;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .box .box-left {
+      float: left;
+      width: 35%;
+      height: 80px;
+      line-height: 78px;
+      color: #fff;
+      font-size: 50px;
+      border-radius: inherit;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .box .box-right {
+      float: left;
+      width: 63%;
+      padding-left: 1%;
+      padding-right: 1%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .box .box-right .box-right-num {
+      font-size: 30px
+    }
+
+    .box .box-right .box-right-txt {
+      color: #aaa;
+    }
+  </style>
 </head>
-
 <body>
-    <div class="page-container">
-        <div class="row clearfix">
-            <div class="col-xs-12 col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-header">学校本周食材总览<a id="ingredientMore" href="javascript:;" class="r">查看详情</a></div>
-                    <div class="panel-body">
-                        <table class="table table-border table-hover">
-                            <thead>
-                                <th>食材名</th>
-                                <th>食材量</th>
-                                <th>单位</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>黄瓜</td>
-                                    <td>300</td>
-                                    <td>公斤</td>
-                                </tr>
-                                <tr>
-                                    <td>鸡蛋</td>
-                                    <td>180</td>
-                                    <td>公斤</td>
-                                </tr>
-                                <tr>
-                                    <td>猪肉</td>
-                                    <td>200</td>
-                                    <td>公斤</td>
-                                </tr>
-                                <tr>
-                                    <td>黄瓜</td>
-                                    <td>300</td>
-                                    <td>公斤</td>
-                                </tr>
-                                <tr>
-                                    <td>鸡蛋</td>
-                                    <td>180</td>
-                                    <td>公斤</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-header">学校基本信息总览<a id="schoolMore" href="javascript:;" class="r">查看详情</a></div>
-                    <div class="panel-body">
-                        <table class="table table-border table-hover">
-                            <thead>
-                                <th>学校名称</th>
-                                <th>教师人数</th>
-                                <th>学生人数</th>
-                                <th>远程监控数</th>
-                                <th>负责人</th>
-                                <th>联系方式</th>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>紫云二小</td>
-                                    <td>25</td>
-                                    <td>700</td>
-                                    <td>26</td>
-                                    <td>韦洪铭</td>
-                                    <td>13979387921</td>
-                                </tr>
-                                <tr>
-                                    <td>紫云二小</td>
-                                    <td>25</td>
-                                    <td>700</td>
-                                    <td>26</td>
-                                    <td>韦洪铭</td>
-                                    <td>13979387921</td>
-                                </tr>
-                                <tr>
-                                    <td>紫云二小</td>
-                                    <td>25</td>
-                                    <td>700</td>
-                                    <td>26</td>
-                                    <td>韦洪铭</td>
-                                    <td>13979387921</td>
-                                </tr>
-                                <tr>
-                                    <td>紫云二小</td>
-                                    <td>25</td>
-                                    <td>700</td>
-                                    <td>26</td>
-                                    <td>韦洪铭</td>
-                                    <td>13979387921</td>
-                                </tr>
-                                <tr>
-                                    <td>紫云二小</td>
-                                    <td>25</td>
-                                    <td>700</td>
-                                    <td>26</td>
-                                    <td>韦洪铭</td>
-                                    <td>13979387921</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+<div class="page-container">
+  <!--系统数据-->
+  <div class="row clearfix">
+    <div class="col-xs-3">
+      <div class="bg-g-blue view">
+        <a href="javascript:;" data-href="../NutritiousOrg/area-list.html" data-title="片区管理" class="hide-a"></a>
+        <div class="f14 bg-t1 view-head" style="border-color: rgba(68,115,168,.6)">
+          <span class="Hui-iconfont mr-5 c-">&#xe6ae;</span>
+          接入学校数（所）
         </div>
-        <div class="row clearfix mt-35">
-            <div class="col-xs-12 col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-header">食材搭配比例分析</div>
-                    <div class="panel-body" style="padding-bottom: 0">
-                        <div id="chartPie" style="height: 200px"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-header">食材配送周期分析</div>
-                    <div class="panel-body" style="padding-bottom: 0">
-                        <div id="chartLine" style="height: 200px"></div>
-                    </div>
-                </div>
-            </div>
+        <div class="view-body">
+          <b>102</b>
         </div>
+      </div>
     </div>
-    <script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript" src="../Public/lib/eCharts/echarts.min.js"></script>
-    <script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
-    <script>
-        $(function () {
-            //模拟点击事件
-            var triIngredient = $(window.parent.document.getElementById('triIngredient')),
-                triSchool = $(window.parent.document.getElementById('triSchool'));
-            $('#ingredientMore').click(function () {
-                triIngredient.click()
-            })
-            $('#schoolMore').click(function () {
-                triSchool.click()
-            });
-            // echarts
-            var myChart1 = echarts.init(document.getElementById('chartPie'));
-            option1 = {
-                tooltip: {
-                    trigger: 'item',
-                    formatter: "{a} <br/>{b} : {c} ({d}%)"
-                },
-                legend: {
-                    orient: 'vertical',
-                    left: 'left',
-                    data: ['肉品类', '海产类', '蔬果类', '其他', ]
-                },
-                series: [{
-                    name: '食材占比',
-                    type: 'pie',
-                    radius: '80%',
-                    data: [{
-                        value: 335,
-                        name: '肉品类'
-                    }, {
-                        value: 310,
-                        name: '海产类'
-                    }, {
-                        value: 234,
-                        name: '蔬果类'
-                    }, {
-                        value: 135,
-                        name: '其他'
-                    }, ],
-                    itemStyle: {
-                        emphasis: {
-                            shadowBlur: 10,
-                            shadowOffsetX: 0,
-                            shadowColor: 'rgba(0, 0, 0, 0.5)'
-                        }
-                    }
-                }]
-            };
-            myChart1.setOption(option1);
+    <div class="col-xs-3">
+      <div class="bg-g-red view">
+        <a href="javascript:;" data-href="../NutritiousOrg/firm-list.html" data-title="公司管理" class="hide-a"></a>
+        <div class="f14 bg-t1 view-head" style="border-color: rgba(170,64,62,0.6)">
+          <span class="Hui-iconfont mr-5 c-">&#xe6ae;</span>
+          配送公司数（家）
+        </div>
+        <div class="view-body">
+          <b>18</b>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3">
+      <div class="bg-g-green view">
+        <a href="javascript:;" data-href="../NutritiousOrg/area-list.html" data-title="片区管理" class="hide-a"></a>
+        <div class="f14 bg-t1 view-head" style="border-color: rgba(76,145,77,0.6)">
+          <span class="Hui-iconfont mr-5 c-">&#xe6ae;</span>
+          划分片区数（个）
+        </div>
+        <div class="view-body">
+          <b>18</b>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3">
+      <div class="bg-g-yellow view">
+        <a href="javascript:;" data-href="../NutritiousImprove/nutritious-library-list.html" data-title="食材管理" class="hide-a"></a>
+        <div class="f14 bg-t1 view-head" style="border-color: rgba(185,95,35,0.6)">
+          <span class="Hui-iconfont mr-5 c-">&#xe6ae;</span>
+          食材名称数（种）
+        </div>
+        <div class="view-body">
+          <b>39</b>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--业务数据-->
+  <div class="row clearfix mt-20">
+    <div class="col-xs-3">
+      <div class="box clearfix">
+        <a href="javascript:;" data-href="../NutritiousImprove/nutritious-setMenu-censorship-list.html" data-title="局办审核" class="hide-a"></a>
+        <div class="bg-blue box-left">
+          <span class="Hui-iconfont">&#xe687;</span>
+        </div>
+        <div class="box-right">
+          <span class="box-right-num">2</span>
+          <div class="box-right-txt">待审订单数</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3">
+      <div class="box clearfix">
+        <a href="javascript:;" data-href="../SettlementStatistical/nutritious-out-list.html" data-title="食材出库报表" class="hide-a"></a>
+        <div class="bg-red box-left">
+          <span class="Hui-iconfont">&#xe644;</span>
+        </div>
+        <div class="box-right">
+          <span class="box-right-num">452349.18</span>
+          <div class="box-right-txt">本月已出库(元)</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3">
+      <div class="box clearfix">
+        <a href="javascript:;" data-href="../SettlementStatistical/nutritious-in-list.html" data-title="食材入库报表" class="hide-a"></a>
+        <div class="bg-green box-left">
+          <span class="Hui-iconfont">&#xe645;</span>
+        </div>
+        <div class="box-right">
+          <span class="box-right-num">401238.87</span>
+          <div class="box-right-txt">本月已入库(元)</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-3">
+      <div class="box clearfix">
+        <a href="javascript:;" data-href="../SettlementStatistical/nutritious-out-list.html" data-title="食材出库报表" class="hide-a"></a>
+        <div class="bg-yellow box-left">
+          <span class="Hui-iconfont">&#xe627;</span>
+        </div>
+        <div class="box-right">
+          <span class="box-right-num">207234.55</span>
+          <div class="box-right-txt">库存结余(元)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row clearfix mt-20">
+    <div class="col-xs-12">
+      <div class="panel panel-default" style="border-radius: 6px;overflow: hidden">
+        <div class="panel-header">每日食材出入库分析 <a href="javascript:;" data-href="404.html" data-title="4444" id="schoolMore">404404040</a></div>
+        <div class="panel-body">
+          <div id="chart" style="height: 300px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../Public/lib/eCharts/echarts.min.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
+<script>
 
-            var myChart2 = echarts.init(document.getElementById('chartLine'));
-            option2 = {
-                tooltip: {
-                    trigger: 'none',
-                    axisPointer: {
-                        type: 'cross'
-                    }
+  // 定义获取数据并渲染可视化方法
+  function drawChart() {
+    // echarts
+    var myChart = echarts.init(document.getElementById('chart'));
+    $.ajax({
+      type:'get',
+      url:'https://www.easy-mock.com/mock/5aefbefe474c537b3e077081/nutritious/crkfx',
+      dataType:'json',
+      data:'',
+      beforeSend:function(){
+        myChart.showLoading();
+      },
+      complete:function () {
+        myChart.hideLoading();
+      },
+      success:function(result){
+        if(result.success){
+          var option = {
+            tooltip: {
+              trigger: 'axis'
+            },
+            legend: {
+              data: result.data.map(function (item) {
+                return item.name;
+              })
+            },
+            grid: {
+              left: '1%',
+              right: '1%',
+              bottom: '1%',
+              containLabel: true
+            },
+            xAxis: [
+              {
+                type: 'category',
+                boundaryGap: false,
+                data: result.xData
+              }
+            ],
+            yAxis: [
+              {
+                type: 'value',
+                name: '元',
+                axisLabel: {
+                  formatter: '{value}'
+                }
+              },
+              {
+                type: 'value',
+                name: '元',
+                axisLabel: {
+                  formatter: '{value}'
+                }
+              }
+            ],
+            dataZoom: [
+              {
+                type: 'slider',
+                show: true,
+                xAxisIndex: [0],
+                start: 30,
+                end: 100
+              }
+            ],
+            series: [
+              {
+                name: result.data[0].name,
+                type: 'line',
+                areaStyle: {
+                  normal: {
+                    type: 'default',
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                      offset: 0,
+                      color: 'rgba(199, 37, 50,0.2)'
+                    }, {
+                      offset: 1,
+                      color: 'rgba(199, 37, 50,0.2)'
+                    }], false)
+                  }
                 },
-                grid: {
-                    top: 30,
-                    bottom: 30
+                data: result.data[0].value
+              },
+              {
+                name: result.data[1].name,
+                type: 'line',
+                areaStyle: {
+                  normal: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                      offset: 0,
+                      color: 'rgba(216, 244, 247,1)'
+                    }, {
+                      offset: 1,
+                      color: 'rgba(216, 244, 247,1)'
+                    }], false)
+                  }
                 },
-                xAxis: [
-                    {
-                        type: 'category',
-                        axisTick: {
-                            alignWithLabel: true
-                        },
-                        axisLine: {
-                            onZero: false,
-                        },
-                        axisPointer: {
-                            label: {
-                                formatter: function (params) {
-                                    return params.value
-                                        + (params.seriesData.length ? '：' + params.seriesData[0].data : '')
-                                        + '天';
-                                }
-                            }
-                        },
-                        data: ["第一周", "第二周", "第三周", "第四周", "第五周", "第六周"]
-                    }
-                ],
-                yAxis: [
-                    {
-                        type: 'value',
-                    }
-                ],
-                series: [
+                data: result.data[1].value
+              },
+              {
+                yAxisIndex: 1,
+                name: result.data[2].name,
+                type: 'line',
+                label: {
+                  normal: {
+                    show: false,
+                    position: 'top'
+                  }
+                },
+                areaStyle: {
+                  normal: {
+                    type: 'default',
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                      offset: 0,
+                      color: 'rgba(19, 37, 250,0.1)'
+                    }, {
+                      offset: 1,
+                      color: 'rgba(19, 37, 250,0.1)'
+                    }], false)
+                  }
+                },
+                data: result.data[2].value
+              }
+            ]
+          };
+          myChart.setOption(option);
+        }
+      }
+    });
+  }
 
-                    {
-                        name:'各周食材配送周期',
-                        type:'line',
-                        smooth: true,
-                        data: [2,2,5,2,3,4,]
-                    }
-                ]
-            };
-            myChart2.setOption(option2);
-        })
-    </script>
+  $(function () {
+    // 调用父页面方法打开tab页面
+    $('.view,.box').on('click','a',function () {
+      parent.Hui_admin_tab(this);
+    });
+    // 渲染可视化曲线
+    drawChart()
+  })
+
+</script>
 </body>
-
 </html>
