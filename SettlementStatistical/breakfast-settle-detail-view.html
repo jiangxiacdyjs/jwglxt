@@ -15,11 +15,15 @@
   <link href="../Public/static/h-ui.admin/css/H-ui.admin.css" rel="stylesheet" type="text/css"/>
   <link href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css"/>
 
-  <!--dataTable-->
-  <link href="../Public/lib/datatables/1.10.16/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
+  <!--自带版dataTable-->
+  <!--<link href="../Public/lib/datatables/1.10.16/jquery.dataTables.min.css" rel="stylesheet" type="text/css"/>
   <link href="../Public/lib/datatables/1.10.16/fixedColumns.dataTables.min.css" rel="stylesheet"
-        type="text/css"/>
-  <!--<link href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css"/>-->
+        type="text/css"/>-->
+
+  <!--bootstrap版dataTable样式-->
+  <link href="../Public/lib/datatables/1.10.16/bootstrap.css" rel="stylesheet" type="text/css"/>
+  <link href="../Public/lib/datatables/1.10.16/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/3.2.4/css/fixedColumns.bootstrap4.min.css">
 
   <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
   <link href="../Public/mySrc/css/style.css" rel="stylesheet" type="text/css"/>
@@ -29,27 +33,27 @@
     th, td {
       white-space: nowrap;
     }
-
     div.dataTables_wrapper {
       width: 100%;
       margin: 0 auto;
     }
+    .btn-group .btn{line-height: 18px}
   </style>
 </head>
 <body>
-<div class="page-container" style="padding-top: 70px">
-  <div class="" style="position: absolute;z-index: 1;left: 20px;top: 20px">
+<div class="page-container" style="padding-top: 30px">
+  <div class="" style="position: absolute;z-index: 1;left: 35px;top: 20px">
     <div class="btn-group f-l">
       <span class="btn btn-primary radius">导出Excel</span>
       <span class="btn btn-danger radius">导出Pdf</span>
       <span class="btn btn-success radius">打印报表</span>
     </div>
-    <div class="btn btn-default-outline radius f-l ml-10" style="line-height: 22px" >
+    <div class="btn btn-default-outline radius f-l ml-10" style="border-color: #ddd;font-size: 14px;line-height: 18px">
       数据单位：<span class="c-green mr-10">羊场中学</span>
       结算月份及天数：<span class="c-green">2018年03月 <span class="c-black">(2018-02-28至2018-03-26)</span>/ <span class="c-red">30天</span>  </span>
     </div>
   </div>
-  <table id="example" class="stripe row-border order-column">
+  <table id="example" class="table table-striped table-bordered nowrap">
     <thead>
     <tr>
       <th rowspan="2">序号</th>
@@ -301,17 +305,10 @@
 
 <!--dataTable-->
 <script type="text/javascript" src="../Public/lib/datatables/1.10.16/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../Public/lib/datatables/1.10.16/dataTables.bootstrap4.min.js"></script><!--渲染了input-->
 <script type="text/javascript" src="../Public/lib/datatables/1.10.16/dataTables.fixedColumns.min.js"></script>
-<!--<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>-->
-<!--<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>-->
-<!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>-->
-<!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>-->
-<!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>-->
-<!--<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>-->
-<!--<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>-->
 
 <script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
-
 <script>
 
   function returnScrollHeight() {
@@ -352,12 +349,12 @@
         'copy', 'csv', 'excel', 'pdf', 'print'
       ],
       scrollY: (returnScrollHeight()-250) + "px",
-      scrollX: false,
+      scrollX: true,
       scrollCollapse: true,
       paging: false,
-     /* fixedColumns: {
+      fixedColumns: {
         leftColumns: 2
-      }*/
+      }
     });
   })
 </script>
