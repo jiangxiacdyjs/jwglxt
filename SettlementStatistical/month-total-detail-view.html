@@ -54,7 +54,7 @@
       数据单位：<span class="c-green mr-10">贵州省紫云县</span>
     </div>
 
-    <div class="btn btn-default-outline radius f-l ml-10" style="padding: 0 0 0 12px">
+    <div class="btn btn-default-outline radius f-l ml-10" style="border-color: #ddd;font-size: 14px;line-height: 18px;padding: 0 0 0 12px">
       <span style="line-height: 28px;">报表月度：</span>
       <input type="text" placeholder="选择汇总月份" class="input-text" name="search_text"
              value=""
@@ -636,6 +636,11 @@
           "sSortDescending": ": 以降序排列此列"
         }
       },
+
+      // 对0，1，2列不进行排序
+      "aoColumnDefs": [ { "bSortable": false, "aTargets": [0,1,2] }],
+      "aaSorting": [[1,2,"asc"]],
+
       dom: 'Bfrtip',
       buttons: [
         'copy', 'csv', 'excel', 'pdf', 'print'
