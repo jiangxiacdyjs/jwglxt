@@ -54,11 +54,16 @@
       border: 1px solid #e6e6e6;
     }
 
-    th, td {
+    .bz {
+      cursor: pointer;
+      max-width: 120px;
       word-break: keep-all; /* 不换行 */
       white-space: nowrap; /* 不换行 */
       overflow: hidden; /* 内容超出宽度时隐藏超出部分的内容 */
       text-overflow: ellipsis; /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+    }
+    .bz:hover{
+      color: #5eb95e;
     }
 
     div.dataTables_wrapper {
@@ -120,7 +125,7 @@
       <th>11</th>
       <th>12</th>
 
-      <th></th>
+      <th>456</th>
       <th></th>
     </tr>
     </thead>
@@ -153,7 +158,7 @@
       <th>12</th>
 
       <th></th>
-      <th></th>
+      <th><div class="bz" title="备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注">备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注备注</div></th>
     </tr>
     <!--学生就餐人次-->
     <tr>
@@ -347,6 +352,7 @@
   }
 
   $(function () {
+    // 初始化dataTable
     var table = $('#example').DataTable({
       language: {
         "sProcessing": "处理中...",
@@ -376,14 +382,23 @@
       buttons: [
         'copy', 'csv', 'excel', 'pdf', 'print'
       ],
-      scrollY: (returnScrollHeight() - 255) + "px",
-      scrollX: true,
+      scrollY: (returnScrollHeight() - 265) + "px",
+      // scrollX: true,
       scrollCollapse: true,
       paging: false,
       fixedColumns: {
         leftColumns: 2
       }
     });
+    // 备注信息鼠标经过的时候会显示其title内容，但是比较慢，这多加了个点击弹出详情效果
+    $('#example').on('click', '.bz', function () {
+      var detail = $(this).html();
+      layer.open({
+        content: detail,
+        title: '备注详情',
+        shadeClose: true //开启遮罩关闭
+      });
+    })
   })
 </script>
 </body>
