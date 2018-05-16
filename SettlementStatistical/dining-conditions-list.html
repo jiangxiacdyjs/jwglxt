@@ -310,10 +310,10 @@
             data: "",
             dataType: 'json',
             beforeSend: function (xhr, options) {
-              var index = LoadWait('系统正在生成报表，请勿关闭此页面...');
+              this.loading = LoadWait('系统正在生成报表，请勿关闭此页面...');
             },
             complete: function (XHR, TS) {
-              layer.close(index);
+              layer.close(this.loading);
             },
             success: function (data) {
               if(data.success){
