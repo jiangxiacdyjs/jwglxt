@@ -675,9 +675,9 @@
       // 对0，1，2列不进行排序
       "aoColumnDefs": [{"bSortable": false, "aTargets": [0, 1, 2, 14]}],
       "aaSorting": [[1, 2, "asc"]],
-
+      bInfo : false, //是否显示页脚信息，DataTables插件左下角显示记录数
       dom: 'Bfrtip',
-      scrollY: (returnScrollHeight() - 265) + "px",
+      scrollY: false,
       scrollX: false,
       scrollCollapse: true,
       paging: false,

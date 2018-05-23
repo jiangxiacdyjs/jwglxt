@@ -439,10 +439,8 @@
         }
       },
       dom: 'Bfrtip',
-      buttons: [
-        'copy', 'csv', 'excel', 'pdf', 'print'
-      ],
-      scrollY: (returnScrollHeight() - 320) + "px",
+      bInfo : false, //是否显示页脚信息，DataTables插件左下角显示记录数
+      scrollY: false,
       // scrollX: true, //设置了此项很可能会显示错乱（默写情况下）
       scrollCollapse: true,
       paging: false,
