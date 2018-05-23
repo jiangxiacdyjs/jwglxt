@@ -8,18 +8,18 @@
         content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
   <meta http-equiv="Cache-Control" content="no-siteapp"/>
   <!--[if lt IE 9]>
-  <script type="text/javascript" src="../Public/lib/html5shiv.js"></script>
-  <script type="text/javascript" src="../Public/lib/respond.min.js"></script>
+  <script type="text/javascript" src="/Public/lib/html5shiv.js"></script>
+  <script type="text/javascript" src="/Public/lib/respond.min.js"></script>
   <![endif]-->
-  <link rel="stylesheet" type="text/css" href="../Public/static/h-ui/css/H-ui.min.css"/>
-  <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css"/>
-  <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
-  <link rel="stylesheet" type="text/css" href="../Public/lib/jedate-6.5.0/skin/jedate.css"/>
-  <link rel="stylesheet" type="text/css" href="../Public/lib/jquery-searchableSelect/jquery.searchableSelect.css"/>
-  <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
-  <link rel="stylesheet" type="text/css" href="../Public/mySrc/css/style.css"/>
+  <link rel="stylesheet" type="text/css" href="/Public/static/h-ui/css/H-ui.min.css"/>
+  <link rel="stylesheet" type="text/css" href="/Public/static/h-ui.admin/css/H-ui.admin.css"/>
+  <link rel="stylesheet" type="text/css" href="/Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
+  <link rel="stylesheet" type="text/css" href="/Public/lib/jedate-6.5.0/skin/jedate.css"/>
+  <link rel="stylesheet" type="text/css" href="/Public/lib/jquery-searchableSelect/jquery.searchableSelect.css"/>
+  <link rel="stylesheet" type="text/css" href="/Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
+  <link rel="stylesheet" type="text/css" href="/Public/mySrc/css/style.css"/>
   <!--[if IE 6]>
-  <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
+  <script type="text/javascript" src="/Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
   <script>DD_belatedPNG.fix('*');</script>
   <![endif]-->
   <title>食材入库汇总列表</title>
@@ -114,20 +114,9 @@
     </div>
   </div>
   <div class="mt-20">
-    <form method="" action="" class="search_form">
-      <!--统计模式：
-      <input type="text" value="学校统计" class="input-text ac_input mr-10" name="search_text"
-             value="" autocomplete="off" style="width:120px;">-->
+    <div class="search_form">
       <div class="inline">
-        <span>汇总模式：</span>
-        <select class="model-select" name="" id="modelSelect">
-          <option value="1" selected="">学校汇总</option>
-          <option value="0">片区汇总</option>
-        </select>
-      </div>
-
-      <div class="inline area-select hidden">
-        <span class="ml-5">片区选择：</span>
+        <span class="ml-5"><label for="areaSelect">片区：</label></span>
         <select class="" name="" id="areaSelect">
           <option value="0" selected="">全县区域</option>
           <option value="1">A片区</option>
@@ -137,59 +126,51 @@
         </select>
       </div>
 
-      <div class="inline school-select">
-        <span class="ml-5">学校名称：</span>
-        <select class="" id="schoolSelect">
-          <option value="0">羊场中学</option>
-          <option value="1">火花中学</option>
-          <option value="2">平坝中学</option>
-          <option value="3">水池中学</option>
-          <option value="4">马布里中学</option>
-          <option value="5">奥尼雅中学</option>
-          <option value="6">广村中学</option>
-          <option value="7">凌平中学</option>
+      <div class="inline" style="margin-left: 15px; ">
+        <span> <label for="modelSelect">学校：</label></span>
+        <select class="model-select" name="" id="modelSelect">
+          <option value="1" selected="">学校汇总</option>
+          <option value="0">片区汇总</option>
         </select>
       </div>
 
-      <div class="inline">
-        <span class="ml-5">汇总月份：</span>
+      <div class="inline" style="margin-left: 15px; ">
+        <span class="ml-5">年月：</span>
         <input type="text" placeholder="选择汇总月份" class="input-text ac_input mr-10" name="search_text"
                value=""
                id="tim1" autocomplete="off" style="width:120px;cursor: pointer;" readonly>
       </div>
 
-      <button type="button" class="btn btn-success" id="searchBtn">
+      <button type="button" class="btn btn-success" style="margin-left: 8px;" id="searchBtn">
         <i class="Hui-iconfont inline f-18">&#xe709;</i>
-        <span>查询/生成汇总表</span>
+        <span>查询</span>
       </button>
-    </form>
+    </div>
     <table class="table table-border table-bordered table-bg table-hover table-sort0">
       <thead>
       <tr class="text-c">
         <th width="40">编号</th>
-        <th width="150">汇总对象</th>
-        <th width="150">所属片区</th>
+        <th width="150">片区</th>
+        <th width="150">学校</th>
         <th>汇总年月</th>
         <th>起始日期</th>
         <th>截止日期</th>
         <th>入库总额</th>
-        <th>报表批号</th>
         <th width="150">操作</th>
       </tr>
       </thead>
       <tbody>
       <tr class="text-c">
         <td>1</td>
-        <td><span title="">羊场中学</span></td>
-        <td><span title="A片区">A片区</span></td>
+        <td><span title="">A片区</span></td>
+        <td><span title="A片区">羊场中学</span></td>
         <td><span title="2018-03">2018-03</span></td>
         <td><span title="2018-03-01">2018-03-01</span></td>
         <td><span title="2018-03-31">2018-03-31</span></td>
         <td><span title="40987.2">40987.2</span></td>
-        <td><span title="2017093853201709385320170938532017093853">2017093853201709385320170938532017093853</span></td>
         <td class="f-14 td-manage">
           <a class="ml-5"
-             href="javascript:article_view('食材入库明细表','nutritious-in-detail-view.html','100%','100%');"
+             href="javascript:article_view('食材入库明细表','nutritious-in-view.html','100%','100%');"
              title="查看">查看</a>
           <a href="" class="ml-5">下载</a>
           <a class="ml-5 del" href="javascript:article_del(this,'10001');" title="删除">删除</a>
@@ -200,14 +181,14 @@
   </div>
 </div>
 
-<script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
-<script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
-<script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
-<script type="text/javascript" src="../Public/lib/jedate-6.5.0/dist/jedate.min.js"></script>
-<script type="text/javascript" src="../Public/lib/jquery-searchableSelect/jquery.searchableSelect.js"></script>
-<script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
+<script type="text/javascript" src="/Public/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/Public/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="/Public/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="/Public/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="/Public/lib/jedate-6.5.0/dist/jedate.min.js"></script>
+<script type="text/javascript" src="/Public/lib/jquery-searchableSelect/jquery.searchableSelect.js"></script>
+<script type="text/javascript" src="/Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/Public/mySrc/js/common.js"></script>
 <script type="text/javascript">
 
   /*切换设置按钮状态*/
@@ -330,7 +311,7 @@
       maxDate: str //最大日期
     });
 
-    tableSort('.table-sort0', [0, 1, 2, 7, 8]);
+    tableSort('.table-sort0', [0, 1, 2]);
   })
 </script>
 </body>
