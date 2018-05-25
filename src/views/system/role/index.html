@@ -1,0 +1,427 @@
+<title>角色管理</title>
+<div class="layui-fluid">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-lg8 layui-col-md7">
+      <div class="layui-card fullh">
+        <div class="layui-card-header operate-box">
+          <!--操作按钮组-->
+          <div class="layui-btn-group">
+            <button data-type="add" class="layui-btn layui-btn-sm">
+              新增
+            </button>
+            <button data-type="edit" class="layui-btn layui-btn-normal layui-btn-sm">
+              编辑
+            </button>
+            <button data-type="del" class="layui-btn layui-btn-danger layui-btn-sm">
+              删除
+            </button>
+            <button data-type="typeadmin" class="layui-btn layui-btn-warm layui-btn-sm">
+              分类管理
+            </button>
+          </div>
+          <!--搜索查询-->
+          <div class="test-table-reload-btn layui-layout-right" style="right: 15px">
+            名称搜索：
+            <div class="layui-inline">
+              <input class="layui-input h30" name="id" id="searchInput" autocomplete="off">
+            </div>
+            <button class="layui-btn layui-btn-sm" data-type="search">搜索</button>
+          </div>
+        </div>
+        <div class="layui-card-body">
+          <table class="layui-hide" id="roleTable" lay-filter="roleTable"></table>
+          <!--数据类别栏模板-->
+          <script type="text/html" id="role-typeTpl">
+            {{d.type.name}}
+          </script>
+          <!--这里的 checked 是根据每条数据的lock字段判断是否选中 -->
+          <script type="text/html" id="role-checkboxTpl">
+            <input type="checkbox" name="lock" title="锁定" lay-filter="role-lock"
+                   value="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}" {{ d.lock== 1
+                   ? 'checked' : '' }}>
+          </script>
+          <!--表格操作栏目-->
+          <script type="text/html" id="role-operateTplDom">
+            <a class="layui-btn layui-btn-sm"
+               lay-event="edit"
+               lay-filter="role-operate"
+               title="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}">编辑/查看</a>
+          </script>
+        </div>
+      </div>
+    </div>
+    <div class="layui-col-lg4 layui-col-md5">
+      <div class="layui-card fullh">
+        <div class="layui-card-header ">
+          <span id="showName">系统</span>&nbsp;/&nbsp;资源树
+          <!--操作按钮组-->
+          <button id="undoBtn" class="layui-hide layui-btn layui-btn-primary layui-btn-sm layui-layout-right"
+                  style="right: 15px;top: 6px;">
+            &nbsp;撤销修改&nbsp;
+          </button>
+        </div>
+        <div class="layui-card-body tree-box overh" style="overflow-y: scroll">
+          <!--别忘记form 以及form的class-->
+          <form class="layui-form">
+            <div id="xtree1" class="xtree_contianer" data-id=""></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--单独引入非模块化的xtree控件-->
+<script src="../src/lib/extend/layui-xtree.js"></script>
+<script>
+  layui.use(['admin', 'table', 'form', 'view'], function () {
+    var table = layui.table
+      , form = layui.form
+      , $ = layui.$
+      , admin = layui.admin
+      , view = layui.view;
+
+    // 设置表单默认值
+    function setFormVals(filter,dataObj) {
+      form.val(filter,dataObj);
+    }
+
+    // todo：愚昧地手动设置显示区域高度，正在寻找更智能的方法
+    $('.fullh').height(admin.getRightAvailableHeight());
+    $('.tree-box').height($('.tree-box').parent().height() - 62);
+
+    // 切换显示和保存状态
+    function toggleState(currentId, state) {
+      switch (state) {
+        case "save":
+          $('table:not(.layui-hide)').find('a[title=' + currentId + ']').addClass('layui-btn-normal').html('确认/保存');
+          $('#undoBtn').removeClass('layui-hide');
+          break;
+        case "normal":
+          $('table:not(.layui-hide)').find('a').removeClass('layui-btn-normal').html('编辑/查看');
+          $('#undoBtn').addClass('layui-hide');
+          break;
+        default:
+      }
+    }
+
+    // 表格
+    table.render({
+      elem: '#roleTable'
+      , url: admin.baseUrl + '/role'
+      , method: 'post'
+      , height: 'full-151'
+      // ,cellMinWidth: 80
+      // ,size: 'sm'
+      , cols: [[
+        {type: 'numbers'}
+        , {type: 'checkbox'}
+        // ,{field:'id', title:'ID', width:100, unresize: true, sort: true}
+        , {field: 'name', title: '角色名称'}
+        , {field: 'type', title: '角色分类', templet: '#role-typeTpl'}
+        , {field: 'desc', title: '描述'}
+        , {field: 'creator', title: '创建人'}
+        , {field: 'operate', title: '权限操作', templet: '#role-operateTplDom', unresize: true, width: 120, align: 'center'}
+        , {field: 'lock', title: '是否锁定', width: 100, templet: '#role-checkboxTpl', unresize: true}
+      ]]
+      , page: true
+    });
+
+    // 初始化资源树
+    var xtree1 = new layuiXtree({
+      elem: 'xtree1'  //必填三兄弟之老大
+      , form: form   //必填三兄弟之这才是真老大
+      , data: admin.baseUrl + '/resourceTreeDisabled' //必填三兄弟之这也算是老大
+      , isopen: true  //加载完毕后的展开状态，默认值：true
+      , ckall: true    //启用全选功能，默认值：false
+      , ckallback: function () {
+        var currentId = $('#xtree1').attr('data-id');
+        // 切换显示为保存模式
+        if (currentId.length) toggleState(currentId, 'save');
+      } //全选框状态改变后执行的回调函数
+      , icon: {        //三种图标样式，更改几个都可以，用的是layui的图标
+        open: "&#xe625;"       //节点打开的图标
+        , close: "&#xe623;"    //节点关闭的图标
+        , end: "&#xe621;"      //末尾节点的图标
+      }
+      , color: {       //三种图标颜色，独立配色，更改几个都可以
+        // open: "#EE9A00"        //节点图标打开的颜色
+        // , close: "#EEC591"     //节点图标关闭的颜色
+        // , end: "#828282"       //末级节点图标的颜色
+      }
+      // ,param:{
+      //   id:'初始值'
+      // }
+      , click: function (data) {  //节点选中状态改变事件监听，全选框有自己的监听事件
+        //console.log(data.elem); //得到checkbox原始DOM对象
+        //console.log(data.elem.checked); //开关是否开启，true或者false
+        //console.log(data.value); //开关value值，也可以通过data.elem.value得到
+        //console.log(data.othis); //得到美化后的DOM对象
+        var currentId = $('#xtree1').attr('data-id');
+        // 切换显示为保存模式
+        if (currentId.length) toggleState(currentId, 'save');
+      }
+    });
+
+    // 监听工具条
+    table.on('tool(roleTable)', function (obj) {
+      var data = obj.data;
+      if (obj.event === 'edit') {
+        // 获得当前按钮的jq对象
+        var $thisBtn = $(this);
+        // 如果当前按钮是初始的状态，执行编辑模式，否则执行保存模式
+        if ($thisBtn.hasClass('layui-btn-normal')) {
+          // 保存模式
+          var oCks = xtree1.GetChecked();
+          var checkedIdsArr = [];
+          for (var i = 0; i < oCks.length; i++) {
+            checkedIdsArr.push(oCks[i].value);
+          }
+          ;
+          $.ajax({
+            type: 'post',
+            url: admin.baseUrl + '/postSuccess',
+            data: JSON.stringify(checkedIdsArr),
+            dataType: 'json',
+            beforeSend: function () {
+              this.loading = admin.loading('正在保存，请耐心等待...')
+            },
+            complete: function () {
+              layer.close(this.loading);
+            },
+            success: function (result) {
+              xtree1.render({
+                data: admin.baseUrl + '/resourceTree'
+              });
+              // 切换显示为正常模式
+              toggleState('', 'normal');
+            },
+            error: function (error) {
+            },
+          });
+        } else {
+          // 切换显示为正常模式
+          toggleState('', 'normal');
+          // 设置右侧资源树显示当前角色
+          $('#showName').html(data.name);
+          // 设置右侧资源树容器data-id为当前角色id值
+          $('#xtree1').attr('data-id', data.id);
+          xtree1.render({
+            data: admin.baseUrl + '/resourceTree',
+            param: {id: data.id}
+          });
+        }
+        // layer.alert('编辑行：<br>'+ JSON.stringify(data))
+      }
+      ;
+      // console.log(obj.data)
+    });
+
+    // 撤销修改事件（请求系统资源，隐藏自身，恢复所有按钮为正常状态，设置右侧显示角色名称）
+    if ($('#undoBtn').length) {
+      $('#undoBtn').on('click', function () {
+        // 需要清空下xtree1的标志id，否则在展示系统资源模式下，会因为资源数的全选还可以勾选导致重置进入相应id的保存模式
+        $('#xtree1').attr('data-id', '');
+        xtree1.render({
+          data: admin.baseUrl + '/resourceTreeDisabled'
+        });
+        // 切换显示为正常模式
+        toggleState('', 'normal');
+        // 设置右侧资源树显示
+        $('#showName').html('系统');
+      })
+    }
+
+    // 监听锁定操作
+    form.on('checkbox(role-lock)', function (obj) {
+      var json = JSON.parse(decodeURIComponent($(this).data('json')));
+      layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
+
+      json = table.clearCacheKey(json);
+      console.log(json); //当前行数据
+    });
+
+    // layer
+    var layerActive = {
+      add: function () {
+        admin.popup.addLayer = admin.popup({
+          "title": "角色新增&nbsp;/&nbsp;编辑"
+          , area: admin.screen() < 2 ? ['100%', '400px'] : ['620px', '400px']
+          , id: 'roleAdd'//id唯一
+          , success: function () {
+            view(this.id).render('system/role/role-layer').done(function (html) {
+              if ($('button[lay-filter=role-undo]').length){
+                $('button[lay-filter=role-undo]').off('click').prop('type','reset').text('重置表单').trigger('click')
+              }
+            });
+          }
+        });
+      }
+      , edit: function () {
+        if (checkActive.getCheckLength() > 1) {
+          layer.msg('不可一次性编辑多条数据哦', {icon: 2})
+        } else if (!checkActive.getCheckLength()) {
+          layer.msg('请先选中一条数据', {icon: 2})
+        } else {
+          admin.popup.editLayer = admin.popup({
+            "title": "角色新增&nbsp;/&nbsp;编辑"
+            , area: admin.screen() < 2 ? ['100%', '400px'] : ['620px', '400px']
+            , id: 'roleAdd'//id唯一
+            , success: function () {
+              // 自定义了一个参数对象传递给view.render()方法，在其渲染完之后执行回调函数
+              view(this.id).render('system/role/role-layer').done(function (html) {
+                // console.log(html);
+                // layui2.3可以调用form.val()方法对表单赋值
+                var checkedRowDataObj = checkActive.getCheckData()[0];
+                // 绑定恢复操作按钮事件
+                if ($('button[lay-filter=role-undo]').length){
+                  $('button[lay-filter=role-undo]').off('click').prop('type','button').text('恢复操作').on('click',function () {
+                    setFormVals("role-form",checkedRowDataObj);
+                    setFormVals("role-form",{"type": 3});
+                    layer.msg('已恢复至最近保存数据');
+                  });
+                };
+                form.val("role-form", checkedRowDataObj)
+                // 实际生产中只要传入的value与表单中select下option对应的value
+                // form.val("role-form", {"type": checkedRowDataObj.type.value});
+                // form.val("role-form", {"parent": checkedRowDataObj.parent.value});
+                // 此处为测试示例
+                form.val("role-form", {"type": 3});
+                // form.render();
+
+                /*
+                // layui2.3以下自己手动赋值
+                // 获取请求页面结构的外层jq对象
+                var $layerInnerIdBox = $('#roleAdd');
+                // 定义用于存放每行数据的键名称数组（请求页面中的表单内input，select等的name值和此键一一对应）
+                var layerInnerFormItemsNames = [];
+                // 获取选中的行的数据对象（未转成string的object结构）
+                var checkedRowDataObj = checkActive.getCheckData()[0];
+                // 遍历选中行的数据对象结构，取出其键名称，并依次存入layerInnerFormItemsNames数组中
+                for (var i in checkedRowDataObj) {
+                  layerInnerFormItemsNames.push(i);
+                }
+                // console.log(layerInnerFormItemsNames)
+                // 遍历layerInnerFormItemsNames数组，将checkedRowDataObj中的数据一一填入请求的页面中
+                for (var j = 0; j < layerInnerFormItemsNames.length; j++) {
+                  var $currentInput = $layerInnerIdBox.find(':input[name=' + layerInnerFormItemsNames[j] + ']');
+                  if ($currentInput.length) $currentInput.val(checkedRowDataObj[layerInnerFormItemsNames[j]]);
+                }
+                // 模拟select选中某项的效果，实际开发中应该根据传入的id，选择对应的select的option项，并设置如下
+                $layerInnerIdBox.find('select').eq(1).children().eq(1).prop('selected', true);
+                */
+              });
+            }
+          });
+        }
+      }
+      , del: function () {
+        if (checkActive.getCheckLength() > 0) {
+          var confirmLayerIdx = admin.popup({
+            content: '是否确认删除已选择的' + checkActive.getCheckLength() + '条数据？'
+            , btn: ['确认', '取消']
+            , skin: 'layui-layer-admin'
+            , btnAlign: 'c'
+            , yes: function (index, layero) {
+              layer.close(confirmLayerIdx);
+              $.ajax({
+                type: 'post',
+                url: admin.baseUrl + '/role',
+                data: JSON.stringify(checkActive.getCheckData()),
+                dataType: 'json',
+                beforeSend: function () {
+                  this.loading = admin.loading();
+                },
+                complete: function () {
+                  layer.close(this.loading);
+                },
+                success: function (result) {
+                  if (result.code == 0) {
+                    table.reload('roleTable', {
+                      data: result.data,
+                      where: {} // 请求额外参数（注意：这里面的参数可任意定义）
+                    });
+                  }
+                },
+                error: function (error) {
+                  layer.msg('请求出错啦', {icon: 2});
+                },
+              });
+            }
+            , btn2: function (index, layero) {
+            }
+            , cancel: function () {
+            }
+          });
+        } else {
+          layer.msg('请选则需要删除的数据项', {icon: 2})
+        }
+      }
+      , typeadmin: function () {
+        admin.popup.editLayer = admin.popup({
+          "title": "角色分类管理"
+          , area: admin.screen() < 2 ? ['100%', '520px'] : ['620px', '520px']
+          , id: 'roleAdd'//id唯一
+          , maxmin: true//id唯一
+          , success: function () {
+            // 自定义了一个参数对象传递给view.render()方法，在其渲染完之后执行回调函数
+            view(this.id).render('system/role/role-type-layer', {
+                callback: function () {
+
+                }
+              }
+            );
+          }
+        });
+      }
+    };
+
+    // 检查选中
+    var checkActive = {
+      getCheckData: function () { //获取选中数据
+        var checkStatus = table.checkStatus('roleTable')
+          , data = checkStatus.data;
+        // layer.alert(JSON.stringify(data));
+        // return JSON.stringify(data);
+        return data;
+      }
+      , getCheckLength: function () { //获取选中数目
+        var checkStatus = table.checkStatus('roleTable')
+          , data = checkStatus.data;
+        // layer.msg('选中了：'+ data.length + ' 个');
+        return data.length;
+      }
+      , isAll: function () { //验证是否全选
+        var checkStatus = table.checkStatus('roleTable');
+        layer.msg(checkStatus.isAll ? '全选' : '未全选')
+      }
+    };
+
+    // 搜索重载表格
+    var searchActive = {
+      search: function () {
+        var $serIpt = $('#searchInput');
+        var $serBtn = $('#searchBtn');
+        //执行重载
+        table.reload('roleTable', {
+          page: {
+            curr: 1
+          }
+          , where: {
+            key: {
+              name: $serIpt.val()
+            }
+          }
+        });
+      }
+    };
+
+    $('.operate-box .layui-btn').on('click', function () {
+      var type = $(this).data('type');
+      // 弹窗
+      layerActive[type] && layerActive[type].call(this);
+      // 搜索
+      searchActive[type] && searchActive[type].call(this);
+    });
+
+  });
+</script>

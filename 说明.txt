@@ -1,0 +1,19 @@
+
+layuiAdmin pro（单页版）
+
+# 运行说明：
+直接运行入口文件即可： start/index.html
+
+
+# 目录说明：
+dist/  经过打包压缩后的文件，一般用于正式环境使用
+src/   源代码，一般用于开发环境
+controller/ 默认扩展控制器js路径（在index.js中做了设置，每次哈希值变动后都动态将当前扩展基础路径定义为此目录，因此如果需要使用此目录下的模块，只需直接调用模块js的文件名称即可，无需做extend扩展定义）
+
+# 源码构建
+项目可采用 gulp 构建，gulpfile.js 是任务脚本，package.json 是任务配置文件
+step1：确保你的电脑已经安装好了 Node.js
+step2: 命令行安装 gulp：npm install gulp -g
+step3：切换到 layuiAdmin 项目根目录（即 gulpfile.js 所在目录），命令行安装任务所依赖的包：npm install
+step4: 安装完依赖包后，即可直接执行命令：gulp 把src目录资源打包到dist目录的构建
+（开发过程中请设置start/index.html中的加载index模块的路径为src，完成开发打包后，把该src目录改成dist目录即可）

@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../../style/login.css" media="all">
+  <link rel="icon" href="../../../start/favicon.ico" type="image/x-icon"/>
+  <link rel="stylesheet" href="../../../start/layui2.3/css/layui.css" media="all">
+  <title>用户登录</title>
+</head>
+<body>
+<div class="m-login-bg">
+  <div class="m-bg-contain"></div>
+  <div class="m-login">
+    <h3 style="letter-spacing: 3px">营养餐管理系统登录</h3>
+    <div class="m-login-warp">
+      <form class="layui-form">
+        <div class="layui-form-item">
+          <input type="text" name="title" required lay-verify="title" placeholder="用户名" autocomplete="off"
+                 class="layui-input">
+        </div>
+        <div class="layui-form-item">
+          <input type="password" name="pwd" required lay-verify="pwd" placeholder="密码" autocomplete="off"
+                 class="layui-input">
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-inline" style="width: 48%;float: left;margin-right: 4%">
+            <input type="text" name="verity" required lay-verify="verity" placeholder="验证码" autocomplete="off"
+                   class="layui-input">
+          </div>
+          <div class="layui-inline" style="width: 48%;float: left;margin-right: 0">
+            <div style="height: 38px;margin:0 0 5px 0;border-radius: 2px;overflow: hidden">
+              <div id="vContainer" style="width: inherit;height: inherit"></div>
+            </div>
+          </div>
+        </div>
+        <div class="layui-form-item m-login-btn">
+          <div class="layui-inline" style="width: 48%;float: left;margin-right: 4%">
+            <button type="reset" class="layui-btn layui-btn-primary">取消</button>
+          </div>
+          <div class="layui-inline" style="width: 48%;float: left;margin-right: 0">
+            <button type="button" class="layui-btn" lay-submit lay-filter="LAY-user-login-submit">登录
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="layui-trans layui-form-item layadmin-user-login-other">
+      <label>系统版本：</label><i class="layui-icon layui-icon-chart"></i><span>v2.0</span>
+      <a href="reg-alone.html" class="layadmin-user-jump-change layadmin-link">注册帐号</a>
+    </div>
+    <!--<p class="copyright">Copyright 2017-2018 by bd</p>-->
+    <div class="ladmin-user-login-theme">
+      <ul>
+        <!--<li data-theme=""><img src="{{ layui.setter.base }}style/res/bg-none.jpg"></li>-->
+        <li layadmin-event="setTheme" data-alias="default" data-index="0" title="default" class="layui-this">
+          <div style="background-color: #20222A;"></div>
+        </li>
+        <li layadmin-event="setTheme" data-alias="dark-blue" data-index="1" title="dark-blue">
+          <div style="background-color: #03152A;"></div>
+        </li>
+        <li layadmin-event="setTheme" data-alias="coffee" data-index="2" title="coffee">
+          <div style="background-color: #2E241B;"></div>
+        </li>
+        <li layadmin-event="setTheme" data-alias="purple-red" data-index="3" title="purple-red">
+          <div style="background-color: #7A4D7B;"></div>
+        </li>
+        <li layadmin-event="setTheme" data-alias="ocean" data-index="4" title="ocean">
+          <div style="background-color: #1E9FFF;"></div>
+        </li>
+        <li layadmin-event="setTheme" data-alias="green" data-index="5" title="green">
+          <div style="background-color: #2F9688;"></div>
+        </li>
+        <li layadmin-event="setTheme" data-alias="red" data-index="6" title="red">
+          <div style="background-color: #F78400;"></div>
+        </li>
+        <li layadmin-event="setTheme" data-alias="fashion-red" data-index="7" title="fashion-red">
+          <div style="background-color: #AA3130;"></div>
+        </li>
+        <li layadmin-event="setTheme" data-alias="classic-black" data-index="8" title="classic-black">
+          <div style="background-color: #3A3D49;"></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<script src="../../../start/layui2.3/layui.js"></script>
+<script>
+  layui.extend({
+    verfiy: '{/}../../lib/extend/layui-gVerify' //{/}代表自有路径 验证码组件(在index.js中entryPage方法里，哈希路径改变后就动态的将扩展根目录设置在了controller文件夹下，因此这要单独配置路径)
+  }).use(['form', 'verfiy', 'laytpl'], function () {
+    var layer = layui.layer
+      , $ = layui.$
+      , form = layui.form
+      , laytpl = layui.laytpl
+      , verfiy = layui.verfiy;
+
+    // 主题初始化
+    var local = layui.data('layuiAdmin');
+    // 主题配置
+    var themeColorObj = {
+        //配色方案，如果用户未设置主题，第一个将作为默认
+        color: [{
+          main: '#20222A' //主题色
+          ,logo: '#009688' //logo色
+          ,selected: '#009688' //选中色
+          ,alias: 'default' //默认别名
+          ,index: 0 //序号
+        },{
+          main: '#03152A'
+          ,logo: '#3B91FF'
+          ,selected: '#3B91FF'
+          ,alias: 'dark-blue' //藏蓝
+          ,index: 1 //序号
+        },{
+          main: '#2E241B'
+          ,logo: '#A48566'
+          ,selected: '#A48566'
+          ,alias: 'coffee' //咖啡
+          ,index: 2 //序号
+        },{
+          main: '#50314F'
+          ,logo: '#7A4D7B'
+          ,selected: '#7A4D7B'
+          ,alias: 'purple-red' //紫红
+          ,index: 3 //序号
+        },{
+          main: '#344058'
+          ,logo: '#1E9FFF'
+          ,selected: '#1E9FFF'
+          ,alias: 'ocean' //海洋
+          ,index: 4 //序号
+        },{
+          main: '#3A3D49'
+          ,logo: '#2F9688'
+          ,selected: '#5FB878'
+          ,alias: 'green' //墨绿
+          ,index: 5 //序号
+        },{
+          main: '#20222A'
+          ,logo: '#F78400'
+          ,selected: '#F78400'
+          ,alias: 'red' //橙色
+          ,index: 6 //序号
+        },{
+          main: '#28333E'
+          ,logo: '#AA3130'
+          ,selected: '#AA3130'
+          ,alias: 'fashion-red' //时尚红
+          ,index: 7 //序号
+        },{
+          main: '#24262F'
+          ,logo: '#3A3D49'
+          ,selected: '#009688'
+          ,alias: 'classic-black' //经典黑
+          ,index: 8 //序号
+        }]
+      }
+
+    // 创建主题
+    function creatTheme(options) {
+      //主题设置
+      var id = 'themeStyle'
+        , style = document.createElement('style')
+        , styleText = laytpl([
+        //主题色
+        '.layui-side-menu,'
+        , '.layadmin-pagetabs .layui-tab-title li:after,'
+        , '.layadmin-pagetabs .layui-tab-title li.layui-this:after,'
+        , '.layui-layer-admin .layui-layer-title,'
+        , '.layadmin-side-shrink .layui-side-menu .layui-nav>.layui-nav-item>.layui-nav-child'
+        , '{background-color:{{d.color.main}} !important;}'
+        // 修改点admin.popup弹窗样式
+        , '.layui-layer-admin .layui-layer-title{background-color:{{d.color.logo || d.color.main}} !important;}'
+        , '.layui-layer-admin .layui-layer-btn .layui-layer-btn0{background-color:{{d.color.logo || d.color.main}} !important;border-color:{{d.color.logo || d.color.main}} !important}'
+        , '.layui-btn[lay-submit]{background-color:{{d.color.logo || d.color.main}} !important;border-color:{{d.color.logo || d.color.main}} !important}'
+
+        //选中色
+        , '.layui-nav-tree .layui-this,'
+        , '.layui-nav-tree .layui-this>a,'
+        , '.layui-nav-tree .layui-nav-child dd.layui-this,'
+        , '.layui-nav-tree .layui-nav-child dd.layui-this a'
+        , '{background-color:{{d.color.selected}} !important;}'
+
+        //logo
+        , '.layui-layout-admin .layui-logo{background-color:{{d.color.logo || d.color.main}} !important;}}'
+      ].join('')).render(options = $.extend({}, local.theme, options))
+        , styleElem = document.getElementById(id);
+
+      //添加主题样式
+      if ('styleSheet' in style) {
+        style.setAttribute('type', 'text/css');
+        style.styleSheet.cssText = styleText;
+      } else {
+        style.innerHTML = styleText;
+      }
+      style.id = id;
+
+      styleElem && $('body')[0].removeChild(styleElem);
+      $('body')[0].appendChild(style);
+      $('body').attr('layadmin-themealias', options.color.alias);
+
+      //本地存储记录
+      local.theme = local.theme || {};
+      layui.each(options, function (key, value) {
+        local.theme[key] = value;
+      });
+      layui.data('layuiAdmin', {
+        key: 'theme'
+        , value: local.theme
+      });
+    }
+
+    // 手动设置主题
+    function setTheme(othis) {
+      var theme = local.theme
+        , idx = othis.data('index');
+      if (othis.hasClass('layui-this')) return;
+      othis.addClass('layui-this').siblings().removeClass('layui-this');
+      creatTheme({
+        color: themeColorObj.color[idx]
+      });
+    }
+
+    // 页面特殊布局
+    $('.m-login-bg').height($(window).height());
+    $('.m-bg-contain').height($(window).height() / 2);
+
+    // 验证码
+    var verifyCode = new verfiy({
+      id: "vContainer",
+      type: "number"
+    });
+
+    // 读取本地是否已设主题
+    local.theme && creatTheme(local.theme);
+    // 执行设置主题
+    var $themeUl = $('.ladmin-user-login-theme').children('ul');
+    var currentThemeIdx = local.theme ? local.theme.color.index : 0;
+    var currentThemeLi = $themeUl.children('[data-index=' + currentThemeIdx + ']');
+    var currentThemeColor = currentThemeLi.children().css('background-color');
+    $('.m-bg-contain').css('background-color', currentThemeColor);
+    $('button[lay-filter="LAY-user-login-submit"]').css('background-color', currentThemeColor);
+    currentThemeLi.addClass('layui-this').siblings().removeClass('layui-this');
+    // 设置主题(此处只是对本页进行特殊显示效果处理，另外还隐式触发了定义在admin.js里面的设置主题方法)
+    $('.ladmin-user-login-theme').on('click', '[layadmin-event="setTheme"]', function () {
+      var bgc = $(this).children().css('background-color');
+      $('.m-bg-contain').css('background-color', bgc);
+      $('button[lay-filter="LAY-user-login-submit"]').css('background-color', bgc);
+      setTheme($(this))
+    });
+
+    // 表单初始化
+    form.render();
+
+    //自定义验证规则
+    form.verify({
+      title: function (value) {
+        if (value.length < 2) {
+          return '账号不得少于2字符';
+        }
+      },
+      pwd: [/(.+){6,12}$/, '密码必须6到12位'],
+      verity: function (value) {
+        if (!verifyCode.validate(value)) {
+          if ($('input[name=verity]').length) $('input[name=verity]').val('');
+          return '验证码不正确';
+        }
+        ;
+      }
+    });
+
+    //监听提交
+    form.on('submit(LAY-user-login-submit)', function (data) {
+      // 请求登入接口
+      $.ajax({
+        type: 'post',
+        url: 'https://www.easy-mock.com/mock/5af45f8ab45afc56560ae781/admin/postLogin',
+        data: data.field,
+        dataType: 'json',
+        beforeSend: function (xhr, options) {
+        },
+        complete: function (XHR, TS) {
+        },
+        success: function (result) {
+          //登入成功的提示与跳转
+          layer.msg(result.msg, {
+            offset: '15px'
+            , icon: 1
+            , time: 1000
+          }, function () {
+            window.location.href = '../../../start/index.html';
+          });
+        },
+        error: function () {
+          layer.msg('请求错误',{icon:2})
+        }
+      });
+      return false;
+    });
+
+    /*回车提交*/
+    $(':input[name=verity]').keyup(function (event) {
+      if (event.keyCode == "13") {
+        $("button[lay-filter=LAY-user-login-submit]").trigger("click");
+        return false;
+      }
+    });
+  });
+</script>
+</body>
+</html>

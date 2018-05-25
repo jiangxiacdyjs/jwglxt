@@ -1,0 +1,160 @@
+<title>用户编辑/新增</title>
+
+<div class="">
+  <form class="layui-form layui-form-pane" lay-filter="user-form">
+    <!--名称-->
+    <div class="layui-form-item">
+      <label class="layui-form-label">用户名称</label>
+      <div class="layui-input-block">
+        <input type="text" name="name" lay-verify="title" autocomplete="off" placeholder="请输入用户名称"
+               class="layui-input">
+      </div>
+    </div>
+    <!--初始密码-->
+    <div class="layui-form-item">
+      <label class="layui-form-label">初始密码</label>
+      <div class="layui-input-block">
+        <input type="password" name="pwd" lay-verify="pwd" autocomplete="off" placeholder="请输入初始密码"
+               class="layui-input">
+      </div>
+    </div>
+    <!--初始密码-->
+    <div class="layui-form-item">
+      <label class="layui-form-label">确认密码</label>
+      <div class="layui-input-block">
+        <input type="text" name="repwd" lay-verify="repwd" autocomplete="off" placeholder="请再次确认密码"
+               class="layui-input">
+      </div>
+    </div>
+    <!--类型-->
+    <div class="layui-form-item">
+      <label class="layui-form-label">用户分类</label>
+      <div class="layui-input-block">
+        <select name="type" lay-filter="type" lay-search="">
+          <option value="">请选择用户分类（不选将归为默认分类）</option>
+        </select>
+      </div>
+    </div>
+    <!--提交-->
+    <div class="layui-form-item mb0 pt50">
+      <div class="layui-footer">
+        <button type="button" class="layui-btn fr" lay-submit="" lay-filter="role-smt">立即提交</button>
+        <button type="reset" class="layui-btn layui-btn-primary fl ml0" lay-filter="user-undo">恢复操作</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  layui.use(['admin', 'form', 'table'], function () {
+    var $ = layui.$
+      , admin = layui.admin
+      , element = layui.element
+      , layer = layui.layer
+      , table = layui.table
+      , form = layui.form;
+
+    // 生成option并添加至第一个参数传入的jq对象
+    function generateTypeItem(jqObj, name, value, selectedVal) {
+      var $newOption = $('<option/>').val(value).text(name);
+      // todo:此处传入selectedVal是类别的value值，如果此传入的value值和当前select内的某个option的value值匹配，则选中它
+      if(value === selectedVal){
+        $newOption.attr('selected',true)
+      };
+      jqObj.append($newOption);
+    }
+
+    // 加载后执行请求渲染用户分类详情信息
+    $.ajax({
+      type: 'post',
+      url: admin.baseUrl + '/userType',
+      data: '',
+      dataType: 'json',
+      beforeSend: function () {
+        $('form').find('select[name=type]').children('option:not(:first)').remove();
+        this.typesLoading = admin.loading();
+      },
+      complete: function () {
+        layer.close(this.typesLoading);
+      },
+      success: function (result) {
+        if (result.code == 0) {
+          var data = result.data;
+          var $select = $('form').find('select[name=type]').eq(0);
+          // todo：待完善：此自定义id是在父页面设置的，实际上js执行的顺序先是执行此模块的所有代码，然后才是执行父页面中的done回调方法，因为是异步操作，所以这里能获取到从父页面传递过来的自定义id值，如果是在beforeSend中获取则会返回undefined
+          var selectedValue = $('form').find('select[name=type]').eq(0).attr('data-id');
+          for (var i = 0; i < data.length; i++) {
+            generateTypeItem($select, data[i].name, data[i].value, selectedValue);
+          };
+          form.render('select');
+        }
+      },
+      error: function (error) {
+        layer.msg('请求错误，请检查网络', {icon: 2});
+        form.render('select');
+      },
+    });
+
+    // 自定义验证规则
+    form.verify({
+      title: function (value) {
+        if (value.length < 2) {
+          return '标题至少得2个字符啊';
+        }
+      }
+      , pwd: [/(.+){6,12}$/, '密码必须6到12位']
+      , repwd: function (value) {
+        if(!value.length){
+          return '请确认密码'
+        }else if (value !== $('[name=pwd]').val()) {
+          return '两次输入密码不一致'
+        }
+      }
+      , content: function (value) {
+        layedit.sync(editIndex);
+      }
+    });
+
+    // 监听指定开关
+    form.on('switch(role-lock-edit)', function (data) {
+      console.log('cuck')
+      layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+        offset: '6px'
+      });
+      layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+    });
+
+    // 监听提交
+    form.on('submit(role-smt)', function (data) {
+      layer.alert(JSON.stringify(data.field), {
+        title: '最终的提交信息'
+      });
+      $.ajax({
+        type: 'post',
+        url: admin.baseUrl + '/role',
+        data: data.field,
+        dataType: 'json',
+        beforeSend: function () {
+          this.loading = admin.loading();
+        },
+        complete: function () {
+          layer.close(this.loading);
+        },
+        success: function (result) {
+          if (result.code == 0) {
+            table.reload('roleTable', {
+              data: result.data,
+              where: {} // 请求额外参数（注意：这里面的参数可任意定义）
+            });
+          }
+        },
+        error: function (error) {
+          layer.msg('请求出错啦', {icon: 2});
+        },
+      });
+      if (admin.popup.addLayer) layer.close(admin.popup.addLayer);
+      if (admin.popup.editLayer) layer.close(admin.popup.editLayer);
+      return false;
+    });
+  });
+</script>
