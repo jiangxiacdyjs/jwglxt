@@ -23,8 +23,8 @@
           <div class="layui-inline" style="width: 48%;float: left;margin-right: 0">
             <!--<img class="verifyImg" onclick="this.src=this.src+'?c='+Math.random();"
                  src="../src/img/login/yzm.jpg"/>-->
-            <div style="height: 38px;margin:0 0 5px 0;border-radius: 2px;overflow: hidden">
-              <div id="vContainer" style="width: inherit;height: inherit"></div>
+            <div style="width:100%;height: 38px;margin:0 0 5px 0;border-radius: 2px;overflow: hidden">
+              <div id="vContainer" style="width:100%;height: inherit"></div>
             </div>
           </div>
         </div>
@@ -95,7 +95,8 @@
     $('.m-login-bg').height($(window).height());
     $('.m-bg-contain').height($(window).height() / 2);
 
-    // 验证码 todo:切换模块后验证码会显示不全，此问题有待解决
+    // 验证码 todo:切换模块后验证码会显示不全，暂时用如何设置宽度解决此问题
+    $('#vContainer').width('163');
     var verifyCode = new verfiy({
       id: "vContainer",
       type: "number"
