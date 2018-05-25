@@ -12,7 +12,7 @@ layui.define(['laytpl', 'layer', 'element', 'util'], function(exports){
     ,pageTabs: false //是否开启页面选项卡功能。单页面专业版不推荐开启
     ,baseUrl: ' https://www.easy-mock.com/mock/5af45f8ab45afc56560ae781/admin' //是否开启页面选项卡功能。单页面专业版不推荐开启
 
-    ,name: '智慧售电系统'
+    ,name: '营养餐管理系统'
     ,tableName: 'layuiAdmin' //本地存储表名
     ,MOD_NAME: 'admin' //模块事件名
     

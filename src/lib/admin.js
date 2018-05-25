@@ -27,7 +27,7 @@ layui.define('view', function (exports) {
 
     //通用方法
     , admin = {
-      v: '1.0.0-beta9 pro'
+      v: '2.0'
 
       //把config配置文件传递给admin，以便其他模块直接通过admin.setter使用配置文件（而无需再次导入config模块再使用）
       , setter: setter
