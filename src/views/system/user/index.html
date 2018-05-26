@@ -47,20 +47,19 @@
       </script>
       <!--这里的 checked 是根据每条数据的lock字段判断是否选中 -->
       <script type="text/html" id="user-checkboxTpl">
-        <input type="checkbox" name="lock" title="锁定" lay-filter="user-lock"
-               value="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}" {{ d.lock== 1
+        <input type="checkbox" name="lock" lay-skin="switch" lay-text="开启|锁定" title="锁定" lay-filter="user-lock" value="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}" {{ d.lock== 1
                ? 'checked' : '' }}>
       </script>
       <!--表格操作栏目-->
       <script type="text/html" id="user-operateTplDom">
-        <a class="layui-btn layui-btn-sm"
+        <a class="layui-btn layui-btn-xs"
            lay-event="operate"
            lay-filter="user-operate"
            title="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}">编辑/查看</a>
       </script>
       <!--表格信息编辑栏目-->
       <script type="text/html" id="user-infoTplDom">
-        <a class="layui-btn layui-btn-normal layui-btn-sm"
+        <a class="layui-btn layui-btn-normal layui-btn-xs"
            lay-event="info"
            lay-filter="user-operate"
            title="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}">编辑/查看</a>
@@ -106,9 +105,9 @@
         , {field: 'nickname', title: '用户昵称'}
         , {field: 'type', title: '分类', templet: '#user-typeTpl'}
         , {field: 'phone', title: '手机号'}
-        , {field: 'operate', title: '角色分配', templet: '#user-operateTplDom', unresize: true, width: 120, align: 'center'}
-        , {field: 'info', title: '信息编辑', templet: '#user-infoTplDom', unresize: true, width: 120, align: 'center'}
-        , {field: 'lock', title: '是否锁定', width: 100, templet: '#user-checkboxTpl', unresize: true}
+        , {field: 'operate', title: '角色分配', templet: '#user-operateTplDom', unresize: true, width: 95, align: 'center'}
+        , {field: 'info', title: '信息编辑', templet: '#user-infoTplDom', unresize: true, width: 95, align: 'center'}
+        , {field: 'lock', title: '开启', templet: '#user-checkboxTpl', unresize: true, width: 90, align: 'center'}
       ]]
       , page: true
     });
@@ -148,7 +147,7 @@
     });
 
     // 监听锁定操作
-    form.on('checkbox(user-lock)', function (obj) {
+    form.on('switch(user-lock)', function (obj) {
       var json = JSON.parse(decodeURIComponent($(this).data('json')));
       layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
 

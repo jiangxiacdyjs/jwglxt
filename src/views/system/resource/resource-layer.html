@@ -70,8 +70,8 @@
       <div class="layui-col-xs6">
         <label class="layui-form-label">是否锁定</label>
         <div class="layui-input-block">
-          <input type="checkbox" name="lock" title="锁定" lay-skin="" lay-filter="resource-lock-edit"
-                 lay-text="ON|OFF" value="{{d.id}}">
+          <input type="checkbox" name="lock" lay-skin="switch" lay-text="开启|锁定" title="锁定" lay-filter="resource-lock" value="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}" {{ d.lock== 1
+                 ? 'checked' : '' }}>
         </div>
       </div>
     </div>

@@ -38,8 +38,7 @@
           <table class="layui-hide" id="resourceTable"></table>
           <!--这里的 checked 是根据每条数据的lock字段判断是否选中 -->
           <script type="text/html" id="resource-checkboxTpl">
-            <input type="checkbox" name="lock" title="锁定" lay-filter="resource-lock"
-                   value="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}" {{ d.lock== 1
+            <input type="checkbox" name="lock" lay-skin="switch" lay-text="开启|锁定" title="锁定" lay-filter="resource-lock" value="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}" {{ d.lock== 1
                    ? 'checked' : '' }}>
           </script>
           <!--父级资源对象参数的解析显示-->
@@ -95,13 +94,13 @@
         , {field: 'desc', title: '描述'}
         , {field: 'level', title: '层级', width: 68, align:"center", sort:true}
         , {field: 'parent', title: '父级', templet: '#resource-parentTpl'}
-        , {field: 'lock', title: '是否锁定', width: 100, templet: '#resource-checkboxTpl', unresize: true}
+        , {field: 'lock', title: '开启',templet: '#resource-checkboxTpl', unresize: true, width: 90, align: 'center'}
       ]]
       , page: true
     });
 
     // 监听锁定操作
-    form.on('checkbox(resource-lock)', function (obj) {
+    form.on('switch(resource-lock)', function (obj) {
       var json = JSON.parse(decodeURIComponent($(this).data('json')));
       layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
 

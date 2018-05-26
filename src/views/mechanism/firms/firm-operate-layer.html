@@ -14,22 +14,13 @@
              class="layui-input">
     </div>
   </div>
-  <!--角色选择-->
+  <!--片区选择-->
   <div class="layui-form-item">
-    <select name="roles" lay-verify="" xm-select="xmselect" xm-select-type="1" xm-select-skin="" xm-select-search>
-      <!--<option value="">请选择角色（初次新增时可不选）</option>
-      <option value="0">用户管理</option>
-      <option value="1">系统管理</option>
-      <option value="2">客户管理</option>
-      <option value="3">运维管理</option>
-      <option value="5">后期维护</option>
-      <option value="6">客服运维</option>
-      <option value="7">开发制作</option>
-      <option value="8">市场营销</option>-->
+    <select name="areas" lay-verify="required" xm-select="xmselect" xm-select-type="1" xm-select-skin="" xm-select-search>
     </select>
   </div>
   <!--提交-->
-  <div class="layui-form-item pt50">
+  <div class="layui-form-item">
     <button id="givupBtn" style="width: 48%;float: left;" type="button" disabled
             class="layui-btn layui-btn-danger layui-btn-disabled layui-btn-fluid">撤销修改
     </button>
@@ -38,7 +29,19 @@
     </button>
   </div>
 </form>
-
+<!--片区数据展示-->
+<div class="layui-collapse" lay-accordion="" id="areaCollapse"></div>
+<!--片区数据模板-->
+<div class="layui-colla-item layui-hide" data-type="template">
+  <h2 class="layui-colla-title">
+    <span></span>
+    <div class="fr ccc"><span class=""></span>&nbsp;所学校</div>
+  </h2>
+  <div class="layui-colla-content">
+    <!--这还是需要把layui-hide加上，用于克隆后标识为角色模板，和其他角色badge的区别就在于多了个layui-hide类-->
+    <span class="layui-badge layui-bg-black layui-hide"></span>
+  </div>
+</div>
 <script>
   layui.use(['admin', 'form', 'formSelects', 'table'], function () {
     var $ = layui.$
@@ -49,22 +52,33 @@
       , table = layui.table
       , form = layui.form;
 
+    var areaColId = '#areaCollapse';
+
     // 加载后执行请求渲染角色分类详情信息
     $.ajax({
       type: 'post',
-      url: admin.baseUrl + '/roleType',
+      url: admin.baseUrl + '/areas',
       data: '',
       dataType: 'json',
       beforeSend: function () {
-        $('#typeCollapse').empty();
-        this.typesLoading = admin.loading();
+        $('#areaCollapse').empty();
+        this.areaLoading = admin.loading();
       },
       complete: function () {
-        layer.close(this.typesLoading);
+        layer.close(this.areaLoading);
       },
       success: function (result) {
         if (result.code == 0) {
-          setRoleSelectOptions(result.data)
+          var data = result.data;
+          for (var i = 0; i < data.length; i++) {
+            generateAreaItem(data[i].name, data[i].value, data[i].schools.length, data[i].schools)
+          };
+          // 要在上述插入dom结构之后--展开新增的分类，收缩其他分类
+          $(areaColId).children().eq(0).find('.layui-colla-content').addClass('layui-show');
+          // 重置折叠面板
+          element.render('collapse');
+          // 创建符合xmselect格式的数据并初始化xmselect
+          setAreaSelectOptions(data)
         }
       },
       error: function (error) {
@@ -72,28 +86,36 @@
       },
     });
 
-    // 根据页面中展示的分类信息，设置选择角色的select的options数据
-    function setRoleSelectOptions(data) {
+    // 生成片区分类信息
+    function generateAreaItem(name, id, schoolsNum, schools) {
+      var $newCollapseItem = $('[data-type=template]').eq(0).clone().removeClass('layui-hide').removeAttr('data-type');
+      $newCollapseItem.attr('id', id).find('.layui-colla-title').children('span').html(name).siblings('div').children('span').html(schoolsNum);
+      var $newCollapseItemContent = $newCollapseItem.find('.layui-colla-content').eq(0);
+      if (schoolsNum) {
+        for (var i = 0; i < schoolsNum; i++) {
+          var $newAreaItem = $newCollapseItemContent.find('.layui-badge.layui-hide').clone().removeClass('layui-hide').html(schools[i].name).attr('id', schools[i].id);
+          $newCollapseItemContent.append($newAreaItem);
+        }
+        // 在这里手动的把每个分类里的角色badge模板删除掉
+        $newCollapseItemContent.find('.layui-badge.layui-hide').remove();
+      } else {
+        $newCollapseItem.find('.layui-colla-content').html('<div class="ccc tc">此区域暂无数据</div>');
+      }
+      $newCollapseItem.appendTo($(areaColId));
+    }
 
+    // 根据页面中展示的分类信息，设置选择片区的select的options数据
+    function setAreaSelectOptions(data) {
       var dataArr = [];
       for (var i = 0; i < data.length; i++) {
         // 创建一个类别的对象
-        var typeObj = {};
+        var obj = {};
         // 设置类对象的name
-        typeObj.name = data[i].name;
-        var typeObjArr = [];
-        for (var j = 0; j < data[i].roles.length; j++) {
-          var roleObj = {}
-          roleObj.name = data[i].roles[j].name;
-          roleObj.val = data[i].roles[j].id;
-          typeObjArr.push(roleObj);
-        };
-        // 设置类对象的包含项
-        typeObj.arr = typeObjArr;
+        obj.name = data[i].name;
+        obj.val = data[i].value;
         // 把以上处理好的单个类数据添加到dataArr数组中
-        dataArr.push(typeObj);
-      }
-
+        dataArr.push(obj);
+      };
       if(formSelects){
         // 表单选择组件
         formSelects.render({
@@ -111,63 +133,8 @@
         //formSelects.value('select', 'name');		//获取选中的name数组
         //formSelects.value('select', [1, 3]);	//动态赋值
       }else{
-        console.log('formSelects是什么')
       }
 
-    }
-
-    // 根据页面中展示的分类信息，设置选择分类的select的options数据，而不是请求后台获取（个人认为前端已经有这些数据了，而且是后台返回的最新的，就没必要再多一次请求）
-    function setTypeSelectOptions(selectJqObj) {
-      selectJqObj.children('option:not(:first)').remove();
-      var $typeCollapse = $('#typeCollapse');
-      for (var i = 0; i < $typeCollapse.children().length; i++) {
-        var optionVal = $typeCollapse.children().eq(i).attr('id');
-        var optionTxt = $typeCollapse.children().eq(i)
-          .find('.layui-colla-title').children('span').text();
-        var $newOption = $('<option/>').val(optionVal).text(optionTxt);
-        // 克隆的select循环添加option
-        selectJqObj.append($newOption);
-      }
-    }
-
-    // 重置表单
-    function formReset() {
-      // 清空所有表单值
-      $(':input').val('');
-      // 清空已选角色
-      formSelects.value('xmselect', []);
-      // 重置删除按钮即保存提交按钮状态
-      $('#delBtn').attr('data-id', '').prop('disabled', true).addClass('layui-btn-disabled').next().attr('data-id', '');
-      // 重新渲染form表单
-      form.render();
-      // 设置新增模式下的提交按钮为下面文字（因为新增模式下用户选择了角色会动态改变该按钮内文字，现在需要重置回来）
-      $('#smtBtn').html('确认新增');
-    }
-
-    // 修改现目前已存在的分类的角色信息
-    function editTypeItem(id, name, rolesArr) {
-      var $typeItem = $('#' + id);
-      var $typeItemTitle = $typeItem.find('.layui-colla-title').children('span');
-      var $typeItemContent = $typeItem.find('.layui-colla-content');
-      name.length ? $typeItemTitle.text(name) : '';
-      $typeItemTitle.siblings().eq(0).children('span').text(rolesArr.length);
-      $typeItemContent.empty();
-      if (rolesArr.length) {
-        for (var i = 0; i < rolesArr.length; i++) {
-          var $newBadge = $('[data-type="template"]').find('.layui-badge').clone(true).removeClass('layui-hide');
-          // 如果其他地方已有此id的角色，就要先通过此id找到原来分类然后修改到显示的角色数,然后再把它移除掉，然后再创建新增到别处
-          if($('#'+rolesArr[i].id).length){
-            var $oldShowRolesNumSpan = $('#'+rolesArr[i].id).parent().siblings('.layui-colla-title').children('div').find('span');
-            var oldRolesNum = $oldShowRolesNumSpan.text();
-            $oldShowRolesNumSpan.text(oldRolesNum-1);
-            $('#'+rolesArr[i].id).remove();
-          };
-          $newBadge.text(rolesArr[i].name).attr('id', rolesArr[i].id);
-          $typeItemContent.append($newBadge);
-        }
-      } else {
-        $typeItemContent.html('<div class="ccc tc">此分类暂无数据</div>');
-      }
     }
 
     // 自定义验证规则
@@ -176,35 +143,23 @@
         if (value.length < 2) {
           return '名称不得少于2个字符';
         }
-      },
-      editTitle: function (value) {
-        if (!value) {
-          return '';
-        } else if (value.length && value.length < 2) {
-          return '分类名称不得少于2个字符';
-        }
-      },
-      typeselect: function (value) {
-        if (!value.length) {
-          return '请先选择操作对象';
-        }
       }
     });
 
     // 监听提交(根据lay-filter值来监听提交，便于保存操作和新增操作的提交公用一个方法)，但是需要判断是新增模式还是修改模式（根据点击按钮是否有data-id值来确定，有的话是编辑模式，无则是新增模式）
     form.on('submit(operate-smt)', function (data) {
       //获取选中的val数组
-      var rolesValueArr = formSelects.value('xmselect', 'val');
-      var rolesNameArr = formSelects.value('xmselect', 'name');
-      var rolesArr = [];
-      for (var i = 0; i < rolesValueArr.length; i++) {
+      var areasValueArr = formSelects.value('xmselect', 'val');
+      var areasNameArr = formSelects.value('xmselect', 'name');
+      var areasArr = [];
+      for (var i = 0; i < areasValueArr.length; i++) {
         var obj = {};
-        obj.id = rolesValueArr[i];
-        obj.name = rolesNameArr[i];
-        rolesArr.push(obj);
+        obj.id = areasValueArr[i];
+        obj.name = areasNameArr[i];
+        areasArr.push(obj);
       };
       // 传给后台的已选角色id数组
-      data.field.roles = rolesArr;
+      data.field.areas = areasArr;
       $.ajax({
         type: 'post',
         url: admin.baseUrl + '/postSuccess',
@@ -230,7 +185,7 @@
             },
             success: function (result) {
               if (result.code == 0) {
-                table.reload('userTable', {
+                table.reload('firmTable', {
                   data: result.data,
                   where: {} // 请求额外参数（注意：这里面的参数可任意定义）
                 });
