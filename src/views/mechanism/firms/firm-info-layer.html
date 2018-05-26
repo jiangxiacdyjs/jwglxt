@@ -1,0 +1,223 @@
+<title>用户角色分配</title>
+<style>
+  .layui-badge {
+    margin-right: 5px
+  }
+  .avatar{width: 60px;height: 60px;border-radius: 100%;cursor: pointer}
+</style>
+<!--可在form上添加layui-form-pane类来改变表单风格-->
+<form class="layui-form layui-form-pane" lay-filter="info-form">
+  
+  <div class="tc">
+    <input type="radio" name="sex" value="男" title="男">
+    <img title="点击上传头像" class="avatar" src="http://www.yyweishi.com/uploads/allimg/140323/010H92234-16.jpg" alt="">
+    <input type="radio" name="sex" value="女" title="女">
+    <p class="mt5 mb5 account">account</p>
+  </div>
+  <!--信息表单折叠面板-->
+  <div class="layui-collapse" lay-filter="info-panel">
+    <!--用户信息-->
+    <div class="layui-colla-item">
+      <h2 class="layui-colla-title">用户基本信息</h2>
+      <div class="layui-colla-content layui-show" style="padding: 20px 15px">
+        <div class="layui-row layui-col-space20">
+          <div class="layui-col-xs6">
+            <div class="layui-form-item mb0">
+              <label class="layui-form-label">昵称</label>
+              <div class="layui-input-block">
+                <input type="text" name="nickname" lay-verify="title" autocomplete="off" placeholder="请输入用户昵称"
+                       class="layui-input">
+              </div>
+            </div>
+          </div>
+          <div class="layui-col-xs6">
+            <div class="layui-form-item mb0">
+              <label class="layui-form-label">年龄</label>
+              <div class="layui-input-block">
+                <input type="number" name="age" lay-verify="required" autocomplete="off" placeholder="请输入您的年龄"
+                       class="layui-input">
+              </div>
+            </div>
+          </div>
+
+            <div class="layui-col-xs6">
+              <div class="layui-form-item mb0">
+                <label class="layui-form-label">手机号码</label>
+                <div class="layui-input-block">
+                  <input type="number" name="phone" lay-verify="phone" autocomplete="off" placeholder="请输入常用手机号"
+                         class="layui-input">
+                </div>
+              </div>
+            </div>
+            <div class="layui-col-xs6">
+              <div class="layui-form-item mb0">
+                <label class="layui-form-label">常用邮箱</label>
+                <div class="layui-input-block">
+                  <input type="text" name="email" lay-verify="email" autocomplete="off" placeholder="请输入常用邮箱"
+                         class="layui-input">
+                </div>
+              </div>
+            </div>
+
+            <div class="layui-col-xs12">
+              <div class="layui-form-item mb0">
+                <label class="layui-form-label">签名</label>
+                <div class="layui-input-block">
+                  <input type="text" name="desc" class="layui-input" placeholder="菩提本无树，明镜亦非台，本来无一物，何处惹尘埃。">
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <!--单位信息-->
+    <div class="layui-colla-item">
+      <h2 class="layui-colla-title">用户所属单位信息</h2>
+      <div class="layui-colla-content layui-show" style="padding: 20px 15px">
+        <div class="layui-row layui-col-space20">
+          <div class="layui-col-xs6">
+            <div class="layui-form-item mb0">
+              <label class="layui-form-label">单位名称</label>
+              <div class="layui-input-block">
+                <input type="text" name="group" lay-verify="" autocomplete="off" placeholder="所在单位全称"
+                       class="layui-input">
+              </div>
+            </div>
+          </div>
+          <div class="layui-col-xs6">
+            <div class="layui-form-item mb0">
+              <label class="layui-form-label">办公电话</label>
+              <div class="layui-input-block">
+                <input type="text" name="gphone" lay-verify="" autocomplete="off" placeholder="所在单位办公电话"
+                       class="layui-input">
+              </div>
+            </div>
+          </div>
+          <div class="layui-col-xs12">
+            <div class="layui-form-item mb0">
+              <label class="layui-form-label">单位地址</label>
+              <div class="layui-input-block">
+                <input type="text" name="address" lay-verify="" autocomplete="off" placeholder="所在单位地址"
+                       class="layui-input">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--提交-->
+  <div class="layui-form-item mt20">
+    <button id="givupBtn" style="width: 48%;float: left;" type="button"
+            class="layui-btn layui-btn-danger layui-btn-fluid" lay-filter="info-undo">撤销修改
+    </button>
+    <button style="width: 48%;float: right;" type="button" class="layui-btn layui-btn-fluid" lay-submit=""
+            lay-filter="info-smt">确认保存
+    </button>
+  </div>
+</form>
+
+<script>
+  layui.use(['admin', 'form', 'formSelects', 'table', 'upload'], function () {
+    var $ = layui.$
+      , admin = layui.admin
+      , element = layui.element
+      , layer = layui.layer
+      , table = layui.table
+      , upload = layui.upload
+      , form = layui.form;
+
+    element.render('collapse');
+
+    form.render();
+
+    // 头像图片上传
+    var uploadInst = upload.render({
+      elem: '.avatar'
+      ,url: admin.baseUrl + '/postSuccess'
+      ,before: function(obj){
+        //预读本地文件示例，不支持ie8
+        obj.preview(function(index, file, result){
+          $('.avatar').attr('src', result); //图片链接（base64）
+        });
+      }
+      ,done: function(res){
+        //如果上传失败
+        if(res.code > 0){
+          return layer.msg('上传失败');
+        }
+        //上传成功
+      }
+      ,error: function(){
+        /* 失败状态，并实现重传
+        demoText.find('.demo-reload').on('click', function(){
+          uploadInst.upload();
+        });*/
+      }
+    });
+
+    // 自定义验证规则
+    form.verify({
+      title: function (value) {
+        if (value.length < 2) {
+          return '昵称不得少于2个字符';
+        }
+      }
+    });
+
+    // 监听提交(根据lay-filter值来监听提交，便于保存操作和新增操作的提交公用一个方法)，但是需要判断是新增模式还是修改模式（根据点击按钮是否有data-id值来确定，有的话是编辑模式，无则是新增模式）
+    form.on('submit(info-smt)', function (data) {
+      $.ajax({
+        type: 'post',
+        url: admin.baseUrl + '/postSuccess',
+        data: data.field,
+        dataType: 'json',
+        beforeSend: function () {
+          this.loading = admin.loading();
+        },
+        complete: function () {
+          layer.close(this.loading);
+        },
+        success: function (result) {
+          $.ajax({
+            type: 'post',
+            url: admin.baseUrl + '/role',
+            data: data.field,
+            dataType: 'json',
+            beforeSend: function () {
+              this.loading = admin.loading();
+            },
+            complete: function () {
+              layer.close(this.loading);
+            },
+            success: function (result) {
+              if (result.code == 0) {
+                layer.close(admin.popup.infoLayer);
+                table.reload('userTable', {
+                  data: result.data,
+                  where: {} // 请求额外参数（注意：这里面的参数可任意定义）
+                });
+              }
+            },
+            error: function (error) {
+              layer.msg('请求出错啦', {icon: 2});
+            },
+          });
+          layer.msg('编辑成功', {icon: 1});
+          layer.close(admin.popup.operateLayer);
+          // formReset();
+        },
+        error: function (error) {
+          layer.msg('请求出错啦', {icon: 2});
+        },
+      });
+    });
+
+    // 删除分类事件（首先获取已选分类id值，然后判断已选分类是否是系统默认分类，是的话不允许继续删除操作，不是的话友情提示下是否确认删除，以及删除后的操作提示，用户依然确认删除的话就执行ajax请求提交删除项）
+    $('form').on('click', '#givupBtn', function () {
+      var that = this;
+      layer.msg('撤销编辑操作，还原至初始状态')
+    });
+
+  });
+</script>

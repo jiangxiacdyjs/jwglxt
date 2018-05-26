@@ -1,0 +1,353 @@
+<title>配送公司管理</title>
+
+<div class="layui-fluid">
+  <div class="layui-card fullh">
+    <div class="layui-card-header operate-box">
+      <!--操作按钮组-->
+      <div class="layui-btn-group">
+        <button data-type="add" class="layui-btn layui-btn-sm">
+          新增
+        </button>
+        <button data-type="edit" class="layui-btn layui-btn-normal layui-btn-sm">
+          编辑
+        </button>
+        <button data-type="del" class="layui-btn layui-btn-danger layui-btn-sm">
+          删除
+        </button>
+      </div>
+      <!--搜索查询-->
+      <div class="test-table-reload-btn layui-layout-right" style="right: 15px">
+        名称搜索：
+        <div class="layui-inline">
+          <input class="layui-input h30" name="id" id="searchInput" autocomplete="off">
+        </div>
+        <button class="layui-btn layui-btn-sm" data-type="search">搜索</button>
+      </div>
+    </div>
+    <div class="layui-card-body">
+      <table class="layui-hide" id="firmTable" lay-filter="firmTable"></table>
+      <!--头像栏模板-->
+      <script type="text/html" id="firm-avatarTpl">
+        <img src="{{d.logo}}" alt="" style="border-radius: 100%;height: 26px">
+      </script>
+      <!--这里的 checked 是根据每条数据的lock字段判断是否选中 -->
+      <script type="text/html" id="firm-checkboxTpl">
+        <input type="checkbox" name="lock" title="锁定" lay-filter="firm-lock"
+               value="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}" {{ d.lock== 1
+               ? 'checked' : '' }}>
+      </script>
+      <!--表格操作栏目-->
+      <script type="text/html" id="firm-operateTplDom">
+        <a class="layui-btn layui-btn-sm"
+           lay-event="operate"
+           lay-filter="firm-operate"
+           title="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}">编辑/查看</a>
+      </script>
+      <!--表格信息编辑栏目-->
+      <script type="text/html" id="firm-infoTplDom">
+        <a class="layui-btn layui-btn-normal layui-btn-sm"
+           lay-event="info"
+           lay-filter="firm-operate"
+           title="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}">编辑/查看</a>
+      </script>
+      <!--责任人-->
+      <script type="text/html" id="firm-responsibleTplDom">
+        {{d.staffs[0].name}}
+      </script>
+      <!--责任人-->
+      <script type="text/html" id="firm-cellphoneTplDom">
+        {{d.staffs[0].cellphone}}
+      </script>
+    </div>
+  </div>
+</div>
+<script>
+  layui.use(['admin', 'table', 'form', 'view', 'formSelects'], function () {
+    var table = layui.table
+      , form = layui.form
+      , $ = layui.$
+      , admin = layui.admin
+      , formSelects = layui.formSelects
+      , view = layui.view;
+
+    // todo：愚昧地手动设置显示区域高度，正在寻找更智能的方法
+    $('.fullh').height(admin.getRightAvailableHeight());
+    $('.tree-box').height($('.tree-box').parent().height() - 62);
+
+    // 表格
+    table.render({
+      elem: '#firmTable'
+      , url: admin.baseUrl + '/firm'
+      , method: 'post'
+      , height: 'full-151'
+      // ,cellMinWidth: 80
+      // ,size: 'sm'
+      , cols: [[
+        {type: 'numbers'}
+        , {type: 'checkbox'}
+        // ,{field:'id', title:'ID', width:100, unresize: true, sort: true}
+        // , {
+        //   field: 'logo',
+        //   title: 'logo',
+        //   templet: '#firm-avatarTpl',
+        //   align: 'center',
+        //   width: 80,
+        //   event: 'viewAvatar',
+        //   style: "cursor:pointer"
+        // }
+        , {field: 'name', title: '公司名称'}
+        , {field: 'telephone', title: '办公电话'}
+        , {field: 'legalPerson', title: '法人',width: 75}
+        , {field: 'address', title: '地址',width: 150}
+        // , {field: 'desc', title: '描述'}
+        , {field: 'staffs', title: '责任人',templet: '#firm-responsibleTplDom',width: 75}
+        , {field: 'staffs', title: '责任人手机号',templet: '#firm-cellphoneTplDom'}
+
+        , {field: 'creator', title: '创建人',width: 75}
+        , {field: 'creatTime', title: '创建时间'}
+        , {field: 'operate', title: '角色区域', templet: '#firm-operateTplDom', unresize: true, width: 120, align: 'center'}
+        , {field: 'info', title: '信息编辑', templet: '#firm-infoTplDom', unresize: true, width: 120, align: 'center'}
+        , {field: 'lock', title: '是否锁定', width: 100, templet: '#firm-checkboxTpl', unresize: true}
+      ]]
+      , page: true
+    });
+
+    // 监听工具条
+    table.on('tool(firmTable)', function (obj) {
+      var data = obj.data;
+      if (obj.event === 'operate') {
+        // 获得当前按钮的jq对象
+        var $thisBtn = $(this);
+        // 执行打开operate对应弹窗
+        layerActive.operate(data)
+
+      } else if (obj.event === 'info') {
+        // 获得当前按钮的jq对象
+        var $thisBtn = $(this);
+        // 执行打开operate对应弹窗
+        layerActive.info(data)
+
+      } else if (obj.event === 'viewAvatar') {
+        layer.photos({
+          photos: {
+            "title": "", //相册标题
+            "data": [   //相册包含的图片，数组格式
+              {
+                "alt": obj.data.nickname,
+                "src": obj.data.avatar, //原图地址
+                "thumb": '' //缩略图地址
+              }
+            ]
+          }
+          //格式见API文档手册页
+          , anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机
+          , shade: [0.3, '#000']
+        });
+      };
+    });
+
+    // 监听锁定操作
+    form.on('checkbox(firm-lock)', function (obj) {
+      var json = JSON.parse(decodeURIComponent($(this).data('json')));
+      layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
+
+      json = table.clearCacheKey(json);
+      console.log(json); //当前行数据
+    });
+
+    // layer
+    var layerActive = {
+      add: function () {
+        admin.popup.addLayer = admin.popup({
+          "title": "配送公司新增"
+          , area: admin.screen() < 2 ? ['100%', '400px'] : ['620px', '400px']
+          , id: 'firmAdd'//id唯一
+          , maxmin: true//id唯一
+          , success: function () {
+            view(this.id).render('system/firm/firm-layer').done(function (html) {
+              if ($('button[lay-filter=firm-undo]').length){
+                $('button[lay-filter=firm-undo]').off('click').prop('type','reset').text('重置表单').trigger('click')
+              }
+            });
+          }
+        });
+      }
+      , edit: function () {
+        if (checkActive.getCheckLength() > 1) {
+          layer.msg('不可一次性编辑多条数据哦', {icon: 2})
+        } else if (!checkActive.getCheckLength()) {
+          layer.msg('请先选中一条数据', {icon: 2})
+        } else {
+          admin.popup.editLayer = admin.popup({
+            "title": "配送公司编辑"
+            , area: admin.screen() < 2 ? ['100%', '400px'] : ['620px', '400px']
+            , id: 'firmEdit'//id唯一
+            , success: function () {
+              // 自定义了一个参数对象传递给view.render()方法，在其渲染完之后执行回调函数
+              view(this.id).render('system/firm/firm-layer','fuckfuckfuckfuck').then(function (html) {
+                // console.log(html)
+              }).done(function (html) {
+                // layui2.3可以调用form.val()方法对表单赋值
+                var checkedRowDataObj = checkActive.getCheckData()[0];
+                // 绑定恢复操作按钮事件
+                if ($('button[lay-filter=firm-undo]').length){
+                  $('button[lay-filter=firm-undo]').off('click').prop('type','button').text('恢复操作').on('click',function () {
+                    form.val("firm-form", checkedRowDataObj);
+                    $('form').find('select[name=type]').attr('data-id',checkedRowDataObj.type.value);
+                    layer.msg('已恢复至最近保存数据');
+                  });
+                };
+                form.val("firm-form", checkedRowDataObj);
+                $('form').find('select[name=type]').attr('data-id',checkedRowDataObj.type.value);
+                // form.render();
+              });
+            }
+          });
+        }
+      }
+      , del: function () {
+        if (checkActive.getCheckLength() > 0) {
+          var confirmLayerIdx = admin.popup({
+            content: '是否确认删除已选择的' + checkActive.getCheckLength() + '条数据？'
+            , btn: ['确认', '取消']
+            , skin: 'layui-layer-admin'
+            , btnAlign: 'c'
+            , yes: function (index, layero) {
+              layer.close(confirmLayerIdx);
+              $.ajax({
+                type: 'post',
+                url: admin.baseUrl + '/firm',
+                data: JSON.stringify(checkActive.getCheckData()),
+                dataType: 'json',
+                beforeSend: function () {
+                  this.loading = admin.loading();
+                },
+                complete: function () {
+                  layer.close(this.loading);
+                },
+                success: function (result) {
+                  if (result.code == 0) {
+                    table.reload('firmTable', {
+                      data: result.data,
+                      where: {} // 请求额外参数（注意：这里面的参数可任意定义）
+                    });
+                  }
+                },
+                error: function (error) {
+                  layer.msg('请求出错啦', {icon: 2});
+                },
+              });
+            }
+            , btn2: function (index, layero) {
+            }
+            , cancel: function () {
+            }
+          });
+        } else {
+          layer.msg('请选则需要删除的数据项', {icon: 2})
+        }
+      }
+      , operate: function (data) {
+        admin.popup.operateLayer = admin.popup({
+          "title": "用户角色分配"
+          , area: admin.screen() < 2 ? ['100%', '300px'] : ['620px', '350px']
+          , id: 'firmOperate'//id唯一
+          , maxmin: true//id唯一
+          , success: function () {
+            // 自定义了一个参数对象传递给view.render()方法，在其渲染完之后执行回调函数
+            view(this.id).render('system/firm/firm-operate-layer', {
+                callback: function () {
+                  form.val("operate-form", data);
+                  var rolesValArr = [];
+                  for (var i = 0; i < data.roles.length; i++) {
+                    rolesValArr.push(data.roles[i].value);
+                  };
+                  layer.msg('该用户所拥有的角色id数组为:' + rolesValArr.toString() + ",之所以在打开编辑窗口时这写角色没有选中并显示设置在角色选择栏，是因为表格中模拟数据和弹窗中角色模拟数据的接口不一样，动态生成的随机id值也无法匹配，实际开发中只要此传入的id数组与弹窗中角色列表中id匹配，就会选中",{
+                    time: 10000,
+                  });
+                  formSelects.value('xmselect', rolesValArr);
+                  form.render();
+                }
+              }
+            );
+          }
+        });
+      }
+      , info: function (data) {
+        admin.popup.infoLayer = admin.popup({
+          "title": "用户信息编辑"
+          , area: admin.screen() < 2 ? ['100%', '680px'] : ['680px', '680px']
+          , id: 'firmInfo'//id唯一
+          , maxmin: true//id唯一
+          , success: function () {
+            // 自定义了一个参数对象传递给view.render()方法，在其渲染完之后执行回调函数
+            view(this.id).render('system/firm/firm-info-layer').done(function (html) {
+              // 绑定恢复操作按钮事件
+              if ($('button[lay-filter=info-undo]').length){
+                $('button[lay-filter=info-undo]').on('click',function () {
+                  form.val("info-form", data);
+                  $('[lay-filter="info-form"]').find('.avatar').attr('src',data.avatar).attr('alt',data.name + '头像')
+                    .end().find('.account').text(data.name);
+                  layer.msg('已恢复至最近保存数据');
+                });
+              };
+              // 设置默认值
+              form.val("info-form", data);
+              $('[lay-filter="info-form"]').find('.avatar').attr('src',data.avatar).attr('alt',data.name + '头像')
+                .end().find('.account').text(data.name);
+            });
+          }
+        });
+      }
+    };
+
+    // 检查选中
+    var checkActive = {
+      getCheckData: function () { //获取选中数据
+        var checkStatus = table.checkStatus('firmTable')
+          , data = checkStatus.data;
+        // layer.alert(JSON.stringify(data));
+        // return JSON.stringify(data);
+        return data;
+      }
+      , getCheckLength: function () { //获取选中数目
+        var checkStatus = table.checkStatus('firmTable')
+          , data = checkStatus.data;
+        // layer.msg('选中了：'+ data.length + ' 个');
+        return data.length;
+      }
+      , isAll: function () { //验证是否全选
+        var checkStatus = table.checkStatus('firmTable');
+        layer.msg(checkStatus.isAll ? '全选' : '未全选')
+      }
+    };
+
+    // 搜索重载表格
+    var searchActive = {
+      search: function () {
+        var $serIpt = $('#searchInput');
+        var $serBtn = $('#searchBtn');
+        //执行重载
+        table.reload('firmTable', {
+          page: {
+            curr: 1
+          }
+          , where: {
+            key: {
+              name: $serIpt.val()
+            }
+          }
+        });
+      }
+    };
+
+    $('.operate-box .layui-btn').on('click', function () {
+      var type = $(this).data('type');
+      // 弹窗
+      layerActive[type] && layerActive[type].call(this);
+      // 搜索
+      searchActive[type] && searchActive[type].call(this);
+    });
+
+  });
+</script>

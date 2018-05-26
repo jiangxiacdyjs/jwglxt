@@ -10,7 +10,7 @@ layui.define(['laytpl', 'layer', 'element', 'util'], function(exports){
     ,entry: 'index' //默认视图文件名
     ,engine: '.html' //视图文件后缀名
     ,pageTabs: false //是否开启页面选项卡功能。单页面专业版不推荐开启
-    ,baseUrl: ' https://www.easy-mock.com/mock/5af45f8ab45afc56560ae781/admin' //是否开启页面选项卡功能。单页面专业版不推荐开启
+    ,baseUrl: 'https://www.easy-mock.com/mock/5b081444b2917d747f8614ef/nutritional2.0' //api基准路径
 
     ,name: '营养餐管理系统'
     ,tableName: 'layuiAdmin' //本地存储表名
