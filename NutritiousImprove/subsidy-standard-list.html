@@ -1,0 +1,236 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="renderer" content="webkit|ie-comp|ie-stand">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp"/>
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="../Public/lib/html5shiv.js"></script>
+  <script type="text/javascript" src="../Public/lib/respond.min.js"></script>
+  <![endif]-->
+  <link rel="stylesheet" type="text/css" href="../Public/static/h-ui/css/H-ui.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css"/>
+  <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
+  <link href="../Public/lib/jedate/skin/jedate.css" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin"/>
+  <link rel="stylesheet" type="text/css" href="../Public/mySrc/css/style.css"/>
+  <!--[if IE 6]>
+  <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
+  <script>DD_belatedPNG.fix('*');</script>
+  <![endif]-->
+  <title>补助标准管理</title>
+</head>
+
+<body>
+<div class="page-container">
+  <div class="tabs-list cl pd-5 bg-1 bk-gray">
+    <span class="Hui-iconfont c-red f-18 mr-5">&#xe6df;</span>补助标准列表
+    <span class="r">
+            <a class="btn btn-success radius" href="javascript:;"
+               onClick="subsidy_standard_add('新增补助标准','subsidy-standard-add.html','800','420')">
+                <i class="Hui-iconfont">&#xe647;</i> 新增补助标准
+            </a>
+        </span>
+  </div>
+  <div class="mt-20">
+    <form method="" action="" class="search_form">
+      创建日期：
+      <input type="text" placeholder="创建日期" class="input-text ac_input mr-10" name="search_text"
+             value=""
+             id="tim1" autocomplete="off" style="width:120px;cursor: pointer;" readonly>
+      餐别：
+      <span class="select-box mr-10" style="width: 100px">
+        <select class="select" size="1" name="demo1">
+            <option value="" selected="0">早餐</option>
+            <option value="1">中餐</option>
+            <option value="2">晚餐</option>
+        </select>
+    </span>
+      <button type="submit" class="btn btn-success" id="search_button1">
+        <i class="Hui-iconfont">&#xe665;</i>
+        搜索
+      </button>
+    </form>
+    <table class="table table-border table-bordered table-bg table-hover table-sort0">
+      <thead>
+      <tr class="text-c">
+        <th>
+          <input type="checkbox" name="check1" value="">
+        </th>
+        <th>编号</th>
+        <!--<th>ID</th>-->
+        <th>补助标准中文名</th>
+        <th>补助标准英文名</th>
+        <th>补助餐别</th>
+        <th>补助金额/元</th>
+        <th>创建人</th>
+        <th>创建时间</th>
+        <th>所处状态</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="text-c">
+        <td>
+          <input type="checkbox" value="" name="">
+        </td>
+        <td>1</td>
+        <td name="chinese-name">营养改善计划之中餐</td>
+        <td name="english-name">lunch-inprove</td>
+        <td name="meal-type">中餐</td>
+        <td name="subsidy-money">5</td>
+        <td>admin</td>
+        <td>2018-05-28</td>
+        <td style="cursor: pointer;" class="td-status" onClick="admin_toggle(this,'10001')"><span
+                class="label label-success radius">已启用</span></td>
+        <td class="f-14 td-manage">
+          <a class="ml-5"
+             onClick="subsidy_standard_add('编辑补助标准','subsidy-standard-add.html','800','420',this)"
+             href="javascript:;" title="反馈">编辑</a>
+          <a class="ml-5 del" href="javascript:;" title="删除">删除</a>
+        </td>
+      </tr>
+      <tr class="text-c">
+        <td>
+          <input type="checkbox" value="" name="">
+        </td>
+        <td>2</td>
+        <td name="chinese-name">营养改善计划之晚餐</td>
+        <td name="english-name">supper-inprove</td>
+        <td name="meal-type">晚餐</td>
+        <td name="subsidy-money">4</td>
+        <td>admin</td>
+        <td>2018-05-28</td>
+        <td style="cursor: pointer;" class="td-status" onClick="admin_toggle(this,'10001')"><span
+                class="label label-danger radius">已停用</span></td>
+        <td class="f-14 td-manage">
+          <a class="ml-5"
+             onClick="subsidy_standard_add('编辑补助标准','subsidy-standard-add.html','800','420',this)"
+             href="javascript:;" title="反馈">编辑</a>
+          <a class="ml-5 del" href="javascript:;" title="删除">删除</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="../Public/lib/jedate/jquery.jedate.min.js"></script>
+<script type="text/javascript" src="../Public/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../Public/mySrc/js/common.js"></script>
+<script type="text/javascript">
+
+  /* 切换启用禁用状态 */
+  function admin_toggle(obj, id) {
+    var txt = $(obj).find('span').text();
+    if (txt == '已启用') {
+      layer.confirm('确认要停用吗？', function (index) {
+        $(obj).html('<span class="label label-danger radius">已停用</span>');
+        layer.msg('已停用!', {
+          icon: 5,
+          time: 1000
+        });
+      });
+    } else {
+      layer.confirm('确认要启用吗？', function (index) {
+        $(obj).html('<span class="label label-success radius">已启用</span>');
+        layer.msg('已启用!', {
+          icon: 6,
+          time: 1000
+        });
+      });
+    }
+  }
+
+  /*添加-编辑*/
+  function subsidy_standard_add(title, url, w, h,ele) {
+    if (title == null || title == '') {
+      title = false;
+    }
+    ;
+    if (url == null || url == '') {
+      url = "404.html";
+    }
+    ;
+    if (w == null || w == '') {
+      w = 800;
+    }
+    ;
+    if (h == null || h == '') {
+      h = ($(window).height() - 50);
+    }
+    ;
+    var dataObj = {};
+    var $tr = $(ele).closest('tr');
+    for (var i = 0; i < $tr.children().length; i++) {
+      var $currentTd = $tr.children().eq(i);
+      var currentTdName = $currentTd.attr('name');
+      if(currentTdName){
+        dataObj[currentTdName] = $currentTd.html();
+      }
+    }
+    layer.open({
+      type: 2,
+      area: [w + 'px', h + 'px'],
+      fix: false, //不固定
+      maxmin: true,
+      shade: 0.4,
+      title: title,
+      content: url,
+      success: function(layero, index){
+        var $iframe = $(layero[0]).find('iframe');
+        // console.log($iframe.contents().find('input'))
+        for (var key in dataObj) {
+          $iframe.contents().find(':input[name='+key+']').val(dataObj[key])
+        }
+      }
+    });
+  }
+
+  // 提示操作
+  function operate_msg(state) {
+    switch(state)
+    {
+      case 'success':
+        layer.msg('操作成功',{icon:1})
+        break;
+      case 'failed':
+        layer.msg('操作失败',{icon:2})
+        break;
+      default:
+        layer.msg('操作成功',{icon:1})
+    }
+  }
+
+  $(function () {
+    /* 获取当前时间*/
+    var d = new Date();
+    var str = d.getFullYear() + "-" + ((d.getMonth() + 1) < 10 ? "0" : "") + (d.getMonth() + 1) + "-" + (d.getDate() < 10 ? "0" : "") + d.getDate();
+
+    //初始化日期搜索jedate
+    $('#tim0').jeDate({
+      format: 'YYYY-MM',
+      minDate: '2014-06', //设定最小日期为当前日期
+      maxDate: str //最大日期
+    });
+
+    //初始化日期搜索jedate
+    $('#tim1').jeDate({
+      format: 'YYYY-MM-DD',
+      minDate: '2014-06-16', //设定最小日期为当前日期
+      maxDate: str //最大日期
+    });
+    tableSort('.table-sort0', [0,1,2,3,6,8,9])
+  })
+</script>
+</body>
+
+</html>

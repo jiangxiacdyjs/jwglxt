@@ -1,0 +1,211 @@
+﻿<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../Public/lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../Public/lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/lib/jquery-searchableSelect/jquery.searchableSelect.css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../Public/static/h-ui.admin/skin/green/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="../Public/mySrc/css/style.css"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../Public/lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <!--/meta 作为公共模版分离出去-->
+    <title>新增补助情况</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <style>
+        .searchable-select{width: 100%}
+    </style>
+</head>
+
+<body>
+<article class="page-container">
+    <form action="" method="post" class="form form-horizontal" id="form-admin-source-add">
+        <!--1-->
+        <div class="row cl">
+            <div class="formControls col-xs-8 col-xs-offset-2">
+                <div class="row cl" style="margin-top: 0;">
+                    <div class="col-xs-3">
+                        补助学校：
+                    </div>
+                    <div class="col-xs-9">
+                        <select class="" name="school-name" id="schoolSelect">
+                            <option value="0" selected="">请选择学校</option>
+                            <option value="1">格凸中学格凸中学格凸中学</option>
+                            <option value="2">羊场中学</option>
+                            <option value="3">猫场中学</option>
+                            <option value="4">溧阳中学</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--2-->
+        <div class="row cl">
+            <div class="formControls col-xs-8 col-xs-offset-2">
+                <div class="row cl" style="margin-top: 0;">
+                    <div class="col-xs-3">
+                        补助标准：
+                    </div>
+                    <div class="col-xs-9">
+                        <select class="" name="subsidy-name" id="subsidyStdSelect">
+                            <option value="0" selected="">请选择补助标准</option>
+                            <option value="1">营养改善计划之中餐</option>
+                            <option value="2">营养改善计划之晚餐</option>
+                            <option value="3">明日希望补助之晚餐</option>
+                            <option value="4">未来之子补助之早餐</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--2-->
+        <div class="row cl subsidy-detail hide">
+            <div class="formControls pt-5 pb-5 col-xs-8 col-xs-offset-2">
+                <i class="Hui-iconfont c-success mr-5">&#xe6a8;</i><span class="c-999">已选补助标准：</span><span class="subsidy-name">营养改善计划之晚餐</span>
+                <span class="subsidy-money f-r">5元</span><span class="c-999 f-r">补助金额：</span>
+            </div>
+            <div style="clear: both"></div>
+            <div class="line mt-5 mb-5"></div>
+        </div>
+        <!--3-->
+        <div class="row cl">
+            <div class="formControls col-xs-8 col-xs-offset-2">
+                <div class="row cl" style="margin-top: 0;">
+                    <div class="col-xs-3">
+                        补助天数：
+                    </div>
+                    <div class="col-xs-9">
+                        <input type="text" class="input-text" value="22" placeholder="请输入补助天数" name="subsidy-days">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--4-->
+        <div class="row cl">
+            <div class="formControls col-xs-8 col-xs-offset-2">
+                <div class="row cl" style="margin-top: 0;">
+                    <div class="col-xs-3">
+                        补助学生数：
+                    </div>
+                    <div class="col-xs-9">
+                        <input type="text" class="input-text" value="" placeholder="请输入补助学生人数" name="subsidy-students">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--5-->
+        <div class="row cl">
+            <div class="formControls col-xs-8 col-xs-offset-2">
+                <div class="row cl" style="margin-top: 0;">
+                    <div class="col-xs-3">
+                        补助教师数：
+                    </div>
+                    <div class="col-xs-9">
+                        <input type="text" class="input-text" value="" placeholder="请输入补助教师人数" name="subsidy-teachers">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--5-->
+        <div class="row cl">
+            <div class="formControls col-xs-8 col-xs-offset-2">
+                <div class="row cl" style="margin-top: 0;">
+                    <div class="col-xs-3">
+                        备注信息：
+                    </div>
+                    <div class="col-xs-9">
+                        <input type="text" class="input-text" value="" placeholder="在此输入备注信息" name="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--确认新增-->
+        <div class="row cl">
+            <div class="col-xs-4 col-xs-offset-4">
+                <button type="submit" style="width: 100%;margin-top: 30px" class="btn btn-success radius"
+                        name="form-save"><i class="icon-ok"></i> 确定
+                </button>
+            </div>
+        </div>
+    </form>
+</article>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="../Public/lib/jquery/1.9.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="../Public/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="../Public/static/h-ui.admin/js/H-ui.admin.js"></script>
+<!--/_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="../Public/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="../Public/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="../Public/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="../Public/lib/jquery-searchableSelect/jquery.searchableSelect.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+      // 选择学校
+      $('#schoolSelect').searchableSelect({
+        afterSelectItem: function () {
+          //console.log(this.holder.text());
+          //console.log(this.holder.data("value"));
+        }
+      });
+      // 选择补助类别
+      $('#subsidyStdSelect').searchableSelect({
+        afterSelectItem: function () {
+          //console.log(this.holder.text());
+          if(this.holder.data("value") != 0 ){
+            $('.subsidy-detail').slideDown('fast');
+            $('.subsidy-detail').find('.subsidy-name').html(this.holder.text())
+          }else{
+            $('.subsidy-detail').slideUp('fast')
+          };
+        }
+      });
+
+        $("#form-admin-source-add").validate({
+            rules: {
+              'school-name': {
+                    required: true,
+                },
+                'subsidy-name': {
+                    required: true,
+                },
+                'subsidy-days': {
+                    required: true,
+                },
+                'subsidy-students': {
+                    required: true,
+                }
+            },
+            onkeyup: false,
+            focusCleanup: true,
+            success: "valid",
+            submitHandler: function (form) {
+              $(form).ajaxSubmit();
+                var index = parent.layer.getFrameIndex(window.name);
+              parent.operate_msg('success')
+              // parent.operate_msg('failed')
+              parent.layer.close(index);
+            }
+        });
+    });
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+
+</html>
