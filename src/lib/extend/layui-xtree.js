@@ -132,11 +132,21 @@ layuiXtree.prototype.dataBind = function (d) {
       var xtree_ischecked = '';
       var xtree_isdisabled = d[i].disabled ? ' disabled="disabled" ' : '';
       _this._domStr += '<div class="layui-xtree-item">';
-      // 修改：把数据格式中的data改成children
-      if (d[i].children.length > 0)
-        _this._domStr += '<i class="layui-icon layui-xtree-icon" data-xtree="' + (_this._isopen ? '1' : '0') + '">' + (_this._isopen ? _this._iconOpen : _this._iconClose) + '</i>';
+      // 修改：把数据格式中的data改成children,新增判断是否传入iconCls类名作为定制图标，如果有，则渲染，没有则渲染默认的图标
+      if (d[i].children.length > 0){
+        if(d[i].iconCls !=null){
+          _this._domStr += '<i class="layui-icon layui-xtree-icon" data-xtree="' + (_this._isopen ? '1' : '0') + '">' + (_this._isopen ? _this._iconOpen : _this._iconClose) + '</i>';
+          _this._domStr += '<i class="'+d[i].iconCls+'" style="margin-right: 5px;font-size: 16px;vertical-align: middle;color: #b7b7b7"></i>';
+        }else{
+          _this._domStr += '<i class="layui-icon layui-xtree-icon" data-xtree="' + (_this._isopen ? '1' : '0') + '">' + (_this._isopen ? _this._iconOpen : _this._iconClose) + '</i>';
+        }
+      }
       else {
-        _this._domStr += '<i class="layui-icon layui-xtree-icon-null">' + _this._iconEnd + '</i>';
+        if(d[i].iconCls !=null){
+          _this._domStr += '<i class="'+d[i].iconCls+'" style="margin-right: 5px;font-size: 16px;vertical-align: middle;color: #b7b7b7"></i>';
+        }else{
+          _this._domStr += '<i class="layui-icon layui-xtree-icon-null">' + _this._iconEnd + '</i>';
+        };
         xtree_isend = 'data-xend="1"';
         xtree_ischecked = d[i].checked ? ' checked ' : '';
         xtree_isdisabled = d[i].disabled ? ' disabled="disabled" ' : '';

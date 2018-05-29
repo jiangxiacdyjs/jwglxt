@@ -293,7 +293,7 @@ layui.define('view', function (exports) {
       //获取右侧栏目通用可用高度（减去顶部导航及面包屑导航高度）
       , getRightAvailableHeight: function () {
         var availableFullHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-        return availableFullHeight - 81;
+        return availableFullHeight - 80;
       }
 
       //loading效果
