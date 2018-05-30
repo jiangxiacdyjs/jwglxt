@@ -39,7 +39,7 @@
       <table class="layui-hide" id="userTable" lay-filter="userTable"></table>
       <!--头像栏模板-->
       <script type="text/html" id="user-avatarTpl">
-        <img src="{{d.avatar}}" alt="" style="border-radius: 100%;height: 26px">
+        <img src="{{d.avatar}}" data-original="{{d.avatar}}" alt="{{d.nickname}}" title="{{d.nickname}}" style="border-radius: 100%;height: 26px">
       </script>
       <!--数据类别栏模板-->
       <script type="text/html" id="user-typeTpl">
@@ -68,13 +68,15 @@
   </div>
 </div>
 <script>
-  layui.use(['admin', 'table', 'form', 'view', 'formSelects'], function () {
+  var i = 0
+  layui.use(['admin', 'table', 'form', 'view', 'formSelects', 'viewer'], function () {
     var table = layui.table
       , form = layui.form
       , $ = layui.$
       , admin = layui.admin
       , formSelects = layui.formSelects
-      , view = layui.view;
+      , view = layui.view
+      , viewer = layui.viewer;
 
     // todo：愚昧地手动设置显示区域高度，正在寻找更智能的方法
     $('.fullh').height(admin.getRightAvailableHeight());
@@ -98,7 +100,7 @@
           templet: '#user-avatarTpl',
           align: 'center',
           width: 80,
-          event: 'viewAvatar',
+          // event: 'viewAvatar',
           style: "cursor:pointer"
         }
         , {field: 'name', title: '用户名'}
@@ -110,6 +112,13 @@
         , {field: 'lock', title: '开启', templet: '#user-checkboxTpl', unresize: true, width: 90, align: 'center'}
       ]]
       , page: true
+      ,done:function (v) {
+        var galley = document.querySelector('.layui-table-view');
+        var viewerDemo = new Viewer(galley, {
+          url: 'data-original',
+          cssPath:'../src/lib/extend/viewer/'
+        });
+      }
     });
 
     // 监听工具条
@@ -127,7 +136,7 @@
         // 执行打开operate对应弹窗
         layerActive.info(data)
 
-      } else if (obj.event === 'viewAvatar') {
+      }/* else if (obj.event === 'viewAvatar') {
         layer.photos({
           photos: {
             "title": "", //相册标题
@@ -143,7 +152,7 @@
           , anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机
           , shade: [0.3, '#000']
         });
-      };
+      }*/;
     });
 
     // 监听锁定操作

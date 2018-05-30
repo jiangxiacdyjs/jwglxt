@@ -48,5 +48,8 @@
 .pt50{padding-top: 50px}
 .pb10{padding-bottom: 10px}
 /*高度*/
+.h{height: 100%}
 .h30{height: 30px}
 .inh{height: inherit}
+/*宽度*/
+.w{width: 100%}

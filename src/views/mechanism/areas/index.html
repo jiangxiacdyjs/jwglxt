@@ -1,9 +1,6 @@
-
 <title>标题</title>
-
 <style>
-/* 这段样式只是用于演示 */
-
+  /* 这段样式只是用于演示 */
 </style>
 
 <div class="layui-fluid">
@@ -12,32 +9,71 @@
       <div class="layui-card">
         <div class="layui-card-header">YYY</div>
         <div class="layui-card-body">
-          
-          
-          
+
         </div>
       </div>
     </div>
     <div class="layui-col-md12">
       <div class="layui-card">
-        <div class="layui-card-header">ZZZ</div>
+        <div class="layui-card-header">测试照片查看器组件</div>
         <div class="layui-card-body">
-          
-          
-          
+          <div id="galley">
+            <div class="layui-row layui-col-space10">
+              <div class="layui-col-xs2">
+                <img data-original="../src/img/scenery/tibet-1.jpg" src="../src/img/scenery/tibet-1-thumb.jpg" alt="清澈的湖" class="w">
+              </div>
+              <div class="layui-col-xs2">
+                <img data-original="../src/img/scenery/tibet-2.jpg" src="../src/img/scenery/tibet-2-thumb.jpg" alt="清澈的湖" class="w">
+              </div>
+              <div class="layui-col-xs2">
+                <img data-original="../src/img/scenery/tibet-3.jpg" src="../src/img/scenery/tibet-3-thumb.jpg" alt="清澈的湖" class="w">
+              </div>
+              <div class="layui-col-xs2">
+                <img data-original="../src/img/scenery/tibet-4.jpg" src="../src/img/scenery/tibet-4-thumb.jpg" alt="清澈的湖" class="w">
+              </div>
+              <div class="layui-col-xs2">
+                <img data-original="../src/img/scenery/tibet-5.jpg" src="../src/img/scenery/tibet-5-thumb.jpg" alt="清澈的湖" class="w">
+              </div>
+              <div class="layui-col-xs2">
+                <img data-original="../src/img/scenery/tibet-6.jpg" src="../src/img/scenery/tibet-6-thumb.jpg" alt="清澈的湖" class="w">
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 <script>
-layui.use(['admin'], function(){
-  var $ = layui.$
-  ,admin = layui.admin
-  ,element = layui.element
-  ,router = layui.router();
-
-  
-});
+  layui.use(['admin', 'viewer'], function () {
+    var $ = layui.$
+      , admin = layui.admin
+      , element = layui.element
+      , viewer = layui.viewer
+      , router = layui.router();
+    var galley = document.getElementById('galley');
+    var viewerDemo =new Viewer(galley, {
+      url: 'data-original',
+      cssPath:'../src/lib/extend/viewer/',
+      inline:false,
+      /*toolbar: {
+        oneToOne: true,
+        prev: function () {
+          viewerDemo.prev(true);
+        },
+        play: true,
+        next: function () {
+          viewerDemo.next(true);
+        },
+        download: function () {
+          const a = document.createElement('a');
+          a.href = viewerDemo.image.src;
+          a.download = viewerDemo.image.alt;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        },
+      },*/
+    });
+  });
 </script>

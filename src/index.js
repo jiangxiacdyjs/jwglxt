@@ -13,6 +13,7 @@ layui.extend({
   , view: 'lib/view' //核心模块
   , treeselect: '../lib/extend/layui-treeselect' // 属性选择控件（可加上{/}的意思即代表采用自有路径，即不跟随 base 路径）
   , formSelects: '../lib/extend/formSelects-v3' //表单选择拓展控件
+  , viewer: '../lib/extend/viewer/viewer' //表单选择拓展控件
 }).define(['setter', 'admin'], function (exports) {
   var setter = layui.setter
     , element = layui.element

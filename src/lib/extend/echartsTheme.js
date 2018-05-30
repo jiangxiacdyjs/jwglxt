@@ -25,7 +25,7 @@ layui.define(function(exports) {
         color: '#666'      // 主标题文字颜色
       }
     },
-    
+
     // 值域
     dataRange: {
       itemWidth: 15,
@@ -71,7 +71,13 @@ layui.define(function(exports) {
     categoryAxis: {
       axisLine: {      // 坐标轴线
         lineStyle: {     // 属性lineStyle控制线条样式
-          color: '#009688'
+          color: '#009688',
+          width: 2
+        }
+      },
+      axisLabel: {
+        textStyle: {
+          color: '#666',//坐标值得具体的颜色
         }
       },
       axisTick: { //小标记
@@ -88,7 +94,13 @@ layui.define(function(exports) {
     valueAxis: {
       axisLine: {      // 坐标轴线
         lineStyle: {     // 属性lineStyle控制线条样式
-          color: '#009688'
+          color: '#009688',
+          width: 2
+        }
+      },
+      axisLabel: {
+        textStyle: {
+          color: '#666',//坐标值得具体的颜色
         }
       },
       splitArea : {

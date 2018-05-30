@@ -17,3 +17,8 @@ step2: 命令行安装 gulp：npm install gulp -g
 step3：切换到 layuiAdmin 项目根目录（即 gulpfile.js 所在目录），命令行安装任务所依赖的包：npm install
 step4: 安装完依赖包后，即可直接执行命令：gulp 把src目录资源打包到dist目录的构建
 （开发过程中请设置start/index.html中的加载index模块的路径为src，完成开发打包后，把该src目录改成dist目录即可）
+
+# 开发说明
+扩展模块有两种方式：
+①每次模块加载时会设置扩展模块的根路径为controller目录，因此可以直接把符合模块规范的js文件放在此目录，然后直接use即可
+②入口页面的index.js文件是整个项目共用的文件，可在该js文件头部利用extend扩展方法定义扩展模块的别名（键值对，值即为模块路径）

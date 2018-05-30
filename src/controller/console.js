@@ -213,7 +213,7 @@ layui.define(function(exports){
     });
   });
 
-  //最新订单
+  //学校库存
   layui.use(['admin','table'], function(){
     var $ = layui.$
     ,admin = layui.admin
