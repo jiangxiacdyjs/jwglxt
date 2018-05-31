@@ -84,9 +84,9 @@
       form.val(filter,dataObj);
     }
 
-    // todo：愚昧地手动设置显示区域高度，正在寻找更智能的方法
+    // 设置高度最大化
     $('.fullh').height(admin.getRightAvailableHeight());
-    $('.tree-box').height($('.tree-box').parent().height() - 62);
+    $('.tree-box').height($('.tree-box').parent().height() - 63);
 
     // 切换显示和保存状态
     function toggleState(currentId, state) {
@@ -108,7 +108,7 @@
       elem: '#roleTable'
       , url: admin.baseUrl + '/role'
       , method: 'post'
-      , height: 'full-151'
+      , height:  admin.getRightAvailableHeight()-63
       // ,cellMinWidth: 80
       // ,size: 'sm'
       , cols: [[

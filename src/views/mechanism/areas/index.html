@@ -49,11 +49,10 @@
     var $ = layui.$
       , admin = layui.admin
       , element = layui.element
-      // , viewer = layui.viewer
+      , viewer = layui.viewer
       , router = layui.router();
     var galley = document.getElementById('galley');
-    // console.log(window.Viewer,this===layui)
-    var viewerDemo =new Viewer(galley, {
+    var viewerDemo =new viewer(galley, {
       url: 'data-original',
       cssPath:'../src/lib/extend/viewer/',
       inline:false,

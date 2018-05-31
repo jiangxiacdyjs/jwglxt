@@ -26,22 +26,6 @@
     <div class="layui-form-item">
       <label class="layui-form-label">父级资源</label>
       <div class="layui-input-block">
-        <!--<select name="parent" lay-search="" lay-verify="required">
-          <option value="">请选择所属父级</option>
-          <optgroup label="系统资源">
-            <option value="0">系统设置</option>
-            <option value="1">资源管理</option>
-            <option value="2">权限管理</option>
-          </optgroup>
-          <optgroup label="业务资源">
-            <option value="3">业务管理</option>
-            <option value="4">业务流程</option>
-            <option value="5">商务流程</option>
-            <option value="6">业务审批</option>
-            <option value="7">业务转手</option>
-            <option value="8">业务告知</option>
-          </optgroup>
-        </select>-->
         <input type="text" id="parent" name="parent" lay-filter="parent" lay-verify="required" placeholder="模块" autocomplete="off" class="layui-input">
       </div>
     </div>
@@ -69,7 +53,7 @@
       </div>
       <div class="layui-col-xs6">
         <label class="layui-form-label">是否锁定</label>
-        <div class="layui-input-block">
+        <div class="layui-input-block b-e6">
           <input type="checkbox" name="lock" lay-skin="switch" lay-text="开启|锁定" title="锁定" lay-filter="resource-lock" value="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}" {{ d.lock== 1
                  ? 'checked' : '' }}>
         </div>

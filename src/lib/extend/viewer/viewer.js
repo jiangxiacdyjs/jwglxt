@@ -5,9 +5,17 @@
  */
 ;layui.define(function (exports) {
   (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+    /**
+     * 判断是否支持AMD/ES6等导出方式，如果支持，则进行模块化导出
+     * 否则就直接往此js执行环境下的this上注册factory()的执行结果(Viewer构造函数)
+     */
+    /*typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
       typeof define === 'function' && define.amd ? define(factory) :
-        (global.Viewer = factory());
+        (global.Viewer = factory());*/
+    /**
+     * 下面这句代码的意思是在layui对象上定义viewer键，值即为factory()的执行结果（Viewer构造函数）
+     * 此处如果仅仅导出factory，则是导出一个函数的字符串形式，未执行结构的，所以获取不到Viewer构造函数
+     */
     exports('viewer', factory());
   }(this, (function () {
 

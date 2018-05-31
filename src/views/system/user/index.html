@@ -1,13 +1,5 @@
 <title>用户管理</title>
 
-<!--<div class="layui-card layadmin-header">
-  <div class="layui-breadcrumb" lay-filter="breadcrumb">
-    <a lay-href="">主页</a>
-    <a><cite>系统管理</cite></a>
-    <a><cite>用户管理</cite></a>
-  </div>
-</div>-->
-
 <div class="layui-fluid">
   <div class="layui-card fullh">
     <div class="layui-card-header operate-box">
@@ -68,7 +60,6 @@
   </div>
 </div>
 <script>
-  var i = 0
   layui.use(['admin', 'table', 'form', 'view', 'formSelects', 'viewer'], function () {
     var table = layui.table
       , form = layui.form
@@ -78,16 +69,16 @@
       , view = layui.view
       , viewer = layui.viewer;
 
-    // todo：愚昧地手动设置显示区域高度，正在寻找更智能的方法
+    // 设置面板高度最大化
     $('.fullh').height(admin.getRightAvailableHeight());
-    $('.tree-box').height($('.tree-box').parent().height() - 62);
 
     // 表格
+    var viewerDemo;
     table.render({
       elem: '#userTable'
       , url: admin.baseUrl + '/user'
       , method: 'post'
-      , height: 'full-151'
+      , height: admin.getRightAvailableHeight()-63
       // ,cellMinWidth: 80
       // ,size: 'sm'
       , cols: [[
@@ -109,12 +100,13 @@
         , {field: 'phone', title: '手机号'}
         , {field: 'operate', title: '角色分配', templet: '#user-operateTplDom', unresize: true, width: 95, align: 'center'}
         , {field: 'info', title: '信息编辑', templet: '#user-infoTplDom', unresize: true, width: 95, align: 'center'}
-        , {field: 'lock', title: '开启', templet: '#user-checkboxTpl', unresize: true, width: 90, align: 'center'}
+        , {field: 'lock', title: '开启', templet: '#user-checkboxTpl', unresize: true, width: 95, align: 'center'}
       ]]
       , page: true
       ,done:function (v) {
         var galley = document.querySelector('.layui-table-view');
-        var viewerDemo = new Viewer(galley, {
+        if(viewerDemo) viewerDemo.destroy();
+        viewerDemo = new viewer(galley, {
           url: 'data-original',
           cssPath:'../src/lib/extend/viewer/'
         });
