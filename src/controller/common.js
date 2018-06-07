@@ -20,6 +20,17 @@ layui.define(function(exports){
   //公共业务的逻辑处理可以写在此处，切换任何页面都会执行
   //……
 
+  // 全局设置表格行点击事件，如果存在单选框项，则选中，否则返回空
+  $('#LAY_app_body').off('click','table[lay-skin="selectOnClick"] tr');
+  $('#LAY_app_body').on('click','table[lay-skin="selectOnClick"] tr',function (e) {
+    e.stopPropagation();
+    var $iconOk = $(this).find('.layui-icon-ok');
+    var $eTarget = $(e.target);
+    if(!$eTarget.hasClass('layui-icon-ok') && $iconOk.length){
+      $iconOk.trigger('click');
+    }else{}
+  });
+
   //退出
   admin.events.logout = function(){
     //执行退出接口
