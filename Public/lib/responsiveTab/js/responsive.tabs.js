@@ -103,7 +103,6 @@
 			tabListItem.bind( options.fnEvent, function(){
 				var currentIndex = tabListItem.index($(this));
 				showTabs(currentIndex);
-				console.log(currentIndex)
 			});
 			accordionHandle.bind( 'click', function(){
 				var currentIndex = accordionHandle.index($(this));		
