@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html>
 <head>
   <meta charset="utf-8">
@@ -54,7 +54,7 @@
     }
 
     .fname-hc {
-      background-color: #FD5B78;
+      background-color: #597798;
     }
 
     .fname-tl {
@@ -86,7 +86,6 @@
       width: 110px !important;
     }
   </style>
-
   <style>
     .title-table {
       width: 100%;
@@ -109,13 +108,12 @@
       border: 0;
       background-color: rgba(255, 255, 255, 0.8);
     }
-
     .se-input select {
       background-color: transparent;
     }
-
     /*新增input，select的特殊样式结束/*/
-    .list-table thead tr th, td {
+
+    .list-table thead tr th,.list-table td {
       display: block;
       float: left;
       box-sizing: border-box;
@@ -131,7 +129,6 @@
     .list-table tbody {
       display: block;
       width: 100%;
-      /*height: 350px;*/
       overflow-y: scroll;
     }
 
@@ -148,192 +145,192 @@
   <title>学校食材编辑上报</title>
 </head>
 <body>
+<div class="pl-20 pr-20 pt-20 pb-20" style="box-sizing: border-box">
+  <div class="row clearfix">
+    <div class="col-sm-5">
+      <div id="foodPanel" class="panel panel-success panerFix clearfix">
+        <div class="panel-header pos-r">食材选择列表</div>
+        <div class="panel-body">
+          <div class="Huialert Huialert-success">
+            <span>操作说明：</span><span class="c-red">双击</span>下方食材名称即可快速新增食材，新增后在右侧表格中编辑单位及数量！
+          </div>
+          <div class="tabs tabs-vertical-left">
+            <ul id="list1" class="tabs-list">
+              <li class="active">
+                <a href="javascript:;" class="pos-r">
+                  <span>蔬菜类</span>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:;" class="pos-r">
+                  <span>荤菜类</span>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:;" class="pos-r">
+                  <span>调料类</span>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:;" class="pos-r">
+                  <span>豆制类</span>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:;" class="pos-r">
+                  <span>干菜类</span>
+                </a>
+              </li>
+              <li>
+                <a href="javascript:;" class="pos-r">
+                  <span>粮油类</span>
+                </a>
+              </li>
+            </ul>
+            <div id="foodMenu" class="tabs-container">
+              <div class="tab-content" style="display:block;">
+                <label class="Initials">B</label>
+                <span class="fname fname-sc" data-unit="斤" data-id="1">白菜</span>
+                <span class="fname fname-sc" data-unit="颗" data-id="2">白花菜</span>
+                <span class="fname fname-sc" data-unit="根" data-id="3">白萝卜</span>
+                <label class="Initials">C</label>
+                <span class="fname fname-sc" data-unit="斤" data-id="4">菜心</span>
+                <span class="fname fname-sc" data-unit="斤" data-id="5">菜豌豆</span>
+                <label class="Initials" data-unit="斤">D</label>
+                <span class="fname fname-sc" data-unit="斤" data-id="6">大葱</span>
+                <span class="fname fname-sc" data-id="7">大芹菜</span>
+                <span class="fname fname-sc" data-id="8">大蒜苗</span>
+                <span class="fname fname-sc" data-id="9">冬瓜</span>
+                <label class="Initials">E</label>
+                <span class="fname fname-sc" data-id="10">儿菜</span>
+                <label class="Initials">H</label>
+                <span class="fname fname-sc" data-id="11">胡萝卜</span>
+                <span class="fname fname-sc" data-id="12">黄瓜</span>
+                <label class="Initials">J</label>
+                <span class="fname fname-sc" data-id="13">胶瓜（水笋）</span>
+                <label class="Initials">L</label>
+                <span class="fname fname-sc" data-id="14">老南瓜</span>
+                <span class="fname fname-sc" data-id="15">莲花菜</span>
+                <label class="Initials">N</label>
+                <span class="fname fname-sc" data-id="16">牛心菜</span>
+                <label class="Initials">Q</label>
+                <span class="fname fname-sc" data-id="17">茄子</span>
+                <span class="fname fname-sc" data-id="18">青花菜</span>
+                <span class="fname fname-sc" data-id="19">青辣椒</span>
+                <label class="Initials">S</label>
+                <span class="fname fname-sc" data-id="20">生姜</span>
+                <span class="fname fname-sc" data-id="21">蒜台</span>
+                <label class="Initials">W</label>
+                <span class="fname fname-sc" data-id="22">豌豆米</span>
+                <span class="fname fname-sc" data-id="23">莴笋</span>
+                <label class="Initials">X</label>
+                <span class="fname fname-sc" data-id="24">西红柿</span>
+                <span class="fname fname-sc" data-id="25">香葱</span>
+                <span class="fname fname-sc" data-id="26">小瓜</span>
+                <span class="fname fname-sc" data-id="27">小芹菜</span>
+                <label class="Initials">Y</label>
+                <span class="fname fname-sc" data-id="28">洋葱</span>
+                <span class="fname fname-sc" data-id="29">洋芋</span>
+                <span class="fname fname-sc" data-id="30">玉米粒</span>
+              </div>
+              <div class="tab-content">
+                <label class="Initials">J</label>
+                <span class="fname fname-hc" data-id="31">鸡边腿</span>
+                <span class="fname fname-hc" data-id="32">鸡蛋</span>
+                <label class="Initials">N</label>
+                <span class="fname fname-hc" data-id="33">牛肉</span>
+                <label class="Initials">Y</label>
+                <span class="fname fname-hc" data-id="34">羊肉</span>
+                <label class="Initials">Z</label>
+                <span class="fname fname-hc" data-id="35">猪肉</span>
+              </div>
+              <div class="tab-content">
+                <label class="Initials">D</label>
+                <span class="fname fname-tl" data-id="36">豆瓣酱</span>
 
-<div class="row clearfix">
-  <div class="col-sm-5">
-    <div id="foodPanel" class="panel panel-success panerFix clearfix">
-      <div class="panel-header pos-r">食材选择列表</div>
-      <div class="panel-body">
-        <div class="Huialert Huialert-success">
-          <span>操作说明：</span><span class="c-red">双击</span>下方食材名称即可快速新增食材，新增后在右侧表格中编辑单位及数量！
-        </div>
-        <div class="tabs tabs-vertical-left">
-          <ul id="list1" class="tabs-list">
-            <li class="active">
-              <a href="javascript:;" class="pos-r">
-                <span>蔬菜类</span>
-              </a>
-            </li>
-            <li>
-              <a href="javascript:;" class="pos-r">
-                <span>荤菜类</span>
-              </a>
-            </li>
-            <li>
-              <a href="javascript:;" class="pos-r">
-                <span>调料类</span>
-              </a>
-            </li>
-            <li>
-              <a href="javascript:;" class="pos-r">
-                <span>豆制类</span>
-              </a>
-            </li>
-            <li>
-              <a href="javascript:;" class="pos-r">
-                <span>干菜类</span>
-              </a>
-            </li>
-            <li>
-              <a href="javascript:;" class="pos-r">
-                <span>粮油类</span>
-              </a>
-            </li>
-          </ul>
-          <div id="tab1" class="tabs-container">
-            <div class="tab-content" style="display:block;">
-              <label class="Initials">B</label>
-              <span class="fname fname-sc">白菜</span>
-              <span class="fname fname-sc">白花菜</span>
-              <span class="fname fname-sc">白萝卜</span>
-              <label class="Initials">C</label>
-              <span class="fname fname-sc">菜心</span>
-              <span class="fname fname-sc">菜豌豆</span>
-              <label class="Initials">D</label>
-              <span class="fname fname-sc">大葱</span>
-              <span class="fname fname-sc">大芹菜</span>
-              <span class="fname fname-sc">大蒜苗</span>
-              <span class="fname fname-sc">冬瓜</span>
-              <label class="Initials">E</label>
-              <span class="fname fname-sc">儿菜</span>
-              <label class="Initials">H</label>
-              <span class="fname fname-sc">胡萝卜</span>
-              <span class="fname fname-sc">黄瓜</span>
-              <label class="Initials">J</label>
-              <span class="fname fname-sc">胶瓜（水笋）</span>
-              <label class="Initials">L</label>
-              <span class="fname fname-sc">老南瓜</span>
-              <span class="fname fname-sc">莲花菜</span>
-              <label class="Initials">N</label>
-              <span class="fname fname-sc">牛心菜</span>
-              <label class="Initials">Q</label>
-              <span class="fname fname-sc">茄子</span>
-              <span class="fname fname-sc">青花菜</span>
-              <span class="fname fname-sc">青辣椒</span>
-              <label class="Initials">S</label>
-              <span class="fname fname-sc">生姜</span>
-              <span class="fname fname-sc">蒜台</span>
-              <label class="Initials">W</label>
-              <span class="fname fname-sc">豌豆米</span>
-              <span class="fname fname-sc">莴笋</span>
-              <label class="Initials">X</label>
-              <span class="fname fname-sc">西红柿</span>
-              <span class="fname fname-sc">香葱</span>
-              <span class="fname fname-sc">小瓜</span>
-              <span class="fname fname-sc">小芹菜</span>
-              <label class="Initials">Y</label>
-              <span class="fname fname-sc">洋葱</span>
-              <span class="fname fname-sc">洋芋</span>
-              <span class="fname fname-sc">玉米粒</span>
-            </div>
-            <div class="tab-content">
-              <label class="Initials">J</label>
-              <span class="fname fname-hc">鸡边腿</span>
-              <span class="fname fname-hc">鸡蛋</span>
-              <label class="Initials">N</label>
-              <span class="fname fname-hc">牛肉</span>
-              <label class="Initials">Y</label>
-              <span class="fname fname-hc">羊肉</span>
-              <label class="Initials">Z</label>
-              <span class="fname fname-hc">猪肉</span>
-            </div>
-            <div class="tab-content">
-              <label class="Initials">D</label>
-              <span class="fname fname-tl">豆瓣酱</span>
+                <label class="Initials">G</label>
+                <span class="fname fname-tl" data-id="37">干辣椒</span>
 
-              <label class="Initials">G</label>
-              <span class="fname fname-tl">干辣椒</span>
+                <label class="Initials">H</label>
+                <span class="fname fname-tl" data-id="38">胡椒</span>
+                <span class="fname fname-tl" data-id="39">花椒颗</span>
+                <span class="fname fname-tl" data-id="40">花椒面</span>
 
-              <label class="Initials">H</label>
-              <span class="fname fname-tl">胡椒</span>
-              <span class="fname fname-tl">花椒颗</span>
-              <span class="fname fname-tl">花椒面</span>
+                <label class="Initials">J</label>
+                <span class="fname fname-tl" data-id="41">酱油</span>
 
-              <label class="Initials">J</label>
-              <span class="fname fname-tl">酱油</span>
+                <label class="Initials">L</label>
+                <span class="fname fname-tl" data-id="42">辣椒面</span>
 
-              <label class="Initials">L</label>
-              <span class="fname fname-tl">辣椒面</span>
+                <label class="Initials">S</label>
+                <span class="fname fname-tl" data-id="43">砂仁</span>
+                <span class="fname fname-tl" data-id="44">食盐（250克）</span>
+                <span class="fname fname-tl" data-id="45">食盐（500克）</span>
 
-              <label class="Initials">S</label>
-              <span class="fname fname-tl">砂仁</span>
-              <span class="fname fname-tl">食盐（250克）</span>
-              <span class="fname fname-tl">食盐（500克）</span>
+                <label class="Initials">W</label>
+                <span class="fname fname-tl" data-id="46">味精</span>
 
-              <label class="Initials">W</label>
-              <span class="fname fname-tl">味精</span>
-
-              <label class="Initials">Z</label>
-              <span class="fname fname-tl">糟辣椒</span>
-            </div>
-            <div class="tab-content">
-              <label class="Initials">B</label>
-              <span class="fname fname-dz">白豆腐</span>
-              <label class="Initials">D</label>
-              <span class="fname fname-dz">豆腐干</span>
-              <span class="fname fname-dz">豆腐皮</span>
-              <label class="Initials">Q</label>
-              <span class="fname fname-dz">千张豆腐</span>
-              <label class="Initials">Y</label>
-              <span class="fname fname-dz">烟熏豆腐</span>
-            </div>
-            <div class="tab-content">
-              <label class="Initials">C</label>
-              <span class="fname fname-gc">炒豆</span>
-              <label class="Initials">D</label>
-              <span class="fname fname-gc">大豆米</span>
-              <label class="Initials">G</label>
-              <span class="fname fname-gc">干木耳</span>
-              <span class="fname fname-gc">干香菇</span>
-              <label class="Initials">H</label>
-              <span class="fname fname-gc">海带</span>
-              <label class="Initials">X</label>
-              <span class="fname fname-gc">细木耳</span>
-              <label class="Initials">Z</label>
-              <span class="fname fname-gc">紫菜</span>
-            </div>
-            <div class="tab-content">
-              <label class="Initials">C</label>
-              <span class="fname fname-ly">菜籽油</span>
-              <label class="Initials">D</label>
-              <span class="fname fname-ly">大米</span>
-              <label class="Initials">J</label>
-              <span class="fname fname-ly">煎粉</span>
-              <label class="Initials">M</label>
-              <span class="fname fname-ly">米粉</span>
+                <label class="Initials">Z</label>
+                <span class="fname fname-tl" data-id="47">糟辣椒</span>
+              </div>
+              <div class="tab-content">
+                <label class="Initials">B</label>
+                <span class="fname fname-dz" data-id="48">白豆腐</span>
+                <label class="Initials">D</label>
+                <span class="fname fname-dz" data-id="49">豆腐干</span>
+                <span class="fname fname-dz" data-id="50">豆腐皮</span>
+                <label class="Initials">Q</label>
+                <span class="fname fname-dz" data-id="51">千张豆腐</span>
+                <label class="Initials">Y</label>
+                <span class="fname fname-dz" data-id="52">烟熏豆腐</span>
+              </div>
+              <div class="tab-content">
+                <label class="Initials">C</label>
+                <span class="fname fname-gc" data-id="53">炒豆</span>
+                <label class="Initials">D</label>
+                <span class="fname fname-gc" data-id="54">大豆米</span>
+                <label class="Initials">G</label>
+                <span class="fname fname-gc" data-id="55">干木耳</span>
+                <span class="fname fname-gc" data-id="56">干香菇</span>
+                <label class="Initials">H</label>
+                <span class="fname fname-gc" data-id="57">海带</span>
+                <label class="Initials">X</label>
+                <span class="fname fname-gc" data-id="58">细木耳</span>
+                <label class="Initials">Z</label>
+                <span class="fname fname-gc" data-id="59">紫菜</span>
+              </div>
+              <div class="tab-content">
+                <label class="Initials">C</label>
+                <span class="fname fname-ly" data-id="60">菜籽油</span>
+                <label class="Initials">D</label>
+                <span class="fname fname-ly" data-id="61">大米</span>
+                <label class="Initials">J</label>
+                <span class="fname fname-ly" data-id="62">煎粉</span>
+                <label class="Initials">M</label>
+                <span class="fname fname-ly" data-id="63">米粉</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-sm-7">
-    <div class="panel panel-success">
-      <div class="panel-header">
-        <!--------------新增表格内容--------------->
-        <table class="title-table">
-          <tr class="c-white" style="border-bottom: 1px dotted #abcfde">
-            <td colspan="2" class="c-white pb-10" style="text-align: left!important;"><span>单位：</span><span>紫云县第二小学家长学校</span>
-            </td>
-            <td colspan="2" class="c-white pb-10" style="text-align: right!important;"><span>当前日期：</span><span
-              id="date"></span></td>
-          </tr>
-          <tr class="">
-            <td class="c-white pt-10">
-              <div class="f-l">
-                <!--新增选择餐别-->
-                <span>餐别：</span>
-                <span class="select-box p-0 se-input">
+    <div class="col-sm-7">
+      <div id="listPanel" class="panel panel-success">
+        <div class="panel-header">
+          <!--------------新增表格内容--------------->
+          <table class="title-table">
+            <tr class="c-white" style="border-bottom: 1px dotted #abcfde">
+              <td colspan="2" class="c-white pb-10" style="text-align: left!important;"><span>单位：</span><span>紫云县第二小学家长学校</span>
+              </td>
+              <td colspan="2" class="c-white pb-10" style="text-align: right!important;"><span>当前日期：</span><span
+                      id="date"></span></td>
+            </tr>
+            <tr class="">
+              <td class="c-white pt-10">
+                <div class="f-l">
+                  <!--新增选择餐别-->
+                  <span>餐别：</span>
+                  <span class="select-box p-0 se-input">
                                             <select class="select" style="height: 31px;" id="mealType">
                                                 <option value="">--选择餐别--</option>
                                                 <option value="1">早餐</option>
@@ -341,56 +338,57 @@
                                                 <option value="3">晚餐</option>
                                             </select>
                                         </span>
-              </div>
+                </div>
 
-            </td>
-            <td class="c-white pt-10">
-              <span>起始日期：</span>
-              <input type="text" id="supply_start_date" placeholder="供应起始时间"
-                     class="input-text ac_input text-c se-input"
-                     name="search_text" value=""
-                     autocomplete="off" readonly>
-            </td>
-            <td class="c-white pt-10">
-              <span>结束日期：</span>
-              <input type="text" id="supply_end_date" placeholder="供应结束时间"
-                     class="input-text ac_input text-c se-input"
-                     name="search_text" value=""
-                     autocomplete="off" readonly>
-            </td>
-            <td class="c-white pt-10">
-              <div class="f-r">
-                <span>结算日期：</span>
-                <input type="text" id="settle_date" placeholder="结算年月"
+              </td>
+              <td class="c-white pt-10">
+                <span>起始日期：</span>
+                <input type="text" id="supply_start_date" placeholder="供应起始时间"
                        class="input-text ac_input text-c se-input"
                        name="search_text" value=""
                        autocomplete="off" readonly>
-              </div>
-            </td>
-          </tr>
-        </table>
-        <!--------------/新增表格内容结束--------------->
+              </td>
+              <td class="c-white pt-10">
+                <span>结束日期：</span>
+                <input type="text" id="supply_end_date" placeholder="供应结束时间"
+                       class="input-text ac_input text-c se-input"
+                       name="search_text" value=""
+                       autocomplete="off" readonly>
+              </td>
+              <td class="c-white pt-10">
+                <div class="f-r">
+                  <span>结算日期：</span>
+                  <input type="text" id="settle_date" placeholder="结算年月"
+                         class="input-text ac_input text-c se-input"
+                         name="search_text" value=""
+                         autocomplete="off" readonly>
+                </div>
+              </td>
+            </tr>
+          </table>
+          <!--------------/新增表格内容结束--------------->
+        </div>
+        <div class="panel-body p-0">
+          <table class="table table-border table-bordered table-bg table-hover border-0 list-table clearfix"
+                 id="table">
+            <thead>
+            <tr class="text-c" data-tabullet-map="id">
+              <th data-tabullet-map="_index" data-tabullet-readonly="true">编号</th>
+              <th data-tabullet-map="name">食材名称</th>
+              <th data-tabullet-map="unit">食材单位</th>
+              <th data-tabullet-map="amount">食材数量</th>
+              <th data-tabullet-map="mark">备注信息</th>
+              <th data-tabullet-type="edit">编辑</th>
+              <th data-tabullet-type="delete">删除</th>
+            </tr>
+            </thead>
+          </table>
+        </div>
       </div>
-      <div class="panel-body p-0">
-        <table class="table table-border table-bordered table-bg table-hover border-0 list-table clearfix"
-               id="table">
-          <thead>
-          <tr class="text-c" data-tabullet-map="id">
-            <th data-tabullet-map="_index" data-tabullet-readonly="true">编号</th>
-            <th data-tabullet-map="name">食材名称</th>
-            <th data-tabullet-map="unit">食材单位</th>
-            <th data-tabullet-map="amount">食材数量</th>
-            <th data-tabullet-map="mark">备注信息</th>
-            <th data-tabullet-type="edit">编辑</th>
-            <th data-tabullet-type="delete">删除</th>
-          </tr>
-          </thead>
-        </table>
-      </div>
+      <!--<p class="text-c">
+        <input class="btn btn-primary radius mt-30" type="submit" value="确认上报">
+      </p>-->
     </div>
-    <p class="text-c">
-      <input class="btn btn-primary radius mt-30" type="submit" value="确认上报">
-    </p>
   </div>
 </div>
 
@@ -417,11 +415,10 @@
   }
 
   function getAvaliableH() {
-    var avaH = document.body.offsetHeight
+    var avaH = $('body').height()
     return (avaH - 75)
   }
   var avaliableH = getAvaliableH();
-
   // 日期选择
   $(function () {
 
@@ -470,12 +467,8 @@
     }
 
     jeDate('#settle_date',{
-      format: 'YYYY-MM-DD',
+      format: 'YYYY-MM',
       minDate: '2014-06-16 23:59:59', //设定最小日期为当前日期
-      maxDate: function (that) {
-        //that 指向实例对象
-        return jeDate.valText(that.valCell) == "" ? jeDate.nowDate({DD:0}) : start.maxDate;
-      }, //设定最大日期为当前日期
       donefun: function(obj){
 
       }
@@ -531,7 +524,7 @@
             }
           }
           resetTabullet();
-          $('#table').find('tbody').height(avaliableH-157-59)
+          $table.find('tbody').height(avaliableH*0.62 - $listPanel.children('.panel-header').height() - $table.children('thead').height() - 17);
         }
       });
     }
@@ -540,8 +533,11 @@
     // 设置高度
     var $table = $('#table');
     var $foodPanel = $('#foodPanel');
-    $table.find('tbody').height(avaliableH-157-59);
-    $foodPanel.height(avaliableH-60);
+    var $listPanel = $('#listPanel');
+    $foodPanel.height(avaliableH*0.62);
+    $listPanel.height(avaliableH*0.62);
+    $table.find('tbody').height(avaliableH*0.62 - $listPanel.children('.panel-header').height() - $table.children('thead').height() - 17);
+
 
     // 食材名称选择
     !function () {
@@ -551,6 +547,7 @@
         var $editTr = $("[data-tabullet-id='-1']");
         $editTr.find('input').eq(0).val($(this).text());
         $editTr.find('input').eq(1).val($(this).attr('data-unit') || '斤');
+        $editTr.attr('data-id',$(this).attr('data-id'))
       }
 
       // 设置值并创建行
@@ -558,8 +555,8 @@
         var $editTr = $("[data-tabullet-id='-1']");
         $editTr.find('input').eq(0).val($(this).text());
         $editTr.find('input').eq(1).val($(this).attr('data-unit') || '斤');
+        $editTr.attr('data-id',$(this).attr('data-id'))
         $editTr.children('td[data-tabullet-type="save"]').children('button').trigger('click');
-        $(this).addClass('bg-danger');
       }
 
       // 食材名称单击赋值

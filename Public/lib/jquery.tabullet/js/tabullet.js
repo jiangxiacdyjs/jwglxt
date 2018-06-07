@@ -47,12 +47,6 @@
     // 获取配置的数据
     var data = options.data; //表格的数据
 
-    // 这几行代码没什么卵用  如果_index改为id  下面重建表的时候就可以不用idNum
-    var index = 1;
-    $(data).each(function (i, v) {
-      v._index = index++;
-    });
-
     // 获取表格对象，先清空其tbody，然后创建一个空的tbody插入表格
     var table = this;
 
@@ -77,6 +71,8 @@
         // 绑定新增按钮的事件
         td.find('button').click(function (event) {
           var $tr = td.closest('tr');
+          // 获取当前已选项的数据id
+          var markId = $tr.attr('data-id');
           // 添加验证第1个input是否为空，为空不能新增
           var requireVal0 = $tr.find(':input').eq(0).val().replace(/^\s+|\s+$/g, '');
           if (requireVal0) {
@@ -86,6 +82,8 @@
               // $(rv).attr('name')是取的当前input的name值，而此name值在动态创建的时候取的是表头配置metadata中的map值，即字段名称
               saveData[$(rv).attr('name')] = $(rv).val();
             });
+            // 设置单个数据对象中id为tr的data-id或者为空
+            saveData['id'] = markId || '';
             options.action('save', saveData);
             return;
           } else {
@@ -104,10 +102,13 @@
     });
 
     // 重建表格数据
-    var idNum = 0;
+    var idx = 0;
     $(data).each(function (i, v) {
-      idNum++;
-      var tr = $("<tr/>").appendTo($(tbody)).attr('data-tabullet-id', idNum);
+      idx++;
+      var tr = $("<tr/>").attr('data-id',v.id).appendTo($(tbody)).attr('data-tabullet-id', idx);
+      // 判断是否存在id为foodMenu结构，如果存在，则里面对应的食材添加上选中的状态
+      if($('#foodMenu').length) $('#foodMenu').find('[data-id='+v.id+']').addClass('bg-danger');
+
       $(metadata).each(function (mi, mv) {
         if (mv.type === 'delete') {
           var td = $("<td/>")
@@ -115,6 +116,8 @@
             .attr('data-tabullet-type', mv.type)
             .appendTo(tr);
           td.find('button').click(function (event) {
+            // 获取当前已选项的数据id
+            var markId = td.closest('tr').attr('data-id');
             // 添加询问弹出层
             layer.confirm('是否确认删除该条数据？', {
               btn: ['确认', '取消'],
@@ -122,6 +125,8 @@
             }, function () {
               // tr.remove();
               options.action('delete', $(tr).attr('data-tabullet-id'));
+              // 判断是否存在id为foodMenu结构，如果存在，则里面对应的食材取消状态
+              if($('#foodMenu').length) $('#foodMenu').find('[data-id='+markId+']').removeClass('bg-danger');
               layer.close(layer.index);
             }, function () {
               layer.close(layer.index);
@@ -167,15 +172,20 @@
               }
             });
           });
-        } else {
+        } else if (mv.map === '_index'){
+          var td = $("<td/>").html(v[mv.map])
+            .attr('data-tabullet-map', mv.map)
+            .attr('data-tabullet-readonly', mv.readonly)
+            .attr('data-tabullet-type', mv.type)
+            .html(idx)
+            .appendTo(tr);
+        }else {
           var td = $("<td/>").html(v[mv.map])
             .attr('data-tabullet-map', mv.map)
             .attr('data-tabullet-readonly', mv.readonly)
             .attr('data-tabullet-type', mv.type)
             .appendTo(tr);
-
           td.click(function (event) {
-
             if (td.closest('tr').closest('tbody').find('tr').find("[data-tabullet-type='edit']").find("[data-mode='edit']").length >= 1) {
               if (td.closest('tr').find("[data-mode='edit']").length !== 1) {  // 点击当前编辑行的时候 不提示
                 layer.alert("已经有编辑状态行，请先保存后再编辑其它行");
@@ -203,7 +213,6 @@
             });
             td.find('input').focus();
           });
-
         }
       });
     });
