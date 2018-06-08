@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="layui-card-body">
-          <table class="layui-hide" id="resourceTable"></table>
+          <table class="layui-hide" id="resourceTable" lay-filter="resourceTable"></table>
           <!--这里的 checked 是根据每条数据的lock字段判断是否选中 -->
           <script type="text/html" id="resource-checkboxTpl">
             <input type="checkbox" name="lock" lay-skin="switch" lay-text="开启|锁定" title="锁定" lay-filter="resource-lock" value="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}" {{ d.lock== 1
@@ -68,7 +68,6 @@
     // 表格
     table.render({
       elem: '#resourceTable'
-      , id: '#fuckffffffffffffffffffffffffffffff'
       , url: admin.baseUrl + '/resource'
       , method: 'post'
       // 变相的通过设置skin为selectOnClick来配置点击行选中整行（此事件操作写在common.js中）
@@ -100,7 +99,6 @@
       layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
 
       json = table.clearCacheKey(json);
-      console.log(json); //当前行数据
     });
 
     // layer
