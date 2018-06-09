@@ -88,3 +88,31 @@ function article_shenhe(tit,obj) {
             });
         });
 }
+
+/*跨页面传值*/
+function GetQueryString(name) {
+  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+  var r = window.location.search.substr(1).match(reg);
+  if (r != null){
+    return decodeURI(r[2]);
+  }
+  return null;
+}
+
+/*加载效果*/
+function loading(WaitText) {
+  WaitText = WaitText ? (''+WaitText):'加载中，请耐心等待...';
+  var index = layer.msg(
+    '<div>' + WaitText + '</div>'//样式需要你自己定义，或者直接写内容
+    , {
+      zIndex: 20171016//更改窗口层次
+      , icon: 16
+      , time: 0//不自动关闭
+      // , anim: 1
+      , shade: [0.3, '#000']
+      , shadeClose: false
+      , skin: 'layer_my_msg_load'
+    }
+  );
+  return index;  //返回弹层索引号，如需关闭此弹层，执行
+}
