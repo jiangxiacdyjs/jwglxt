@@ -79,9 +79,7 @@
   </div>
 </div>
 <script>
-  layui.extend({
-    verfiy: '{/} ../src/lib/extend/layui-gVerify' //{/}代表自有路径 验证码组件(在index.js中entryPage方法里，哈希路径改变后就动态的将扩展根目录设置在了controller文件夹下，因此这要单独配置路径)
-  }).use(['admin', 'form', 'user', 'verfiy'], function () {
+  layui.use(['admin', 'form', 'user', 'verfiy'], function () {
     var layer = layui.layer
       , $ = layui.$
       , setter = layui.setter

@@ -4,6 +4,9 @@
  @Author：贤心
  @Site：http://www.layui.com/admin/
  @License：LPPL
+ @EDITOR：freshzxf
+ @DESC：此js为入口js，在此使用layui.extend扩展的模块全局可用。当然，也可以把需要扩展的模块放入controllers目录，因为每次加载完模块后移动台设置base路径为controllers目录，
+ 最好不要单独在模块模块内使用layui.extend方法扩展某模块，那种写法可能会导致多次加载某模块后，layui.hint()提示模块名已被占用，但是不会影响程序的运行！
 
  */
 
@@ -14,6 +17,7 @@ layui.extend({
   , treeselect: '../lib/extend/layui-treeselect' // 属性选择控件（可加上{/}的意思即代表采用自有路径，即不跟随 base 路径）
   , formSelects: '../lib/extend/formSelects-v3' //表单选择拓展控件
   , viewer: '../lib/extend/viewer/viewer' //表单选择拓展控件
+  , verfiy: '{/} ../src/lib/extend/layui-gVerify' // 扩展验证码功能
 }).define(['setter', 'admin'], function (exports) {
   var setter = layui.setter
     , element = layui.element
@@ -219,7 +223,7 @@ layui.extend({
           // todo：else if是我手写的一个测试实例，如果当前的access_token值不是admin，那就重定向至"无权限提示页面"
           if (!local[setter.request.tokenName]) {
             return location.hash = '/user/login/redirect=' + encodeURIComponent(pathURL); //跳转到登入页
-          }else if(local[setter.request.tokenName] && local[setter.request.tokenName] !=="admin"){
+          } else if (local[setter.request.tokenName] && local[setter.request.tokenName] !== "admin") {
             return location.hash = '/template/tips/test';
           }
         }
