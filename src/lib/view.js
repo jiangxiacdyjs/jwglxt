@@ -173,14 +173,14 @@ layui.define(['laytpl', 'layer'], function(exports){
     view.loading(that.container); //loading
     
     //请求模板（新增传入本地数据域中access_token值,以下是es5设置动态属性的写法，如果项目使用了es6，则可以直接在定义时候动态设置属性）
-    var param = {};
-    param[setter.request.tokenName] = layui.data(setter.tableName)[setter.request.tokenName];
-    param.v = layui.cache.version;
+    var datas = {};
+    datas[setter.request.tokenName] = layui.data(setter.tableName)[setter.request.tokenName];
+    datas.v = layui.cache.version;
     $.ajax({
       url: views
       ,type: 'get'
       ,dataType: 'html'
-      ,data: param
+      ,data: datas
       ,success: function(html){
         html = '<div>' + html + '</div>';
         

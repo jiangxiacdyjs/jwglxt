@@ -299,7 +299,7 @@ layui.define('view', function (exports) {
 
       //loading效果
       , loading: function (WaitText) {
-        WaitText = WaitText ? (''+WaitText):'加载中，请耐心等待...';
+        WaitText = WaitText ? ('' + WaitText) : '加载中，请耐心等待...';
         var Mti = arguments[1] || 10;//自动关闭时间
         var index = layer.msg(
           '<div>' + WaitText + '</div>'//样式需要你自己定义，或者直接写内容
@@ -314,6 +314,46 @@ layui.define('view', function (exports) {
           }
         );
         return index;  //返回弹层索引号，如需关闭此弹层，执行
+      }
+
+      // 返回状态status恒等于failed时可以调用此方法退出系统
+      , logOut: function (count, msg) {
+        var countDownTimer,
+          time = count === 0 ? 0.01 : (count > 0 ? count : 8),
+          msg = msg ? msg : '您等登录凭证已过期，系统需要重新验证';
+        // 返回失败立即清除本地token，防止用户不销毁以下弹窗，而是直接刷新界面导致不退出登录
+        layui.data(admin.setter.tableName, {
+          key: admin.setter.request.tokenName
+          , remove: true
+        });
+        // 执行友情提示的弹窗
+        admin.popup({
+          title: "请求错误！系统将在" + ' <span>' + time + '</span> ' + '秒后自动退出'
+          // time值不得为0，因此设置0.01来作为0秒关闭的效果
+          , time: time*1000
+          , content: '<i class="fa fa-warning red mr10"></i>' + msg
+          , success: function (i, v) {
+            // 根据成功打开弹窗的回调方法中第一个参数定位此弹窗
+            var $showCountDownSpan = $(i).find('.layui-layer-title').find('span');
+            countDownTimer = setInterval(function () {
+              $showCountDownSpan.html(Number($showCountDownSpan.html()) - 1);
+              Number($showCountDownSpan.html()) === 0 ? clearInterval(countDownTimer) : ''
+            }, 1000);
+            /*if(Number($showCountDownSpan.html()) < 0 || Number($showCountDownSpan.html()) === 0){
+              clearInterval(countDownTimer);
+            }else{
+              countDownTimer = setInterval(function () {
+                $showCountDownSpan.html(Number($showCountDownSpan.html()) - 1);
+                Number($showCountDownSpan.html()) === 0 ? clearInterval(countDownTimer) : ''
+              }, 1000);
+            }*/
+          }
+          , end: function () {
+            clearInterval(countDownTimer);
+            countDownTimer = null;
+            admin.exit();
+          }
+        });
       }
     };
 
@@ -535,13 +575,15 @@ layui.define('view', function (exports) {
   !function () {
     // 主题初始化(修改传入第五个主题作为默认主题)
     var local = layui.data(setter.tableName);
-    local.theme?admin.theme(local.theme):admin.theme({color:{
-        "main":"#3A3D49",
-        "logo":"#2F9688",
-        "selected":"#5FB878",
-        "alias":"green",
-        "index":5
-      }});
+    local.theme ? admin.theme(local.theme) : admin.theme({
+      color: {
+        "main": "#3A3D49",
+        "logo": "#2F9688",
+        "selected": "#5FB878",
+        "alias": "green",
+        "index": 5
+      }
+    });
 
     //禁止水平滚动
     $body.addClass('layui-layout-body');

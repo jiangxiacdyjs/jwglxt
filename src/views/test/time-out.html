@@ -1,0 +1,62 @@
+<title>超时测试</title>
+
+<style>
+  /* 这段样式只是用于演示 */
+
+</style>
+
+<div class="layui-fluid">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md12">
+      <div class="layui-card">
+        <div class="layui-card-header">测试请求超时或错误，后台返回400或</div>
+        <div class="layui-card-body">
+          <button data-type="logOut" class="layui-btn">测试超时</button>
+          <button class="layui-btn layui-btn-danger">测试config.js中配置的登录失效状态码</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  layui.use(['admin'], function () {
+    var $ = layui.$
+      , admin = layui.admin
+      , element = layui.element
+      , router = layui.router();
+
+    var events = {
+      'logOut': function () {
+        $.ajax({
+          type: 'post',
+          url: admin.baseUrl + '/timeOut',
+          data: '',
+          dataType: 'json',
+          beforeSend: function () {
+            // this.loadingIdx = admin.loading();
+          },
+          complete: function () {
+            // layer.close(this.loadingIdx);
+          },
+          success: function (result) {
+            // layer.close(this.loadingIdx);
+            if (result.status === 'failed') {
+              admin.logOut(result.time,result.msg);
+            }
+          },
+          error: function (error) {
+          }
+        });
+      },
+      'other': function () {
+
+      }
+    }
+
+    $('.layui-btn').on('click', function () {
+      var type = $(this).data('type');
+      events[type] && events[type].call(this);
+    });
+  });
+</script>

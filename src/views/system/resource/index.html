@@ -30,7 +30,8 @@
           <table class="layui-hide" id="resourceTable" lay-filter="resourceTable"></table>
           <!--这里的 checked 是根据每条数据的lock字段判断是否选中 -->
           <script type="text/html" id="resource-checkboxTpl">
-            <input type="checkbox" name="lock" lay-skin="switch" lay-text="开启|锁定" title="锁定" lay-filter="resource-lock" value="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}" {{ d.lock== 1
+            <input type="checkbox" name="lock" lay-skin="switch" lay-text="开启|锁定" title="锁定" lay-filter="resource-lock"
+                   value="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}" {{ d.lock== 1
                    ? 'checked' : '' }}>
           </script>
           <!--父级资源对象参数的解析显示-->
@@ -61,36 +62,43 @@
       , view = layui.view;
 
     // 设置表单默认值
-    function setFormVals(filter,dataObj) {
-      form.val(filter,dataObj);
+    function setFormVals(filter, dataObj) {
+      form.val(filter, dataObj);
     }
 
     // 表格
     table.render({
       elem: '#resourceTable'
       , url: admin.baseUrl + '/resource'
+      // , url: admin.baseUrl + '/timeOut'
       , method: 'post'
       // 变相的通过设置skin为selectOnClick来配置点击行选中整行（此事件操作写在common.js中）
       , skin: 'selectOnClick'
-      ,height: admin.getRightAvailableHeight() - 63
+      , height: admin.getRightAvailableHeight() - 63
+      // , where: {token: '', id: ''}
       // ,cellMinWidth: 80
       // ,size: 'sm'
       , cols: [[
         {type: 'numbers'}
         , {type: 'checkbox'}
-      //,{field:'id', title:'ID', width:100, unresize: true, sort: true}
+        //,{field:'id', title:'ID', width:100, unresize: true, sort: true}
         , {field: 'name', title: '资源名称'}
         , {field: 'type', title: '资源类型', templet: '#resource-typeTpl', width: 90}
         , {field: 'url', title: '资源地址', minWidth: 120}
         , {field: 'mark', title: '权限签名'}
         , {field: 'addMark', title: '附加标记'}
-        , {field: 'iconCls', title: '图标', width:60, align:"center", templet: '#resource-iconTpl'}
+        , {field: 'iconCls', title: '图标', width: 60, align: "center", templet: '#resource-iconTpl'}
         , {field: 'desc', title: '描述'}
-        , {field: 'level', title: '层级', width: 68, align:"center", sort:true}
+        , {field: 'level', title: '层级', width: 68, align: "center", sort: true}
         , {field: 'parent', title: '父级', templet: '#resource-parentTpl'}
-        , {field: 'lock', title: '开启',templet: '#resource-checkboxTpl', unresize: true, width: 95, align: 'center'}
+        , {field: 'lock', title: '开启', templet: '#resource-checkboxTpl', unresize: true, width: 95, align: 'center'}
       ]]
       , page: true
+      , done: function (i, t) {
+        if (i.status === 'failed') {
+          admin.logOut(i.time,i.msg)
+        }
+      }
     });
 
     // 监听锁定操作
@@ -119,8 +127,8 @@
                 //click:function (i,v) {console.log(i,v)},
                 method: "post"
               });
-              if ($('button[lay-filter=resource-undo]').length){
-                $('button[lay-filter=resource-undo]').off('click').prop('type','reset').text('重置表单').trigger('click')
+              if ($('button[lay-filter=resource-undo]').length) {
+                $('button[lay-filter=resource-undo]').off('click').prop('type', 'reset').text('重置表单').trigger('click')
               }
             });
           }
@@ -143,7 +151,7 @@
                 // layui2.3可以调用form.val()方法对表单赋值
                 var checkedRowDataObj = checkActive.getCheckData()[0];
                 form.val("resource-form", checkedRowDataObj)
-                form.val("resource-form", {"check[lock]": checkedRowDataObj.lock == 0 ? false:true});
+                form.val("resource-form", {"check[lock]": checkedRowDataObj.lock == 0 ? false : true});
                 // 初始化树形下拉组件
                 treeselect.render({
                   elem: "#parent",
@@ -154,18 +162,19 @@
                   method: "post"
                 });
                 // 绑定恢复操作按钮事件
-                if ($('button[lay-filter=resource-undo]').length){
-                  $('button[lay-filter=resource-undo]').off('click').prop('type','button').text('恢复操作').on('click',function () {
-                    setFormVals("resource-form",checkedRowDataObj);
-                    setFormVals("resource-form",{"check[lock]": checkedRowDataObj.lock == 0 ? false:true});
-                    setFormVals("resource-form",{"type": 1});
-                    setFormVals("resource-form",{"parent": checkedRowDataObj.parent.name});
+                if ($('button[lay-filter=resource-undo]').length) {
+                  $('button[lay-filter=resource-undo]').off('click').prop('type', 'button').text('恢复操作').on('click', function () {
+                    setFormVals("resource-form", checkedRowDataObj);
+                    setFormVals("resource-form", {"check[lock]": checkedRowDataObj.lock == 0 ? false : true});
+                    setFormVals("resource-form", {"type": 1});
+                    setFormVals("resource-form", {"parent": checkedRowDataObj.parent.name});
                     layer.msg('已恢复至最近保存数据');
                   });
-                };
+                }
+                ;
                 // 打开即设置默认值
-                setFormVals("resource-form",checkedRowDataObj);
-                setFormVals("resource-form",{"check[lock]": checkedRowDataObj.lock == 0 ? false:true});
+                setFormVals("resource-form", checkedRowDataObj);
+                setFormVals("resource-form", {"check[lock]": checkedRowDataObj.lock == 0 ? false : true});
                 // 实际生产中只要传入的value与表单中select下option对应的value
                 // form.val("resource-form", {"type": checkedRowDataObj.type.value});
                 // form.val("resource-form", {"parent": checkedRowDataObj.parent.value});
@@ -268,7 +277,7 @@
 
     // 搜索重载表格
     var searchActive = {
-      search: function(){
+      search: function () {
         var $serIpt = $('#searchInput');
         var $serBtn = $('#searchBtn');
         //执行重载
@@ -276,7 +285,7 @@
           page: {
             curr: 1
           }
-          ,where: {
+          , where: {
             key: {
               name: $serIpt.val()
             }
