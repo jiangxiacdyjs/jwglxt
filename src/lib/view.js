@@ -71,7 +71,7 @@ layui.define(['laytpl', 'layer'], function(exports){
     if(request.tokenName){
       //自动给参数传入默认 token
       options.data[request.tokenName] = request.tokenName in options.data 
-        ?  options.data[request.tokenName]
+        ? options.data[request.tokenName]
       : (layui.data(setter.tableName)[request.tokenName] || '');
       
       //自动给 Request Headers 传入 token
@@ -100,7 +100,7 @@ layui.define(['laytpl', 'layer'], function(exports){
           view.exit();
         }
         
-        //其它异常
+        // 其它异常
         else {
           var error = [
             '<cite>Error：</cite> ' + (res[response.msgName] || '返回状态码异常')
