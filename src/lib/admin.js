@@ -32,8 +32,9 @@ layui.define('view', function (exports) {
       //把config配置文件传递给admin，以便其他模块直接通过admin.setter使用配置文件（而无需再次导入config模块再使用）
       , setter: setter
 
-      //API根目录
+      //API根目录(如果需要每次请求的API都带有本地token值，可参考下方注释掉的写法，直接在setter中配置会获取不到，需要在此配置)
       , baseUrl: setter.baseUrl
+      // , baseUrl: setter.baseUrl + '?' + setter.request.tokenName + '=' + layui.data(setter.tableName)[setter.request.tokenName]
 
       //数据的异步请求
       , req: view.req

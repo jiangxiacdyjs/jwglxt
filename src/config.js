@@ -24,7 +24,7 @@ layui.define(['laytpl', 'layer', 'element', 'util'], function(exports){
     ,request: {
       tokenName: 'access_token' //自动携带 token 的字段名。可设置 false 不携带。
     }
-    
+
     //自定义响应字段
     ,response: {
       statusName: 'code' //数据状态的字段名称
@@ -35,7 +35,7 @@ layui.define(['laytpl', 'layer', 'element', 'util'], function(exports){
       ,msgName: 'msg' //状态信息的字段名称
       ,dataName: 'data' //数据详情的字段名称
     }
-    
+
     //独立页面路由，可随意添加（无需写参数）
     ,indPage: [
       '/user/login' //登入页

@@ -51,8 +51,8 @@ layui.define(['laytpl', 'layer'], function(exports){
     //跳转到登入页
     location.hash = '/user/login'; 
   };
-  
-  //Ajax请求
+
+  //Ajax请求(获取菜单等是调用此方法，默认携带本地数据域中tokenName值)
   view.req = function(options){
     var that = this
     ,success = options.success
@@ -164,22 +164,23 @@ layui.define(['laytpl', 'layer'], function(exports){
     }, options))
   };
   
-  //请求模板文件渲染
+  //请求各模板文件渲染
   Class.prototype.render = function(views, params){
     var that = this, router = layui.router();
     views = setter.views + views + setter.engine;
-    
+
     $('#'+ LAY_BODY).children('.layadmin-loading').remove();
     view.loading(that.container); //loading
     
-    //请求模板
+    //请求模板（新增传入本地数据域中access_token值,以下是es5设置动态属性的写法，如果项目使用了es6，则可以直接在定义时候动态设置属性）
+    var param = {};
+    param[setter.request.tokenName] = layui.data(setter.tableName)[setter.request.tokenName];
+    param.v = layui.cache.version;
     $.ajax({
       url: views
       ,type: 'get'
       ,dataType: 'html'
-      ,data: {
-        v: layui.cache.version
-      }
+      ,data: param
       ,success: function(html){
         html = '<div>' + html + '</div>';
         
@@ -226,7 +227,6 @@ layui.define(['laytpl', 'layer'], function(exports){
         } else {
           that.render('template/tips/error');
         }
-        
         that.render.isError = true;
       }
     });
