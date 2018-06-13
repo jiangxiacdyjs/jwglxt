@@ -1,27 +1,36 @@
-
 <title>消息编辑</title>
 
 <form class="layui-form layui-form-pane" lay-filter="message-form">
   <div class="layui-form-item layui-row layui-col-space20" style="margin-bottom: 0">
     <!--消息类别-->
-    <div class="layui-col-xs4">
-      <label class="layui-form-label">消息类别</label>
+    <div class="layui-col-xs6">
+      <label class="layui-form-label">消息分类</label>
       <div class="layui-input-block">
-        <select name="type" lay-filter="type" lay-verify="required" lay-search="">
-          <option value="">请选择消息类别</option>
-          <option value="1">通知公告</option>
-          <option value="2">政策新闻</option>
+        <select name="type" lay-verify="required" lay-search="" lay-filter="type">
+          <!--<option value="">请选择消息类别</option>-->
+          <option value="1" selected>通知公告</option>
+          <option value="2">新闻动态</option>
         </select>
       </div>
     </div>
-    <!--接收对象-->
-    <div class="layui-col-xs8">
-      <label class="layui-form-label">接收对象</label>
+    <!--接收用户-->
+    <div class="layui-col-xs6">
+      <label class="layui-form-label">接收用户</label>
       <div class="layui-input-block">
-        <input type="text" name="type" lay-verify="required" autocomplete="off" placeholder="请选择接收对象"
-               class="layui-input">
+        <select name="acceptMode" lay-verify="required" lay-search="" lay-filter="accept-mode">
+          <!--<option value="">请选择消息类别</option>-->
+          <option value="1" selected>系统全部用户</option>
+          <option value="2">指定义教学校</option>
+          <option value="3">指定学前学校</option>
+          <option value="4">指定配送公司</option>
+        </select>
       </div>
     </div>
+  </div>
+  <!--发送对象-->
+  <div class="layui-form-item mb10 accepts-item layui-hide">
+    <select name="accepts" lay-verify="" xm-select="xmselect" xm-select-type="1" xm-select-placeholder="请选择消息接收用户"
+            xm-select-skin="" xm-select-search></select>
   </div>
   <!--详情-->
   <div class="layui-form-item layui-form-text">
@@ -40,37 +49,168 @@
 </form>
 
 <script>
-layui.use(['admin', 'layedit', 'layer', 'element', 'form'], function(){
-  var $ = layui.$
-  ,admin = layui.admin
-  ,layer = layui.layer
-  ,element = layui.element
-  ,form = layui.form
-  ,layedit = layui.layedit;
+  layui.use(['admin', 'layedit', 'layer', 'element', 'form', 'formSelects'], function () {
+    var $ = layui.$
+      , admin = layui.admin
+      , layer = layui.layer
+      , element = layui.element
+      , form = layui.form
+      , formSelects = layui.formSelects
+      , layedit = layui.layedit;
 
-  form.render()
+    // 渲染表单
+    form.render();
 
-  // 建立编辑器
-  var msgBoxIdx = layedit.build('msgBox', {
-    height: 410
-    , uploadImage: {url: 'https://www.easy-mock.com/mock/5b081444b2917d747f8614ef/nutritional2.0/postSuccessImg', type: 'post'}
-    , tool: [
-      'strong' //加粗
-      ,'italic' //斜体
-      ,'underline' //下划线
-      ,'del' //删除线
+    var acceptsData = {
+        acceptsDataArr2: [],
+        acceptsDataArr3: [],
+        acceptsDataArr4: []
+      },
+      // 标记已扩展至最大高度
+      flagMaxHeight = false;
 
-      ,'|' //分割线
+    // select选择监听
+    form.on('select(accept-mode)', function (data) {
+      if (Number(data.value) != 1) {
+        $('.accepts-item').removeClass('layui-hide');
+        var $currentLayerContent = $('#messageAdd');
+        if ($currentLayerContent.length && !flagMaxHeight) {
+          $currentLayerContent.height($currentLayerContent.height() + 48);
+          $currentLayerContent.parent().height($currentLayerContent.parent().height() + 48);
+          $currentLayerContent.closest('.layui-layer').css('margin-top', '-24px')
+          flagMaxHeight = true;
+        }
+        ;
+        switch (Number(data.value)) {
+          case 2:
+            acceptsData.acceptsDataArr2.length ? localRenderAcceptsSelect(acceptsData.acceptsDataArr2) : remoteRenderAcceptsSelect(2);
+            break;
+          case 3:
+            acceptsData.acceptsDataArr3.length ? localRenderAcceptsSelect(acceptsData.acceptsDataArr3) : remoteRenderAcceptsSelect(3);
+            break;
+          case 4:
+            acceptsData.acceptsDataArr4.length ? localRenderAcceptsSelect(acceptsData.acceptsDataArr4) : remoteRenderAcceptsSelect(4);
+            break;
+          default:
+            return;
+        }
+      } else {
+        $('.accepts-item').addClass('layui-hide');
+        var $currentLayerContent = $('#messageAdd');
+        if ($currentLayerContent.length && flagMaxHeight) {
+          $currentLayerContent.height($currentLayerContent.height() - 48);
+          $currentLayerContent.parent().height($currentLayerContent.parent().height() - 48);
+          $currentLayerContent.closest('.layui-layer').css('margin-top', 0)
+          flagMaxHeight = false;
+        }
+        ;
+      }
+    });
 
-      ,'left' //左对齐
-      ,'center' //居中对齐
-      ,'right' //右对齐
-      ,'link' //超链接
-      ,'unlink' //清除链接
-      ,'face' //表情
-      ,'image' //插入图片
-      ,'help' //帮助
-    ]
+    // 根据现成的数据动态创建select选项
+    function localRenderAcceptsSelect(dataArr) {
+      // 表单选择组件
+      formSelects.render({
+        name: 'xmselect'
+        , on: function (data, arr) {
+        }
+        , data: {
+          arr: dataArr
+          , val: 'value'
+        }
+        //, init: formSelects.value('xmselect','val')
+      })
+      //formSelects.value('select');			//获取选中的值
+      //formSelects.value('select', 'val');		//获取选中的val数组
+      //formSelects.value('select', 'name');		//获取选中的name数组
+      //formSelects.value('select', [1, 3]);	//动态赋值
+    }
+
+    // 根据本地已请求数据动态创建select选项
+    function remoteRenderAcceptsSelect(id) {
+      $.ajax({
+        type: 'post',
+        url: admin.baseUrl + '/messageAccepts',
+        data: id,
+        dataType: 'json',
+        beforeSend: function () {
+          this.loadingIdx = admin.loading();
+        },
+        complete: function () {
+          layer.close(this.loadingIdx);
+        },
+        success: function (result) {
+          layer.close(this.loadingIdx);
+          if (result.code == 0) {
+            // 存储数据，避免二次请求
+            acceptsData['acceptsDataArr' + id] = result.data;
+            // 渲染select
+            localRenderAcceptsSelect(result.data);
+          }
+        },
+        error: function (error) {
+          layer.msg('请求出错！');
+        },
+      });
+    }
+
+    // 建立编辑器
+    var msgBoxIdx = layedit.build('msgBox', {
+      height: 380
+      ,
+      uploadImage: {
+        url: 'https://www.easy-mock.com/mock/5b081444b2917d747f8614ef/nutritional2.0/postSuccessImg',
+        type: 'post'
+      }
+      ,
+      tool: [
+        'strong' //加粗
+        , 'italic' //斜体
+        , 'underline' //下划线
+        , 'del' //删除线
+
+        , '|' //分割线
+
+        , 'left' //左对齐
+        , 'center' //居中对齐
+        , 'right' //右对齐
+        , 'link' //超链接
+        , 'unlink' //清除链接
+        , 'face' //表情
+        , 'image' //插入图片
+        , 'help' //帮助
+      ]
+    });
+
+    // 监听提交(根据lay-filter值来监听提交，便于保存操作和新增操作的提交公用一个方法)，但是需要判断是新增模式还是修改模式（根据点击按钮是否有data-id值来确定，有的话是编辑模式，无则是新增模式）
+    form.on('submit(message-smt)', function (data) {
+      // 新增操作
+      $.ajax({
+        type: 'post',
+        url: admin.baseUrl + '/postSuccess',
+        data: data.field,
+        dataType: 'json',
+        beforeSend: function () {
+          this.loadingIdx = admin.loading();
+        },
+        complete: function () {
+          layer.close(this.loadingIdx);
+        },
+        success: function (result) {
+          layer.close(this.loadingIdx);
+          if(admin.popup.addLayer) layer.close(admin.popup.addLayer);
+          if (result.code == 0) {
+
+          }
+          layer.msg('新增成功', {icon: 1});
+          // 重置表单
+          // formReset();
+        },
+        error: function (error) {
+          layer.msg('请求出错啦', {icon: 2});
+        },
+      });
+      return false;
+    });
   });
-});
 </script>

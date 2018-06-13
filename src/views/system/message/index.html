@@ -5,8 +5,8 @@
     <div class="layui-tab layui-tab-brief">
       <ul class="layui-tab-title">
         <li class="layui-this">全部消息</li>
-        <li>通知<span class="layui-badge">6</span></li>
-        <li>私信</li>
+        <li>通知公告<span class="layui-badge">6</span></li>
+        <li>新闻动态</li>
         <div class="LAY-app-message-btns mt7 mr10 fr">
           <button data-events="add" class="layui-btn layui-btn-sm"><i class="layui-icon layui-icon-edit"></i>发布消息
           </button>
@@ -45,7 +45,7 @@
             </button>
           </div>
 
-          <table id="LAY-app-message-direct" lay-filter="LAY-app-message-direct"></table>
+          <table id="LAY-app-message-news" lay-filter="LAY-app-message-direct"></table>
         </div>
       </div>
     </div>
@@ -81,43 +81,27 @@
     };
 
     //全部消息
-    table.render({
-      elem: '#LAY-app-message-all'
-      , url: './json/message/all.js' //模拟接口
-      , page: true
-      , cols: [[
-        {type: 'checkbox', fixed: 'left'}
-        , {field: 'title', title: '标题内容', minWidth: 300, templet: tplTitle}
-        , {field: 'time', title: '时间', width: 170, templet: '<div>{{ layui.util.timeAgo(d.time) }}</div>'}
-      ]]
-      , skin: 'line'
-    });
+    function renderTable(id, url){
+      table.render({
+        elem: '#'+id
+        , url: admin.baseUrl + url //模拟接口
+        , method: 'post'
+        // 变相的通过设置skin为selectOnClick来配置点击行选中整行（此事件操作写在common.js中）
+        // , skin: 'selectOnClick'
+        , skin: 'line'
+        , height:  admin.getRightAvailableHeight()-113
+        , page: true
+        , cols: [[
+          {type: 'checkbox', fixed: 'left'}
+          , {field: 'title', title: '标题内容', minWidth: 300, templet: tplTitle}
+          , {field: 'time', title: '时间', width: 170}
+        ]]
+      });
+    }
 
-    //通知
-    table.render({
-      elem: '#LAY-app-message-notice'
-      , url: './json/message/notice.js' //模拟接口
-      , page: true
-      , cols: [[
-        {type: 'checkbox', fixed: 'left'}
-        , {field: 'title', title: '标题内容', minWidth: 300, templet: tplTitle}
-        , {field: 'time', title: '时间', width: 170, templet: '<div>{{ layui.util.timeAgo(d.time) }}</div>'}
-      ]]
-      , skin: 'line'
-    });
-
-    //私信
-    table.render({
-      elem: '#LAY-app-message-direct'
-      , url: './json/message/direct.js' //模拟接口
-      , page: true
-      , cols: [[
-        {type: 'checkbox', fixed: 'left'}
-        , {field: 'title', title: '标题内容', minWidth: 300, templet: tplTitle}
-        , {field: 'time', title: '时间', width: 170, templet: '<div>{{ layui.util.timeAgo(d.time) }}</div>'}
-      ]]
-      , skin: 'line'
-    });
+    renderTable('LAY-app-message-all','/message');
+    renderTable('LAY-app-message-notice','/message');
+    renderTable('LAY-app-message-news','/message');
 
     //事件处理
     var events = {
@@ -127,17 +111,38 @@
           , data = checkStatus.data; // 获得选中的数据
         if (data.length === 0) return layer.msg('未选中行');
 
-        layer.confirm('确定删除选中的数据吗？', function () {
-          /*
-          admin.req('url', {}, function(){ //请求接口
-            //do somethin
-          });
-          */
-          // 此处只是演示，实际应用需把下述代码放入上述Ajax回调中
-          layer.msg('删除成功', {
-            icon: 1
-          });
-          table.reload(thisTabs.id); //刷新表格
+        var confirmLayerIdx = admin.popup({
+          content: '是否确认删除已选择的' + data.length + '条数据？'
+          , btn: ['确认', '取消']
+          , skin: 'layui-layer-admin'
+          , btnAlign: 'c'
+          , yes: function (index, layero) {
+            layer.close(confirmLayerIdx);
+            $.ajax({
+              type: 'post',
+              url: admin.baseUrl + '/message',
+              data: data,
+              dataType: 'json',
+              beforeSend: function () {
+                this.loading = admin.loading();
+              },
+              complete: function () {
+                layer.close(this.loading);
+              },
+              success: function (result) {
+                if (result.code == 0) {
+                  table.reload(thisTabs.id); //刷新表格
+                }
+              },
+              error: function (error) {
+                layer.msg('请求出错啦', {icon: 2});
+              },
+            });
+          }
+          , btn2: function (index, layero) {
+          }
+          , cancel: function () {
+          }
         });
       }
       , ready: function (othis, type) {
@@ -164,7 +169,7 @@
       , add: function (othis, type) {
         admin.popup.addLayer = admin.popup({
           "title": "消息新增&nbsp;/&nbsp;编辑"
-          , area: admin.screen() < 2 ? ['100%', '690px'] : ['880px', '690px']
+          , area: admin.screen() < 2 ? ['100%', '660px'] : ['880px', '660px']
           , id: 'messageAdd'//id唯一
           , maxmin: true //支持窗口最大化
           , shadeClose: false //支持窗口最大化
