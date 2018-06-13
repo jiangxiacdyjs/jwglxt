@@ -95,7 +95,7 @@
       ]]
       , page: true
       , done: function (i, t) {
-        if (i.status === 'failed') {
+        if (i.status === 'fail') {
           admin.logOut(i.time,i.msg)
         }
       }

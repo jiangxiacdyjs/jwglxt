@@ -355,6 +355,23 @@ layui.define('view', function (exports) {
           }
         });
       }
+
+      , setBtnState: function (btn, state) {
+          var $btn = btn instanceof $ ? btn : $(btn),
+              text = $btn.text(),
+              loadingIcon = $btn.find('.layui-icon-loading');
+          switch (state){
+            case 'loading':
+              $btn.prop('disabled', true);
+              loadingIcon.length ? loadingIcon.addClass('layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop mr10') :
+                $btn.text($btn.attr('data-loading') || '加载中').attr('data-normal', text).prepend($('<i/>').addClass('layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop mr10'));
+              break;
+            case 'normal':
+              $btn.prop('disabled', false).text($btn.attr('data-normal') || '确认');
+              loadingIcon.length ? $btn.find('.layui-icon-loading').remove() : '';
+              break;
+          }
+      }
     };
 
   //事件

@@ -1,0 +1,76 @@
+
+<title>消息编辑</title>
+
+<form class="layui-form layui-form-pane" lay-filter="message-form">
+  <div class="layui-form-item layui-row layui-col-space20" style="margin-bottom: 0">
+    <!--消息类别-->
+    <div class="layui-col-xs4">
+      <label class="layui-form-label">消息类别</label>
+      <div class="layui-input-block">
+        <select name="type" lay-filter="type" lay-verify="required" lay-search="">
+          <option value="">请选择消息类别</option>
+          <option value="1">通知公告</option>
+          <option value="2">政策新闻</option>
+        </select>
+      </div>
+    </div>
+    <!--接收对象-->
+    <div class="layui-col-xs8">
+      <label class="layui-form-label">接收对象</label>
+      <div class="layui-input-block">
+        <input type="text" name="type" lay-verify="required" autocomplete="off" placeholder="请选择接收对象"
+               class="layui-input">
+      </div>
+    </div>
+  </div>
+  <!--详情-->
+  <div class="layui-form-item layui-form-text">
+    <label class="layui-form-label">消息编辑</label>
+    <div class="layui-input-block">
+      <textarea id="msgBox" name="msg" placeholder="请输入内容" class="layui-textarea"></textarea>
+    </div>
+  </div>
+  <!--提交-->
+  <div class="layui-form-item mb0">
+    <div class="layui-footer">
+      <button type="button" class="layui-btn fr" lay-submit="" lay-filter="message-smt">立即提交</button>
+      <button type="button" class="layui-btn layui-btn-primary fl ml0" lay-filter="message-undo">撤销操作</button>
+    </div>
+  </div>
+</form>
+
+<script>
+layui.use(['admin', 'layedit', 'layer', 'element', 'form'], function(){
+  var $ = layui.$
+  ,admin = layui.admin
+  ,layer = layui.layer
+  ,element = layui.element
+  ,form = layui.form
+  ,layedit = layui.layedit;
+
+  form.render()
+
+  // 建立编辑器
+  var msgBoxIdx = layedit.build('msgBox', {
+    height: 410
+    , uploadImage: {url: 'https://www.easy-mock.com/mock/5b081444b2917d747f8614ef/nutritional2.0/postSuccessImg', type: 'post'}
+    , tool: [
+      'strong' //加粗
+      ,'italic' //斜体
+      ,'underline' //下划线
+      ,'del' //删除线
+
+      ,'|' //分割线
+
+      ,'left' //左对齐
+      ,'center' //居中对齐
+      ,'right' //右对齐
+      ,'link' //超链接
+      ,'unlink' //清除链接
+      ,'face' //表情
+      ,'image' //插入图片
+      ,'help' //帮助
+    ]
+  });
+});
+</script>

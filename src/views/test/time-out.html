@@ -41,8 +41,8 @@
           },
           success: function (result) {
             // layer.close(this.loadingIdx);
-            if (result.status === 'failed') {
-              admin.logOut(result.time,result.msg);
+            if (result.status === 'fail') {
+              admin.logOut(result.time, result.msg);
             }
           },
           error: function (error) {

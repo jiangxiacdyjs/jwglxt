@@ -40,10 +40,12 @@
 /*边距*/
 .mb0{margin-bottom: 0!important;}
 .mb5{margin-bottom: 5px;}
+.mb10{margin-bottom: 10px;}
 .ml0{margin-left: 0!important;}
 .mt5{margin-top: 5px}
+.mt7{margin-top: 7px}
 .mt10{margin-top: 10px}
-.mr10{margin-right: 10px}
+.mr10{margin-right: 10px!important;}
 .mt20{margin-top: 20px}
 .mt50{margin-top: 50px}
 .pt50{padding-top: 50px}

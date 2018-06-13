@@ -22,6 +22,11 @@
         "name": "user",
         "title": "用户管理",
         "spread": false
+      },
+      {
+        "name": "message",
+        "title": "消息管理",
+        "spread": false
       }
     ]
   },
