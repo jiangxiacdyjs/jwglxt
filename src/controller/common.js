@@ -20,14 +20,19 @@ layui.define(function(exports){
   //公共业务的逻辑处理可以写在此处，切换任何页面都会执行
   //……
 
-  // 全局设置表格行点击事件，如果存在单选框项，则选中，否则返回空(此处使用的是css3中包含属性选择器，意在兼容表格设置其他风格的skin，已在admin.css中重置了表格skin为line的样式设置)
-  $('#LAY_app_body').off('.selectOnClick','table[lay-skin*="selectOnClick"] tbody tr');
-  $('#LAY_app_body').on('click.selectOnClick','table[lay-skin*="selectOnClick"] tbody tr',function (e) {
+  /**
+   * 全局设置表格行点击事件，如果存在单选框项，则选中，否则返回空
+   * (此处使用的是css3中包含属性选择器，意在兼容表格设置其他风格的skin，已在admin.css中重置了表格skin为line的样式设置)
+   * 在绑定事件的if判断之前的代码会被执行2次，因为当点击当前tr时，模拟点击了tr里面的单选框，会再次冒泡点击到tr
+   * 不建议去除事件冒泡，因为有些情况下需要冒泡支持，如另外在tr中设置了其他内部元素的点击事件等
+   */
+  $('#LAY_app_body').off('.selectOnClick','table[lay-skin*="selectOnClick"] tbody tr').on('click.selectOnClick','table[lay-skin*="selectOnClick"] tbody tr',function (e) {
     // e.stopPropagation();
     var idx = $(this).attr('data-index');
     var $fixedIconOk = $('.layui-table-fixed').find('table[lay-skin*="selectOnClick"] tbody tr[data-index='+idx+']').find('.layui-icon-ok').eq(0);
     var $iconOk = $fixedIconOk.length ? $fixedIconOk : $(this).find('.layui-icon-ok').eq(0);
     var $eTarget = $(e.target);
+    console.log(11)
     if(!$eTarget.hasClass('layui-icon-ok') && $iconOk.length){
       $iconOk.trigger('click');
       return;
