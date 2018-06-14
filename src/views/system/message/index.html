@@ -44,8 +44,8 @@
             <button class="layui-btn layui-btn-primary layui-btn-sm" data-type="direct" data-events="readyAll">全部已读
             </button>
           </div>
-
-          <table id="LAY-app-message-news" lay-filter="LAY-app-message-direct"></table>
+<div id="dom1"></div>
+          <table id="LAY-app-message-news" lay-filter="LAY-app-message-news"></table>
         </div>
       </div>
     </div>
@@ -66,12 +66,12 @@
           , id: 'LAY-app-message-all'
         }
         , notice: {
-          text: '通知'
+          text: '通知公告'
           , id: 'LAY-app-message-notice'
         }
-        , direct: {
-          text: '私信'
-          , id: 'LAY-app-message-direct'
+        , news: {
+          text: '新闻动态'
+          , id: 'LAY-app-message-news'
         }
       };
 
@@ -88,7 +88,7 @@
         , method: 'post'
         // 变相的通过设置skin为selectOnClick来配置点击行选中整行（此事件操作写在common.js中）
         // , skin: 'selectOnClick'
-        , skin: 'line'
+        , skin: 'line selectOnClick'
         , height:  admin.getRightAvailableHeight()-113
         , page: true
         , cols: [[
@@ -99,9 +99,9 @@
       });
     }
 
-    renderTable('LAY-app-message-all','/message');
-    renderTable('LAY-app-message-notice','/message');
-    renderTable('LAY-app-message-news','/message');
+    renderTable('LAY-app-message-all', '/message');
+    // renderTable('LAY-app-message-notice', '/message');
+    // renderTable('LAY-app-message-news', '/message');
 
     //事件处理
     var events = {

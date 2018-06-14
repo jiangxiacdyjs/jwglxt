@@ -20,15 +20,20 @@ layui.define(function(exports){
   //公共业务的逻辑处理可以写在此处，切换任何页面都会执行
   //……
 
-  // 全局设置表格行点击事件，如果存在单选框项，则选中，否则返回空
-  $('#LAY_app_body').off('click','table[lay-skin="selectOnClick"] tr');
-  $('#LAY_app_body').on('click','table[lay-skin="selectOnClick"] tr',function (e) {
-    e.stopPropagation();
-    var $iconOk = $(this).find('.layui-icon-ok');
+  // 全局设置表格行点击事件，如果存在单选框项，则选中，否则返回空(此处使用的是css3中包含属性选择器，意在兼容表格设置其他风格的skin，已在admin.css中重置了表格skin为line的样式设置)
+  $('#LAY_app_body').off('.selectOnClick','table[lay-skin*="selectOnClick"] tbody tr');
+  $('#LAY_app_body').on('click.selectOnClick','table[lay-skin*="selectOnClick"] tbody tr',function (e) {
+    // e.stopPropagation();
+    var idx = $(this).attr('data-index');
+    var $fixedIconOk = $('.layui-table-fixed').find('table[lay-skin*="selectOnClick"] tbody tr[data-index='+idx+']').find('.layui-icon-ok').eq(0);
+    var $iconOk = $fixedIconOk.length ? $fixedIconOk : $(this).find('.layui-icon-ok').eq(0);
     var $eTarget = $(e.target);
     if(!$eTarget.hasClass('layui-icon-ok') && $iconOk.length){
       $iconOk.trigger('click');
-    }else{}
+      return;
+    }else{
+      return;
+    }
   });
 
   //退出

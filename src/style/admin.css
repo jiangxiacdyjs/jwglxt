@@ -29,7 +29,9 @@ html{background-color: #f2f2f2; color: #666;}
 *[layadmin-event]{cursor: pointer;}
 
 /* 重置布局结构 */
-.layui-layout-admin .layui-header{position: fixed; top: 0; left: 0; width: 100%; height: 50px;} 
+.layui-layout-admin .layui-header{position: fixed; top: 0; left: 0; width: 100%; height: 50px;}
+.layui-table-view .layui-table[lay-skin*=line], .layui-table-view .layui-table[lay-skin~=line] {border-width: 0 1px 0 0;}
+.layui-table[lay-skin*=line] td, .layui-table[lay-skin~=line] td, .layui-table[lay-skin*=line] th, .layui-table[lay-skin~=line] th{border-width: 0 0 1px;}
 
 /*
 .layui-layout-admin .layui-header .layui-layout-right .layui-nav-item a{color: #fff;}
