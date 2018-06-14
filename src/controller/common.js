@@ -23,7 +23,7 @@ layui.define(function(exports){
   /**
    * 全局设置表格行点击事件，如果存在单选框项，则选中，否则返回空
    * (此处使用的是css3中包含属性选择器，意在兼容表格设置其他风格的skin，已在admin.css中重置了表格skin为line的样式设置)
-   * layui的table组件中对单选框的绑定事件是在单选框icon的父元素上，因此采用阻止冒泡模拟点击事件模拟触发单选框状态
+   * todo：事件内判断事件源之前的代码会被执行2次，因为存在icon模拟点击的冒泡触发，尝试使用triggerHandler替代trigger，显示效果是已选中，但是实际无法触发选中功能，此处待进一步研究
    */
   $('#LAY_app_body').off('.selectOnClick','table[lay-skin*="selectOnClick"] tbody tr').on('click.selectOnClick','table[lay-skin*="selectOnClick"] tbody tr',function (e) {
     // e.stopPropagation();
@@ -32,7 +32,8 @@ layui.define(function(exports){
     var $iconOk = $fixedIconOk.length ? $fixedIconOk : $(this).find('.layui-icon-ok').eq(0);
     var $eTarget = $(e.target);
     if(!$eTarget.hasClass('layui-icon-ok') && $iconOk.length){
-      $iconOk.parent().triggerHandler('click');
+      $iconOk.trigger('click');
+      // $iconOk.triggerHandler('click');
       return;
     }else{
       return;
