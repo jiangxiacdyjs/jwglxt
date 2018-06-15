@@ -23,8 +23,8 @@
           <div class="layui-inline" style="width: 48%;float: left;margin-right: 0">
             <!--<img class="verifyImg" onclick="this.src=this.src+'?c='+Math.random();"
                  src="../src/img/login/yzm.jpg"/>-->
-            <div style="height: 38px;margin:0 0 5px 0;border-radius: 2px;overflow: hidden">
-              <div id="vContainer" style="width: inherit;height: inherit"></div>
+            <div style="width:100%;height: 38px;margin:0 0 5px 0;border-radius: 2px;overflow: hidden">
+              <div id="vContainer" style="width:100%;height: inherit"></div>
             </div>
           </div>
         </div>
@@ -33,7 +33,7 @@
             <button type="reset" class="layui-btn layui-btn-primary">取消</button>
           </div>
           <div class="layui-inline fl" style="width: 48%;float: left;margin-right: 0">
-            <button type="button" class="layui-btn" lay-submit lay-filter="LAY-user-login-submit">登录
+            <button type="button" class="layui-btn" lay-submit lay-filter="LAY-user-login-submit" data-loading="登陆中，请稍等">登录
             </button>
           </div>
         </div>
@@ -79,9 +79,7 @@
   </div>
 </div>
 <script>
-  layui.extend({
-    verfiy: '{/} ../src/lib/extend/layui-gVerify' //{/}代表自有路径 验证码组件(在index.js中entryPage方法里，哈希路径改变后就动态的将扩展根目录设置在了controller文件夹下，因此这要单独配置路径)
-  }).use(['admin', 'form', 'user', 'verfiy'], function () {
+  layui.use(['admin', 'form', 'user', 'verfiy'], function () {
     var layer = layui.layer
       , $ = layui.$
       , setter = layui.setter
@@ -95,7 +93,8 @@
     $('.m-login-bg').height($(window).height());
     $('.m-bg-contain').height($(window).height() / 2);
 
-    // 验证码 todo:切换模块后验证码会显示不全，此问题有待解决
+    // 验证码 todo:切换模块后验证码会显示不全，暂时用如何设置宽度解决此问题
+    $('#vContainer').width('163');
     var verifyCode = new verfiy({
       id: "vContainer",
       type: "number"
@@ -106,7 +105,7 @@
     local.theme && admin.theme(local.theme);
     var $themeUl = $('.ladmin-user-login-theme').children('ul');
     var currentThemeIdx = local.theme ? local.theme.color.index : 0;
-    var currentThemeLi = $themeUl.children('[data-index='+currentThemeIdx+']');
+    var currentThemeLi = $themeUl.children('[data-index=' + currentThemeIdx + ']');
     var currentThemeColor = currentThemeLi.children().css('background-color');
     $('.m-bg-contain').css('background-color', currentThemeColor);
     $('button[lay-filter="LAY-user-login-submit"]').css('background-color', currentThemeColor);
@@ -131,21 +130,31 @@
       pwd: [/(.+){6,12}$/, '密码必须6到12位'],
       verity: function (value) {
         if (!verifyCode.validate(value)) {
-          if($('input[name=verity]').length) $('input[name=verity]').val('');
+          if ($('input[name=verity]').length) $('input[name=verity]').val('');
           return '验证码不正确';
-        };
+        }
+        ;
       }
     });
 
     //监听提交
     form.on('submit(LAY-user-login-submit)', function (obj) {
+      var that = this;
       //请求登入接口
       admin.req({
-        url: setter.baseUrl + '/postLogin' //实际使用请改成服务端真实接口
+        // 实际使用请改成服务端真实接口
+        url: admin.baseUrl + '/postLogin'
         , type: "post"
         , data: obj.field
+        , before: obj.field
+        , beforeSend: function (xhr, options) {
+          admin.setBtnState(that, 'loading');
+        }
+        , complete: function (XHR, TS) {
+          admin.setBtnState(that, 'normal');
+        }
         , done: function (res) {
-
+          admin.setBtnState(that, 'normal');
           //请求成功后，写入 access_token
           layui.data(setter.tableName, {
             key: setter.request.tokenName

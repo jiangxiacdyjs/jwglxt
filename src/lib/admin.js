@@ -320,7 +320,7 @@ layui.define('view', function (exports) {
       , logOut: function (count, msg) {
         var countDownTimer,
           time = count === 0 ? 0.01 : (count > 0 ? count : 8),
-          msg = msg ? msg : '您等登录凭证已过期，系统需要重新验证';
+          msg = msg ? msg : '您的登录凭证已过期，系统需要重新验证';
         // 返回失败立即清除本地token，防止用户不销毁以下弹窗，而是直接刷新界面导致不退出登录
         layui.data(admin.setter.tableName, {
           key: admin.setter.request.tokenName

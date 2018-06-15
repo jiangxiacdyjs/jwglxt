@@ -36,13 +36,12 @@
           </script>
           <!--这里的 checked 是根据每条数据的lock字段判断是否选中 -->
           <script type="text/html" id="role-checkboxTpl">
-            <input type="checkbox" name="lock" title="锁定" lay-filter="role-lock"
-                   value="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}" {{ d.lock== 1
+            <input type="checkbox" name="lock" lay-skin="switch" lay-text="开启|锁定" title="锁定" lay-filter="role-lock" value="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}" {{ d.lock== 1
                    ? 'checked' : '' }}>
           </script>
           <!--表格操作栏目-->
           <script type="text/html" id="role-operateTplDom">
-            <a class="layui-btn layui-btn-sm"
+            <a class="layui-btn layui-btn-xs"
                lay-event="edit"
                lay-filter="role-operate"
                title="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}">编辑/查看</a>
@@ -85,9 +84,9 @@
       form.val(filter,dataObj);
     }
 
-    // todo：愚昧地手动设置显示区域高度，正在寻找更智能的方法
+    // 设置高度最大化
     $('.fullh').height(admin.getRightAvailableHeight());
-    $('.tree-box').height($('.tree-box').parent().height() - 62);
+    $('.tree-box').height($('.tree-box').parent().height() - 63);
 
     // 切换显示和保存状态
     function toggleState(currentId, state) {
@@ -109,7 +108,9 @@
       elem: '#roleTable'
       , url: admin.baseUrl + '/role'
       , method: 'post'
-      , height: 'full-151'
+      // 变相的通过设置skin为selectOnClick来配置点击行选中整行（此事件操作写在common.js中）
+      , skin: 'selectOnClick'
+      , height:  admin.getRightAvailableHeight()-63
       // ,cellMinWidth: 80
       // ,size: 'sm'
       , cols: [[
@@ -120,8 +121,8 @@
         , {field: 'type', title: '角色分类', templet: '#role-typeTpl'}
         , {field: 'desc', title: '描述'}
         , {field: 'creator', title: '创建人'}
-        , {field: 'operate', title: '权限操作', templet: '#role-operateTplDom', unresize: true, width: 120, align: 'center'}
-        , {field: 'lock', title: '是否锁定', width: 100, templet: '#role-checkboxTpl', unresize: true}
+        , {field: 'operate', title: '权限操作', templet: '#role-operateTplDom', unresize: true, width: 95, align: 'center'}
+        , {field: 'lock', title: '开启',templet: '#role-checkboxTpl', unresize: true, width: 95, align: 'center'}
       ]]
       , page: true
     });
@@ -232,12 +233,11 @@
     }
 
     // 监听锁定操作
-    form.on('checkbox(role-lock)', function (obj) {
+    form.on('switch(role-lock)', function (obj) {
       var json = JSON.parse(decodeURIComponent($(this).data('json')));
       layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
 
       json = table.clearCacheKey(json);
-      console.log(json); //当前行数据
     });
 
     // layer

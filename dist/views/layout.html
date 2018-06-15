@@ -21,21 +21,19 @@
         </a>
       </li>
       <li class="layui-nav-item layui-hide-xs" lay-unselect>
-        <a href="http://www.layui.com/admin/" target="_blank" title="前台">
+        <a href="http://zy.meal.xiaoyut.cn/Index/index.html" target="_blank" title="前台">
           <i class="layui-icon layui-icon-website"></i>
         </a>
       </li>
       <li class="layui-nav-item" lay-unselect>
-        <a lay-href="app/message/" layadmin-event="message">
+        <a lay-href="system/message/" layadmin-event="message">
           <i class="layui-icon layui-icon-notice"></i>
-          
           <!-- 如果有新消息，则显示小圆点 -->
           <script type="text/html" template lay-url="./json/message/new.js">
           {{# if(d.data.newmsg){ }} 
             <span class="layui-badge-dot"></span>
           {{# } }}
           </script>
-          
         </a>
       </li>
       <li class="layui-nav-item layui-hide-xs" lay-unselect>
@@ -75,11 +73,14 @@
   <!-- 侧边菜单 -->
   <div class="layui-side layui-side-menu">
     <div class="layui-side-scroll">
-      <script type="text/html" template lay-url="./json/menu.js?v={{ layui.admin.v }}" 
+      <!--所有携带有template属性的结构，在被解析的时候（view.js中的parse方法）都会渲染其lay-url制定的内容，支持传入的属性包括：
+      lay-data、lay-headers、lay-url、lay-done，同时在解析url时会默认携带上本地设置的token值（在config.js中配置的那个）
+      读取完毕后重绘lay-filter值为layadmin-system-side-menu的nav菜单，即左侧折叠菜单-->
+      <script type="text/html" template lay-url="./json/menu.js?v={{ layui.admin.v }}"
       lay-done="layui.element.render('nav', 'layadmin-system-side-menu');" id="TPL_layout">
       
         <div class="layui-logo" lay-href="">
-          <img src= {{layui.setter.base}}style/res/logo.png alt="" style="height: 18px;vertical-align: -4px">
+          <img src= {{layui.setter.base}}/img/logo.svg alt="" style="height: 18px;vertical-align: -4px">
           <span>{{ layui.setter.name || 'layuiAdmin' }}</span>
         </div>
         

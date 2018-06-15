@@ -1,13 +1,5 @@
 <title>用户管理</title>
 
-<!--<div class="layui-card layadmin-header">
-  <div class="layui-breadcrumb" lay-filter="breadcrumb">
-    <a lay-href="">主页</a>
-    <a><cite>系统管理</cite></a>
-    <a><cite>用户管理</cite></a>
-  </div>
-</div>-->
-
 <div class="layui-fluid">
   <div class="layui-card fullh">
     <div class="layui-card-header operate-box">
@@ -39,7 +31,7 @@
       <table class="layui-hide" id="userTable" lay-filter="userTable"></table>
       <!--头像栏模板-->
       <script type="text/html" id="user-avatarTpl">
-        <img src="{{d.avatar}}" alt="" style="border-radius: 100%;height: 26px">
+        <img src="{{d.avatar}}" data-original="{{d.avatar}}" alt="{{d.nickname}}" title="{{d.nickname}}" style="border-radius: 100%;height: 26px">
       </script>
       <!--数据类别栏模板-->
       <script type="text/html" id="user-typeTpl">
@@ -47,20 +39,19 @@
       </script>
       <!--这里的 checked 是根据每条数据的lock字段判断是否选中 -->
       <script type="text/html" id="user-checkboxTpl">
-        <input type="checkbox" name="lock" title="锁定" lay-filter="user-lock"
-               value="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}" {{ d.lock== 1
+        <input type="checkbox" name="lock" lay-skin="switch" lay-text="开启|锁定" title="锁定" lay-filter="user-lock" value="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}" {{ d.lock== 1
                ? 'checked' : '' }}>
       </script>
       <!--表格操作栏目-->
       <script type="text/html" id="user-operateTplDom">
-        <a class="layui-btn layui-btn-sm"
+        <a class="layui-btn layui-btn-xs"
            lay-event="operate"
            lay-filter="user-operate"
            title="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}">编辑/查看</a>
       </script>
       <!--表格信息编辑栏目-->
       <script type="text/html" id="user-infoTplDom">
-        <a class="layui-btn layui-btn-normal layui-btn-sm"
+        <a class="layui-btn layui-btn-normal layui-btn-xs"
            lay-event="info"
            lay-filter="user-operate"
            title="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}">编辑/查看</a>
@@ -69,24 +60,27 @@
   </div>
 </div>
 <script>
-  layui.use(['admin', 'table', 'form', 'view', 'formSelects'], function () {
+  layui.use(['admin', 'table', 'form', 'view', 'formSelects', 'viewer'], function () {
     var table = layui.table
       , form = layui.form
       , $ = layui.$
       , admin = layui.admin
       , formSelects = layui.formSelects
-      , view = layui.view;
+      , view = layui.view
+      , viewer = layui.viewer;
 
-    // todo：愚昧地手动设置显示区域高度，正在寻找更智能的方法
+    // 设置面板高度最大化
     $('.fullh').height(admin.getRightAvailableHeight());
-    $('.tree-box').height($('.tree-box').parent().height() - 62);
 
     // 表格
+    var viewerDemo;
     table.render({
       elem: '#userTable'
       , url: admin.baseUrl + '/user'
       , method: 'post'
-      , height: 'full-151'
+      // 变相的通过设置skin为selectOnClick来配置点击行选中整行（此事件操作写在common.js中）
+      , skin: 'selectOnClick'
+      , height: admin.getRightAvailableHeight()-63
       // ,cellMinWidth: 80
       // ,size: 'sm'
       , cols: [[
@@ -99,18 +93,26 @@
           templet: '#user-avatarTpl',
           align: 'center',
           width: 80,
-          event: 'viewAvatar',
+          // event: 'viewAvatar',
           style: "cursor:pointer"
         }
         , {field: 'name', title: '用户名'}
         , {field: 'nickname', title: '用户昵称'}
         , {field: 'type', title: '分类', templet: '#user-typeTpl'}
         , {field: 'phone', title: '手机号'}
-        , {field: 'operate', title: '角色分配', templet: '#user-operateTplDom', unresize: true, width: 120, align: 'center'}
-        , {field: 'info', title: '信息编辑', templet: '#user-infoTplDom', unresize: true, width: 120, align: 'center'}
-        , {field: 'lock', title: '是否锁定', width: 100, templet: '#user-checkboxTpl', unresize: true}
+        , {field: 'operate', title: '角色分配', templet: '#user-operateTplDom', unresize: true, width: 95, align: 'center'}
+        , {field: 'info', title: '信息编辑', templet: '#user-infoTplDom', unresize: true, width: 95, align: 'center'}
+        , {field: 'lock', title: '开启', templet: '#user-checkboxTpl', unresize: true, width: 95, align: 'center'}
       ]]
       , page: true
+      ,done:function (v) {
+        var galley = document.querySelector('.layui-table-view');
+        if(viewerDemo) viewerDemo.destroy();
+        viewerDemo = new viewer(galley, {
+          url: 'data-original',
+          cssPath:'../src/lib/extend/viewer/'
+        });
+      }
     });
 
     // 监听工具条
@@ -128,7 +130,7 @@
         // 执行打开operate对应弹窗
         layerActive.info(data)
 
-      } else if (obj.event === 'viewAvatar') {
+      }/* else if (obj.event === 'viewAvatar') {
         layer.photos({
           photos: {
             "title": "", //相册标题
@@ -144,11 +146,11 @@
           , anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机
           , shade: [0.3, '#000']
         });
-      };
+      }*/;
     });
 
     // 监听锁定操作
-    form.on('checkbox(user-lock)', function (obj) {
+    form.on('switch(user-lock)', function (obj) {
       var json = JSON.parse(decodeURIComponent($(this).data('json')));
       layer.tips(this.value + ' ' + this.name + '：' + obj.elem.checked, obj.othis);
 

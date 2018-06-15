@@ -44,7 +44,7 @@
             <button class="layui-btn layui-btn-primary layui-btn-sm" data-type="direct" data-events="readyAll">全部已读
             </button>
           </div>
-<div id="dom1"></div>
+          <div id="dom1"></div>
           <table id="LAY-app-message-news" lay-filter="LAY-app-message-news"></table>
         </div>
       </div>
@@ -81,15 +81,15 @@
     };
 
     //全部消息
-    function renderTable(id, url){
+    function renderTable(id, url) {
       table.render({
-        elem: '#'+id
+        elem: '#' + id
         , url: admin.baseUrl + url //模拟接口
         , method: 'post'
         // 变相的通过设置skin为selectOnClick来配置点击行选中整行（此事件操作写在common.js中）
         // , skin: 'selectOnClick'
         , skin: 'line selectOnClick'
-        , height:  admin.getRightAvailableHeight()-113
+        , height: admin.getRightAvailableHeight() - 113
         , page: true
         , cols: [[
           {type: 'checkbox', fixed: 'left'}
