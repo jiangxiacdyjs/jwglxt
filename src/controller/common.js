@@ -18,7 +18,6 @@ layui.define(function(exports){
   ,admin = layui.admin
 
   //公共业务的逻辑处理可以写在此处，切换任何页面都会执行
-  //……
 
   /**
    * 全局设置表格行点击事件，如果存在单选框项，则选中，否则返回空
@@ -40,20 +39,24 @@ layui.define(function(exports){
     }
   });
 
-  //退出
-  admin.events.logout = function(){
-    //执行退出接口
-    admin.req({
-      url: './json/user/logout.js'
-      ,type: 'get'
-      ,data: {}
-      ,done: function(res){ //这里要说明一下：done 是只有 response 的 code 正常才会执行。而 succese 则是只要 http 为 200 就会执行
-        
-        //清空本地记录的 token，并跳转到登入页
-        admin.exit();
-      }
-    });
-  };
+  /**
+   * 全局绑定form表单中带有类名layui-tip-label的label标签鼠标移入和移出事件，部分label因文字过多导致溢出隐藏，此事件可优化用户体验
+   * 移入：提示当前label内文字，最长显示时间10秒
+   * 移出：关闭所有tips
+   */
+  $('body').off('mouseenter mouseout').on('mouseenter mouseout','form .layui-tip-label', function (e) {
+    var that = this,
+      text = $(that).text().replace(/\*/,'');
+    if(e.type === 'mouseenter'){
+      layer.tips(text, $(that), {
+        tips: 3,
+        time: 10000
+      });
+    }else{
+      layer.closeAll('tips');
+    }
+  });
+
 
   //对外暴露的接口
   exports('common', {});

@@ -8,7 +8,7 @@
   <form class="layui-form layui-form-pane" lay-filter="resource-form">
     <!--名称-->
     <div class="layui-form-item">
-      <label class="layui-form-label">资源名称</label>
+      <label class="layui-form-label layui-tip-label">资源名称</label>
       <div class="layui-input-block">
         <input type="text" name="name" lay-verify="title" autocomplete="off" placeholder="请输入资源名称"
                class="layui-input">
@@ -16,7 +16,7 @@
     </div>
     <!--地址-->
     <div class="layui-form-item">
-      <label class="layui-form-label">资源地址</label>
+      <label class="layui-form-label layui-tip-label">资源地址</label>
       <div class="layui-input-block">
         <input type="text" name="url" lay-verify="required" placeholder="请输入资源地址" autocomplete="off"
                class="layui-input">
@@ -24,14 +24,14 @@
     </div>
     <!--父级-->
     <div class="layui-form-item">
-      <label class="layui-form-label">父级资源</label>
+      <label class="layui-form-label layui-tip-label">父级资源</label>
       <div class="layui-input-block">
         <input type="text" id="parent" name="parent" lay-filter="parent" lay-verify="required" placeholder="模块" autocomplete="off" class="layui-input">
       </div>
     </div>
     <!--类型-->
     <div class="layui-form-item">
-      <label class="layui-form-label">资源类型</label>
+      <label class="layui-form-label layui-tip-label">资源类型</label>
       <div class="layui-input-block">
         <select name="type" lay-filter="type">
           <option value="">请选择资源类型</option>
@@ -45,14 +45,14 @@
     <!--图标、锁定-->
     <div class="layui-form-item layui-row layui-col-space20">
       <div class="layui-col-xs6">
-        <label class="layui-form-label">图标类名</label>
+        <label class="layui-form-label layui-tip-label">图标类名</label>
         <div class="layui-input-block">
           <input type="text" name="iconCls" lay-verify="required" placeholder="请输入资源地址" autocomplete="off"
                  class="layui-input">
         </div>
       </div>
       <div class="layui-col-xs6">
-        <label class="layui-form-label">是否锁定</label>
+        <label class="layui-form-label layui-tip-label">是否锁定</label>
         <div class="layui-input-block b-e6">
           <input type="checkbox" name="lock" lay-skin="switch" lay-text="开启|锁定" title="锁定" lay-filter="resource-lock" value="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}" {{ d.lock== 1
                  ? 'checked' : '' }}>
@@ -61,7 +61,7 @@
     </div>
     <!--描述-->
     <div class="layui-form-item layui-form-text">
-      <label class="layui-form-label">资源描述</label>
+      <label class="layui-form-label layui-tip-label">资源描述</label>
       <div class="layui-input-block">
         <textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
       </div>
