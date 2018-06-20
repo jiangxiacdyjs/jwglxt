@@ -24,7 +24,7 @@ layui.define(function(exports){
    * 移入：提示当前label内文字，最长显示时间10秒
    * 移出：关闭所有tips
    */
-  $('body').off('mouseenter mouseout').on('mouseenter mouseout','form .layui-tip-label', function (e) {
+  $('body').on('mouseenter mouseout','form .layui-tip-label', function (e) {
     var that = this,
       text = $(that).text().replace(/\*/,'');
     if(e.type === 'mouseenter'){
