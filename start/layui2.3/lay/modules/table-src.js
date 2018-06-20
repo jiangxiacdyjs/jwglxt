@@ -281,6 +281,7 @@ layui.define(['laytpl', 'laypage', 'layer', 'form'], function (exports) {
     //请求数据
     that.pullData(that.page);
     that.events();
+
   };
 
   //根据列类型，定制化参数
@@ -1172,19 +1173,23 @@ layui.define(['laytpl', 'laypage', 'layer', 'form'], function (exports) {
         var othis = $(this)
           , index = othis.index()
           , checkBoxIpt = $(that.elem).find('input[name="layTableCheckbox"]').eq(index + 1)
-          , fixedCheckBox = $('.layui-table-fixed').find('table tbody tr[data-index='+index+']').find('.layui-form-checkbox').eq(0)
-          , checkbox = fixedCheckBox.length? fixedCheckBox : checkBoxIpt.next();
+          ,
+          fixedCheckBox = $('.layui-table-fixed').find('table tbody tr[data-index=' + index + ']').find('.layui-form-checkbox').eq(0)
+          , checkbox = fixedCheckBox.length ? fixedCheckBox : checkBoxIpt.next();
         if (!$(e.target).hasClass('layui-icon-ok') && checkbox.hasClass('layui-form-checked')) {
           that.setCheckData(index, false);
           checkbox.removeClass('layui-form-checked');
-          checkBoxIpt.prop('checked',false);
+          checkBoxIpt.prop('checked', false);
         } else if (!$(e.target).hasClass('layui-icon-ok') && !checkbox.hasClass('layui-form-checked')) {
           that.setCheckData(index, true);
           checkbox.addClass('layui-form-checked');
-          checkBoxIpt.prop('checked',true);
+          checkBoxIpt.prop('checked', true);
         }
+        ;
+        that.syncCheckAll();
       })
-    };
+    }
+    ;
 
     _WIN.on('resize', function () { //自适应
       that.fullSize();

@@ -1,2 +1,2 @@
 /** layuiAdmin.pro-v1.0.0-beta9 LPPL License By http://www.layui.com/admin/ */
- ;layui.define(function(e){var i=layui.$,t=layui.layer;layui.laytpl,layui.setter,layui.view,layui.admin;i("body").off("mouseenter mouseout").on("mouseenter mouseout","form .layui-tip-label",function(e){var l=this,u=i(l).text().replace(/\*/,"");"mouseenter"===e.type?t.tips(u,i(l),{tips:3,time:1e4}):t.closeAll("tips")}),e("common",{})});
+ ;layui.define(function(e){var i=layui.$,l=layui.layer;layui.laytpl,layui.setter,layui.view,layui.admin;i("body").on("mouseenter mouseout","form .layui-tip-label",function(e){var t=this,a=i(t).text().replace(/\*/,"");"mouseenter"===e.type?l.tips(a,i(t),{tips:3,time:1e4}):l.closeAll("tips")}),e("common",{})});
