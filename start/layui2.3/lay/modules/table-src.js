@@ -277,7 +277,6 @@ layui.define(['laytpl', 'laypage', 'layer', 'form'], function (exports) {
       var th = that.layFixed.find(ELEM_HEADER).find('th');
       th.height(that.layHeader.height() - 1 - parseFloat(th.css('padding-top')) - parseFloat(th.css('padding-bottom')));
     }
-
     //请求数据
     that.pullData(that.page);
     that.events();
@@ -414,7 +413,14 @@ layui.define(['laytpl', 'laypage', 'layer', 'form'], function (exports) {
 
     that.startTime = new Date().getTime(); //渲染开始时间
 
-    if (options.url) { //Ajax请求
+    //Ajax请求
+    if (options.url) {
+      /**
+       * @修改：表格首次远程加载数据显示loading效果
+       * @time:2018/6/21
+       * @author:freshzxf
+       */
+      loadIndex = loadIndex || that.loading();
       var params = {};
       params[request.pageName] = curr;
       params[request.limitName] = options.limit;
