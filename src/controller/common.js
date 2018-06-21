@@ -26,7 +26,7 @@ layui.define(function(exports){
    */
   $('body').on('mouseenter mouseout','form .layui-tip-label', function (e) {
     var that = this,
-      text = $(that).text().replace(/\*/,'');
+      text = $(that).text().replace(/\*|\s*/,'') || $(that).val().replace(/\s*/,'');
     if(e.type === 'mouseenter'){
       layer.tips(text, $(that), {
         tips: 3,
