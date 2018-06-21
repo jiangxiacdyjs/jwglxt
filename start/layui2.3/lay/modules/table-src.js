@@ -769,7 +769,6 @@ layui.define(['laytpl', 'laypage', 'layer', 'form'], function (exports) {
       });
       return checked;
     };
-
     if (!checkAllElem[0]) return;
 
     if (table.checkStatus(that.key).isAll) {
@@ -1173,19 +1172,23 @@ layui.define(['laytpl', 'laypage', 'layer', 'form'], function (exports) {
         var othis = $(this)
           , index = othis.index()
           , checkBoxIpt = $(that.elem).find('input[name="layTableCheckbox"]').eq(index + 1)
-          ,
-          fixedCheckBox = $('.layui-table-fixed').find('table tbody tr[data-index=' + index + ']').find('.layui-form-checkbox').eq(0)
-          , checkbox = fixedCheckBox.length ? fixedCheckBox : checkBoxIpt.next();
+          , staticCheckBox = checkBoxIpt.next()
+          , fixedTr = $('.layui-table-fixed').find('.layui-table-body').find('tr[data-index=' + index + ']')
+          , fixedCheckBoxIpt = fixedTr.find('input[name="layTableCheckbox"]').eq(0)
+          , fixedCheckBox = fixedTr.find('.layui-form-checkbox').eq(0)
+          , checkbox = fixedCheckBox.length ? fixedCheckBox : staticCheckBox;
+
         if (!$(e.target).hasClass('layui-icon-ok') && checkbox.hasClass('layui-form-checked')) {
+          checkBoxIpt.prop('checked', false);
+          fixedCheckBoxIpt.prop('checked', false);
           that.setCheckData(index, false);
           checkbox.removeClass('layui-form-checked');
-          checkBoxIpt.prop('checked', false);
         } else if (!$(e.target).hasClass('layui-icon-ok') && !checkbox.hasClass('layui-form-checked')) {
+          checkBoxIpt.prop('checked', true);
+          fixedCheckBoxIpt.prop('checked', true);
           that.setCheckData(index, true);
           checkbox.addClass('layui-form-checked');
-          checkBoxIpt.prop('checked', true);
-        }
-        ;
+        };
         that.syncCheckAll();
       })
     }
