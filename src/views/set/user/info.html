@@ -201,9 +201,10 @@ layui.use(['admin', 'form', 'layer', 'element', 'upload'], function () {
     elem: '.avatar'
     ,url: 'https://www.easy-mock.com/mock/5af45f8ab45afc56560ae781/admin/postSuccess'
     ,before: function(obj){
+      var $triggerEle = $(this.item);
       //预读本地文件示例，不支持ie8
       obj.preview(function(index, file, result){
-        $('.avatar').attr('src', result); //图片链接（base64）
+        $triggerEle.attr('src', result); //图片链接（base64）
       });
     }
     ,done: function(res){
