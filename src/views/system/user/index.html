@@ -105,12 +105,8 @@
       ]]
       , page: true
       ,done:function (v) {
-        var galley = document.querySelector('.layui-table-view');
-        if(viewerDemo) viewerDemo.destroy();
-        viewerDemo = new viewer(galley, {
-          url: 'data-original',
-          cssPath:'../src/lib/extend/viewer/'
-        });
+        // 通用图片查看方法
+        admin.viewFile('', 'layui-table-view', 'galley', 'data-original', true, true)
       }
     });
 
@@ -129,23 +125,7 @@
         // 执行打开operate对应弹窗
         layerActive.info(data)
 
-      }/* else if (obj.event === 'viewAvatar') {
-        layer.photos({
-          photos: {
-            "title": "", //相册标题
-            "data": [   //相册包含的图片，数组格式
-              {
-                "alt": obj.data.nickname,
-                "src": obj.data.avatar, //原图地址
-                "thumb": '' //缩略图地址
-              }
-            ]
-          }
-          //格式见API文档手册页
-          , anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机
-          , shade: [0.3, '#000']
-        });
-      }*/;
+      };
     });
 
     // 监听锁定操作
