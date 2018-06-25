@@ -16,6 +16,7 @@ layui.extend({
   , viewer: 'lib/extend/viewer/viewer' //图片查看器组件
   , treeselect: '../lib/extend/layui-treeselect' //属性选择控件（可加上{/}的意思即代表采用自有路径，即不跟随 base 路径）
   , formSelects: '../lib/extend/formSelects-v3' //表单选择拓展控件
+  , xtree: '../lib/extend/layui-xtree' //依赖form模块带复选框的xTree拓展树组件
   , verfiy: '../lib/extend/layui-gVerify' //扩展验证码功能
 }).define(['setter', 'admin'], function (exports) {
   var setter = layui.setter
