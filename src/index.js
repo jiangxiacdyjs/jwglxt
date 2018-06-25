@@ -1,23 +1,22 @@
 /**
-
- @Name：layuiAdmin 主入口
- @Author：贤心
- @Site：http://www.layui.com/admin/
- @License：LPPL
- @EDITOR：freshzxf
- @DESC：此js为入口js，在此使用layui.extend扩展的模块全局可用。当然，也可以把需要扩展的模块放入controllers目录，因为每次加载完模块后移动台设置base路径为controllers目录，
+ @Name：系统主入口
+ @Editor：freshzxf
+ @Description：此js为入口js，在此使用layui.extend扩展的模块全局可用。当然，也可以把需要扩展的模块放入controllers目录，因为每次加载完模块后移动台设置base路径为controllers目录，
  最好不要单独在模块模块内使用layui.extend方法扩展某模块，那种写法可能会导致多次加载某模块后，layui.hint()提示模块名已被占用，但是不会影响程序的运行！
-
+ @Notice：
+ 在此index.js组件被定义之前定义组件路径都是：lib/extend/viewer/viewer这种格式
+ 在此index.js组件被定义之后定义组件路径都是：../lib/extend/layui-gVerify这种格式或配置{/}定义相对自己的路径
+ 因为在index.js中已设置全局调用第三方组件的路径为 setter.base + 'controller/' 即controller目录，因此如果组件放在lib文件夹下需要往上一层
  */
 
 layui.extend({
   setter: 'config' //配置文件
   , admin: 'lib/admin' //核心模块
   , view: 'lib/view' //核心模块
-  , treeselect: '../lib/extend/layui-treeselect' // 属性选择控件（可加上{/}的意思即代表采用自有路径，即不跟随 base 路径）
+  , viewer: 'lib/extend/viewer/viewer' //图片查看器组件
+  , treeselect: '../lib/extend/layui-treeselect' //属性选择控件（可加上{/}的意思即代表采用自有路径，即不跟随 base 路径）
   , formSelects: '../lib/extend/formSelects-v3' //表单选择拓展控件
-  , viewer: '../lib/extend/viewer/viewer' //表单选择拓展控件
-  , verfiy: '{/} ../src/lib/extend/layui-gVerify' // 扩展验证码功能
+  , verfiy: '../lib/extend/layui-gVerify' //扩展验证码功能
 }).define(['setter', 'admin'], function (exports) {
   var setter = layui.setter
     , element = layui.element
@@ -39,7 +38,7 @@ layui.extend({
       //如果最后一项为空字符，则读取默认文件（这里指的是在config.js里配置的index）
       if (path[path.length - 1] === '') {
         path[path.length - 1] = setter.entry;
-      }
+      };
 
       /*
       layui.config({
@@ -254,6 +253,9 @@ layui.extend({
     }
     , 'layuiAdmin'
   );
+
+  // 新增图片查看器viewer样式
+  layui.link(setter.base + 'lib/extend/viewer/viewer.css?v=' + (admin.v + '-1'));
 
   // 新增字体图标样式
   layui.link(setter.base + 'font-awesome-4.7.0/css/font-awesome.min.css?v=' + (admin.v + '-1'));

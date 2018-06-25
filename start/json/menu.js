@@ -149,6 +149,18 @@
     ]
   },
   {
+    "name": "extend",
+    "title": "扩展组件",
+    "icon": "layui-icon-star",
+    "list": [
+      {
+        "jump": "extend/viewer",
+        "title": "viewer",
+        "spread": false
+      }
+    ]
+  },
+  {
     "name": "test",
     "title": "开发测试",
     "icon": "layui-icon-fonts-code",
@@ -161,6 +173,11 @@
       {
         "jump": "test/access",
         "title": "权限测试",
+        "spread": false
+      },
+      {
+        "jump": "test/complex-table",
+        "title": "复杂表格",
         "spread": false
       }
     ]

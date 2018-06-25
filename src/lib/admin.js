@@ -7,12 +7,13 @@
  定义模块，其中view为此定义模块所依赖的模块，function为回调导出模块函数
  */
 
-layui.define('view', function (exports) {
+layui.define(['view','viewer'], function (exports) {
   var $ = layui.jquery
     , laytpl = layui.laytpl
     , element = layui.element
     , setter = layui.setter
     , view = layui.view
+    , viewer = layui.viewer
     , device = layui.device()
 
     , $win = $(window), $body = $('body')
@@ -297,7 +298,11 @@ layui.define('view', function (exports) {
         return availableFullHeight - 80;
       }
 
-      //loading效果
+      /**
+       * @title loading加载状态/freshzxf/2018.6.25
+       * @param WaitText 等待显示文本内容
+       * @returns {*}
+       */
       , loading: function (WaitText) {
         WaitText = WaitText ? ('' + WaitText) : '加载中，请耐心等待...';
         var Mti = arguments[1] || 10;//自动关闭时间
@@ -316,21 +321,27 @@ layui.define('view', function (exports) {
         return index;  //返回弹层索引号，如需关闭此弹层，执行
       }
 
-      // 返回状态status恒等于failed时可以调用此方法退出系统
+      /**
+       * @title 清除登录身份信息并退出系统/freshzxf/2018.6.25
+       * @param count 显示自动退出系统倒计时(默认8s)
+       * @param msg 提示文本(后台返回的msg)
+       * @description 按钮标签可设置data-loading属性值作为加载显示文字
+       */
       , logOut: function (count, msg) {
-        var countDownTimer,
-          time = count === 0 ? 0.01 : (count > 0 ? count : 8),
-          msg = msg ? msg : '您的登录凭证已过期，系统需要重新验证';
+        var that = this
+          , countDownTimer
+          , time = count === 0 ? 0.01 : (count > 0 ? count : 8)
+          , msg = msg ? msg : '您的登录凭证已过期，系统需要重新验证';
         // 返回失败立即清除本地token，防止用户不销毁以下弹窗，而是直接刷新界面导致不退出登录
-        layui.data(admin.setter.tableName, {
-          key: admin.setter.request.tokenName
+        layui.data(that.setter.tableName, {
+          key: that.setter.request.tokenName
           , remove: true
         });
         // 执行友情提示的弹窗
         admin.popup({
           title: "请求错误！系统将在" + ' <span>' + time + '</span> ' + '秒后自动退出'
           // time值不得为0，因此设置0.01来作为0秒关闭的效果
-          , time: time*1000
+          , time: time * 1000
           , content: '<i class="fa fa-warning red mr10"></i>' + msg
           , success: function (i, v) {
             // 根据成功打开弹窗的回调方法中第一个参数定位此弹窗
@@ -339,14 +350,6 @@ layui.define('view', function (exports) {
               $showCountDownSpan.html(Number($showCountDownSpan.html()) - 1);
               Number($showCountDownSpan.html()) === 0 ? clearInterval(countDownTimer) : ''
             }, 1000);
-            /*if(Number($showCountDownSpan.html()) < 0 || Number($showCountDownSpan.html()) === 0){
-              clearInterval(countDownTimer);
-            }else{
-              countDownTimer = setInterval(function () {
-                $showCountDownSpan.html(Number($showCountDownSpan.html()) - 1);
-                Number($showCountDownSpan.html()) === 0 ? clearInterval(countDownTimer) : ''
-              }, 1000);
-            }*/
           }
           , end: function () {
             clearInterval(countDownTimer);
@@ -356,21 +359,88 @@ layui.define('view', function (exports) {
         });
       }
 
+      /**
+       * @title 切换设置按钮loading状态/freshzxf/2018.6.25
+       * @param btn 按钮对象或按钮jq对象
+       * @param state 状态值(loading/normal)
+       * @description 按钮标签可设置data-loading属性值作为加载显示文字
+       */
       , setBtnState: function (btn, state) {
-          var $btn = btn instanceof $ ? btn : $(btn),
-              text = $btn.text(),
-              loadingIcon = $btn.find('.layui-icon-loading');
-          switch (state){
-            case 'loading':
-              $btn.prop('disabled', true);
-              loadingIcon.length ? loadingIcon.addClass('layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop mr10') :
-                $btn.text($btn.attr('data-loading') || '加载中').attr('data-normal', text).prepend($('<i/>').addClass('layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop mr10'));
-              break;
-            case 'normal':
-              $btn.prop('disabled', false).text($btn.attr('data-normal') || '确认');
-              loadingIcon.length ? $btn.find('.layui-icon-loading').remove() : '';
-              break;
+        var $btn = btn instanceof $ ? btn : $(btn),
+          text = $btn.text(),
+          loadingIcon = $btn.find('.layui-icon-loading');
+        switch (state) {
+          case 'loading':
+            $btn.prop('disabled', true);
+            loadingIcon.length ? loadingIcon.addClass('layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop mr10') :
+              $btn.text($btn.attr('data-loading') || '加载中').attr('data-normal', text).prepend($('<i/>').addClass('layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop mr10'));
+            break;
+          case 'normal':
+            $btn.prop('disabled', false).text($btn.attr('data-normal') || '确认');
+            loadingIcon.length ? $btn.find('.layui-icon-loading').remove() : '';
+            break;
+        }
+      }
+
+      /**
+       * @title 文件查看通用方法/freshzxf/2018.6.25
+       * @param filePath(文件路径含后缀)
+       * @param outerCon(外层容器id或者类名,不得与inst参数重名)
+       * @param inst(定义在window全局的变量,不得与outerCon参数重名)
+       * @param viewerUrl(image提供给查看器的图片的路径属性，默认src)
+       * @param shouwTitle(显示图片名称布尔值，默认false，和插件实际默认相反)
+       * @param shouwThumb(显示缩略图布尔值,缩略图取image的src地址，默认false，和插件实际默认相反)
+       * @description 如查看的文件非图片格式(gif|jpg|jpeg|png|ico)，则调用打开发文件方法
+       * 文件查看调用方法：admin.viewFile('http://www.filecenter.com/test.pdf')
+       * 图片查看调用方法（filePath可为''）：admin.viewFile('', 'viewerBox', 'galley', 'data-original', false, false)
+       * 兼容查看调用方法(filePath必须传且不为空)：admin.viewFile('http://www.filecenter.com/test.jpg', 'viewerBox', 'galley', 'data-original', false, false)
+       */
+      , viewFile: function (filePath, outerCon, inst, viewerUrl, showTitle, showThumb) {
+        // 如果是图片文件或者未传入filePath(图片组查看的使用场景中无需传入图片路径)
+        if (/\.(gif|jpg|jpeg|png|ico)$/i.test(filePath) || !filePath) {
+          var galley = document.getElementById(outerCon) || document.querySelector('.' + outerCon);
+          // 如果该实例存在，则销毁并释放实例所占内存
+          if (window[inst] && window[inst].destroy) {
+            window[inst].destroy();
+            window[inst] = null;
           }
+          ;
+          // 如果传入有效的外层容器，则重新初始化实例
+          if (galley) {
+            window[inst] = new viewer(galley, {
+              // 查看图片的url(默认值为src)
+              url: viewerUrl || 'src',
+              // 显示alt内的标题
+              title: showTitle || false,
+              // 显示缩略图(image标签的src地址)
+              navbar: showThumb || false,
+              // 层级(因每次打开layer弹出层，弹层层级会叠加，因此设置个足够大的层级以免被layer弹层遮住)
+              zIndex: 1989104200000,
+              // 引用css路径
+              //cssPath: '${ctxPath}/admin/lib/extend/viewer/'
+            });
+          } else {
+            layer.alert('请检查传入查看器的外层容器id或class是否正确')
+          }
+        } else {
+          if (window[inst] && window[inst].destroy) {
+            window[inst].destroy();
+            window[inst] = null;
+          }
+          ;
+          window.open(filePath);
+        }
+        ;
+      }
+
+      // 动态创建单个option
+      , generateSelectOption: function (jqObj, name, value, selectedVal) {
+        var $newOption = $('<option/>').val(value).text(name);
+        // todo:此处传入selectedVal是类别的value值，如果此传入的value值和当前select内的某个option的value值匹配，则选中它
+        if (value === selectedVal) {
+          $newOption.attr('selected', true)
+        }
+        jqObj.append($newOption);
       }
     };
 
@@ -588,7 +658,7 @@ layui.define('view', function (exports) {
     }
 
     //遮罩
-    , logout: function(){
+    , logout: function () {
       admin.exit();
       //执行退出接口
       /*admin.req({

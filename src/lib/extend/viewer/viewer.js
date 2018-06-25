@@ -2729,30 +2729,29 @@
         this.init();
         /**
          * 修改点：动态创建样式引入
-         * 2018/5/30(freshzxf)
+         * 支持传入配置cssPath用于自定义viewer.css的引用路径
+         * 2018/6/25(freshzxf)
          */
         var that = this;
-        !function creatCssLink() {
-          var doc = document;
-          var heads = doc.getElementsByTagName("head");
-          var links = doc.getElementsByTagName('link');
-          var ble = false;
+        if (that.options.cssPath){
+          var doc = document
+              , heads = doc.getElementsByTagName("head")
+              , links = doc.getElementsByTagName('link')
+              , ble = false;
           for (var i = 0; i < links.length; i++) {
             var currentAttr = links[i].getAttribute('data-id');
             if(currentAttr === 'viewerCss') ble = true;
-          }
+          };
           if(!ble){
             var link = doc.createElement("link");
             link.setAttribute("rel", "stylesheet");
             link.setAttribute("type", "text/css");
             link.setAttribute("href", that.options.cssPath ? that.options.cssPath + '/viewer.css' : 'viewer.css');
             link.setAttribute("data-id", 'viewerCss');
-            if (heads.length)
-              heads[0].prepend(link)
-            else
-              doc.documentElement.appendChild(link);
+            if (heads.length){heads[0].prepend(link)}
+            else{doc.documentElement.appendChild(link);}
           }
-        }();
+        };
       }
 
       createClass(Viewer, [{
