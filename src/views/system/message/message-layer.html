@@ -13,9 +13,9 @@
         </select>
       </div>
     </div>
-    <!--接收用户-->
+    <!--发送对象-->
     <div class="layui-col-xs6">
-      <label class="layui-form-label">接收用户</label>
+      <label class="layui-form-label">发送对象</label>
       <div class="layui-input-block">
         <select name="acceptMode" lay-verify="required" lay-search="" lay-filter="accept-mode">
           <!--<option value="">请选择消息类别</option>-->
@@ -29,7 +29,7 @@
   </div>
   <!--发送对象-->
   <div class="layui-form-item mb10 accepts-item layui-hide">
-    <select name="accepts" lay-verify="" xm-select="xmselect" xm-select-type="1" xm-select-placeholder="请选择消息接收用户"
+    <select name="accepts" lay-filter="accepts" lay-verify="" xm-select="xmselect" xm-select-type="1" xm-select-placeholder="请选择消息接收用户"
             xm-select-skin="" xm-select-search></select>
   </div>
   <!--详情-->
@@ -83,13 +83,13 @@
         ;
         switch (Number(data.value)) {
           case 2:
-            acceptsData.acceptsDataArr2.length ? localRenderAcceptsSelect(acceptsData.acceptsDataArr2) : remoteRenderAcceptsSelect(2);
+            acceptsData.acceptsDataArr2.length ? localRenderAcceptsSelect('请选择义教学校', acceptsData.acceptsDataArr2) : remoteRenderAcceptsSelect(2);
             break;
           case 3:
-            acceptsData.acceptsDataArr3.length ? localRenderAcceptsSelect(acceptsData.acceptsDataArr3) : remoteRenderAcceptsSelect(3);
+            acceptsData.acceptsDataArr3.length ? localRenderAcceptsSelect('请选择学前学校', acceptsData.acceptsDataArr3) : remoteRenderAcceptsSelect(3);
             break;
           case 4:
-            acceptsData.acceptsDataArr4.length ? localRenderAcceptsSelect(acceptsData.acceptsDataArr4) : remoteRenderAcceptsSelect(4);
+            acceptsData.acceptsDataArr4.length ? localRenderAcceptsSelect('请选择配送公司', acceptsData.acceptsDataArr4) : remoteRenderAcceptsSelect(4);
             break;
           default:
             return;
@@ -108,7 +108,8 @@
     });
 
     // 根据现成的数据动态创建select选项
-    function localRenderAcceptsSelect(dataArr) {
+    function localRenderAcceptsSelect(dataName,dataArr) {
+      $('form[lay-filter=message-form]').find('select[name=accepts]').attr('xm-select-placeholder',dataName);
       // 表单选择组件
       formSelects.render({
         name: 'xmselect'
@@ -119,7 +120,9 @@
           , val: 'value'
         }
         //, init: formSelects.value('xmselect','val')
-      })
+      });
+      // 重置lay-filter属性值为accepts的接受对象选择select组件，以实现动态更新其placeholder内容
+      form.render('select');
       //formSelects.value('select');			//获取选中的值
       //formSelects.value('select', 'val');		//获取选中的val数组
       //formSelects.value('select', 'name');		//获取选中的name数组
@@ -145,7 +148,7 @@
             // 存储数据，避免二次请求
             acceptsData['acceptsDataArr' + id] = result.data;
             // 渲染select
-            localRenderAcceptsSelect(result.data);
+            localRenderAcceptsSelect('请选择' + (result.name ? result.name : '发送对象'), result.data);
           }
         },
         error: function (error) {
