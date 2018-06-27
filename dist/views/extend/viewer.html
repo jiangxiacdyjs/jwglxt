@@ -1,0 +1,52 @@
+<title>标题</title>
+<style>
+</style>
+
+<div class="layui-fluid">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md12">
+      <div class="layui-card">
+        <div class="layui-card-header">viewer照片组查看器</div>
+        <div class="layui-card-body">
+          <div id="galley">
+            <div class="layui-row layui-col-space10">
+              <div class="layui-col-xs2">
+                <img data-original="../src/img/scenery/tibet-1.jpg" src="../src/img/scenery/tibet-1-thumb.jpg"
+                     alt="清澈的湖" class="w">
+              </div>
+              <div class="layui-col-xs2">
+                <img data-original="../src/img/scenery/tibet-2.jpg" src="../src/img/scenery/tibet-2-thumb.jpg"
+                     alt="清澈的湖" class="w">
+              </div>
+              <div class="layui-col-xs2">
+                <img data-original="../src/img/scenery/tibet-3.jpg" src="../src/img/scenery/tibet-3-thumb.jpg"
+                     alt="清澈的湖" class="w">
+              </div>
+              <div class="layui-col-xs2">
+                <img data-original="../src/img/scenery/tibet-4.jpg" src="../src/img/scenery/tibet-4-thumb.jpg"
+                     alt="清澈的湖" class="w">
+              </div>
+              <div class="layui-col-xs2">
+                <img data-original="../src/img/scenery/tibet-5.jpg" src="../src/img/scenery/tibet-5-thumb.jpg"
+                     alt="清澈的湖" class="w">
+              </div>
+              <div class="layui-col-xs2">
+                <img data-original="../src/img/scenery/tibet-6.jpg" src="../src/img/scenery/tibet-6-thumb.jpg"
+                     alt="清澈的湖" class="w">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  layui.use('admin', function () {
+    var $ = layui.$
+      , admin = layui.admin;
+    // 通用图片查看方法
+    admin.viewFile('', 'galley', 'galleyBox', 'data-original', true, true)
+  })
+  ;
+</script>

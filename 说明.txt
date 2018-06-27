@@ -4,7 +4,6 @@ layuiAdmin pro（单页版）
 # 运行说明：
 直接运行入口文件即可： start/index.html
 
-
 # 目录说明：
 dist/  经过打包压缩后的文件，一般用于正式环境使用
 src/   源代码，一般用于开发环境
@@ -22,3 +21,10 @@ step4: 安装完依赖包后，即可直接执行命令：gulp 把src目录资�
 扩展模块有两种方式：
 ①每次模块加载时会设置扩展模块的根路径为controller目录，因此可以直接把符合模块规范的js文件放在此目录，然后直接use即可
 ②入口页面的index.js文件是整个项目共用的文件，可在该js文件头部利用extend扩展方法定义扩展模块的别名（键值对，值即为模块路径）
+
+# 扩展说明
+①table组件修改源码，新增配置项如下：
+	selectOnClick: true // 点击行即选中行
+	rowClick: function(obj){} // 点击行回调方法,obj参数为一个对象，包括当前点击行数据data和索引值index
+	{type: 'radio',width: 48,title: '单选'} 替换 {type: 'checkbox'} 可实现限制数据单选功能
+②

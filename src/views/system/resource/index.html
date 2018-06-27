@@ -78,7 +78,8 @@
       // ,cellMinWidth: 80
       // ,size: 'sm'
       , cols: [[
-        {type: 'numbers'}
+        {type: 'numbers',title:'--', fixed:'left'}
+        //,{type: 'radio',title:'选择', width:48,fixed:'left'}
         , {type: 'checkbox'}
         //,{field:'id', title:'ID', width:100, unresize: true, sort: true}
         , {field: 'name', title: '资源名称'}
@@ -98,6 +99,9 @@
           admin.logOut(i.time,i.msg)
         }
       }
+      // , rowClick: function (obj) {
+      //   console.log(obj)
+      // }
     });
 
     // 监听锁定操作

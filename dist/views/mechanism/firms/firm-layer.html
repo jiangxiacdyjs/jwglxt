@@ -1,0 +1,117 @@
+<title>用户编辑/新增</title>
+
+<div class="">
+  <form class="layui-form layui-form-pane" lay-filter="firm-form">
+    <!--公司名称-->
+    <div class="layui-form-item">
+      <label class="layui-form-label">公司全称</label>
+      <div class="layui-input-block">
+        <input type="text" name="name" lay-verify="title" autocomplete="off" placeholder="请输入完整配送公司名称"
+               class="layui-input">
+      </div>
+    </div>
+    <!--责任人-->
+    <div class="layui-form-item">
+      <label class="layui-form-label">责任人</label>
+      <div class="layui-input-block">
+        <input type="text" name="responsible" lay-verify="title" autocomplete="off" placeholder="请输入责任人姓名"
+               class="layui-input">
+      </div>
+    </div>
+    <!--责任人-->
+    <div class="layui-form-item">
+      <label class="layui-form-label">公司账号</label>
+      <div class="layui-input-block">
+        <input type="text" name="account" lay-verify="title" autocomplete="off" placeholder="请输入责任人姓名"
+               class="layui-input">
+      </div>
+    </div>
+    <!--初始密码-->
+    <div class="layui-form-item">
+      <label class="layui-form-label">初始密码</label>
+      <div class="layui-input-block">
+        <input type="password" name="password" lay-verify="pwd" autocomplete="off" placeholder="请输入初始密码"
+               class="layui-input">
+      </div>
+    </div>
+    <!--初始密码-->
+    <div class="layui-form-item">
+      <label class="layui-form-label">确认密码</label>
+      <div class="layui-input-block">
+        <input type="text" name="repassword" lay-verify="repwd" autocomplete="off" placeholder="请再次确认密码"
+               class="layui-input">
+      </div>
+    </div>
+    <!--提交-->
+    <div class="layui-form-item mb0 pt50">
+      <div class="layui-footer">
+        <button type="button" class="layui-btn fr" lay-submit="" lay-filter="firm-smt">立即提交</button>
+        <button type="reset" class="layui-btn layui-btn-primary fl ml0" lay-filter="firm-undo">恢复操作</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  layui.use(['admin', 'form', 'table'], function () {
+    var $ = layui.$
+      , admin = layui.admin
+      , element = layui.element
+      , layer = layui.layer
+      , table = layui.table
+      , form = layui.form;
+
+    // 自定义验证规则
+    form.verify({
+      title: function (value) {
+        if (value.length < 2) {
+          return '标题至少得2个字符啊';
+        }
+      }
+      , pwd: [/(.+){6,12}$/, '密码必须6到12位']
+      , repwd: function (value) {
+        if(!value.length){
+          return '请确认密码'
+        }else if (value !== $('[name=pwd]').val()) {
+          return '两次输入密码不一致'
+        }
+      }
+      , content: function (value) {
+        layedit.sync(editIndex);
+      }
+    });
+
+    // 监听提交
+    form.on('submit(firm-smt)', function (data) {
+      layer.alert(JSON.stringify(data.field), {
+        title: '最终的提交信息'
+      });
+      $.ajax({
+        type: 'post',
+        url: admin.baseUrl + '/firm',
+        data: data.field,
+        dataType: 'json',
+        beforeSend: function () {
+          this.loading = admin.loading();
+        },
+        complete: function () {
+          layer.close(this.loading);
+        },
+        success: function (result) {
+          if (result.code == 0) {
+            table.reload('firmTable', {
+              data: result.data,
+              where: {} // 请求额外参数（注意：这里面的参数可任意定义）
+            });
+          }
+        },
+        error: function (error) {
+          layer.msg('请求出错啦', {icon: 2});
+        },
+      });
+      if (admin.popup.addLayer) layer.close(admin.popup.addLayer);
+      if (admin.popup.editLayer) layer.close(admin.popup.editLayer);
+      return false;
+    });
+  });
+</script>

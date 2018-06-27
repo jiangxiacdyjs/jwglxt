@@ -1,0 +1,215 @@
+<title>用户角色分配</title>
+<style>
+  .layui-badge {
+    margin-right: 5px
+  }
+</style>
+
+<form class="layui-form layui-form-pane" lay-filter="operate-form">
+  <!--名称-->
+  <div class="layui-form-item">
+    <label class="layui-form-label">用户名称</label>
+    <div class="layui-input-block">
+      <input type="text" name="name" lay-verify="title" autocomplete="off" placeholder="请输入用户名称"
+             class="layui-input">
+    </div>
+  </div>
+  <!--片区选择-->
+  <div class="layui-form-item">
+    <select name="areas" lay-verify="required" xm-select="xmselect" xm-select-type="1" xm-select-skin="" xm-select-search>
+    </select>
+  </div>
+  <!--提交-->
+  <div class="layui-form-item">
+    <button id="givupBtn" style="width: 48%;float: left;" type="button" disabled
+            class="layui-btn layui-btn-danger layui-btn-disabled layui-btn-fluid">撤销修改
+    </button>
+    <button style="width: 48%;float: right;" type="button" class="layui-btn layui-btn-fluid" lay-submit=""
+            lay-filter="operate-smt">确认保存
+    </button>
+  </div>
+</form>
+<!--片区数据展示-->
+<div class="layui-collapse" lay-accordion="" id="areaCollapse"></div>
+<!--片区数据模板-->
+<div class="layui-colla-item layui-hide" data-type="template">
+  <h2 class="layui-colla-title">
+    <span></span>
+    <div class="fr ccc"><span class=""></span>&nbsp;所学校</div>
+  </h2>
+  <div class="layui-colla-content">
+    <!--这还是需要把layui-hide加上，用于克隆后标识为角色模板，和其他角色badge的区别就在于多了个layui-hide类-->
+    <span class="layui-badge layui-bg-black layui-hide"></span>
+  </div>
+</div>
+<script>
+  layui.use(['admin', 'form', 'formSelects', 'table'], function () {
+    var $ = layui.$
+      , admin = layui.admin
+      , element = layui.element
+      , layer = layui.layer
+      // , formSelects = layui.formSelects
+      , table = layui.table
+      , form = layui.form;
+
+    var areaColId = '#areaCollapse';
+
+    // 加载后执行请求渲染角色分类详情信息
+    $.ajax({
+      type: 'post',
+      url: admin.baseUrl + '/areas',
+      data: '',
+      dataType: 'json',
+      beforeSend: function () {
+        $('#areaCollapse').empty();
+        this.areaLoading = admin.loading();
+      },
+      complete: function () {
+        layer.close(this.areaLoading);
+      },
+      success: function (result) {
+        if (result.code == 0) {
+          var data = result.data;
+          for (var i = 0; i < data.length; i++) {
+            generateAreaItem(data[i].name, data[i].value, data[i].schools.length, data[i].schools)
+          };
+          // 要在上述插入dom结构之后--展开新增的分类，收缩其他分类
+          $(areaColId).children().eq(0).find('.layui-colla-content').addClass('layui-show');
+          // 重置折叠面板
+          element.render('collapse');
+          // 创建符合xmselect格式的数据并初始化xmselect
+          setAreaSelectOptions(data)
+        }
+      },
+      error: function (error) {
+
+      },
+    });
+
+    // 生成片区分类信息
+    function generateAreaItem(name, id, schoolsNum, schools) {
+      var $newCollapseItem = $('[data-type=template]').eq(0).clone().removeClass('layui-hide').removeAttr('data-type');
+      $newCollapseItem.attr('id', id).find('.layui-colla-title').children('span').html(name).siblings('div').children('span').html(schoolsNum);
+      var $newCollapseItemContent = $newCollapseItem.find('.layui-colla-content').eq(0);
+      if (schoolsNum) {
+        for (var i = 0; i < schoolsNum; i++) {
+          var $newAreaItem = $newCollapseItemContent.find('.layui-badge.layui-hide').clone().removeClass('layui-hide').html(schools[i].name).attr('id', schools[i].id);
+          $newCollapseItemContent.append($newAreaItem);
+        }
+        // 在这里手动的把每个分类里的角色badge模板删除掉
+        $newCollapseItemContent.find('.layui-badge.layui-hide').remove();
+      } else {
+        $newCollapseItem.find('.layui-colla-content').html('<div class="ccc tc">此区域暂无数据</div>');
+      }
+      $newCollapseItem.appendTo($(areaColId));
+    }
+
+    // 根据页面中展示的分类信息，设置选择片区的select的options数据
+    function setAreaSelectOptions(data) {
+      var dataArr = [];
+      for (var i = 0; i < data.length; i++) {
+        // 创建一个类别的对象
+        var obj = {};
+        // 设置类对象的name
+        obj.name = data[i].name;
+        obj.val = data[i].value;
+        // 把以上处理好的单个类数据添加到dataArr数组中
+        dataArr.push(obj);
+      };
+      if(formSelects){
+        // 表单选择组件
+        formSelects.render({
+          name: 'xmselect'
+          , on: function (data, arr) {
+            (arr.length && $('#smtBtn').parent().is(":visible")) ? $('#smtBtn').html('已选' + arr.length + '个角色，' + '确认新增') : $('#smtBtn').html('确认新增');
+          }
+          , data: {
+            arr: dataArr
+          }
+          //, init: formSelects.value('xmselect','val')
+        })
+        //formSelects.value('select');			//获取选中的值
+        //formSelects.value('select', 'val');		//获取选中的val数组
+        //formSelects.value('select', 'name');		//获取选中的name数组
+        //formSelects.value('select', [1, 3]);	//动态赋值
+      }else{
+      }
+
+    }
+
+    // 自定义验证规则
+    form.verify({
+      title: function (value) {
+        if (value.length < 2) {
+          return '名称不得少于2个字符';
+        }
+      }
+    });
+
+    // 监听提交(根据lay-filter值来监听提交，便于保存操作和新增操作的提交公用一个方法)，但是需要判断是新增模式还是修改模式（根据点击按钮是否有data-id值来确定，有的话是编辑模式，无则是新增模式）
+    form.on('submit(operate-smt)', function (data) {
+      //获取选中的val数组
+      var areasValueArr = formSelects.value('xmselect', 'val');
+      var areasNameArr = formSelects.value('xmselect', 'name');
+      var areasArr = [];
+      for (var i = 0; i < areasValueArr.length; i++) {
+        var obj = {};
+        obj.id = areasValueArr[i];
+        obj.name = areasNameArr[i];
+        areasArr.push(obj);
+      };
+      // 传给后台的已选角色id数组
+      data.field.areas = areasArr;
+      $.ajax({
+        type: 'post',
+        url: admin.baseUrl + '/postSuccess',
+        data: data.field,
+        dataType: 'json',
+        beforeSend: function () {
+          this.loading = admin.loading();
+        },
+        complete: function () {
+          layer.close(this.loading);
+        },
+        success: function (result) {
+          $.ajax({
+            type: 'post',
+            url: admin.baseUrl + '/role',
+            data: data.field,
+            dataType: 'json',
+            beforeSend: function () {
+              this.loading = admin.loading();
+            },
+            complete: function () {
+              layer.close(this.loading);
+            },
+            success: function (result) {
+              if (result.code == 0) {
+                table.reload('firmTable', {
+                  data: result.data,
+                  where: {} // 请求额外参数（注意：这里面的参数可任意定义）
+                });
+              }
+            },
+            error: function (error) {
+              layer.msg('请求出错啦', {icon: 2});
+            },
+          });
+          layer.msg('编辑成功', {icon: 1});
+          layer.close(admin.popup.operateLayer);
+          // formReset();
+        },
+        error: function (error) {
+          layer.msg('请求出错啦', {icon: 2});
+        },
+      });
+    });
+
+    // 删除分类事件（首先获取已选分类id值，然后判断已选分类是否是系统默认分类，是的话不允许继续删除操作，不是的话友情提示下是否确认删除，以及删除后的操作提示，用户依然确认删除的话就执行ajax请求提交删除项）
+    $('form').on('click', '#givupBtn', function () {
+      var that = this;
+      layer.msg('撤销编辑操作，还原至初始状态')
+    });
+
+  });
+</script>

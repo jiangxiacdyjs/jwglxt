@@ -20,7 +20,8 @@ layui.define(['laytpl', 'laypage', 'layer', 'form'], function (exports) {
     //外部接口
     , table = {
       config: {
-        checkName: 'LAY_CHECKED' //是否选中状态的字段名
+        checkName: 'LAY_CHECKED' //是否选中状态的字段名(复选)
+        , radioName: 'LAY_RadioCHECKED' //是否选中状态的字段名(单选)
         , indexName: 'LAY_TABLE_INDEX' //下标索引名
       } //全局配置项
       , cache: {} //数据缓存
@@ -554,7 +555,7 @@ layui.define(['laytpl', 'laypage', 'layer', 'form'], function (exports) {
                   LAY_INDEX: numbers
                 }, item1);
 
-                //渲染复选框列视图
+                //渲染复选框列视图(item3是指此列所在标题的配置参数对象)
                 if (item3.type === 'checkbox') {
                   return '<input type="checkbox" name="layTableCheckbox" lay-skin="primary" ' + function () {
                     var checkName = table.config.checkName;
@@ -564,6 +565,16 @@ layui.define(['laytpl', 'laypage', 'layer', 'form'], function (exports) {
                       return item3[checkName] ? 'checked' : '';
                     }
                     return tplData[checkName] ? 'checked' : '';
+                  }() + '>';
+                } else if (item3.type === 'radio') {
+                  //如果传入了radio栏目
+                  return '<input type="radio" name="layTableRadio" lay-skin="primary" ' + function () {
+                    var radioName = table.config.radioName;
+                    if (item3[radioName]) {
+                      item1[radioName] = item3[radioName];
+                      return item3[radioName] ? 'checked' : '';
+                    }
+                    return item1[radioName] ? 'checked' : '';
                   }() + '>';
                 } else if (item3.type === 'numbers') { //渲染序号
                   return numbers;
@@ -739,6 +750,7 @@ layui.define(['laytpl', 'laypage', 'layer', 'form'], function (exports) {
     var that = this
       , options = that.config;
     if (options.loading && options.url) {
+
       return layer.msg('数据请求中', {
         icon: 16
         , offset: [
@@ -748,6 +760,8 @@ layui.define(['laytpl', 'laypage', 'layer', 'form'], function (exports) {
         , time: -1
         , anim: -1
         , fixed: false
+      }, function (e) {
+        //console.log('关闭了msg')
       });
     }
   };
@@ -937,6 +951,7 @@ layui.define(['laytpl', 'laypage', 'layer', 'form'], function (exports) {
         });
       }
     });
+
     //拖拽中
     _DOC.on('mousemove', function (e) {
       if (dict.resizeStart) {
@@ -989,15 +1004,54 @@ layui.define(['laytpl', 'laypage', 'layer', 'form'], function (exports) {
       }
     });
 
-    //复选框选择
-    that.elem.on('click', 'input[name="layTableCheckbox"]+', function () {
-      var checkbox = $(this).prev()
-        , childs = that.layBody.find('input[name="layTableCheckbox"]')
-        , index = checkbox.parents('tr').eq(0).data('index')
-        , checked = checkbox[0].checked
-        , isAll = checkbox.attr('lay-filter') === 'layTableAllChoose';
+    /**
+     * @修改：新增rowClick回调方法，用户监听行点击事件
+     * @desc 返回值①当前点击行数据②当前点击行索引值
+     * @time:2018/6/27
+     * @author:freshzxf
+     */
+    (function () {
+      if (typeof options.rowClick === "function") {
+        that.elem.on('click.rowClick', 'tr', function (e) {
+          var othis = $(this)
+            //当前行索引
+            , index = othis.index()
+            //所在行
+            , tr = othis
+            //兄弟其他行
+            , oTr = othis.siblings()
+            , data = table.cache[that.key][index];
 
-      //全选
+          options.rowClick.call(this, {
+            data: table.clearCacheKey(data)
+            , index: othis.index()
+          });
+        })
+      }
+    }());
+
+    /**
+     * @修改：复选框选择
+     * @time:2018/6/26
+     * @author:freshzxf
+     * @description:input[name="layTableCheckbox"]+ 是相邻选择器，选择紧接在其后的元素(二者有着相同父元素),此例中也即绑定.layui-form-checkbox(可见)的事件
+     */
+    that.elem.on('click', 'input[name="layTableCheckbox"]+', function (e) {
+      // 实际隐藏的checkbox
+      var checkbox = $(this).prev()
+        // 所有隐藏的checkbox，包括当前点击的
+        , childs = that.layBody.find('input[name="layTableCheckbox"]')
+        // 获取当前点击行索引
+        , index = checkbox.parents('tr').eq(0).data('index')
+        // 获取当前点击行tr
+        , tr = checkbox.parents('tr').eq(0)
+        // 获取当前点击行的兄弟行tr
+        , oTrs = checkbox.closest('tr').siblings()
+        // 通过将jq对象转成原始对象 获取当前对应隐藏checkbox选中状态(返回true或false)
+        , checked = checkbox[0].checked
+        // 判断当前点击对象是否是全选对象
+        , isAll = checkbox.attr('lay-filter') === 'layTableAllChoose';
+      // 如果点击的是全选checkbox，则遍历所有的隐藏checkbox设置其checked布尔值为当前全选隐藏checkbox的checkbox布尔值
       if (isAll) {
         childs.each(function (i, item) {
           item.checked = checked;
@@ -1009,6 +1063,7 @@ layui.define(['laytpl', 'laypage', 'layer', 'form'], function (exports) {
         that.setCheckData(index, checked);
         that.syncCheckAll();
       }
+      ;
       layui.event.call(this, MOD_NAME, 'checkbox(' + filter + ')', {
         checked: checked
         , data: table.cache[that.key] ? (table.cache[that.key][index] || {}) : {}
@@ -1016,7 +1071,131 @@ layui.define(['laytpl', 'laypage', 'layer', 'form'], function (exports) {
       });
     });
 
-    //行事件
+    /**
+     * @修改：单选框选择
+     * @time:2018/6/27
+     * @author:freshzxf
+     * @description:input[name="layTableRadio"]+ 是相邻选择器，选择紧接在其后的元素(二者有着相同父元素),此例中也即绑定.layui-form-radio(可见)的事件
+     */
+    that.elem.on('click', 'input[name="layTableRadio"]+', function (e) {
+      // 实际隐藏的radio
+      var radio = $(this).prev()
+        // 所有隐藏的radio，包括当前点击的
+        , childs = that.layBody.find('input[name="layTableRadio"]')
+        // 获取当前点击行索引
+        , index = radio.parents('tr').eq(0).data('index')
+        // 获取当前点击行tr
+        , tr = radio.parents('tr').eq(0)
+        // 获取当前点击行的兄弟行tr
+        , oTr = radio.closest('tr').siblings()
+        // 通过将jq对象转成原始对象 radio(返回true或false)
+        , checked = radio[0].checked;
+
+      /**
+       * 设置选中，便于重置时候显示选中，设置点击行数据，清空其他行数据，重置radio
+       */
+      radio.prop('checked', true);
+      that.setCheckData(index, true);
+      for (var i = 0; i < oTr.length; i++) {
+        var idx = oTr.eq(i).index();
+        that.setCheckData(idx, false);
+      }
+      form.render('radio');
+      // that.syncCheckAll();
+    });
+
+    /**
+     * @修改：新增配置项selectOnClick，如果为true，则执行点击行选中该行数据
+     * @time:2018/6/26
+     * @author:freshzxf
+     */
+    (function () {
+      var selectOnClick = options.selectOnClick;
+      if (selectOnClick) {
+        that.layBody.off('.selectOnClick').on('click.selectOnClick', 'tr', function (e) {
+          var othis = $(this)
+            //当前行索引
+            , index = othis.index()
+            //所在行
+            , tr = othis
+            //兄弟其他行
+            , oTr = othis.siblings()
+
+            /******普通模式下*******/
+            //复选模式下 对应实际checkbox
+            , checkBoxIpt = $(that.elem).find('input[name="layTableCheckbox"]').eq(index + 1)
+            //单选模式下 对应隐藏实际radio(因为radio模式下已去除了thead中的radio，因此此处取的radip是直接eq(index),而非eq(index+1))
+            , radioIpt = $(that.elem).find('input[name="layTableRadio"]').eq(index)
+            //复选模式下 对应显示checkbox
+            , staticCheckBox = checkBoxIpt.next()
+            //单选模式下 对应显示radio
+            , staticRadio = radioIpt.next()
+
+            /******固定列模式下*******/
+            //当前点击行对应固定行
+            , fixedTr = $('.layui-table-fixed').find('.layui-table-body').find('tr[data-index=' + index + ']')
+            //复选模式下 当前点击行对应固定的隐藏checkbox
+            , fixedCheckBoxIpt = fixedTr.find('input[name="layTableCheckbox"]').eq(0)
+            //单选模式下 当前点击行对应固定的隐藏radio
+            , fixedRadioIpt = fixedTr.find('input[name="layTableRadio"]').eq(0)
+            //复选模式下 当前点击行对应显示的checkbox
+            , fixedCheckBox = fixedTr.find('.layui-form-checkbox').eq(0)
+            //单选模式下 当前点击行对应显示的radio
+            , fixedRadio = fixedTr.find('.layui-form-radio').eq(0)
+
+            //最终获取复选模式下显示的checkbox
+            , checkbox = fixedCheckBox.length ? fixedCheckBox : staticCheckBox
+            //最终获取单选模式下显示的radio
+            , radio = fixedRadio.length ? fixedRadio : staticRadio;
+
+          /**
+           * “选择图标所在处(有类名layui-icon-ok)”已在上面的“复选框选择”事件中绑定了click选中事件，因此下面的所有操作先判断点击对象是否是“选择图标所在处”
+           * 如果当前点击对象不是显示选择图标所在处(有类名layui-icon-ok) 并且 当前点击行对应checkbox已显示选中状态，则手动设置“显示状态”及“实际状态”均为未选中状态
+           */
+          if (!$(e.target).hasClass('layui-icon-ok') && checkbox.hasClass('layui-form-checked')) {
+            // 设置隐藏的checkbox未选中
+            checkBoxIpt.prop('checked', false);
+            // 如果是fixed模式，实际上有两个相应隐藏的checkbox(设置用户所见的fixed对应checkbox不选中，设置用户不可见的被fixed遮挡住的checkbox不选中)
+            checkbox.removeClass('layui-form-checked');
+            fixedCheckBoxIpt.length ? fixedCheckBoxIpt.prop('checked', false) && staticCheckBox.removeClass('layui-form-checked') : '';
+            // 同步选中值状态
+            that.setCheckData(index, false);
+          } else if (!$(e.target).hasClass('layui-icon-ok') && !checkbox.hasClass('layui-form-checked')) {
+            checkBoxIpt.prop('checked', true);
+            // 如果是fixed模式，实际上有两个相应隐藏的checkbox(设置用户所见的fixed对应checkbox选中，设置用户不可见的被fixed遮挡住的checkbox选中)
+            checkbox.addClass('layui-form-checked');
+            fixedCheckBoxIpt.length ? fixedCheckBoxIpt.prop('checked', true) && staticCheckBox.addClass('layui-form-checked') : '';
+            that.setCheckData(index, true);
+          }
+          ;
+          /**
+           * selectOnSelect配置下的radio单选模式下
+           * radio.length适用于判断是否处于配置有的radio模式下，如果不做此判断，会导致checkbox模式下也只能选中一条数据
+           */
+          if (radio.length && !radio.hasClass('layui-form-radioed')) {
+            radioIpt.prop('checked', true);
+            // 如果是fixed模式
+            fixedRadioIpt.length ? fixedRadioIpt.prop('checked', true) : null;
+            that.setCheckData(index, true);
+            for (var i = 0; i < oTr.length; i++) {
+              var idx = oTr.eq(i).index();
+              that.setCheckData(idx, false);
+            }
+            form.render('radio');
+          } else if (radio.length && radio.hasClass('layui-form-radioed')) {
+            for (var i = 0; i < oTr.length; i++) {
+              var idx = oTr.eq(i).index();
+              that.setCheckData(idx, false);
+            }
+          }
+          ;
+          that.syncCheckAll();
+        })
+      }
+      ;
+    }());
+
+    //行移入移出事件
     that.layBody.on('mouseenter', 'tr', function () {
       var othis = $(this)
         , index = othis.index();
@@ -1168,38 +1347,6 @@ layui.define(['laytpl', 'laypage', 'layer', 'form'], function (exports) {
       layer.close(that.tipsIndex);
     });
 
-    /**
-     * @修改：新增配置项selectOnClick，如果为true，则执行点击行选中该行数据
-     * @time:2018/6/20
-     * @author:freshzxf
-     */
-    if (options.selectOnClick) {
-      that.layBody.off('.selectOnClick').on('click.selectOnClick', 'tr', function (e) {
-        var othis = $(this)
-          , index = othis.index()
-          , checkBoxIpt = $(that.elem).find('input[name="layTableCheckbox"]').eq(index + 1)
-          , staticCheckBox = checkBoxIpt.next()
-          , fixedTr = $('.layui-table-fixed').find('.layui-table-body').find('tr[data-index=' + index + ']')
-          , fixedCheckBoxIpt = fixedTr.find('input[name="layTableCheckbox"]').eq(0)
-          , fixedCheckBox = fixedTr.find('.layui-form-checkbox').eq(0)
-          , checkbox = fixedCheckBox.length ? fixedCheckBox : staticCheckBox;
-
-        if (!$(e.target).hasClass('layui-icon-ok') && checkbox.hasClass('layui-form-checked')) {
-          checkBoxIpt.prop('checked', false);
-          fixedCheckBoxIpt.prop('checked', false);
-          that.setCheckData(index, false);
-          checkbox.removeClass('layui-form-checked');
-        } else if (!$(e.target).hasClass('layui-icon-ok') && !checkbox.hasClass('layui-form-checked')) {
-          checkBoxIpt.prop('checked', true);
-          fixedCheckBoxIpt.prop('checked', true);
-          that.setCheckData(index, true);
-          checkbox.addClass('layui-form-checked');
-        };
-        that.syncCheckAll();
-      })
-    }
-    ;
-
     _WIN.on('resize', function () { //自适应
       that.fullSize();
       that.scrollPatch();
@@ -1333,5 +1480,3 @@ layui.define(['laytpl', 'laypage', 'layer', 'form'], function (exports) {
 
   exports(MOD_NAME, table);
 });
-
- 

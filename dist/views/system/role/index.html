@@ -70,14 +70,14 @@
   </div>
 </div>
 <!--单独引入非模块化的xtree控件-->
-<script src="../src/lib/extend/layui-xtree.js"></script>
 <script>
-  layui.use(['admin', 'table', 'form', 'view'], function () {
+  layui.use(['admin', 'table', 'form', 'view', 'xtree'], function () {
     var table = layui.table
       , form = layui.form
       , $ = layui.$
       , admin = layui.admin
-      , view = layui.view;
+      , view = layui.view
+      , xtree = layui.xtree;
 
     // 设置表单默认值
     function setFormVals(filter,dataObj) {
@@ -127,7 +127,7 @@
     });
 
     // 初始化资源树
-    var xtree1 = new layuiXtree({
+    var xtree1 = new xtree({
       elem: 'xtree1'  //必填三兄弟之老大
       , form: form   //必填三兄弟之这才是真老大
       , data: admin.baseUrl + '/resourceTreeDisabled' //必填三兄弟之这也算是老大
