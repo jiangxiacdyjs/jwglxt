@@ -1,0 +1,51 @@
+<div class="layui-fluid" id="LAY-app-message-detail">
+  <div class="layui-card layuiAdmin-msg-detail">
+    <div template
+         lay-url="https://www.easy-mock.com/mock/5b081444b2917d747f8614ef/nutritional2.0/messageDetail?id={{ layui.router().search.id }}"
+         lay-done="layui.admin.viewFile('', 'fullh', 'gallery', 'src', true, true);">
+      <div class="layui-card-header">
+        <h1>{{ d.data.title }}</h1>
+        <p>
+          <span>{{ layui.util.timeAgo(d.data.time) }}</span>
+        </p>
+      </div>
+      <div class="layui-card-body layui-text fullh" style="overflow-y: scroll">
+        <div class="layadmin-text" style="width: 700px;margin:-16px auto;padding:20px;border: 1px solid #f6f6f6">
+          {{ d.data.content }}
+        </div>
+        <div style="padding-top: 30px;width: 740px;margin: auto">
+          <a lay-href="template/news/" class="layui-btn layui-btn-primary layui-btn-sm">返回上级</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  layui.use(['util', 'admin'], function () {
+    var $ = layui.$
+      , util = layui.util
+      , admin = layui.admin;
+    // console.log(layui.router())
+
+    // 设置右侧显示详情区高度占满整屏
+    $('.fullh').height(admin.getRightAvailableHeight() - 115);
+
+    /*固定右下角工具*/
+    util.fixbar({
+      bar1: '&#xe604;'
+      , css: {right: 50, bottom: 50}
+      , bgcolor: '#393D49'
+      , click: function (type) {
+        if (type === 'bar1') {
+          $('.fullh').animate({
+            'scrollTop': 0
+          }, 500);
+        }
+      }
+    });
+
+
+  });
+</script>
