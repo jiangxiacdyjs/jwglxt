@@ -1,0 +1,128 @@
+<title>友情链接</title>
+<style>
+  .img{width: 60px;height: 60px;border:1px solid #CCCCCC;border-radius: 100%;cursor: pointer}
+</style>
+
+<div class="">
+  <form class="layui-form layui-form-pane" lay-filter="editForm">
+    <!--数据id-->
+    <input type="hidden" name="id">
+
+    <!--logo地址-->
+    <input type="hidden" name="img" value="">
+
+    <!--logo-->
+    <div class="tc mb20">
+      <img title="点击上传logo" id="img" class="img" src="../src/img/default-logo.png" alt="">
+    </div>
+
+    <!--栏目名称-->
+    <div class="layui-form-item">
+      <label class="layui-form-label">企业名称</label>
+      <div class="layui-input-block">
+        <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="请输入企业名称"
+               class="layui-input">
+      </div>
+    </div>
+
+    <!--排序、锁定-->
+    <div class="layui-form-item layui-row layui-col-space20">
+      <div class="layui-col-xs6">
+        <label class="layui-form-label layui-tip-label">权值排序</label>
+        <div class="layui-input-block">
+          <input type="number" name="sort" lay-verify="required" placeholder="请输入权值排序" autocomplete="off"
+                 class="layui-input">
+        </div>
+      </div>
+      <div class="layui-col-xs6">
+        <label class="layui-form-label layui-tip-label">禁用栏目</label>
+        <div class="layui-input-block b-e6">
+          <input type="checkbox" name="disabled" lay-skin="switch" lay-text="禁用|不禁用" lay-filter="disabled" value="">
+        </div>
+      </div>
+    </div>
+
+    <!--链接地址-->
+    <div class="layui-form-item">
+      <label class="layui-form-label">链接地址</label>
+      <div class="layui-input-block">
+        <input type="text" name="link" lay-verify="required" autocomplete="off" placeholder="请输入链接地址"
+               class="layui-input">
+      </div>
+    </div>
+
+    <div class="layui-form-item mb0">
+      <div class="layui-footer">
+        <button type="button" class="layui-btn fr" lay-submit="" lay-filter="form-smt">立即提交</button>
+        <button type="button" class="layui-btn layui-btn-primary fl ml0" lay-filter="form-undo">撤销操作</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  layui.use(['admin', 'form', 'upload'], function () {
+    var $ = layui.$
+      , admin = layui.admin
+      , layer = layui.layer
+      , upload = layui.upload
+      , form = layui.form;
+
+    // 渲染表单
+    form.render();
+
+    // logo上传
+    var uploadFile = upload.render({
+      elem: '#img'
+      , accept: 'file' //允许上传的文件类型
+      , url: 'https://www.easy-mock.com/mock/5af45f8ab45afc56560ae781/admin/postSuccess'
+      , before: function (obj) {
+        this.loadingIdx = admin.loading('文件上传中，请稍等...');
+        // 获取触发上传功能的元素的jq对象
+        var $triggerEle = $(this.item);
+        //预读本地文件示例，不支持ie8
+        obj.preview(function (index, file, result) {
+          $triggerEle.prop('src',result); // 图片链接（base64）
+        });
+      }
+      , done: function (res, index, upload) {
+        //如果上传失败
+        if (res.code > 0) {
+          return layer.msg('上传失败');
+        } else {
+          layer.close(this.loadingIdx);
+        }
+      }
+      , error: function () {}
+    });
+
+    // 监听提交
+    form.on('submit(form-smt)', function (data) {
+      data.field.img = $('#img').prop('src');
+      $.ajax({
+        //contentType: 'application/json; charset=utf-8',
+        type: 'post',
+        url: 'https://www.easy-mock.com/mock/5af45f8ab45afc56560ae781/admin/linksTable',
+        data: JSON.stringify(data.field),
+        dataType: 'json',
+        beforeSend: function () {
+          this.loadingIdx = admin.loading();
+        },
+        complete: function () {
+          layer.close(this.loadingIdx);
+        },
+        success: function (result) {
+          if(result.code == 0){
+            layer.msg('数据编辑成功', {icon:1})
+          };
+          if(admin.popup.editLayer) layer.close(admin.popup.editLayer);
+          if(admin.popup.addLayer) layer.close(admin.popup.addLayer);
+        },
+        error: function (error) {
+          layer.msg('请求出错啦', {icon: 2,anim:6});
+        },
+      });
+      return false;
+    });
+  });
+</script>

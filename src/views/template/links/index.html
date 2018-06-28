@@ -1,0 +1,373 @@
+<title>友情链接</title>
+<style>
+    .box{position:relative;background-color: #fff;border-radius: 6px;overflow: hidden;border: 1px solid #e2e2e2}
+    .box .box-img{position: relative;z-index: 1;width: 100px;height: 100px;border:1px solid #CCCCCC;border-radius: 100%;cursor: pointer;}
+    .box .box-title{overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;}
+    .box .box-link{}
+    .box .box-operate{position: absolute;z-index:1;top: 0;right: -70px;bottom: 0;border-top-right-radius:6px;border-bottom-right-radius:6px;width:70px;text-align:center;background-color: rgba(0,0,0,0.3);}
+    .box .box-operate-item{width: 36px;height: 36px;line-height:36px;border-radius: 100%;text-align: center;margin: auto;cursor: pointer}
+    .box .box-operate-item:hover{opacity: 0.7}
+
+    .box.disabled:before{content: "\f023";position: absolute;opacity: 0.08;z-index: 0;color: red;
+        top:50%;left: 50%;
+        -webkit-transform: translate(-50%,-50%);
+        -moz-transform: translate(-50%,-50%);
+        -ms-transform: translate(-50%,-50%);
+        -o-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
+        font-family:FontAwesome!important;font-size:140px;font-style:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+</style>
+<div class="layui-card layadmin-header">
+    <!--操作按钮组-->
+    <div class="layui-btn-group col-btn-group ml15">
+        <button data-event="add" class="layui-btn layui-btn-sm">
+            <i class="layui-icon">&#xe654;</i>新增
+        </button>
+        <button data-event="del" class="layui-btn layui-btn-danger layui-btn-sm">
+            <i class="layui-icon">&#xe640;</i>批量删除
+        </button>
+    </div>
+    <!--搜索查询-->
+    <div class="test-table-reload-btn layui-layout-right" style="right: 15px">
+        名称搜索：
+        <div class="layui-inline">
+            <input class="layui-input h30" style="width: 350px" name="id" id="searchInput" autocomplete="off">
+            <span class="layui-icon layui-icon-close-fill layui-hide pointer" style="position: absolute;right:0;top: -8px;font-size: 20px;padding: 0 10px;"></span>
+        </div>
+        <button class="layui-btn layui-btn-sm" data-event="search">搜索</button>
+    </div>
+</div>
+<div class="layui-fluid layadmin-maillist-fluid">
+    <div id="list" class="layui-row layui-col-space15">
+        <!--<div class="layui-col-md4 layui-col-sm6">
+            <div class="box disabled">
+                &lt;!&ndash;显示区域&ndash;&gt;
+                <table style="width: 100%">
+                    <tr>
+                        <td class="p20">
+                            <img class="box-img" src="https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1530091657&di=2963729e46e3b335c331e3d07d4f2b98&src=http://img3.duitang.com/uploads/item/201512/10/20151210131006_xzeKh.jpeg">
+                        </td>
+                        <td class="p20 lh200">
+                            <h3 class="box-title">
+                                <strong>江西百电信息产业有限公司</strong>
+                            </h3>
+                            <p class="box-link layui-elip">
+                                <i class="layui-icon layui-icon-link red mr10"></i>
+                                <a href="http://www.baidianxinxi.com" target="_blank">http://www.baidianxinxi.com</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+                &lt;!&ndash;隐藏操作区域&ndash;&gt;
+                <div class="box-operate" data-id="" data-lockshow=''>
+                    <table style="height: 100%;width:100%;">
+                        <tr>
+                            <td>
+                                <div data-event="edit" class="layui-icon layui-icon-edit layui-bg-green box-operate-item"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div data-event="del" class="layui-icon layui-icon-delete layui-bg-red box-operate-item"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &lt;!&ndash;<div class="layui-icon layui-icon-ok layui-bg-blue box-operate-item"></div>&ndash;&gt;
+                                <div data-event="check" class="layui-icon layui-icon-ok layui-bg-gray box-operate-item"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>-->
+    </div>
+</div>
+<!--隐藏模板-->
+<div id="template" class="layui-col-md4 layui-col-sm6 layui-hide">
+    <div class="box">
+        <!--显示区域-->
+        <table style="width: 100%">
+            <tr>
+                <td class="p20">
+                    <img class="box-img" src="../src/img/default-logo.png" alt="">
+                </td>
+                <td class="p20 lh200">
+                    <h3 class="box-title">
+                        <strong></strong>
+                    </h3>
+                    <p class="box-link layui-elip">
+                        <i class="layui-icon layui-icon-link red mr10"></i>
+                        <a href="" target="_blank"></a>
+                    </p>
+                </td>
+            </tr>
+        </table>
+        <!--隐藏操作区域-->
+        <div class="box-operate" data-id="" data-lockshow=''>
+            <table style="height: 100%;width:100%;">
+                <tr>
+                    <td>
+                        <div data-event="edit" class="layui-icon layui-icon-edit layui-bg-green box-operate-item"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div data-event="del" class="layui-icon layui-icon-delete layui-bg-red box-operate-item"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div data-event="check" class="layui-icon layui-icon-ok layui-bg-gray box-operate-item"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    layui.use(['admin', 'view', 'table', 'form'], function () {
+        var $ = layui.$
+                , admin = layui.admin
+                , view = layui.view
+                , form = layui.form;
+        var $template = $('#template'),
+                $list = $('#list'),
+                $searchIpt = $('#searchInput');
+
+        // 获取选中数据
+        function getCheckedDatas() {
+            var $boxes = $list.find('.box'),
+                    $operateCheck = $boxes.find('.layui-icon-ok'),
+                    $operateChecked = $operateCheck.closest('.layui-bg-blue');
+            var ids = [];
+            if($operateChecked.length){
+                for (var i = 0; i < $operateChecked.length; i++) {
+                    ids.push($operateChecked.eq(i).closest('.box-operate').attr('data-id'))
+                }
+            };
+            return {length:$operateChecked.length,ids:ids};
+        }
+
+        // 生成显示数据项
+        function generateItems(data){
+            $list.empty();
+            for (var i = 0; i < data.length; i++) {
+                var $newTemplate = $template.clone().removeClass('layui-hide');
+                data[i]['disabled'] ? $newTemplate.children('.box').addClass('disabled') : null;
+                $newTemplate.children('.box').attr('data-id',data[i].id).attr('data-sort',data[i].sort)
+                        .find('.box-title strong').html(data[i].name).end()
+                        .find('.box-img').prop('src',data[i].img).end()
+                        .find('.box-link a').prop('href', data[i].link).html(data[i].link).end()
+                        .find('.box-operate').attr('data-id',data[i].id);
+                $list.append($newTemplate)
+            };
+            /**
+             * @title: 初始化插图查看器
+             */
+            admin.viewFile('', 'list', 'galley', 'src', true, true);
+        }
+
+        // 绘制数据列表
+        function drawList(data){
+            $.ajax({
+                type: 'post',
+                url: "https://www.easy-mock.com/mock/5af45f8ab45afc56560ae781/admin/linksTable",
+                data: data || '',
+                dataType: 'json',
+                beforeSend: function (xhr, options) {
+                    this.loadingIdx = admin.loading();
+                },
+                complete: function (xhr, ts) {
+                    layer.close(this.loadingIdx);
+                },
+                success: function (result) {
+                    // 生成数据项
+                    generateItems(result.data);
+                },
+                error: function () {
+                    $.toptips('网络连接错误，请检查您的网络！', 'warning');
+                }
+            });
+        }
+        drawList('');
+
+        // 全局事件对象
+        var globalEventsObj = {
+            del: function () {
+                var that = this,
+                        data = getCheckedDatas();
+                if(data.length){
+                    var confirmLayerIdx = admin.popup({
+                        content: '是否确认删除' + data.length + '该数据？'
+                        , btn: ['确认', '取消']
+                        , btnAlign: 'c'
+                        , yes: function (index, layero) {
+                            layer.close(confirmLayerIdx);
+                            $.ajax({
+                                type: 'post',
+                                url: 'https://www.easy-mock.com/mock/5af45f8ab45afc56560ae781/admin/linksTable',
+                                data: data.ids,
+                                dataType: 'json',
+                                beforeSend: function () {
+                                    this.loadingIdx = admin.loading();
+                                },
+                                complete: function () {
+                                    layer.close(this.loadingIdx);
+                                    for (var i = 0; i < data.ids.length; i++) {
+                                        $list.find('[data-id='+data.ids[i]+']').parent().remove();
+                                    };
+                                    layer.msg('已成功删除',{icon:1})
+                                },
+                                success: function (result) {
+                                    layer.close(this.loadingIdx);
+                                },
+                                error: function (error) {
+                                    layer.msg('请求出错啦', {icon: 2, anim: 6});
+                                }
+                            });
+                        }
+                    })
+                }else{layer.msg('请选择需要删除的数据项',{icon:2,anim:6});}
+            }
+            , add: function(){
+                admin.popup.addLayer = admin.popup({
+                    "title": "编辑数据"
+                    , area: admin.screen() < 2 ? ['100%', '400px'] : ['620px', '400px']
+                    , id: 'add' //id唯一
+                    , maxmin: true
+                    , shadeClose: false
+                    , success: function () {
+                        view(this.id).render('template/links/edit').done(function (html) {
+                            // 绑定撤销编辑事件
+                            var $undoBtn = $('button[lay-filter=form-undo]');
+                            $undoBtn.length ? $undoBtn.off('click').prop('type','reset').text('重置表单') : null;
+                        });
+                    }
+                });
+            }
+            , search: function(){
+                var val = $searchIpt.val();
+                if(val) $searchIpt.attr('data-area',1);
+                drawList(val);
+            }
+        };
+
+        // 每项事件对象
+        var boxEventsObj = {
+            edit: function () {
+                var $that = $(this),
+                        $box = $that.closest('.box');
+                admin.popup.editLayer = admin.popup({
+                    "title": "编辑数据"
+                    , area: admin.screen() < 2 ? ['100%', '400px'] : ['620px', '400px']
+                    , id: 'edit' //id唯一
+                    , maxmin: true
+                    , shadeClose: false
+                    , success: function () {
+                        view(this.id).render('template/links/edit').done(function (html) {
+                            var dataObj={
+                                id:$box.attr('data-id'),
+                                sort:$box.attr('data-sort'),
+                                img:$box.find('.box-img').prop('src'),
+                                name:$box.find('.box-title strong').html(),
+                                disabled:$box.hasClass('disabled') ? true : false,
+                                link:$box.find('.box-link a').html()
+                            };
+                            // 绑定撤销编辑事件
+                            var $undoBtn = $('button[lay-filter=form-undo]');
+                            if ($undoBtn.length) {
+                                $undoBtn.off('click.undo').prop('type', 'button').text('恢复操作').on('click.undo', function () {
+                                    // 表单赋值
+                                    form.val('editForm', dataObj);
+                                    $('#img').prop('src',dataObj.img);
+                                });
+                            };
+                            // 表单赋值
+                            form.val('editForm', dataObj);
+                            $('#img').prop('src',dataObj.img);
+                        });
+                    }
+                });
+            }
+            , del: function () {
+                var that = this,
+                        id = $(that).closest('.box-operate').attr('data-id');
+                var confirmLayerIdx = admin.popup({
+                    content: '是否确认删除该数据？'
+                    , btn: ['确认', '取消']
+                    , btnAlign: 'c'
+                    , yes: function (index, layero) {
+                        layer.close(confirmLayerIdx);
+                        $.ajax({
+                            type: 'post',
+                            url: 'https://www.easy-mock.com/mock/5af45f8ab45afc56560ae781/admin/linksTable',
+                            data: id,
+                            dataType: 'json',
+                            beforeSend: function () {
+                                this.loadingIdx = admin.loading();
+                            },
+                            complete: function () {
+                                layer.close(this.loadingIdx);
+                                $(that).closest('.box').parent().remove();
+                                layer.msg('已成功删除',{icon:1})
+                            },
+                            success: function (result) {
+                                layer.close(this.loadingIdx);
+                            },
+                            error: function (error) {
+                                layer.msg('请求出错啦', {icon: 2, anim: 6});
+                            }
+                        });
+                    }
+                });
+            }
+            , check: function(){
+                if($(this).hasClass('layui-bg-blue')){
+                    $(this).removeClass('layui-bg-blue').addClass('layui-bg-gray');
+                    // 设置解锁定显示操作层
+                    $(this).closest('.box-operate').attr('data-lockshow','');
+                }else{
+                    $(this).removeClass('layui-bg-gray').addClass('layui-bg-blue');
+                    // 设置锁定显示操作层
+                    $(this).closest('.box-operate').attr('data-lockshow',1);
+                }
+            }
+        };
+
+        // 每项数据项效果
+        $('.layadmin-maillist-fluid').on('mouseover', '.box', function () {
+            $(this).find('.box-operate').stop().animate({right:"0"},200);
+        }).on('mouseout', '.box', function () {
+            var $operate = $(this).find('.box-operate');
+            $operate.attr('data-lockshow') != 1 ? $(this).find('.box-operate').stop().animate({right:"-70px"},200) : null;
+        });
+
+        // 每项数据的所有按钮组内按钮事件类型，如果存在对应定义，则执行
+        $('.layadmin-maillist-fluid').on('click', '.box-operate .box-operate-item', function () {
+            var type = $(this).attr('data-event');
+            boxEventsObj[type] && boxEventsObj[type].call(this);
+        });
+
+        // 顶部操作栏下所有按钮组内按钮事件类型，如果存在对应定义，则执行
+        $('.layadmin-header').on('click', '.layui-btn', function () {
+            var type = $(this).attr('data-event');
+            globalEventsObj[type] && globalEventsObj[type].call(this);
+        });
+
+        // 清空搜索值
+        $searchIpt.next().on('click',function(){
+            $searchIpt.val('');
+            $(this).addClass('layui-hide');
+            $searchIpt.attr('data-area') ? $searchIpt.attr('data-area','') && drawList() : null;
+        });
+
+        // 监听搜索框keydown事件，动态显隐清除icon
+        $searchIpt.on('keydown',function(){
+            var $clearIcon = $(this).next(),
+                    searchVal = $searchIpt.val();
+            searchVal ? ($clearIcon.is(':visible') ? null : $clearIcon.removeClass('layui-hide')) :
+                    ($clearIcon.is(':visible') ? $clearIcon.addClass('layui-hide') : null);
+        })
+    });
+</script>

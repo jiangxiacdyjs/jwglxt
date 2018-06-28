@@ -1,0 +1,438 @@
+<title>新闻动态</title>
+<style>
+    .detail img {
+        cursor: pointer
+    }
+</style>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <!--分类列表-->
+        <div class="layui-col-md4">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    <span>栏目分类</span>
+                    <!--操作按钮组-->
+                    <div class="layui-btn-group col-btn-group fr">
+                        <button data-event="add" class="layui-btn layui-btn-sm">
+                            <span class="layui-icon">&#xe654;</span>
+                        </button>
+                        <button data-event="edit" class="layui-btn layui-btn-normal layui-btn-sm">
+                            <span class="layui-icon">&#xe642;</span>
+                        </button>
+                        <button data-event="del" class="layui-btn layui-btn-danger layui-btn-sm">
+                            <span class="layui-icon">&#xe640;</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="layui-card-body">
+                    <table class="layui-hide" id="columnTable" lay-filter="columnTable"></table>
+                </div>
+            </div>
+        </div>
+        <!--内容列表-->
+        <div class="layui-col-md4">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    <span id="listTit">全部栏目</span>
+                    <!--操作按钮组-->
+                    <div class="layui-btn-group con-btn-group fr">
+                        <button data-event="add" class="layui-btn layui-btn-sm">
+                            <span class="layui-icon">&#xe654;</span>
+                        </button>
+                        <button data-event="edit" class="layui-btn layui-btn-normal layui-btn-sm">
+                            <span class="layui-icon">&#xe642;</span>
+                        </button>
+                        <button data-event="del" class="layui-btn layui-btn-danger layui-btn-sm">
+                            <span class="layui-icon">&#xe640;</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="layui-card-body">
+                    <table class="layui-hide" id="contentsTable" lay-filter="contentsTable"></table>
+                    <!--这里的 checked 是根据每条数据的disabled字段判断是否选中 -->
+                    <script type="text/html" id="stateCheckboxTpl">
+                        <input type="checkbox" name="disabled" lay-skin="switch" lay-text="启用|禁用" title="禁用"
+                               lay-filter="columnDisabled"
+                               value="{{d.id}}" data-json="{{ encodeURIComponent(JSON.stringify(d)) }}" {{ d.disabled
+                               ? 'checked' : ''}}>
+                    </script>
+                    <!--
+                    <script type="text/html" id="radioTpl">
+                        <input type="radio" name="radioCheck" value="{{d.id}}" title=" " lay-filter="radioCheck" {{d.id=="10002"?"checked":""}}>
+                    </script>-->
+                </div>
+            </div>
+        </div>
+        <!--预览展示-->
+        <div class="layui-col-md4">
+            <div class="layui-card">
+                <div class="layui-card-header">
+                    <span id="detailTit">预览展示</span><i class="layui-icon layui-icon-read"></i>
+                </div>
+                <div class="layui-card-body detail fullh">
+                    <div style="border: 1px solid #e6e6e6;height: inherit;box-sizing:border-box;overflow-y: scroll;padding: 15px">
+                        <!--实际内容展示区-->
+                        <div class="layui-text tj" style="line-height: 200%;text-indent: 2em;">
+                            <p class="tc"><img src="../src/img/news/illustration1.jpg" alt="" width="90%">
+                            </p>
+                            <blockquote class="layui-elem-quote mt20" style="line-height: 200%">
+                                2014年9月21日，中共中央总书记、国家主席、中央军委主席习近平在庆祝中国人民政治协商会议成立65周年大会上发表重要讲话时指出：“政之所兴在顺民心，政之所废在逆民心。”
+                            </blockquote>
+                            <!--<div class="layui-word-aux mt20">2014年9月21日，中共中央总书记、国家主席、中央军委主席习近平在庆祝中国人民政治协商会议成立65周年大会上发表重要讲话时指出：“政之所兴在顺民心，政之所废在逆民心。”
+                                （新华社记者李学仁摄）</div>-->
+                            <p class="mt20">政之所兴，在顺民心。政之所废，在逆民心。得民心者得天下，失民心者失天下，这是亘古不变的历史真理。</p>
+                            <p class="mt20">
+                                在美丽的西子湖畔，G20杭州峰会唱响了中国“勇做世界经济的弄潮儿”的壮丽篇章。中国人民用海纳百川的胸怀、兼济天下的情怀，向世界传递出“二十国集团不仅属于二十国，也属于全世界”的强烈信号。在世界经济面临危机和挑战的关键时刻，世界各国人民向往美好生活、渴盼经济发展、改善民生的决心与意志又一次点亮了团结共赢的前进之路。</p>
+                            <p class="mt20">“民生连民心，民心牵国运”。对中国来讲，民生问题是经济改革面临的最大问题，解决民生问题是最大的政治，改善人民福祉是最大的政绩。</p>
+                            <p class="mt20">“但愿苍生俱保暖”，民生工作“如除腹心之疾”，要一诺千金。</p>
+                            <p class="mt20">
+                                十八大以来，随着全面深化改革的稳步推进，多项举措涵盖了医疗、教育、就业、住房等领域，我国民生状况已经得到了极大改善：城乡居民收入持续稳步增长、世界上最大的社会保险体系初步建构，医疗保障覆盖人口逐步扩大，人民群众健康水平显著提高，教育改革不断向前推进——改革发展成果正更多更公平地惠及全体人民。</p>
+                            <p class="mt20"><b>民生保障是社会进步的“磨刀石”</b></p>
+                            <p class="mt20">民为邦本，本固邦宁。政权要稳定长久，就必须推行顺乎民心的政策。</p>
+                            <p class="mt20">
+                                有目共睹的是，近年来，中国在改善民生方面的力度在不断加大：城乡居民收入持续增长，各项保障事业逐步完善，人民生活水平显著提高，一大批积累多年的突出民生问题已经或正在得到解决。</p>
+                            <p class="mt20">今年5月，贵州省排调镇排晒村村民李安彬13岁的儿子患上了“肾病综合症”，由于家庭本来就贫困，加上医疗费用昂贵，给他们一家的生活蒙上了一层阴影。</p>
+                            <p class="mt20">
+                                9月，帮扶干部杨再烨知道此事后主动联系李安彬，带领他到相关部门进行大病救助报销了部分医疗费用，住院总金额为76291元，救助后个人支付金额仅为8466元，救助比例80%，为李安彬家省了大笔的医疗费用。</p>
+                            <p class="mt20">李安彬的经历是经济发展溢出效应的一个缩影，在中国，从每个人身上都能读出一个真实的民生状况，都能读出一个真实的中国经济。</p>
+                            <p class="mt20">
+                                改革开放以来，中国的整体经济水平已经实现了历史性的跨越和腾飞，但毋庸讳言，我们还面临着很多困难和考验。截至目前，我国仍有5000多万人口尚未完全脱贫，不少地方的基础设施建设和社会服务体系还不完善，住房、养老、教育、医疗、生态等多个领域的民生诉求尚未完全获得满足。</p>
+                            <p class="mt20">
+                                消除贫困不是一句空话。从2011年到2015年，中央财政专项扶贫资金从272亿元增长到467.45亿元，农村贫困人口继续减少。2015年底，全国农村贫困人口为5575万人，比2011年底减少6663万人，成绩来之不易，需要倍加珍惜。</p>
+                            <p class="tc mt20"><img src="../src/img/news/illustration2.jpg" alt=""
+                                                    width="90%"></p>
+                            <p class="mt20">2014年至今居民人均可支配收入-累计值。（来源：国家统计局）</p>
+                            <p class="mt20">
+                                再看总体情况，国家统计局公布的数据显示，今年上半年社会消费品零售总额实现156138亿元，同比增长10.3%，在投资增速回落、出口低迷的情况下，消费需求对经济增长的带动作用进一步凸显。</p>
+                            <p class="mt20">
+                                比如，，标志着生活水平提高的服务消费持续旺盛，全域旅游示范区建设加速推进，乡村旅游、红色旅游、通用航空等个性化、体验化旅游持续升温，今年上半年国内旅游人数22.4亿人次，增长10.5%，国内旅游收入达到1.9万亿元，增长13.7%。</p>
+                            <p class="mt20">从数据可以看出，老百姓的钱袋子“鼓”了。</p>
+                            <p class="mt20">
+                                “治国犹如栽树，本根不摇则枝繁叶茂”。当今世界经济复苏乏力，经济下行压力依然较大，痛定思痛、当断则断，供给侧结构性改革势在必行。此举一出，世界哗然，别有用心者指出：“仅去产能一项举措，就足以令中国社会动荡不安！”</p>
+                            <p class="mt20">
+                                一边是去产能，一边是保民生。“审度时宜，虑定而动，天下无不可为之事”，2016年2月，位列年度经济工作之首的去产能大幕正式拉开。仅仅一个月的时间，财税、金融、职工安置、国土、环保、质量、安全、奖补资金等8个配套文件就全部下发完成。中央财政安排了1000亿元专项奖补资金，重点用于职工分流安置。</p>
+                            <p class="mt20">正如习近平总书记在G20杭州峰会上强调，“中国在去产能方面，力度最大，措施最实，说到就会做到。”</p>
+                            <p class="mt20">老百姓关心什么、期盼什么，改革就要抓住什么、推进什么。真实而生动的获得感是幸福的源泉，只有民众幸福了，社会才会稳定，才会进步。</p>
+                            <p class="mt20"><b>民生工程是社会稳定的“压舱石”</b></p>
+                            <p class="mt20">
+                                毫无疑问，中国社会发展过程中，既有精彩华章，也存在复杂因素。现实生活中，人们既为改革发展带来的获得感和幸福感所满足，往往也会因某些境遇而偶发牢骚，以碎片化的故事得出局限性的结论。网上某些舆论的“流动性过剩”，此起彼伏的舆论喧嚣，制造了大量的口水泡沫，容易引发人们对真实中国社会的误判。</p>
+                            <p class="mt20">
+                                实际上，我们正在享受全面深化改革带来的一大波红利。作为改革的“先手棋”，简政放权“含金量”十足，今年的政府工作报告指出，2015年共取消和下放了311项行政审批事项，取消123项职业资格许可和认定事项，彻底终结了非行政许可审批。今年，简政放权的力度更是只增不减。</p>
+                            <p class="mt20">
+                                早在年初，中央各部委就开出了2016年的民生改善“清单”：环保部，与2015年相比，2016年地级及以上城市PM2.5浓度下降3%，空气质量优良天数比例达75%；教育部，做好重点大学面向农村贫困地区定向招生工作，实现民族自治县全覆盖，比去年再增加1万人；卫计委，实行生育登记服务制度，两孩生育不再审批；住建部，进一步推动住房公积金改革，新安排600万套棚户区改造任务；发改委，制定实施1亿非城镇户籍人口在城市落户方案，；扶贫办，组织央企解决1万个贫困村的水电路等问题，组织万家以上民营企业与贫困村建立结对帮扶关系；工信部，力争2016年基本实现所有设区城市光纤网络全覆盖……</p>
+                            <p class="mt20">
+                                截至目前，各项改革均在稳步推进，百姓对改革成果的获得感也在不断加强，美国波士顿咨询公司最新发布的《2016经济可持续发展评估》报告则印证了这一点。报告显示，中国福祉改善指数得分为97.5，改善程度在全球163个国家和地区中位列第二。中国在民生改善方面的努力，赢得了世界的赞许。</p>
+                            <p class="mt20">随着全面深化改革的持续推进，我国的综合国力不断增强，中国在国际舞台上的话语权也显著提高，百姓也将随之获利。</p>
+                            <p class="mt20">
+                                以近期备受关注的“人民币加入SDR”为例，这是综合国力提升的象征，国家的发展必将普惠亿万民众，老百姓真的方便了：人民币正式加入SDR货币篮子后，民众出国游玩将摆脱换汇的烦恼，人民币走到哪花到哪；海淘一族将告别繁琐的代购程序；投资达人也可以更方便地配置海外资产……</p>
+                            <p class="tc mt20"><img src="../src/img/news/illustration3.jpg" alt=""
+                                                    width="90%"></p>
+                            <p class="tc mt20"><img src="../src/img/news/illustration4.jpg" alt=""
+                                                    width="90%"></p>
+                            <p class="mt20">
+                                纵观世界，美国枪击事件频发、欧洲难民危机无解、西亚武装冲突不断等风险都使得当地民众幸福感骤降，更本质的因素，则是全球经济复苏艰难给诸多国家带来了经济的不景气。而来自中国社会科学院财经战略研究院的最新数据显示：在新兴市场，中国的GDP增速始终位于最高水平的合理区间，而物价水平一直位于最低水平。与发达国家相比，中国也有着同样的优势。通过对比不难看出，中国老百姓的生活还是非常幸福的，可谓风景这边独好。</p>
+                            <p class="tc mt20"><img src="../src/img/news/illustration5.jpg" alt=""
+                                                    width="90%"></p>
+                            <p class="mt20">历史告诫我们，在重大进程中，不能被一些片面的信息左右自己的判断，我们要拥抱乐观的情绪，保持凝神静气的心态。</p>
+                            <p class="mt20">
+                                “我们党和政府做一切工作出发点、落脚点都是让人民过上好日子。”习近平总书记如此强调，“在认识世界和改造世界的过程中，旧的问题解决了，新的问题又会产生，制度总是需要不断完善，因而改革既不可能一蹴而就、也不可能一劳永逸。”</p>
+                            <p class="mt20">
+                                我们务必要坚定这个信念，充满信心，不能喧声鼎沸、人云亦云、随声附和；而是应当做出科学的判断，用战略的眼光布局未来。我们还要做好心理准备，改革是一个长期的过程，其道路必定艰辛曲折，务必凝聚共识、保持乐观，坚定不移地推进改革。</p>
+                            <p class="mt20">民生发展是凝聚民心的“试金石”</p>
+                            <p class="mt20">民生无小事，些许总关情。在共建中共享，还需要调动各方面力量，凝聚改革共识，发挥主观能动性协力共进。</p>
+                            <p class="mt20">
+                                谢正发，原是安徽省白际乡供销社职工，下岗后经营一小店。2008年一次偶然的机会，谢正发在上海体验锦江乐园峡谷漂流时受到启发：白际可以利用天然的优势发展旅游业。</p>
+                            <p class="mt20">
+                                回到白际，在乡政府的支持下，谢正发率先建起旅游网站，随后又办起旅行社、自当导游，乡村旅游接待日益红火。在他的带动下，全乡农家乐如今已发展到42家、网站发展到14家，并与国内800多家户外运动机构建立起了长期稳定的联系。</p>
+                            <p class="mt20">
+                                目前，白际贫困乡村的面貌发生了很大变化，贫困人口由2005年前的360户1157人减少到2015年的144户266人，农民人均纯收入达9500元、2016年预计可超万元。</p>
+                            <p class="mt20">
+                                民生的发展体现在每一个具体的故事里，在好政策的帮扶下，一个点会串成线，线与线又会连成面。在致富路上团结群众，在小康途中凝聚人心，民生发展正发挥着粘合剂作用。</p>
+                            <p class="mt20">
+                                “去年8月底，我在网上提交了创立企业的初审材料，下午便通过初审。9月8日，我10点半到达营业厅、整理材料，11点开始在窗口办理，15分钟后就领到了‘一照一码’营业执照。”作为福州一家金融机构的负责人，李银腾在回忆去年办理营业执照的经历时，仍然显得十分兴奋，“改革真的是给老百姓带来了很多便利。”</p>
+                            <p class="mt20">习近平总书记已经给了我们正确答案：“人民对美好生活的向往，就是我们的奋斗目标！”</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    layui.use(['admin', 'view', 'table', 'form'], function () {
+        var $ = layui.$
+                , admin = layui.admin
+                , view = layui.view
+                , table = layui.table
+                , form = layui.form;
+
+        var $listTit = $('#listTit'),
+                $detailTit = $('#detailTit');
+
+        // 设置右侧显示详情区高度占满整屏
+        $('.fullh').height(admin.getRightAvailableHeight() - 63);
+
+        /**
+         * @title: 初始化插图查看器
+         */
+        admin.viewFile('', 'fullh', 'newsGalley', 'src', true, true);
+
+        /**
+         * @title: 渲染新闻动态分类列表
+         */
+        var tableInst1 = table.render({
+            elem: '#columnTable'
+            //, url: '${ctxPath}/admin/json/template/news/***'
+            , url: 'https://www.easy-mock.com/mock/5af45f8ab45afc56560ae781/admin/columnTable'
+            , selectOnClick: true
+            , method: 'post'
+            , height: admin.getRightAvailableHeight() - 63
+            , cols: [[
+                {type: 'numbers'}
+                , {type: 'radio', width: 48, title: '单选'}
+                , {field: 'name', title: '分类名称'}
+                //, {field: 'disabled', title: '状态',templet: '#stateCheckboxTpl'}
+            ]]
+            , page: false
+            , limit: 1000
+            , done: function () {
+            }
+            , rowClick: function (obj) {
+                requestNewsList(obj.data.id, obj.data.name)
+            }
+        });
+
+        // 请求分类对应新闻列表
+        function requestNewsList(id, tit) {
+            table.render({
+                elem: '#contentsTable'
+                , url: 'https://www.easy-mock.com/mock/5af45f8ab45afc56560ae781/admin/contentsTable'
+                , where: {id:id || ''}
+                , method: 'post'
+                , height: admin.getRightAvailableHeight() - 63
+                , cols: [[
+                    // {field: 'id', title: '选中',width:60,align:'center', templet: '#radioTpl'}
+                    {type: 'checkbox'}
+                    , {type: 'numbers'}
+                    , {field: 'name', title: '内容标题'}
+                    , {field: 'creatTime', title: '创建时间', width: 130, align: 'center'}
+                    // , {field: 'disabled', title: '状态', width: 110, align: 'center', templet: '#stateCheckboxTpl'}
+                ]]
+                , page: false
+                , limit: 100
+                , selectOnClick: true
+                , done: function(){
+                    $listTit.html(tit + '栏目')
+                }
+                , rowClick: function (obj) {
+                    requestNewsItemDetail(obj.data.name)
+                }
+            });
+        }
+        requestNewsList('','全部新闻列表');
+
+        // 请求新闻详情
+        function requestNewsItemDetail(tit) {
+            $detailTit.html(tit)
+            admin.popup({content: '请求新闻 ' + tit + ' 详情，待完善'})
+        }
+
+        // 获取表格选中数据(返回数据对象包括数据及数据数量)
+        function getCheckedDatas(filter){
+            var checkStatus = table.checkStatus(filter)
+                    , data = checkStatus.data;
+            return {data:data,length:data.length};
+        }
+
+        // 栏目分类事件对象
+        var colEventsObj = {
+            add: function () {
+                admin.popup.addLayer = admin.popup({
+                    "title": "新增栏目"
+                    , area: admin.screen() < 2 ? ['100%', '453px'] : ['620px', '453px']
+                    , id: 'colEdit' //id唯一
+                    , maxmin: true
+                    , shadeClose: false
+                    , success: function () {
+                        view(this.id).render('template/news/colEdit').done(function (html) {
+                            var $undoBtn = $('button[lay-filter=form-undo]');
+                            $undoBtn.length ? $undoBtn.off('click').prop('type','reset').text('重置表单') : null;
+                        });
+                    }
+                });
+            }
+            , edit: function () {
+                var data = getCheckedDatas('columnTable').data;
+                if(data.length > 1){
+                    layer.msg('只能同时编辑一条数据',{icon:2,anim:6});
+                    return;
+                };
+                if(!data.length){
+                    layer.msg('请选择需要编辑的数据',{icon:2,anim:6});
+                    return;
+                };
+                admin.popup.addLayer = admin.popup({
+                    "title": "编辑栏目"
+                    , area: admin.screen() < 2 ? ['100%', '453px'] : ['620px', '453px']
+                    , id: 'colEdit' //id唯一
+                    , maxmin: true
+                    , shadeClose: false
+                    , success: function () {
+                        view(this.id).render('template/news/colEdit').done(function (html) {
+                            // 绑定撤销编辑事件
+                            var $undoBtn = $('button[lay-filter=form-undo]');
+                            if ($undoBtn.length){
+                                $undoBtn.off('click.undo').prop('type','button').text('恢复操作').on('click.undo',function () {
+                                    // 表单赋值
+                                    form.val('editForm', data[0]);
+                                    layer.msg('已恢复至最近保存数据');
+                                });
+                            };
+                            // 表单赋值
+                            form.val('editForm', data[0]);
+                        });
+                    }
+                });
+            }
+            , del: function () {
+                var data = getCheckedDatas('columnTable').data;
+                var dataIdArr = data.map(function(i){
+                    return i.id
+                });
+                if(!data.length){
+                    layer.msg('请选择需要删除的数据',{icon:2,anim:6});
+                    return;
+                };
+                var confirmLayerIdx = admin.popup({
+                    content: '是否确认删除已选择的' + data.length + '条数据？'
+                    , btn: ['确认', '取消']
+                    , btnAlign: 'c'
+                    , yes: function (index, layero) {
+                        layer.close(confirmLayerIdx);
+                        $.ajax({
+                            type: 'post',
+                            url: 'https://www.easy-mock.com/mock/5af45f8ab45afc56560ae781/admin/columnTable',
+                            data: dataIdArr,
+                            dataType: 'json',
+                            beforeSend: function () {
+                                this.loadingIdx = admin.loading();
+                            },
+                            complete: function () {
+                                layer.close(this.loadingIdx)
+                            },
+                            success: function (result) {
+                                layer.close(this.loadingIdx);
+                                tableInst1.reload({data: result.data})
+                            },
+                            error: function (error) {
+                                layer.msg('请求出错啦', {icon: 2,anim:6});
+                            },
+                        });
+                    }
+                });
+            }
+        };
+
+        // 新闻列表事件对象
+        var conEventsObj = {
+            add: function () {
+                admin.popup.addLayer = admin.popup({
+                    "title": "发布文章"
+                    , area: admin.screen() < 2 ? ['100%', '720px'] : ['880px', '720px']
+                    , id: 'itemEdit' //id唯一
+                    , maxmin: true
+                    , shadeClose: false
+                    , success: function () {
+                        view(this.id).render('template/news/itemEdit').done(function (html) {
+                            var $undoBtn = $('button[lay-filter=form-undo]');
+                            $undoBtn.length ? $undoBtn.off('click').prop('type','reset').text('重置表单') : null;
+                        });
+                    }
+                });
+            }
+            , edit: function () {
+                var data = getCheckedDatas('contentsTable').data;
+                if(data.length > 1){
+                    layer.msg('只能同时编辑一条数据',{icon:2,anim:6});
+                    return;
+                };
+                if(!data.length){
+                    layer.msg('请选择需要编辑的数据',{icon:2,anim:6});
+                    return;
+                };
+                admin.popup.addLayer = admin.popup({
+                    "title": "编辑文章"
+                    , area: admin.screen() < 2 ? ['100%', '720px'] : ['880px', '720px']
+                    , id: 'itemEdit' //id唯一
+                    , maxmin: true
+                    , shadeClose: false
+                    , success: function () {
+                        view(this.id).render('template/news/itemEdit').done(function (html) {
+                            // 绑定撤销编辑事件
+                            var $undoBtn = $('button[lay-filter=form-undo]');
+                            if ($undoBtn.length){
+                                $undoBtn.off('click.undo').prop('type','button').text('恢复操作').on('click.undo',function () {
+                                    // 表单赋值
+                                    form.val('editForm', data[0]);
+                                    layer.msg('已恢复至最近保存数据');
+                                });
+                            };
+                            // 表单赋值
+                            form.val('editForm', data[0]);
+                        });
+                    }
+                });
+            }
+            , del: function () {
+                var data = getCheckedDatas('contentsTable').data;
+                var dataIdArr = data.map(function(i){
+                    return i.id
+                });
+                if(!data.length){
+                    layer.msg('请选择需要删除的数据',{icon:2,anim:6});
+                    return;
+                };
+                var confirmLayerIdx = admin.popup({
+                    content: '是否确认删除已选择的' + data.length + '条数据？'
+                    , btn: ['确认', '取消']
+                    , btnAlign: 'c'
+                    , yes: function (index, layero) {
+                        layer.close(confirmLayerIdx);
+                        $.ajax({
+                            type: 'post',
+                            url: 'https://www.easy-mock.com/mock/5af45f8ab45afc56560ae781/admin/contentsTable',
+                            data: dataIdArr,
+                            dataType: 'json',
+                            beforeSend: function () {
+                                this.loadingIdx = admin.loading();
+                            },
+                            complete: function () {
+                                layer.close(this.loadingIdx)
+                            },
+                            success: function (result) {
+                                layer.close(this.loadingIdx);
+                                table.reload('contentsTable',{data: result.data})
+                            },
+                            error: function (error) {
+                                layer.msg('请求出错啦', {icon: 2,anim:6});
+                            },
+                        });
+                    }
+                });
+            }
+        };
+
+        // 查询栏目分类下所有按钮组内按钮事件类型，如果存在对应定义，则执行
+        $('.col-btn-group').on('click', '.layui-btn', function () {
+            var type = $(this).attr('data-event');
+            colEventsObj[type] && colEventsObj[type].call(this);
+        });
+
+        // 查询新闻列表所有按钮组内按钮事件类型，如果存在对应定义，则执行
+        $('.con-btn-group').on('click', '.layui-btn', function () {
+            var type = $(this).attr('data-event');
+            conEventsObj[type] && conEventsObj[type].call(this);
+        });
+    });
+</script>

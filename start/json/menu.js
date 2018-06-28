@@ -188,9 +188,14 @@
     "icon": "layui-icon-template",
     "list": [
       {
-        "name": "404",
-        "title": "404",
-        "jump": "template/tips/404"
+        "name": "新闻动态管理",
+        "title": "新闻动态管理",
+        "jump": "template/news/"
+      },
+      {
+        "name": "友情链接管理",
+        "title": "友情链接管理",
+        "jump": "template/links/"
       },
       {
         "name": "error",

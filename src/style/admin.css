@@ -250,15 +250,14 @@ html{background-color: #f2f2f2; color: #666;}
 .layui-tab-admin .layui-tab-title{background-color: #393D49; color: #fff;}
 
 /*
- 
  格局
- 
+  layui-card-header内的layui-icon图标只有用i标签定义时才往右靠
 */
 
 .layui-fluid{padding: 15px;}
 .layadmin-header{display: none; height: 50px; line-height: 50px; margin-bottom: 0; border-radius: 0;}
 .layadmin-header .layui-breadcrumb{padding: 0 15px;}
-.layui-card-header .layui-icon{line-height: initial; position: absolute; right: 15px; top: 50%; margin-top: -7px;}
+.layui-card-header i.layui-icon{line-height: initial; position: absolute; right: 15px; top: 50%; margin-top: -7px;}
 .layadmin-iframe{position: absolute; width: 100%; height: 100%; left: 0; top: 0;}
 
 /*
