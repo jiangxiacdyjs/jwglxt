@@ -1,0 +1,135 @@
+<title>标题</title>
+<style>
+  img {max-width: 100%;}
+  .demo {margin-bottom: 24px;border-radius: 4px;overflow: hidden;border: 1px solid #eee;}
+  .demo-image {width: 100%;display: block;height: auto;}
+</style>
+
+<div class="layui-fluid">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md12">
+      <div class="layui-card">
+        <div class="layui-card-header">macy瀑布流布局</div>
+        <div class="layui-card-body">
+          <div id="galley">
+            <div class="demo">
+              <img src="../src/img/macy/439x856.jpg"
+                   alt="清澈的湖" class="demo-image">
+            </div>
+            <div class="demo">
+              <img src="../src/img/macy/542x805.jpg"
+                   alt="清澈的湖" class="demo-image">
+            </div>
+            <div class="demo">
+              <img src="../src/img/macy/549x315.jpg"
+                   alt="清澈的湖" class="demo-image">
+            </div>
+            <div class="demo">
+              <img src="../src/img/macy/877x693.jpg"
+                   alt="清澈的湖">
+            </div>
+
+            <div class="demo">
+              <img src="../src/img/macy/311x796.jpg"
+                   alt="清澈的湖" class="demo-image">
+            </div>
+            <div class="demo">
+              <img src="../src/img/macy/473x729.jpg"
+                   alt="清澈的湖" class="demo-image">
+            </div>
+            <div class="demo">
+              <img src="../src/img/macy/571x460.jpg"
+                   alt="清澈的湖" class="demo-image">
+            </div>
+            <div class="demo">
+              <img src="../src/img/macy/588x561.jpg"
+                   alt="清澈的湖">
+            </div>
+            <div class="demo">
+              <img src="../src/img/macy/657x632.jpg"
+                   alt="清澈的湖" class="demo-image">
+            </div>
+            <div class="demo">
+              <img src="../src/img/macy/663x541.jpg"
+                   alt="清澈的湖" class="demo-image">
+            </div>
+            <div class="demo">
+              <img src="../src/img/macy/892x379.jpg"
+                   alt="清澈的湖" class="demo-image">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  layui.use(['admin','macy'], function () {
+    var $ = layui.$
+      , admin = layui.admin
+      , macy = layui.macy;
+
+    var macyInst = new macy({
+      // 配置应用插件外层容器，其直接子元素将作为排序项目并应用目标容器高度
+      container: '#galley',
+      // 将其设置为false将优先均衡每个列的高度，直到项目本身的顺序
+      trueOrder: false,
+      // 如果设置为true，则Macy会在运行之前等待页面上的所有图像加载，默认设置为false，每次加载图像时都会运行
+      waitForImages: false,
+      // 如果您希望使用不同的图像加载库，请将其设置为true
+      useOwnImageLoader: false,
+      // 开启调试模式
+      debug: true,
+      // 默认false,配置true后代表移动优先，概念如同前端响应式布局，未设置响应列的屏幕宽度范围内，将默认一行仅显示一列，设置了具体响应列数的以设置为准(breakAt设置)
+      mobileFirst: true,
+      // 定义一排默认显示数量(配合breakAt可实现响应式布局)
+      columns: 1,
+      // 水平垂直间隙
+      margin: {
+        x: 20,
+        y: 20
+      },
+      breakAt: {
+        1200: 6,
+        940: 5,
+        520: 3,
+        400: 2
+      }
+    });
+    /**
+     重新计算方法（适用于异步请求数据后执行算法）
+     macyInst.recalculate();
+     // 图像加载完毕执行回调
+     macyInst.runOnImageLoad(function () {
+      macyInst.recalculate(true);
+    }, true);
+     // 如果只需要在所有图像加载完成后才运行，则可以通过将null作为第一个参数来实现
+     macyInst.runOnImageLoad(function () {
+      console.log('I only get called when all images are loaded');
+      macyInst.recalculate(true, true);
+    });
+     macyInst.runOnImageLoad(function () {
+      console.log('Every time an image loads I get fired');
+      macyInst.recalculate(true);
+    }, true);
+     // 销毁删除实例，它删除了Macy添加到DOM中的所有样式和事件侦听器
+     macyInst.remove();
+     // 重新初始化当前的macy实例
+     macyInst.reInit();
+     // 事件监听
+     macyInst.on(macyInst.constants.EVENT_IMAGE_COMPLETE, function (ctx) {
+      console.log('all images have loaded');
+    });
+     // 事件系统
+     macyInst.constants = {
+      EVENT_INITIALIZED:'macy.initialized'
+      ,EVENT_RECALCULATED: 'macy.recalculated'
+      ,EVENT_IMAGE_LOAD:'macy.images.load'
+      ,EVENT_IMAGE_COMPLETE:'macy.images.complete'
+      ,EVENT_RESIZE:'macy.resize'
+    }
+     */
+
+  })
+  ;
+</script>

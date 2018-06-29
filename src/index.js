@@ -18,6 +18,7 @@ layui.extend({
   , formSelects: '../lib/extend/formSelects-v3' //表单选择拓展控件
   , xtree: '../lib/extend/layui-xtree' //依赖form模块带复选框的xTree拓展树组件
   , verfiy: '../lib/extend/layui-gVerify' //扩展验证码功能
+  , macy: '../lib/extend/macy' //瀑布流布局组件
 }).define(['setter', 'admin'], function (exports) {
   var setter = layui.setter
     , element = layui.element

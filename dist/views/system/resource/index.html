@@ -19,7 +19,7 @@
           </div>
           <!--搜索查询-->
           <div class="test-table-reload-btn layui-layout-right" style="right: 15px">
-            名称搜索：
+            企业名称：
             <div class="layui-inline">
               <input class="layui-input h30" name="id" id="searchInput" autocomplete="off">
             </div>
@@ -78,8 +78,8 @@
       // ,cellMinWidth: 80
       // ,size: 'sm'
       , cols: [[
-        {type: 'numbers'}
-        // ,{type: 'radio',width:48,fixed:'left'}
+        {type: 'numbers',title:'--', fixed:'left'}
+        //,{type: 'radio',title:'选择', width:48,fixed:'left'}
         , {type: 'checkbox'}
         //,{field:'id', title:'ID', width:100, unresize: true, sort: true}
         , {field: 'name', title: '资源名称'}
@@ -99,6 +99,9 @@
           admin.logOut(i.time,i.msg)
         }
       }
+      // , rowClick: function (obj) {
+      //   console.log(obj)
+      // }
     });
 
     // 监听锁定操作

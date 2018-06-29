@@ -157,6 +157,11 @@
         "jump": "extend/viewer",
         "title": "viewer",
         "spread": false
+      },
+      {
+        "jump": "extend/macy",
+        "title": "macy",
+        "spread": false
       }
     ]
   },
@@ -196,6 +201,11 @@
         "name": "友情链接管理",
         "title": "友情链接管理",
         "jump": "template/links/"
+      },
+      {
+        "name": "企业优势管理",
+        "title": "企业优势管理",
+        "jump": "template/advantage/"
       },
       {
         "name": "error",
