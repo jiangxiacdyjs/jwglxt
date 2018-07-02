@@ -205,7 +205,17 @@
       {
         "name": "企业优势管理",
         "title": "企业优势管理",
-        "jump": "template/advantage/"
+        "jump": "template/advantages/"
+      },
+      {
+        "name": "轮播图片管理",
+        "title": "轮播图片管理",
+        "jump": "template/banners/"
+      },
+      {
+        "name": "成功案例管理",
+        "title": "成功案例管理",
+        "jump": "template/cases/"
       },
       {
         "name": "error",

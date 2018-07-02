@@ -740,8 +740,6 @@ layui.define(['view','viewer'], function (exports) {
             // 保险匹配判断匹配最外层：①path数组第0个值为分组栏目li的name值则为true，否则②是第0项菜单且path第0个没有值（即根目录）则为true，否则③当前分组栏目li有个合格的data-jump值则为true
             , matched1 = path[0] == data1.name || (index1 === 0 && !path[0])
             || (data1.jump && pathURL == admin.correctRouter(data1.jump));
-
-
           // 遍历dl的第一层dd菜单下的dl（即我们看到的三级菜单）
           listChildren1.each(function (index2, item2) {
             var othis2 = $(item2)

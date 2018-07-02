@@ -1,0 +1,126 @@
+<title>网页标题</title>
+
+<div class="">
+  <form class="layui-form layui-form-pane" lay-filter="editForm">
+    <!--数据id-->
+    <input type="hidden" name="id">
+
+    <!--插图地址-->
+    <input type="hidden" name="img" lay-verify="img" value="">
+
+    <div class="layui-row layui-col-space15">
+      <div class="layui-col-xs4">
+        <!--插图-->
+        <div id="imgUploader" class="tc b-e6 pointer pr" style="height: 251px;border-style: dashed">
+          <div class="center e6e6e6">
+            <i class="layui-icon layui-icon-add-circle-fine" style="font-size: 50px;"></i>
+            <p class="mt10">上传插图</p>
+          </div>
+          <img class="pa h-center" style="height: 251px;max-width: 100%;background-color:#fff;" src="" alt="">
+        </div>
+      </div>
+      <div class="layui-col-xs8">
+        <!--栏目名称-->
+        <div class="layui-form-item">
+          <label class="layui-form-label"><span class="required">*</span>标题内容</label>
+          <div class="layui-input-block">
+            <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="请输入标题内容"
+                   class="layui-input">
+          </div>
+        </div>
+        <!--排序、锁定-->
+        <div class="layui-form-item layui-row layui-col-space20">
+          <div class="layui-col-xs6">
+            <label class="layui-form-label"><span class="required">*</span>权值排序</label>
+            <div class="layui-input-block">
+              <input type="number" name="sort" lay-verify="required" placeholder="请输入权值排序" autocomplete="off"
+                     class="layui-input">
+            </div>
+          </div>
+          <div class="layui-col-xs6">
+            <label class="layui-form-label">禁用栏目</label>
+            <div class="layui-input-block b-e6">
+              <input type="checkbox" name="disabled" lay-skin="switch" lay-text="禁用|不禁用" lay-filter="disabled">
+            </div>
+          </div>
+        </div>
+        <!--描述文本-->
+        <div class="layui-form-item layui-form-text">
+          <label class="layui-form-label">描述文本</label>
+          <div class="layui-input-block">
+            <textarea name="desc" placeholder="请输入描述文本" class="layui-textarea"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--提交表单-->
+    <div class="layui-form-item mb0">
+      <div class="layui-footer">
+        <button type="button" class="layui-btn fr" lay-submit="" lay-filter="form-smt">立即提交</button>
+        <!--操作按钮组-->
+        <div class="layui-btn-group fl">
+          <button id="clearImg" type="button" class="layui-btn layui-btn-danger ml0">清空插图</button>
+          <button type="button" class="layui-btn layui-btn-primary ml0" lay-filter="form-undo">撤销操作</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  layui.use(['admin', 'form', 'upload'], function () {
+    var $ = layui.$
+      , admin = layui.admin
+      , layer = layui.layer
+      , upload = layui.upload
+      , form = layui.form
+      , UPLOADID = 'imgUploader'
+      , CLEARIMGID = 'clearImg'
+      , $uploader = $('#'+UPLOADID);
+
+    // 渲染表单
+    form.render();
+
+    // 上传文件
+    var uploadFile = upload.render({
+      elem: '#'+UPLOADID
+      , url:admin.baseUrl +  '/postSuccessImg'
+      , before: function (obj) {
+        this.loadingIdx = admin.loading('文件上传中，请稍等...');
+        // 获取触发上传功能的元素的jq对象
+        var $triggerEle = $(this.item);
+        //预读本地文件示例，不支持ie8
+        obj.preview(function (index, file, result) {
+          $triggerEle.children('img').prop('src',result); // 图片链接（base64）
+        });
+      }
+      , done: function (res, index, upload) {
+        //如果上传失败
+        if (res.code > 0) {
+          return layer.msg('上传失败');
+        } else {
+          layer.close(this.loadingIdx);
+          $uploader.css({'border-color':'#e6e6e6'})
+          $('form[lay-filter=editForm]').find('input[name=img]').val(res.data.src)
+        }
+      }
+      , error: function () {}
+    });
+
+    // 自定义验证规则
+    form.verify({
+      img: function(value, item){
+        if(!$('form[lay-filter=editForm]').find('input[name=img]').val()){
+          $uploader.css({'border-color':'red'});
+          return '请上传插图';
+        }
+      }
+    });
+
+    // 清空插图
+    $('#'+CLEARIMGID).on('click',function () {
+      $uploader.children('img').prop('src','');
+      $('form[lay-filter=editForm]').find('input[name=img]').val('');
+    });
+  });
+</script>

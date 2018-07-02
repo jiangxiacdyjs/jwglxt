@@ -1,4 +1,4 @@
-<title>友情链接</title>
+<title>企业优势</title>
 <style>
   .box {
     position: relative;
@@ -11,14 +11,15 @@
   .box .box-img {
     position: relative;
     z-index: 1;
-    width: 100px;
-    height: 100px;
-    border: 1px solid #CCCCCC;
-    border-radius: 100%;
+    width: 100%;
     cursor: pointer;
   }
 
   .box .box-title {
+  }
+
+  .box .box-desc {
+    margin-top: 10px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -26,18 +27,15 @@
     -webkit-box-orient: vertical;
   }
 
-  .box .box-link {
-  }
-
   .box .box-operate {
     position: absolute;
     z-index: 1;
-    top: 0;
-    right: -70px;
-    bottom: 0;
+    left: 0;
+    right: 0;
+    top: -70px;
     border-top-right-radius: 6px;
     border-bottom-right-radius: 6px;
-    width: 70px;
+    height: 70px;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.3);
   }
@@ -57,18 +55,18 @@
   }
 
   .box.disabled:before {
-    content: "\f023";
+    content: "\f00d";
     position: absolute;
     opacity: 0.08;
     z-index: 0;
     color: red;
-    top: 50%;
+    bottom: -18px;
     left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
     font-family: FontAwesome !important;
     font-size: 140px;
     font-style: normal;
@@ -88,7 +86,7 @@
   </div>
   <!--搜索查询-->
   <div class="test-table-reload-btn layui-layout-right" style="right: 15px">
-    名称搜索：
+    标题搜索：
     <div class="layui-inline">
       <input class="layui-input h30" style="width: 350px" name="id" id="searchInput" autocomplete="off">
       <span class="layui-icon layui-icon-close-fill layui-hide pointer"
@@ -98,7 +96,7 @@
   </div>
 </div>
 <div class="layui-fluid layadmin-maillist-fluid">
-  <div id="list" class="layui-row layui-col-space15">
+  <div id="list">
     <!--无数据状态-->
     <div class="empty tc center" style="letter-spacing: 2px;position: fixed">
       <img src="../src/img/none.png" alt="">
@@ -107,25 +105,18 @@
   </div>
 </div>
 <!--隐藏模板-->
-<div id="template" class="layui-col-md4 layui-col-sm6 layui-hide">
+<div id="template" class="layui-hide">
   <div class="box">
-    <!--显示区域-->
-    <table style="width: 100%">
-      <tr>
-        <td class="p20">
-          <img class="box-img" src="../src/img/default-logo.png" alt="">
-        </td>
-        <td class="p20 lh200">
-          <h3 class="box-title">
-            <strong></strong>
-          </h3>
-          <p class="box-link layui-elip">
-            <i class="layui-icon layui-icon-link red mr10"></i>
-            <a href="" target="_blank"></a>
-          </p>
-        </td>
-      </tr>
-    </table>
+    <div class="box-img tc">
+      <img class="box-img" src="https://img.zcool.cn/community/03103b858498bf0a8012060c81402df.jpg@260w_195h_1c_1e_1o_100sh.jpg" alt="">
+    </div>
+    <div class="p20 lh150">
+      <h3 class="box-title layui-elip">
+        <i class="layui-icon layui-icon-note red mr10"></i>
+        <strong>全程服务</strong>
+      </h3>
+      <p class="box-desc layui-text">每个人都有一个死角，自己走不出来，别人也闯不进去。我把最深层的密码放进那里，你不懂我，我不怪你！</p>
+    </div>
     <!--隐藏操作区域-->
     <div class="box-operate" data-id="" data-lockshow=''>
       <table style="height: 100%;width:100%;">
@@ -133,13 +124,9 @@
           <td>
             <div data-event="edit" class="layui-icon layui-icon-edit layui-bg-green box-operate-item"></div>
           </td>
-        </tr>
-        <tr>
           <td>
             <div data-event="del" class="layui-icon layui-icon-delete layui-bg-red box-operate-item"></div>
           </td>
-        </tr>
-        <tr>
           <td>
             <div data-event="check" class="layui-icon layui-icon-ok layui-bg-gray box-operate-item"></div>
           </td>
@@ -149,14 +136,16 @@
   </div>
 </div>
 <script>
-  layui.use(['admin', 'view', 'table', 'form'], function () {
+  layui.use(['admin', 'view', 'macy', 'form'], function () {
     var $ = layui.$
       , admin = layui.admin
       , view = layui.view
+      , macy = layui.macy
       , form = layui.form;
     var $template = $('#template'),
       $list = $('#list'),
-      $searchIpt = $('#searchInput');
+      $searchIpt = $('#searchInput')
+      ,macyInst;
 
     // 获取选中数据
     function getCheckedDatas() {
@@ -182,18 +171,21 @@
         $newTemplate.children('.box').attr('data-id', data[i].id).attr('data-sort', data[i].sort)
           .find('.box-title strong').html(data[i].name).end()
           .find('.box-img').prop('src', data[i].img).end()
-          .find('.box-link a').prop('href', data[i].link).html(data[i].link).end()
           .find('.box-operate').attr('data-id', data[i].id);
-        $list.append($newTemplate)
-      }
-      ;
+        if(data[i].desc){
+          $newTemplate.children('.box').find('.box-desc').html(data[i].desc)
+        }else{
+          $newTemplate.children('.box').find('.box-desc').remove()
+        };
+        $list.append($newTemplate);
+      };
     }
 
     // 绘制数据列表
     function drawList(data) {
       $.ajax({
         type: 'post',
-        url: admin.baseUrl + "/linksDatas",
+        url: admin.baseUrl + "/advantageDatas",
         data: data || '',
         dataType: 'json',
         beforeSend: function (xhr, options) {
@@ -203,13 +195,43 @@
           layer.close(this.loadingIdx);
         },
         success: function (result) {
-          // 生成数据项
-          generateItems(result.data);
-          // 初始化插图查看器
-          admin.viewFile('', 'list', 'galley', 'src', true, true);
+          if(result.data.length){
+            // 生成数据项
+            generateItems(result.data);
+            // 生成瀑布流布局
+            macyInst = new macy({
+              // 配置应用插件外层容器，其直接子元素将作为排序项目并应用目标容器高度
+              container: '#list',
+              // 将其设置为false将优先均衡每个列的高度，直到项目本身的顺序
+              trueOrder: false,
+              // 如果设置为true，则Macy会在运行之前等待页面上的所有图像加载，默认设置为false，每次加载图像时都会运行
+              waitForImages: false,
+              // 如果您希望使用不同的图像加载库，请将其设置为true
+              useOwnImageLoader: false,
+              //
+              debug: true,
+              // 默认false,配置true后代表移动优先，概念如同前端响应式布局，未设置响应列的屏幕宽度范围内，将默认一行仅显示一列，设置了具体响应列数的以设置为准(breakAt设置)
+              mobileFirst: true,
+              // 定义一排默认显示数量(配合breakAt可实现响应式布局)
+              columns: 1,
+              // 水平垂直间隙
+              margin: {
+                x: 20,
+                y: 20
+              },
+              breakAt: {
+                1200: 6,
+                940: 5,
+                520: 3,
+                400: 2
+              }
+            });
+            // 初始化插图查看器
+            admin.viewFile('', 'list', 'galley', 'src', true, true);
+          }
         },
         error: function () {
-          layer.msg('请求错误！',{icon:2, anim: 6})
+          layer.msg('请求失败！',{icon:2})
         }
       });
     }
@@ -230,7 +252,7 @@
               layer.close(confirmLayerIdx);
               $.ajax({
                 type: 'post',
-                url: admin.baseUrl + '/linksDatas',
+                url: admin.baseUrl + "/advantageDatas",
                 data: data.ids,
                 dataType: 'json',
                 beforeSend: function () {
@@ -238,14 +260,14 @@
                 },
                 complete: function () {
                   layer.close(this.loadingIdx);
-                  for (var i = 0; i < data.ids.length; i++) {
-                    $list.find('[data-id=' + data.ids[i] + ']').parent().remove();
-                  }
-                  ;
-                  layer.msg('已成功删除', {icon: 1})
                 },
                 success: function (result) {
                   layer.close(this.loadingIdx);
+                  for (var i = 0; i < data.ids.length; i++) {
+                    $list.find('[data-id=' + data.ids[i] + ']').parent().remove();
+                  };
+                  layer.msg('已成功删除', {icon: 1});
+                  macyInst.reInit();
                 },
                 error: function (error) {
                   layer.msg('请求出错啦', {icon: 2, anim: 6});
@@ -259,13 +281,13 @@
       }
       , add: function () {
         admin.popup.addLayer = admin.popup({
-          "title": "新增数据"
-          , area: admin.screen() < 2 ? ['100%', '400px'] : ['620px', '400px']
+          "title": "编辑数据"
+          , area: admin.screen() < 2 ? ['100%', '420px'] : ['820px', '420px']
           , id: 'add' //id唯一
           , maxmin: true
           , shadeClose: false
           , success: function () {
-            view(this.id).render('template/links/edit').done(function (html) {
+            view(this.id).render('template/advantages/edit').done(function (html) {
               // 绑定撤销编辑事件
               var $undoBtn = $('button[lay-filter=form-undo]');
               $undoBtn.length ? $undoBtn.off('click').prop('type', 'reset').text('重置表单') : null;
@@ -287,19 +309,19 @@
           $box = $that.closest('.box');
         admin.popup.editLayer = admin.popup({
           "title": "编辑数据"
-          , area: admin.screen() < 2 ? ['100%', '400px'] : ['620px', '400px']
+          , area: admin.screen() < 2 ? ['100%', '420px'] : ['820px', '420px']
           , id: 'edit' //id唯一
           , maxmin: true
           , shadeClose: false
           , success: function () {
-            view(this.id).render('template/links/edit').done(function (html) {
+            view(this.id).render('template/advantages/edit').done(function (html) {
               var dataObj = {
                 id: $box.attr('data-id'),
                 sort: $box.attr('data-sort'),
                 img: $box.find('.box-img').prop('src'),
                 name: $box.find('.box-title strong').html(),
                 disabled: $box.hasClass('disabled') ? true : false,
-                link: $box.find('.box-link a').html()
+                link: $box.find('.box-desc a').html()
               };
               // 绑定撤销编辑事件
               var $undoBtn = $('button[lay-filter=form-undo]');
@@ -307,13 +329,13 @@
                 $undoBtn.off('click.undo').prop('type', 'button').text('恢复操作').on('click.undo', function () {
                   // 表单赋值
                   form.val('editForm', dataObj);
-                  $('#img').prop('src', dataObj.img);
+                  $('#imgUploader').children('img').prop('src', dataObj.img);
                 });
               }
               ;
               // 表单赋值
               form.val('editForm', dataObj);
-              $('#img').prop('src', dataObj.img);
+              $('#imgUploader').children('img').prop('src', dataObj.img);
             });
           }
         });
@@ -329,7 +351,7 @@
             layer.close(confirmLayerIdx);
             $.ajax({
               type: 'post',
-              url: admin.baseUrl + '/linksDatas',
+              url: admin.baseUrl + "/advantageDatas",
               data: id,
               dataType: 'json',
               beforeSend: function () {
@@ -337,11 +359,12 @@
               },
               complete: function () {
                 layer.close(this.loadingIdx);
-                $(that).closest('.box').parent().remove();
-                layer.msg('已成功删除', {icon: 1})
               },
               success: function (result) {
                 layer.close(this.loadingIdx);
+                $(that).closest('.box').parent().remove();
+                layer.msg('已成功删除', {icon: 1});
+                macyInst.reInit();
               },
               error: function (error) {
                 layer.msg('请求出错啦', {icon: 2, anim: 6});
@@ -365,10 +388,10 @@
 
     // 每项数据项效果
     $('.layadmin-maillist-fluid').on('mouseover', '.box', function () {
-      $(this).find('.box-operate').stop().animate({right: "0"}, 200);
+      $(this).find('.box-operate').stop().animate({top: "0"}, 200);
     }).on('mouseout', '.box', function () {
       var $operate = $(this).find('.box-operate');
-      $operate.attr('data-lockshow') != 1 ? $(this).find('.box-operate').stop().animate({right: "-70px"}, 200) : null;
+      $operate.attr('data-lockshow') != 1 ? $(this).find('.box-operate').stop().animate({top: "-70px"}, 200) : null;
     });
 
     // 每项数据的所有按钮组内按钮事件类型，如果存在对应定义，则执行
@@ -404,7 +427,7 @@
       $.ajax({
         //contentType: 'application/json; charset=utf-8',
         type: 'post',
-        url: admin.baseUrl + '/linksDatas',
+        url: admin.baseUrl + '/advantageDatas',
         data: JSON.stringify(data.field),
         dataType: 'json',
         beforeSend: function () {
@@ -419,6 +442,7 @@
           };
           if(admin.popup.editLayer) layer.close(admin.popup.editLayer);
           if(admin.popup.addLayer) layer.close(admin.popup.addLayer);
+          // 重绘列表
           drawList();
         },
         error: function (error) {

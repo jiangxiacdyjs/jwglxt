@@ -9,29 +9,37 @@
     <input type="hidden" name="img" lay-verify="img" value="">
 
     <div class="layui-row layui-col-space15">
-      <div class="layui-col-xs4">
+      <div class="layui-col-xs12">
         <!--插图-->
-        <div id="imgUploader" class="tc b-e6 pointer pr" style="height: 251px;border-style: dashed">
+        <div id="imgUploader" class="tc b-e6 pointer pr" style="height: 175px;border-style: dashed">
           <div class="center e6e6e6">
             <i class="layui-icon layui-icon-add-circle-fine" style="font-size: 50px;"></i>
-            <p class="mt10">上传插图</p>
+            <p class="mt10">上传插图（1920x600）</p>
           </div>
-          <img class="pa h-center" style="height: 251px;max-width: 100%;background-color:#fff;" src="" alt="">
+          <img class="pa h-center" style="height: 175px;max-width: 100%;background-color:#fff;" src="" alt="">
         </div>
       </div>
-      <div class="layui-col-xs8">
+      <div class="layui-col-xs12">
         <!--栏目名称-->
         <div class="layui-form-item">
-          <label class="layui-form-label">标题内容</label>
+          <label class="layui-form-label"><span class="required">*</span>标题内容</label>
           <div class="layui-input-block">
             <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="请输入标题内容"
+                   class="layui-input">
+          </div>
+        </div>
+        <!--栏目名称-->
+        <div class="layui-form-item">
+          <label class="layui-form-label">链接地址</label>
+          <div class="layui-input-block">
+            <input type="text" name="link" lay-verify="" autocomplete="off" placeholder="如: http://www.xxx.com"
                    class="layui-input">
           </div>
         </div>
         <!--排序、锁定-->
         <div class="layui-form-item layui-row layui-col-space20">
           <div class="layui-col-xs6">
-            <label class="layui-form-label">权值排序</label>
+            <label class="layui-form-label"><span class="required">*</span>权值排序</label>
             <div class="layui-input-block">
               <input type="number" name="sort" lay-verify="required" placeholder="请输入权值排序" autocomplete="off"
                      class="layui-input">
@@ -121,35 +129,6 @@
     $('#'+CLEARIMGID).on('click',function () {
       $uploader.children('img').prop('src','');
       $('form[lay-filter=editForm]').find('input[name=img]').val('');
-    });
-
-    // 监听提交
-    form.on('submit(form-smt)', function (data) {
-      delete data.field.file;
-      $.ajax({
-        //contentType: 'application/json; charset=utf-8',
-        type: 'post',
-        url: admin.baseUrl + '/advantageDatas',
-        data: JSON.stringify(data.field),
-        dataType: 'json',
-        beforeSend: function () {
-          this.loadingIdx = admin.loading();
-        },
-        complete: function () {
-          layer.close(this.loadingIdx);
-        },
-        success: function (result) {
-          if(result.code == 0){
-            layer.msg('数据编辑成功', {icon:1})
-          };
-          if(admin.popup.editLayer) layer.close(admin.popup.editLayer);
-          if(admin.popup.addLayer) layer.close(admin.popup.addLayer);
-        },
-        error: function (error) {
-          layer.msg('请求出错啦', {icon: 2,anim:6});
-        },
-      });
-      return false;
     });
   });
 </script>

@@ -65,76 +65,10 @@
 </div>
 
 <script>
-  layui.use(['admin', 'form', 'table', 'layedit'], function () {
+  layui.use(['admin', 'form'], function () {
     var $ = layui.$
-            , admin = layui.admin
-            , layer = layui.layer
-            , table = layui.table
-            , form = layui.form
-            , layedit = layui.layedit;
-
+            , form = layui.form;
     // 重新渲染表单所有控件
     form.render(null, 'editForm');
-
-    // 建立编辑器
-    var layeditInst = layedit.build('detail', {
-      height: 235
-      ,
-      uploadImage: {
-        url: 'https://www.easy-mock.com/mock/5af45f8ab45afc56560ae781/admin/postSuccessImg',
-        type: 'post'
-      }
-      ,
-      tool: [
-        'strong' //加粗
-        , 'italic' //斜体
-        , 'underline' //下划线
-        , 'del' //删除线
-
-        , '|' //分割线
-
-        , 'left' //左对齐
-        , 'center' //居中对齐
-        , 'right' //右对齐
-        , 'link' //超链接
-        , 'unlink' //清除链接
-        , 'face' //表情
-        , 'image' //插入图片
-        , 'help' //帮助
-      ]
-    });
-
-    // 监听提交
-    form.on('submit(form-smt)', function (data) {
-      data.field.detail = layedit.getContent(layeditInst);
-      $.ajax({
-        //contentType: 'application/json; charset=utf-8',
-        type: 'post',
-        url: 'https://www.easy-mock.com/mock/5af45f8ab45afc56560ae781/admin/columnTable',
-        data: JSON.stringify(data.field),
-        dataType: 'json',
-        beforeSend: function () {
-          this.loadingIdx = admin.loading();
-        },
-        complete: function () {
-          layer.close(this.loadingIdx);
-        },
-        success: function (result) {
-          if(result.code == 0){
-            table.reload('columnTable', {
-              data: result.data,
-              where: {} // 请求额外参数（注意：这里面的参数可任意定义）
-            });
-            layer.msg('数据编辑成功', {icon:1})
-          };
-          if(admin.popup.editLayer) layer.close(admin.popup.editLayer);
-          if(admin.popup.addLayer) layer.close(admin.popup.addLayer);
-        },
-        error: function (error) {
-          layer.msg('请求出错啦', {icon: 2,anim:6});
-        },
-      });
-      return false;
-    });
   });
 </script>
