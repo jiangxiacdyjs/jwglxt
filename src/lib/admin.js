@@ -7,7 +7,7 @@
  定义模块，其中view为此定义模块所依赖的模块，function为回调导出模块函数
  */
 
-layui.define(['view','viewer'], function (exports) {
+layui.define(['view', 'viewer'], function (exports) {
   var $ = layui.jquery
     , laytpl = layui.laytpl
     , element = layui.element
@@ -738,8 +738,9 @@ layui.define(['view','viewer'], function (exports) {
             //分组栏目li下面的子栏目dl的第一层dd菜单（即我们看到的二级菜单）
             , listChildren1 = data1.list.children('dd')
             // 保险匹配判断匹配最外层：①path数组第0个值为分组栏目li的name值则为true，否则②是第0项菜单且path第0个没有值（即根目录）则为true，否则③当前分组栏目li有个合格的data-jump值则为true
-            , matched1 = path[0] == data1.name || (index1 === 0 && !path[0])
-            || (data1.jump && pathURL == admin.correctRouter(data1.jump));
+            , matched1 = path[0] == data1.name || (data1.jump && pathURL == admin.correctRouter(data1.jump));
+
+          //(index1 === 0 && !path[0])  适用于当当前路由为根目录(即路由path为['']) 情况下 设置第一个菜单组的match为true(即展开第一组菜单效果)
           // 遍历dl的第一层dd菜单下的dl（即我们看到的三级菜单）
           listChildren1.each(function (index2, item2) {
             var othis2 = $(item2)
@@ -775,6 +776,10 @@ layui.define(['view','viewer'], function (exports) {
             var selected = data1.list[0] ? SIDE_NAV_ITEMD : THIS;
             othis1.addClass(selected).siblings().removeClass(selected); //标记选择器
             return false;
+          }else if(path[0] === ''){
+            //当前进入的是根目录，则关闭所有的展开菜单项，因为现在此系统中设计的是主页不属于任何一个菜单组，而是属于总览展示页
+            var selected = data1.list[0] ? SIDE_NAV_ITEMD : THIS;
+            othis1.removeClass(selected).siblings().removeClass(selected); //标记选择器
           }
         });
       }

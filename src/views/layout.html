@@ -76,8 +76,9 @@
       <!--所有携带有template属性的结构，在被解析的时候（view.js中的parse方法）都会渲染其lay-url制定的内容，支持传入的属性包括：
       lay-data、lay-headers、lay-url、lay-done，同时在解析url时会默认携带上本地设置的token值（在config.js中配置的那个）
       读取完毕后重绘lay-filter值为layadmin-system-side-menu的nav菜单，即左侧折叠菜单-->
-      <script type="text/html" template lay-url="./json/menu.js?v={{ layui.admin.v }}"
-      lay-done="layui.element.render('nav', 'layadmin-system-side-menu');" id="TPL_layout">
+      <!--layui.element.render('nav', 'layadmin-system-side-menu')返回值为undefined，因此会继续执行后面的layui.admin.showRouter()方法动态显示路由路径-->
+      <script type="text/html" template lay-url="https://www.easy-mock.com/mock/5b081444b2917d747f8614ef/nutritional2.0/menu?v={{ layui.admin.v }}"
+      lay-done="layui.element.render('nav', 'layadmin-system-side-menu') || layui.index.showRouter()" id="TPL_layout">
       
         <div class="layui-logo" lay-href="">
           <img src= {{layui.setter.base}}/img/logo.svg alt="" style="height: 18px;vertical-align: -4px">
@@ -93,14 +94,15 @@
           layui.each(d[dataName], function(index, item){ 
             var hasChildren = typeof item.list === 'object' && item.list.length > 0
             ,classSelected = function(){
-              var match = path[0] == item.name || (index == 0 && !path[0]) 
-              || (item.jump && pathURL == layui.admin.correctRouter(item.jump)) || item.spread;
+              var match = path[0] == item.name || (item.jump && pathURL == layui.admin.correctRouter(item.jump)) || item.spread;
+          /*  (index == 0 && !path[0])  适用于当当前路由为根目录(即路由path为['']) 情况下 设置第一个菜单组的match为true(即展开第一组菜单效果), 在admin.js的监听hash值变化中也使用同样的方法设置第一项菜单展开效果，如果需要去除，这两处都要同步操作 */
               if(match){
                 return hasChildren ? 'layui-nav-itemed' : 'layui-this';
               }
               return '';
             }
             ,url = (item.jump && typeof item.jump === 'string') ? item.jump : item.name;
+
         }}
           <li data-name="{{ item.name || '' }}" data-jump="{{ item.jump || '' }}" class="layui-nav-item {{ classSelected() }}">
             <a href="javascript:;" {{ hasChildren ? '' : 'lay-href="'+ url +'"' }} lay-tips="{{ item.title }}" lay-direction="2">

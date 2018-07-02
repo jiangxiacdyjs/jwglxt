@@ -25,6 +25,7 @@ layui.extend({
     , admin = layui.admin
     , tabsPage = admin.tabsPage
     , view = layui.view
+    , $ = layui.$
 
     //根据路由渲染页面
     , renderPage = function () {
@@ -40,7 +41,8 @@ layui.extend({
       //如果最后一项为空字符，则读取默认文件（这里指的是在config.js里配置的index）
       if (path[path.length - 1] === '') {
         path[path.length - 1] = setter.entry;
-      };
+      }
+      ;
 
       /*
       layui.config({
@@ -139,52 +141,8 @@ layui.extend({
           //关闭 Tips 层
           layerOpen && layer.closeAll('tips');
         });
-
-        /**
-         * 修改：根据'layui-this'类名获取特定格式的当前路由
-         */
-        var currentInnerMostRoute = $('#LAY-system-side-menu').find('.layui-this');
-        var currentInnerMostRouteA = currentInnerMostRoute.children('a').eq(0);
-        var currentInnerMostRouteName = currentInnerMostRouteA.text().replace(/\s/g, '');
-        // 先清空包屑路由导航
-        var clear = $('#show-router-path').children('a:not(:first),span').remove();
-        //console.log(clear)
-        // 如果是一级目录的跳转
-        if (currentInnerMostRouteA.parent('li').length) {
-          var $cite = $('<cite/>').text(currentInnerMostRouteName);
-          var $a = $('<a/>');
-          var $citeA = $a.append($cite);
-          $('#show-router-path').append($citeA);
-        } else {
-          // 定义存放全部层级路由名称的数组
-          var routeNames = [currentInnerMostRouteName];
-          var parentsDls = currentInnerMostRouteA.parents('dl.layui-nav-child');
-          for (var i = 0; i < parentsDls.length; i++) {
-            routeNames.push(parentsDls.eq(i).siblings('a').eq(0).text().replace(/\s/g, ''));
-          }
-          ;
-          for (var j = routeNames.length - 1; j > -1; j--) {
-            if (j == 0) {
-              var $cite = $('<cite/>').text(routeNames[j]);
-              var $a = $('<a/>');
-              var $item = $a.append($cite);
-            } else {
-              var $item = $('<a/>').text(routeNames[j]);
-            }
-            $('#show-router-path').append($item);
-          }
-        }
-        ;
-        // 重新初始化面包屑路由导航
-        element.render('breadcrumb');
-        // 特地为如果仅仅是主页(layui-this类名的dom结构为0)，去掉主页后面的'/'符号
-        if (currentInnerMostRoute.length === 0) {
-          $('#show-router-path').children('a:not(:first),span').remove();
-        }
-        ;
-        /**
-         * 修改：根据'layui-this'类名获取特定格式的当前路由(结束)
-         */
+        // 修改：将动态显示当前路由的方法移动至全局作用于中，便于layout文件调用
+        showRouter();
       });
 
       reset();
@@ -237,13 +195,58 @@ layui.extend({
           container.render('layout').done(function () {
             renderPage();
             layui.element.render();
-
             if (admin.screen() < 2) {
               admin.sideFlexible();
             }
             admin.pageType = 'console';
           });
         }
+      }
+    }
+
+    // 动态显示当前路由
+    , showRouter = function(){
+      var outerMenuBox = $('#LAY-system-side-menu');
+      if (outerMenuBox.length) {
+        var currentInnerMostRoute = $('#LAY-system-side-menu').find('.layui-this'),
+          currentInnerMostRouteA = currentInnerMostRoute.children('a').eq(0),
+          currentInnerMostRouteName = currentInnerMostRouteA.text().replace(/\s/g, ''),
+          // 先清空包屑路由导航
+          clear = $('#show-router-path').children('a:not(:first),span').remove();
+        //console.log(clear)
+        // 如果是一级目录的跳转
+        if (currentInnerMostRouteA.parent('li').length) {
+          var $cite = $('<cite/>').text(currentInnerMostRouteName);
+          var $a = $('<a/>');
+          var $citeA = $a.append($cite);
+          $('#show-router-path').append($citeA);
+        } else {
+          // 定义存放全部层级路由名称的数组
+          var routeNames = [currentInnerMostRouteName];
+          var parentsDls = currentInnerMostRouteA.parents('dl.layui-nav-child');
+          for (var i = 0; i < parentsDls.length; i++) {
+            routeNames.push(parentsDls.eq(i).siblings('a').eq(0).text().replace(/\s/g, ''));
+          }
+          ;
+          for (var j = routeNames.length - 1; j > -1; j--) {
+            if (j == 0) {
+              var $cite = $('<cite/>').text(routeNames[j]);
+              var $a = $('<a/>');
+              var $item = $a.append($cite);
+            } else {
+              var $item = $('<a/>').text(routeNames[j]);
+            }
+            $('#show-router-path').append($item);
+          }
+        }
+        ;
+        // 重新初始化面包屑路由导航
+        element.render('breadcrumb');
+        // 特地为如果仅仅是主页(layui-this类名的dom结构为0)，去掉主页后面的'/'符号
+        if (currentInnerMostRoute.length === 0) {
+          $('#show-router-path').children('a:not(:first),span').remove();
+        }
+        ;
       }
     };
 
@@ -293,6 +296,7 @@ layui.extend({
 
   //对外输出
   exports('index', {
-    render: renderPage
+    render: renderPage,
+    showRouter: showRouter
   });
 });
