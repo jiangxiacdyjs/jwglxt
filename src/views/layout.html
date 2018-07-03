@@ -90,8 +90,7 @@
           var path =  layui.router().path
           ,pathURL = layui.admin.correctRouter(path.join('/'))
           ,dataName = layui.setter.response.dataName;
-          
-          layui.each(d[dataName], function(index, item){ 
+          layui.each(d[dataName], function(index, item){
             var hasChildren = typeof item.list === 'object' && item.list.length > 0
             ,classSelected = function(){
               var match = path[0] == item.name || (item.jump && pathURL == layui.admin.correctRouter(item.jump)) || item.spread;
@@ -102,7 +101,6 @@
               return '';
             }
             ,url = (item.jump && typeof item.jump === 'string') ? item.jump : item.name;
-
         }}
           <li data-name="{{ item.name || '' }}" data-jump="{{ item.jump || '' }}" class="layui-nav-item {{ classSelected() }}">
             <a href="javascript:;" {{ hasChildren ? '' : 'lay-href="'+ url +'"' }} lay-tips="{{ item.title }}" lay-direction="2">
@@ -124,7 +122,7 @@
                 ,url2 = (item2.jump && typeof item2.jump === 'string') 
                   ? item2.jump 
                 : [item.name, item2.name, ''].join('/');
-              }}
+                }}
                 <dd  data-name="{{ item2.name || '' }}"  data-jump="{{ item2.jump || '' }}" 
                 {{ classSelected2() ? ('class="'+ classSelected2() +'"') : '' }}>
                   <a href="javascript:;" {{ hasChildren2 ? '' : 'lay-href="'+ url2 +'"' }}>{{ item2.title }}</a>
