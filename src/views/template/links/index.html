@@ -177,7 +177,7 @@
     function generateItems(data) {
       $list.empty();
       for (var i = 0; i < data.length; i++) {
-        var $newTemplate = $template.clone().removeClass('layui-hide');
+        var $newTemplate = $template.clone().removeClass('layui-hide').removeAttr('id');
         data[i]['disabled'] ? $newTemplate.children('.box').addClass('disabled') : null;
         $newTemplate.children('.box').attr('data-id', data[i].id).attr('data-sort', data[i].sort)
           .find('.box-title strong').html(data[i].name).end()
@@ -314,6 +314,7 @@
               // 表单赋值
               form.val('editForm', dataObj);
               $('#img').prop('src', dataObj.img);
+              $('#iptImg').value(dataObj.img);
             });
           }
         });

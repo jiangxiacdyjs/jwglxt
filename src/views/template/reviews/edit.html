@@ -1,0 +1,133 @@
+<title>友情链接</title>
+<style>
+  .img{width: 60px;height: 60px;border:1px solid #CCCCCC;border-radius: 100%;cursor: pointer}
+</style>
+
+<div class="">
+  <form class="layui-form layui-form-pane" lay-filter="editForm">
+    <!--数据id-->
+    <input type="hidden" name="id">
+
+    <!--logo地址-->
+    <input type="hidden" id="iptImg" name="img" lay-verify="img" value="">
+
+    <!--logo-->
+    <div class="tc mb20">
+      <img title="点击上传logo" id="img" class="img" src="../src/img/avatar1.png" alt="">
+    </div>
+
+    <!--客户姓名-->
+    <div class="layui-form-item">
+      <label class="layui-form-label"><span class="required">*</span>客户姓名</label>
+      <div class="layui-input-block">
+        <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="请输入客户姓名"
+               class="layui-input">
+      </div>
+    </div>
+    <!--客户姓名-->
+    <div class="layui-form-item">
+      <label class="layui-form-label"><span class="required">*</span>客户职务</label>
+      <div class="layui-input-block">
+        <input type="text" name="post" lay-verify="required" autocomplete="off" placeholder="请输入客户职务"
+               class="layui-input">
+      </div>
+    </div>
+    <!--客户姓名-->
+    <div class="layui-form-item">
+      <label class="layui-form-label"><span class="required">*</span>所在单位</label>
+      <div class="layui-input-block">
+        <input type="text" name="post" lay-verify="required" autocomplete="off" placeholder="请输入客户所在单位"
+               class="layui-input">
+      </div>
+    </div>
+
+    <!--排序、锁定-->
+    <div class="layui-form-item layui-row layui-col-space20">
+      <div class="layui-col-xs6">
+        <label class="layui-form-label layui-tip-label"><span class="required">*</span>权值排序</label>
+        <div class="layui-input-block">
+          <input type="number" name="sort" lay-verify="required" placeholder="请输入权值排序" autocomplete="off"
+                 class="layui-input">
+        </div>
+      </div>
+      <div class="layui-col-xs6">
+        <label class="layui-form-label layui-tip-label">禁用栏目</label>
+        <div class="layui-input-block b-e6">
+          <input type="checkbox" name="disabled" lay-skin="switch" lay-text="禁用|不禁用" lay-filter="disabled" value="">
+        </div>
+      </div>
+    </div>
+
+    <!--链接地址-->
+    <div class="layui-form-item layui-form-text">
+      <label class="layui-form-label"><span class="required">*</span>客户评价详情</label>
+      <div class="layui-input-block">
+        <textarea name="desc" placeholder="请输入客户评价内容" class="layui-textarea"></textarea>
+      </div>
+    </div>
+
+    <div class="layui-form-item mb0">
+      <div class="layui-footer">
+        <button type="button" class="layui-btn fr" lay-submit="" lay-filter="form-smt">立即提交</button>
+        <button type="button" class="layui-btn layui-btn-primary fl ml0" lay-filter="form-undo">撤销操作</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  layui.use(['admin', 'form', 'upload'], function () {
+    var $ = layui.$
+      , admin = layui.admin
+      , layer = layui.layer
+      , upload = layui.upload
+      , form = layui.form
+      , UPLOADID = 'img'
+      , IMGIPTID = 'iptImg';
+
+    // 渲染表单
+    form.render();
+
+    // logo上传
+    var uploadFile = upload.render({
+      elem: '#' + UPLOADID
+      , accept: 'file' //允许上传的文件类型
+      , url: admin.baseUrl + '/postSuccessImg'
+      , before: function (obj) {
+        this.loadingIdx = admin.loading('文件上传中，请稍等...');
+        // 获取触发上传功能的元素的jq对象
+        var $triggerEle = $(this.item);
+        //预读本地文件示例，不支持ie8
+        obj.preview(function (index, file, result) {
+          $triggerEle.prop('src',result); // 图片链接（base64）
+        });
+      }
+      , done: function (res, index, upload) {
+        //如果上传失败
+        if (res.code > 0) {
+          return layer.msg('上传失败');
+        } else {
+          // 将图片路径存在input里
+          if(res.data.src){
+            $('#' + IMGIPTID).val(res.data.src);
+            $('#' + UPLOADID).css({'border-color':'#CCCCCC'})
+          };
+          // $('#' + UPLOADID).val(res)
+          layer.close(this.loadingIdx);
+        }
+      }
+      , error: function () {}
+    });
+
+    // 自定义验证规则
+    form.verify({
+      img: function(value, item){
+        if(!$('#' + IMGIPTID).val()){
+          $('#' + UPLOADID).css({'border-color':'red'});
+          return '请上传用户头像';
+        }
+      }
+    });
+
+  });
+</script>
