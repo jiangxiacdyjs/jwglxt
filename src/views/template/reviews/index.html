@@ -151,7 +151,8 @@
       , form = layui.form;
     var $template = $('#template'),
       $list = $('#list'),
-      $searchIpt = $('#searchInput');
+      $searchIpt = $('#searchInput'),
+      macyInst;
 
     // 获取选中数据
     function getCheckedDatas() {
@@ -262,14 +263,16 @@
                 },
                 complete: function () {
                   layer.close(this.loadingIdx);
+                },
+                success: function (result) {
+                  layer.close(this.loadingIdx);
                   for (var i = 0; i < data.ids.length; i++) {
                     $list.find('[data-id=' + data.ids[i] + ']').parent().remove();
                   }
                   ;
-                  layer.msg('已成功删除', {icon: 1})
-                },
-                success: function (result) {
-                  layer.close(this.loadingIdx);
+                  layer.msg('已成功删除', {icon: 1});
+                  macyInst.reInit();
+
                 },
                 error: function (error) {
                   layer.msg('请求出错啦', {icon: 2, anim: 6});
@@ -363,11 +366,12 @@
               },
               complete: function () {
                 layer.close(this.loadingIdx);
-                $(that).closest('.box').parent().remove();
-                layer.msg('已成功删除', {icon: 1})
               },
               success: function (result) {
                 layer.close(this.loadingIdx);
+                $(that).closest('.box').parent().remove();
+                layer.msg('已成功删除', {icon: 1})
+                macyInst.reInit();
               },
               error: function (error) {
                 layer.msg('请求出错啦', {icon: 2, anim: 6});
