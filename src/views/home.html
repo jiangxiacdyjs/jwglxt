@@ -1,0 +1,385 @@
+<style>
+    .show-steps {
+        margin: 0;
+        padding: 0;
+        display: inline-block;
+        width: 100%;
+    }
+    .show-steps .title .layui-badge {
+        margin-right: 10px;
+        background-color: #fff;
+        color: #333;
+    }
+    .show-steps .detail {
+        margin: 15px 0;
+        line-height: 200%;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        display:-webkit-box;
+        -webkit-box-orient:vertical;
+        -webkit-line-clamp:2;
+    }
+    .show-steps .divider {
+        margin: 10px -17px 0 -30px;
+        background-color: #fff;
+        opacity: 0.15;
+    }
+    .show-steps li {
+        box-sizing: border-box;
+        float: left;
+        position: relative;
+        margin: 0 1% 40px;
+        line-height: 18px;
+        list-style: none;
+        padding: 12px 17px 10px 30px;
+        width: 23%;
+        background: #efefef;
+        zoom:1;*display: inline;
+        *padding-left: 17px;
+        color: #fff;
+    }
+    .show-steps li:hover{cursor: pointer;opacity: 0.85;transition: all 0.5s;}
+    .show-steps li a{color: #fff}
+    .show-steps li.normal:before {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 0;
+        width: 0;
+        border-bottom: 20px inset transparent;
+        border-left: 20px solid #fff;
+        border-top: 20px inset transparent;
+        content: ""
+    }
+    .show-steps li.normal:after {
+        position: absolute;
+        right: -20px;
+        top: 0;
+        height: 0;
+        width: 0;
+        border-bottom: 20px solid transparent;
+        border-left: 20px solid #efefef;
+        border-top: 20px inset transparent;
+        content: "";
+        z-index: 2;
+    }
+    .show-steps li.reverse:after {
+        position: absolute;
+        left: -20px;
+        top: 0;
+        height: 0;
+        width: 0;
+        border-bottom: 20px inset transparent;
+        border-right: 20px solid #fff;
+        border-top: 20px inset transparent;
+        content: ""
+    }
+    .show-steps li.reverse:before {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 0;
+        width: 0;
+        border-bottom: 20px solid transparent;
+        border-right: 20px solid #ffffff;
+        border-top: 20px inset transparent;
+        content: "";
+        z-index: 2;
+    }
+
+    /*步骤1*/
+    .show-steps li:first-child {
+        -moz-border-radius: 4px 0 4px 4px;
+        -webkit-border-radius: 4px 0 4px 4px;
+        border-radius: 4px 0 4px 4px;
+        padding-left: 12px;
+        background: linear-gradient(90deg, #5FB878, #009688);
+    }
+    .show-steps li:first-child:before {
+        border: 0
+    }
+    .show-steps li:first-child:after {
+        border-left-color: #009688
+    }
+    /*步骤2*/
+    .show-steps li:nth-of-type(2) {
+        background: linear-gradient(90deg, #45bced, #1E9FFF);
+        -moz-border-radius: 0 0 4px 4px;
+        -webkit-border-radius: 0 0 4px 4px;
+        border-radius: 0 0 4px 4px;
+    }
+    .show-steps li:nth-of-type(2):after {
+        border-left-color: #1E9FFF
+    }
+    /*步骤3*/
+    .show-steps li:nth-of-type(3) {
+        background: linear-gradient(90deg, #FFB800, #FF5722);
+        -moz-border-radius: 0 0 4px 4px;
+        -webkit-border-radius: 0 0 4px 4px;
+        border-radius: 0 0 4px 4px;
+    }
+    .show-steps li:nth-of-type(3):after {
+        border-left-color: #FF5722
+    }
+    /*步骤4*/
+    .show-steps li:nth-of-type(4) {
+        background: linear-gradient(90deg, #585e70, #393D49);
+        -moz-border-radius: 0 4px 0 4px;
+        -webkit-border-radius: 0 4px 0 4px;
+        border-radius: 0 4px 0 4px;
+    }
+    .show-steps li:nth-of-type(4):after {
+        top: auto;
+        bottom: -40px;
+        right: 0;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-top: 20px solid #393D49;
+    }
+    /*步骤8*/
+    .show-steps li:nth-of-type(5) {
+        background: linear-gradient(90deg, #b076a7, #b046ad);
+        -moz-border-radius: 4px 0 4px 4px;
+        -webkit-border-radius: 4px 0 4px 4px;
+        border-radius: 4px 0 4px 4px;
+    }
+    /*步骤7*/
+    .show-steps li:nth-of-type(6) {
+        background: linear-gradient(90deg, #A48566 , #67533f);
+        -moz-border-radius: 0 0 4px 4px;
+        -webkit-border-radius: 0 0 4px 4px;
+        border-radius: 0 0 4px 4px;
+    }
+    .show-steps li:nth-of-type(6):after {
+        border-right-color: #A48566
+    }
+    /*步骤6*/
+    .show-steps li:nth-of-type(7) {
+        background: linear-gradient(90deg, #ba5952, #AA3130);
+        -moz-border-radius: 0 0 4px 4px;
+        -webkit-border-radius: 0 0 4px 4px;
+        border-radius: 0 0 4px 4px;
+    }
+    .show-steps li:nth-of-type(7):after {
+        border-right-color: #ba5952
+    }
+    /*步骤5*/
+    .show-steps li:nth-of-type(8) {
+        background: linear-gradient(90deg, #9aab42, #558B2F);
+        -moz-border-radius: 0 4px 4px 4px;
+        -webkit-border-radius: 0 4px 4px 4px;
+        border-radius: 0 4px 4px 4px;
+    }
+    .show-steps li:nth-of-type(8):after {
+        border-right-color: #9aab42
+    }
+    .show-steps li:nth-of-type(8):before {
+        border: none;
+    }
+
+    /*步骤9*/
+    .show-steps li:nth-of-type(9) {
+        -moz-border-radius: 4px 0 4px 4px;
+        -webkit-border-radius: 4px 0 4px 4px;
+        border-radius: 4px 0 4px 4px;
+        padding-left: 12px;
+        background: linear-gradient(90deg, #5FB878, #009688);
+    }
+    .show-steps li:nth-of-type(9):before {
+        border: 0
+    }
+    .show-steps li:nth-of-type(9):after {
+        border-left-color: #009688
+    }
+    /*步骤10*/
+    .show-steps li:nth-of-type(10) {
+        background: linear-gradient(90deg, #45bced, #1E9FFF);
+        -moz-border-radius: 0 0 4px 4px;
+        -webkit-border-radius: 0 0 4px 4px;
+        border-radius: 0 0 4px 4px;
+    }
+    .show-steps li:nth-of-type(10):after {
+        border-left-color: #1E9FFF
+    }
+    /*步骤11*/
+    .show-steps li:nth-of-type(11) {
+        background: linear-gradient(90deg, #FFB800, #FF5722);
+        -moz-border-radius: 0 0 4px 4px;
+        -webkit-border-radius: 0 0 4px 4px;
+        border-radius: 0 0 4px 4px;
+    }
+    .show-steps li:nth-of-type(11):after {
+        border-left-color: #FF5722
+    }
+    /*步骤12*/
+    .show-steps li:nth-of-type(12) {
+        background: linear-gradient(90deg, #585e70, #393D49);
+        -moz-border-radius: 0 4px 0 4px;
+        -webkit-border-radius: 0 4px 0 4px;
+        border-radius: 0 4px 0 4px;
+    }
+    .show-steps li:nth-of-type(12):after {
+        top: auto;
+        bottom: -40px;
+        right: 0;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-top: 20px solid #393D49;
+    }
+    /*步骤16*/
+    .show-steps li:nth-of-type(13) {
+        background: linear-gradient(90deg, #b076a7, #b046ad);
+        -moz-border-radius: 4px 0 4px 4px;
+        -webkit-border-radius: 4px 0 4px 4px;
+        border-radius: 4px 0 4px 4px;
+    }
+    /*步骤15*/
+    .show-steps li:nth-of-type(14) {
+        background: linear-gradient(90deg, #A48566 , #67533f);
+        -moz-border-radius: 0 0 4px 4px;
+        -webkit-border-radius: 0 0 4px 4px;
+        border-radius: 0 0 4px 4px;
+    }
+    .show-steps li:nth-of-type(14):after {
+        border-right-color: #A48566
+    }
+    /*步骤14*/
+    .show-steps li:nth-of-type(15) {
+        background: linear-gradient(90deg, #ba5952, #AA3130);
+        -moz-border-radius: 0 0 4px 4px;
+        -webkit-border-radius: 0 0 4px 4px;
+        border-radius: 0 0 4px 4px;
+    }
+    .show-steps li:nth-of-type(15):after {
+        border-right-color: #ba5952
+    }
+    /*步骤13*/
+    .show-steps li:nth-of-type(16) {
+        background: linear-gradient(90deg, #9aab42, #558B2F);
+        -moz-border-radius: 0 4px 4px 4px;
+        -webkit-border-radius: 0 4px 4px 4px;
+        border-radius: 0 4px 4px 4px;
+    }
+    .show-steps li:nth-of-type(16):after {
+        border-right-color: #9aab42
+    }
+    .show-steps li:nth-of-type(16):before {
+        border: none;
+    }
+</style>
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-header">操作流程示意图</div>
+        <div class="layui-card-body fullh">
+            <ol class="show-steps layui-clear">
+                <!--1-->
+                <li class="normal">
+                    <div class="layui-elip title"><span class="layui-badge">1</span><a href="javascript:;">操作步骤标题操作步骤标题操作步骤标题操作步骤标题操作步骤标题</a></div>
+                    <hr class="divider">
+                    <div class="detail">详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...</div>
+                </li>
+                <!--2-->
+                <li class="normal">
+                    <div class="layui-elip title"><span class="layui-badge">2</span><a href="javascript:;">操作步骤标题</a></div>
+                    <hr class="divider">
+                    <div class="detail">详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...</div>
+                </li>
+                <!--3-->
+                <li class="normal">
+                    <div class="layui-elip title"><span class="layui-badge">3</span><a href="javascript:;">操作步骤标题</a></div>
+                    <hr class="divider">
+                    <div class="detail">详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...</div>
+                </li>
+                <!--4-->
+                <li class="normal">
+                    <div class="layui-elip title"><span class="layui-badge">4</span><a href="javascript:;">操作步骤标题</a></div>
+                    <hr class="divider">
+                    <div class="detail">详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...</div>
+                </li>
+                <!--8-->
+                <li class="reverse">
+                    <div class="layui-elip title"><span class="layui-badge">8</span><a href="javascript:;">操作步骤标题</a></div>
+                    <hr class="divider">
+                    <div class="detail">详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...</div>
+                </li>
+                <!--7-->
+                <li class="reverse">
+                    <div class="layui-elip title"><span class="layui-badge">7</span><a href="javascript:;">操作步骤标题</a></div>
+                    <hr class="divider">
+                    <div class="detail">详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...</div>
+                </li>
+                <!--6-->
+                <li class="reverse">
+                    <div class="layui-elip title"><span class="layui-badge">6</span><a href="javascript:;">操作步骤标题</a></div>
+                    <hr class="divider">
+                    <div class="detail">详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...</div>
+                </li>
+                <!--5-->
+                <li class="reverse">
+                    <div class="layui-elip title"><span class="layui-badge">5</span><a href="javascript:;">操作步骤标题</a></div>
+                    <hr class="divider">
+                    <div class="detail">详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...</div>
+                </li>
+
+                <!--9-->
+                <li class="normal">
+                    <div class="layui-elip title"><span class="layui-badge">9</span><a href="javascript:;">操作步骤标题操作步骤标题操作步骤标题操作步骤标题操作步骤标题</a></div>
+                    <hr class="divider">
+                    <div class="detail">详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...</div>
+                </li>
+                <!--10-->
+                <li class="normal">
+                    <div class="layui-elip title"><span class="layui-badge">10</span><a href="javascript:;">操作步骤标题</a></div>
+                    <hr class="divider">
+                    <div class="detail">详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...</div>
+                </li>
+                <!--11-->
+                <li class="normal">
+                    <div class="layui-elip title"><span class="layui-badge">11</span><a href="javascript:;">操作步骤标题</a></div>
+                    <hr class="divider">
+                    <div class="detail">详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...</div>
+                </li>
+                <!--12-->
+                <li class="normal">
+                    <div class="layui-elip title"><span class="layui-badge">12</span><a href="javascript:;">操作步骤标题</a></div>
+                    <hr class="divider">
+                    <div class="detail">详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...</div>
+                </li>
+                <!--16-->
+                <li class="reverse">
+                    <div class="layui-elip title"><span class="layui-badge">16</span><a href="javascript:;">操作步骤标题</a></div>
+                    <hr class="divider">
+                    <div class="detail">详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...</div>
+                </li>
+                <!--15-->
+                <li class="reverse">
+                    <div class="layui-elip title"><span class="layui-badge">15</span><a href="javascript:;">操作步骤标题</a></div>
+                    <hr class="divider">
+                    <div class="detail">详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...</div>
+                </li>
+                <!--14-->
+                <li class="reverse">
+                    <div class="layui-elip title"><span class="layui-badge">14</span><a href="javascript:;">操作步骤标题</a></div>
+                    <hr class="divider">
+                    <div class="detail">详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...</div>
+                </li>
+                <!--13-->
+                <li class="reverse">
+                    <div class="layui-elip title"><span class="layui-badge">13</span><a href="javascript:;">操作步骤标题</a></div>
+                    <hr class="divider">
+                    <div class="detail">详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...详细介绍文本，不超过两行...</div>
+                </li>
+            </ol>
+        </div>
+    </div>
+</div>
+<script>
+    layui.use(['admin'], function () {
+        var $ = layui.$
+            , admin = layui.admin;
+
+        // js设置各宽高
+        $('.fullh').height(admin.getRightAvailableHeight()-63);
+    });
+</script>
+
