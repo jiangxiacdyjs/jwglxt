@@ -1,0 +1,493 @@
+<title>文件管理</title>
+<style>
+  .box {
+  }
+
+  .layui-card-content {
+    position: relative;
+    padding: 15px;
+    line-height: 200%;
+    overflow: hidden;
+  }
+
+  .box .box-operate {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  .box .box-operate-item {
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    border-radius: 100%;
+    text-align: center;
+    margin: auto;
+    cursor: pointer
+  }
+
+  .box .box-content:after {
+    content: "\f15b";
+    font: normal normal normal 60px/1 FontAwesome;
+    opacity: 0.12;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    -webkit-transform: translateY(-50%) rotate(30deg);
+    -moz-transform: translateY(-50%) rotate(30deg);
+    -ms-transform: translateY(-50%) rotate(30deg);
+    -o-transform: translateY(-50%) rotate(30deg);
+    transform: translateY(-50%) rotate(30deg);
+  }
+
+  .box.box-pdf .box-content:after {
+    content: "\f1c1";
+    color: #D4271D;
+  }
+
+  .box.box-excel .box-content:after {
+    content: "\f1c3";
+    color: #227547;
+  }
+
+  .box.box-word .box-content:after {
+    content: "\f1c2";
+    color: #4168A1;
+  }
+
+  .box.box-image .box-content:after {
+    content: "\f1c5";
+    color: #803cbd;
+  }
+
+  .box.box-text .box-content:after {
+    content: "\f0f6";
+    color: #4c5161;
+  }
+
+  .box.box-ppt .box-content:after {
+    content: "\f1c4";
+    color: #D04626;
+  }
+
+  .box.box-zip .box-content:after {
+    content: "\f1c6";
+    color: #92483B;
+  }
+
+  .box.box-audio .box-content:after {
+    content: "\f1c7";
+    color: #636592;
+  }
+
+  .box.box-video .box-content:after {
+    content: "\f1c8";
+    color: #9a622d;
+  }
+</style>
+<div class="layui-card layadmin-header">
+  <!--操作按钮组-->
+  <div class="layui-btn-group col-btn-group ml15">
+    <button data-event="add" class="layui-btn layui-btn-sm">
+      <i class="layui-icon">&#xe654;</i>新增
+    </button>
+    <button data-event="del" class="layui-btn layui-btn-danger layui-btn-sm">
+      <i class="layui-icon">&#xe640;</i>批量删除
+    </button>
+  </div>
+  <!--搜索查询-->
+  <div class="test-table-reload-btn layui-layout-right" style="right: 15px">
+    标题搜索：
+    <div class="layui-inline">
+      <input class="layui-input h30" style="width: 350px" name="id" id="searchInput" autocomplete="off">
+      <span class="layui-icon layui-icon-close-fill layui-hide pointer"
+            style="position: absolute;right:0;top: -8px;font-size: 20px;padding: 0 10px;"></span>
+    </div>
+    <button class="layui-btn layui-btn-sm" data-event="search">搜索</button>
+  </div>
+</div>
+<div class="layui-fluid">
+  <div id="list" class="layui-row layui-col-space1">
+    <!--无数据状态-->
+    <div class="empty tc center" style="letter-spacing: 2px;position: fixed">
+      <img src="../src/img/none.png" alt="">
+      <div class="mt20 ccc">暂无数据或网络延迟，可尝试重新加载</div>
+    </div>
+  </div>
+</div>
+<!--数据模板-->
+<div id="template" class="layui-col-xs2 layui-col-sm3 layui-hide">
+  <div class="layui-card box">
+    <div class="layui-card-header layui-elip">
+      <a href="" class="box-name">2017年第二批园区企业委托售电公司与发电企业场内双边协商交易出清结果</a>
+    </div>
+    <div class="layui-card-content box-content">
+      <!--1-->
+      <div class="layui-elip">
+        <span class="box-size layui-badge layui-bg-cyan">3895kb</span>
+        <span class="box-file layui-badge layui-bg-blue">pdf</span>
+      </div>
+      <!--2-->
+      <div class="layui-elip">
+        <i class="fa fa-download"></i>
+        下载次数：
+        <span class="box-times layui-badge layui-bg-gray">33</span>
+      </div>
+      <!--3-->
+      <div class="layui-elip">
+        <i class="fa fa-upload"></i>
+        文件来源：
+        <span class="box-from layui-badge layui-bg-cyan">Administrator</span>
+        <span class="box-time layui-badge layui-bg-cyan">2018/07/05</span>
+      </div>
+      <!--操作遮罩层-->
+      <div class="box-operate">
+        <table style="width: 76%;height: 100%;margin: auto">
+          <tr>
+            <td>
+              <div data-event="download"
+                   class="fa fa-cloud-download layui-bg-orange box-operate-item"></div>
+            </td>
+            <td>
+              <div data-event="edit"
+                   class="layui-icon layui-icon-edit layui-bg-green box-operate-item"></div>
+            </td>
+            <td>
+              <div data-event="del"
+                   class="layui-icon layui-icon-delete layui-bg-red box-operate-item"></div>
+            </td>
+            <td>
+              <div data-event="check"
+                   class="layui-icon layui-icon-ok layui-bg-gray box-operate-item"></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  layui.use(['admin', 'view', 'form'], function () {
+    var $ = layui.$
+      , admin = layui.admin
+      , view = layui.view
+      , form = layui.form
+      , $template = $('#template')
+      , $searchIpt = $('#searchInput')
+      , $list = $('#list');
+
+
+    // 获取选中数据
+    function getCheckedDatas() {
+      var $boxes = $list.find('.box'),
+        $operateCheck = $boxes.find('.layui-icon-ok'),
+        $operateChecked = $operateCheck.closest('.layui-bg-blue');
+      var ids = [];
+      if ($operateChecked.length) {
+        for (var i = 0; i < $operateChecked.length; i++) {
+          ids.push($operateChecked.eq(i).closest('.box-operate').attr('data-id'))
+        }
+      }
+      ;
+      return {length: $operateChecked.length, ids: ids};
+    }
+
+    // 生成显示数据项
+    function generateItems(data) {
+      $list.empty();
+      for (var i = 0; i < data.length; i++) {
+        var $newTemplate = $template.clone().removeClass('layui-hide').removeAttr('id'),
+          $box = $newTemplate.children('.box');
+        data[i]['disabled'] ? $box.addClass('disabled') : null;
+        $box.attr('data-id', data[i].id).attr('data-sort', data[i].sort)
+          .find('.box-name').html(data[i].name).prop('href', data[i].fileName).end()
+          .find('.box-file').html(data[i].fileName).end()
+          .find('.box-size').html(data[i].size + 'kb').end()
+          .find('.box-times').html(data[i].times).end()
+          .find('.box-time').html(data[i].creatTime).end()
+          .find('.box-from').html(data[i].creator).end()
+          .find('.box-operate').attr('data-id', data[i].id).find('[data-event="download"]').attr('data-src', data[i].fileName);
+        if (/\.(gif|jpg|jpeg|png|ico)$/i.test(data[i].fileName)) {
+          $box.addClass('box-image');
+        } else if (/\.(ppt|pptx|pps|ppsx)$/i.test(data[i].fileName)) {
+          $box.addClass('box-ppt');
+        } else if (/\.(doc|docx|wps|xml|dot|html|mhtml)$/i.test(data[i].fileName)) {
+          $box.addClass('box-word');
+        } else if (/\.(zip|rar|7z|cab|gz|xz|deb)$/i.test(data[i].fileName)) {
+          $box.addClass('box-zip');
+        } else if (/\.(xlsx|xls|xlm|xlsb|xltx|xlt|xml|xla|xlw|xlr)$/i.test(data[i].fileName)) {
+          $box.addClass('box-excel');
+        } else if (/\.(txt)$/i.test(data[i].fileName)) {
+          $box.addClass('box-text');
+        } else if (/\.(mp3|wma|midi|wav|mid|cd|wmv)$/i.test(data[i].fileName)) {
+          $box.addClass('box-audio');
+        } else if (/\.(mp4|3gp|rmvb|rm|mpeg|mpg|mov|wmv|avi|asf|asx)$/i.test(data[i].fileName)) {
+          $box.addClass('box-video');
+        }
+        $list.append($newTemplate)
+      }
+      ;
+    }
+
+    // 获取文件后缀
+    function getFileExt(fileFullName) {
+      var ext = /\.[^\.]+$/.exec(fileFullName);
+      return ext && ext[0].replace(/^./, "");
+    }
+
+    // 绘制数据列表
+    function drawList(data) {
+      $.ajax({
+        type: 'post',
+        url: admin.baseUrl + "/filesDatas",
+        data: data || '',
+        dataType: 'json',
+        beforeSend: function (xhr, options) {
+          this.loadingIdx = admin.loading();
+        },
+        complete: function (xhr, ts) {
+          layer.close(this.loadingIdx);
+        },
+        success: function (result) {
+          if (result.data.length) {
+            // 生成数据项
+            generateItems(result.data);
+          }
+        },
+        error: function () {
+          layer.msg('请求失败！', {icon: 2})
+        }
+      });
+    }
+
+    drawList('');
+
+    // 全局事件对象
+    var globalEventsObj = {
+      del: function () {
+        var that = this,
+          data = getCheckedDatas();
+        if (data.length) {
+          var confirmLayerIdx = admin.popup({
+            content: '是否确认删除所选' + data.length + '条数据？'
+            , btn: ['确认', '取消']
+            , btnAlign: 'c'
+            , yes: function (index, layero) {
+              layer.close(confirmLayerIdx);
+              $.ajax({
+                type: 'post',
+                url: admin.baseUrl + "/filesDatas",
+                data: data.ids,
+                dataType: 'json',
+                beforeSend: function () {
+                  this.loadingIdx = admin.loading();
+                },
+                complete: function () {
+                  layer.close(this.loadingIdx);
+                },
+                success: function (result) {
+                  layer.close(this.loadingIdx);
+                  for (var i = 0; i < data.ids.length; i++) {
+                    $list.find('[data-id=' + data.ids[i] + ']').parent().remove();
+                  }
+                  ;
+                  layer.msg('已成功删除', {icon: 1});
+                },
+                error: function (error) {
+                  layer.msg('请求出错啦', {icon: 2, anim: 6});
+                }
+              });
+            }
+          })
+        } else {
+          layer.msg('请选择需要删除的数据项', {icon: 2, anim: 6});
+        }
+      }
+      , add: function () {
+        admin.popup.addLayer = admin.popup({
+          "title": "编辑数据"
+          , area: admin.screen() < 2 ? ['100%', '450px'] : ['620px', '450px']
+          , id: 'add' //id唯一
+          , maxmin: true
+          , shadeClose: false
+          , success: function () {
+            view(this.id).render('template/files/edit').done(function (html) {
+              // 绑定撤销编辑事件
+              var $undoBtn = $('button[lay-filter=form-undo]');
+              $undoBtn.length ? $undoBtn.off('click').prop('type', 'reset').text('重置表单') : null;
+            });
+          }
+        });
+      }
+      , search: function () {
+        var val = $searchIpt.val();
+        if (val) $searchIpt.attr('data-area', 1);
+        drawList(val);
+      }
+    };
+
+    // 每项事件对象
+    var boxEventsObj = {
+      edit: function () {
+        var $that = $(this),
+          $box = $that.closest('.box');
+        admin.popup.editLayer = admin.popup({
+          "title": "编辑数据"
+          , area: admin.screen() < 2 ? ['100%', '450px'] : ['620px', '450px']
+          , id: 'edit' //id唯一
+          , maxmin: true
+          , shadeClose: false
+          , success: function () {
+            view(this.id).render('template/files/edit').done(function (html) {
+              var dataObj = {
+                id: $box.attr('data-id'),
+                sort: $box.attr('data-sort'),
+                img: $box.find('.box-img').prop('src'),
+                name: $box.find('.box-name').html(),
+                disabled: $box.hasClass('disabled') ? true : false,
+                fileName: $box.find('.box-file').html()
+              };
+              // 绑定撤销编辑事件
+              var $undoBtn = $('button[lay-filter=form-undo]');
+              if ($undoBtn.length) {
+                $undoBtn.off('click.undo').prop('type', 'button').text('恢复操作').on('click.undo', function () {
+                  // 表单赋值
+                  form.val('editForm', dataObj);
+                });
+              }
+              ;
+              // 表单赋值
+              form.val('editForm', dataObj);
+            });
+          }
+        });
+      }
+      , del: function () {
+        var that = this,
+          id = $(that).closest('.box-operate').attr('data-id');
+        var confirmLayerIdx = admin.popup({
+          content: '是否确认删除该数据？'
+          , btn: ['确认', '取消']
+          , btnAlign: 'c'
+          , yes: function (index, layero) {
+            layer.close(confirmLayerIdx);
+            $.ajax({
+              type: 'post',
+              url: admin.baseUrl + "/filesDatas",
+              data: id,
+              dataType: 'json',
+              beforeSend: function () {
+                this.loadingIdx = admin.loading();
+              },
+              complete: function () {
+                layer.close(this.loadingIdx);
+              },
+              success: function (result) {
+                layer.close(this.loadingIdx);
+                $(that).closest('.box').parent().remove();
+                layer.msg('已成功删除', {icon: 1});
+              },
+              error: function (error) {
+                layer.msg('请求出错啦', {icon: 2, anim: 6});
+              }
+            });
+          }
+        });
+      }
+      , check: function () {
+        if ($(this).hasClass('layui-bg-blue')) {
+          $(this).removeClass('layui-bg-blue').addClass('layui-bg-gray');
+          // 设置解锁定显示操作层
+          $(this).closest('.box-operate').attr('data-lockshow', '');
+        } else {
+          $(this).removeClass('layui-bg-gray').addClass('layui-bg-blue');
+          // 设置锁定显示操作层
+          $(this).closest('.box-operate').attr('data-lockshow', 1);
+        }
+      }
+      , download: function () {
+        var filePath = $(this).attr('data-src');
+        if (filePath) {
+          window.open(filePath)
+        } else {
+          layer.msg('文件路径错误！', {icon: 2, anim: 6})
+        }
+      }
+    };
+
+    // 顶部操作栏下所有按钮组内按钮事件类型，如果存在对应定义，则执行
+    $('.layadmin-header').on('click', '.layui-btn', function () {
+      var type = $(this).attr('data-event');
+      globalEventsObj[type] && globalEventsObj[type].call(this);
+    });
+
+    // 每项数据项效果
+    $('.layui-fluid').on('mouseenter', '.box-content', function () {
+      $(this).find('.box-operate').stop().fadeIn();
+    }).on('mouseleave', '.box-content', function () {
+      var $operate = $(this).find('.box-operate');
+      $operate.attr('data-lockshow') != 1 ? $(this).find('.box-operate').stop().fadeOut() : null;
+    });
+
+    // 每项数据的所有按钮组内按钮事件类型，如果存在对应定义，则执行
+    $list.on('click', '.box-operate .box-operate-item', function () {
+      var type = $(this).attr('data-event');
+      boxEventsObj[type] && boxEventsObj[type].call(this);
+    });
+
+    // 监听搜索框keydown事件，动态显隐清除icon
+    $searchIpt.on('keydown', function () {
+      var $clearIcon = $(this).next(),
+        searchVal = $searchIpt.val();
+      searchVal ? ($clearIcon.is(':visible') ? null : $clearIcon.removeClass('layui-hide')) :
+        ($clearIcon.is(':visible') ? $clearIcon.addClass('layui-hide') : null);
+    });
+
+    // 清空搜索值
+    $searchIpt.next().on('click', function () {
+      $searchIpt.val('');
+      $(this).addClass('layui-hide');
+      $searchIpt.attr('data-area') ? $searchIpt.attr('data-area', '') && drawList() : null;
+    });
+
+    // 监听提交
+    form.on('submit(form-smt)', function (data) {
+      delete data.field.file;
+      $.ajax({
+        //contentType: 'application/json; charset=utf-8',
+        type: 'post',
+        url: admin.baseUrl + "/filesDatas",
+        data: JSON.stringify(data.field),
+        dataType: 'json',
+        beforeSend: function () {
+          this.loadingIdx = admin.loading();
+        },
+        complete: function () {
+          layer.close(this.loadingIdx);
+        },
+        success: function (result) {
+          if (result.code == 0) {
+            layer.msg('数据编辑成功', {icon: 1})
+          }
+          ;
+          if (admin.popup.editLayer) layer.close(admin.popup.editLayer);
+          if (admin.popup.addLayer) layer.close(admin.popup.addLayer);
+          // 重绘列表
+          drawList();
+        },
+        error: function (error) {
+          layer.msg('请求出错啦', {icon: 2, anim: 6});
+        },
+      });
+      return false;
+    })
+  });
+</script>

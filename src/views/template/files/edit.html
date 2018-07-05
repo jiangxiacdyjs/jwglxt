@@ -1,0 +1,100 @@
+<title>网页标题</title>
+
+<div class="">
+  <form class="layui-form layui-form-pane" lay-filter="editForm">
+    <!--数据id-->
+    <input type="hidden" name="id">
+
+    <div class="layui-row layui-col-space15">
+
+      <div class="layui-col-xs12">
+        <!--文件标题-->
+        <div class="layui-form-item">
+          <label class="layui-form-label"><span class="required">*</span>文件标题</label>
+          <div class="layui-input-block">
+            <input type="text" name="name" lay-verify="required" autocomplete="off" placeholder="请输入标题内容"
+                   class="layui-input">
+          </div>
+        </div>
+        <!--权值排序-->
+        <div class="layui-form-item">
+          <label class="layui-form-label"><span class="required">*</span>权值排序</label>
+          <div class="layui-input-block">
+            <input type="number" name="sort" lay-verify="required" placeholder="请输入权值排序" autocomplete="off"
+                   class="layui-input">
+          </div>
+        </div>
+        <!--文件上传-->
+        <div class="layui-form-item">
+          <label class="layui-form-label"><span class="required">*</span>上传文件</label>
+          <div class="layui-input-block">
+            <input readonly type="text" id="fileName" name="fileName" lay-verify="required" placeholder="点击上传文件" autocomplete="off"
+                   class="layui-input pointer">
+          </div>
+        </div>
+        <!--描述文本-->
+        <div class="layui-form-item layui-form-text">
+          <label class="layui-form-label">文件描述</label>
+          <div class="layui-input-block">
+            <textarea name="desc" placeholder="请输入描述内容" class="layui-textarea"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--提交表单-->
+    <div class="layui-form-item mb0">
+      <div class="layui-footer">
+        <button type="button" class="layui-btn fr" lay-submit="" lay-filter="form-smt">立即提交</button>
+        <!--操作按钮组-->
+        <button type="button" class="layui-btn layui-btn-primary fl" style="margin-left: 0" lay-filter="form-undo">撤销操作</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  layui.use(['admin', 'form', 'upload'], function () {
+    var $ = layui.$
+      , admin = layui.admin
+      , layer = layui.layer
+      , upload = layui.upload
+      , form = layui.form
+      , UPLOADID = 'fileName'
+      , $uploader = $('#'+UPLOADID);
+
+    // 渲染表单
+    form.render();
+
+    // 上传文件
+    var uploadFile = upload.render({
+      elem: '#'+UPLOADID
+      , accept:'file'
+      , url: admin.baseUrl + '/postSuccessImg'
+      , before: function (obj) {
+        this.loadingIdx = admin.loading('文件上传中，请稍等...');
+      }
+      , done: function (res, index, upload) {
+        //如果上传失败
+        if (res.code > 0) {
+          return layer.msg('上传失败');
+        } else {
+          // 获取触发上传功能的元素的jq对象
+          var $triggerEle = $(this.item);
+          $triggerEle.val(res.data.src);
+          layer.close(this.loadingIdx);
+        }
+      }
+      , error: function () {}
+    });
+
+    // 自定义验证规则
+    form.verify({
+      img: function(value, item){
+        if(!$('form[lay-filter=editForm]').find('input[name=img]').val()){
+          $uploader.css({'border-color':'red'});
+          return '请上传插图';
+        }
+      }
+    });
+  });
+</script>
