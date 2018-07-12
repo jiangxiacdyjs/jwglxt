@@ -132,7 +132,8 @@ layui.define(['laytpl', 'layer'], function(exports){
     delete options.skin;
     
     return layer.open($.extend({
-      type: 1
+      // type允许值为0,1,2,3,4，此处设置为5是解决弹出页面时，内部select列表过长导致外层弹窗出现滚动条的不友好体验
+      type: 5
       ,title: '提示'
       ,content: ''
       ,id: 'LAY-system-view-popup'
