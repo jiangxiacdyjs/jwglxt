@@ -32,7 +32,7 @@ layui.extend({
 
       var router = layui.router() //  获得location.hash路由
         , path = router.path // 路径数组，形如：["system","role",""]
-        , pathURL = admin.correctRouter(router.path.join('/'))
+        , pathURL = admin.correctRouter(router.path.join('/'));
 
       //默认读取主页(页面加载时path是一个空数组:[],要将其转换成['']便于后面的判断最后一项是不是''空字符串，如果是，则设置最后一项为index，从而加载index.html)
       if (!path.length) path = [''];
