@@ -1,0 +1,392 @@
+<title>市场边际价格预测</title>
+<style>
+    .layui-form-pane .layui-form-label {
+        width: 140px;
+    }
+
+    .layui-form-pane .layui-input-block {
+        margin-left: 140px;
+    }
+</style>
+<div class="layui-fluid layadmin-maillist-fluid">
+    <!--条件区域-->
+    <div id="card1" class="layui-card">
+        <div class="layui-card-header">
+            <span class="layui-icon layui-icon-about"></span>&nbsp;按照1兆瓦时的整数倍填报电量，电价精确到0.01元/兆瓦时；电量单位：兆瓦时，容量单位：兆瓦，电价单位：元/兆瓦时
+        </div>
+        <div class="layui-card-body">
+            <form class="layui-form layui-form-pane" lay-filter="filterForm">
+                <div class="layui-form-item layui-row layui-col-space15" style="margin-top: 0;margin-bottom: 0">
+                    <div class="layui-col-xs3">
+                        <label class="layui-form-label layui-elip-label"><span class="required">*</span>交易公告</label>
+                        <div class="layui-input-block">
+                            <select name="notice" lay-verify="required" lay-filter="notice">
+                                <option value="">--请选择交易公告--</option>
+                                <option value="1">2017年第一次交易</option>
+                                <option value="2">2017年第二次交易</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs9">
+                        <div class="layui-row layui-col-space15">
+                            <div class="layui-col-xs3">
+                                <label class="layui-form-label layui-elip-label">总上限</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="" lay-verify="" placeholder="自动读取" readonly
+                                           autocomplete="off"
+                                           class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3">
+                                <label class="layui-form-label layui-elip-label">总下限</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="" lay-verify="" placeholder="自动读取" readonly
+                                           autocomplete="off"
+                                           class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3">
+                                <label class="layui-form-label layui-elip-label">电价上限</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="" lay-verify="" placeholder="自动读取" readonly
+                                           autocomplete="off"
+                                           class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3">
+                                <label class="layui-form-label layui-elip-label">电价下限</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="" lay-verify="" placeholder="自动读取" readonly
+                                           autocomplete="off"
+                                           class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-xs3">
+                        <label class="layui-form-label layui-elip-label">合同电量（万千瓦时）</label>
+                        <div class="layui-input-block">
+                            <input type="number" name="contractElec" lay-verify="required" placeholder="请输入合同电量"
+                                   autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-col-xs3">
+                        <label class="layui-form-label layui-elip-label">目录电价（元/千瓦时）</label>
+                        <div class="layui-input-block">
+                            <input type="number" name="catalogPrice" lay-verify="" placeholder="请输入目录电价"
+                                   autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-col-xs3">
+                        <label class="layui-form-label layui-elip-label">预计差价（元/兆瓦时）</label>
+                        <div class="layui-input-block">
+                            <input type="number" name="forecastDiff" lay-verify="" placeholder="请输入预计差价"
+                                   autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-col-xs3">
+                        <label class="layui-form-label layui-elip-label">服务比例系数K</label>
+                        <div class="layui-input-block">
+                            <input type="number" name="serviceK" lay-verify="" placeholder="请输入服务比例系数K"
+                                   autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-col-xs3">
+                        <label class="layui-form-label layui-elip-label">增值税率</label>
+                        <div class="layui-input-block">
+                            <input type="number" name="vatRate" lay-verify="" placeholder="请输入增值税率"
+                                   autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-col-xs3">
+                        <label class="layui-form-label layui-elip-label">利润目标（万元）</label>
+                        <div class="layui-input-block">
+                            <input type="number" name="profitPlan" lay-verify="" placeholder="请输入利润目标"
+                                   autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <!--操作栏-->
+                    <div class="layui-col-xs6">
+                        <label class="layui-form-label layui-elip-label">申请时间</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="profitPlan" lay-verify="" value="2018-01-05至2018-01-24"
+                                   autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                        <button type="reset" class="layui-btn layui-btn-danger" lay-filter="form-rst"><i
+                                class="fa fa-repeat"></i> 复位
+                        </button>
+                        <button type="button" class="layui-btn" lay-submit lay-filter="form-smt"><i
+                                class="fa fa-area-chart"></i> 分析
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs8">
+            <!--展示区域-->
+            <div class="layui-card fullh pr">
+                <div class="layui-card-header">价格走势图（点击节点可生成报价方案）</div>
+                <div id="dataView" class="layui-card-body ps">
+                    <!--可视化Dom-->
+                    <div>
+                        <div class="tc center" style="letter-spacing: 2px;">
+                            <img src="../src/img/none1.png" alt="">
+                            <div class="mt20 ccc">请完善上面表单数据，然后执行分析渲染</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-xs4">
+            <!--展示区域-->
+            <div class="layui-card fullh pr">
+                <div class="layui-card-header">临时报价方案</div>
+                <div class="layui-card-body">
+                    <table class="layui-hide" id="pricePlan" lay-filter="pricePlan"></table>
+                    <!--操作栏-->
+                    <div class="mt10 tr">
+                        <button type="reset" class="layui-btn layui-btn-xs layui-btn-danger"><i
+                                class="fa fa-eraser"></i> 清除方案
+                        </button>
+                        <button type="button" class="layui-btn layui-btn-xs"><i
+                                class="fa fa-save"></i> 保存方案
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var xIndex;
+    layui.use(['admin', 'form', 'table', 'echarts'], function () {
+        var $ = layui.$
+                , admin = layui.admin
+                , table = layui.table
+                , echarts = layui.echarts
+                , form = layui.form;
+        var xIndex;
+
+        $('.fullh').height(admin.getRightAvailableHeight() - $('#card1').height() - 15);
+
+        // 初始化表单select组件
+        form.render('select');
+
+        // 渲染报价方案
+        function drawPricePlan(params) {
+            $.ajax({
+                type: 'post',
+                url: admin.baseUrl + "/pricePlanTableData",
+                data: {name: params.name, data: params.data},
+                dataType: 'json',
+                beforeSend: function (xhr, options) {
+                    this.loadingIdx = admin.loading();
+                },
+                complete: function (XHR, TS) {
+                    layer.close(this.loadingIdx)
+                },
+                success: function (result) {
+                    tableInst.reload({
+                        data: result.data
+                    });
+                    layer.msg('横坐标：' + params.name + '；纵坐标：' + params.data)
+                },
+                error: function () {
+                    layer.msg('请求错误！', {icon: 2, anim: 6})
+                }
+            });
+        }
+
+        // 全局事件对象
+        var globalEventsObj = {
+            search: function () {
+                var $serIpt = $('#searchInput');
+                //执行重载
+                table.reload('tradeTable', {
+                    page: {
+                        curr: 1
+                    }
+                    , where: {
+                        data: JSON.stringify($serIpt.val())
+                    }
+                });
+            }
+        };
+
+        // 可视化
+        var echartsApp = [] // 存放实例化echarts对象的数组
+                , options = [] // 存放echarts配置项的数组
+                , elemDataView = $('#dataView').children('div') // 获取echarts渲染操作对象Dom
+        // 分离初始化实例方法
+                , initDataView = function (index) {
+            echartsApp[index] = echarts.init(elemDataView[index], layui.echartsTheme);
+            echartsApp[index].showLoading({
+                text: '极速加载中...',
+                // effect: 'whirling'
+            })
+        }
+        // 分离渲染实例方法
+                , renderDataView = function (index, fn) {
+            // 实例化
+            echartsApp[index] = echarts.init(elemDataView[index], layui.echartsTheme);
+            // 重置大小
+            echartsApp[index].resize({
+                height: $('.fullh').height() - 63
+            });
+            // 配置数据
+            echartsApp[index].setOption(options[index]);
+            // 关闭已开启的loading
+            echartsApp[index]._loadingFX ? echartsApp[index].hideLoading() : null;
+            // 绑定点击回调
+            echartsApp[index].on('click', function (params) {
+                // 若果点击的是标注点
+                if (params.componentType === 'markPoint') {
+                    // 点击到了 markPoint 上
+                    if (params.seriesIndex === 5) {
+                        // 点击到了 index 为 5 的 series 的 markPoint 上。
+                    }
+                }
+                // 如果点击的是数据项
+                else if (params.componentType === 'series') {
+                    // 如果有回调方法
+                    if (typeof(eval(fn)) == "function") {
+                        // 此处传参至eval解析，无需传变量方式，eval会自动解析
+                        eval(fn + "(params);");
+                    }
+                    if (params.seriesType === 'graph') {
+                        if (params.dataType === 'edge') {
+                            // 点击到了 graph 的 edge（边）上。
+                        }
+                        else {
+                            // 点击到了 graph 的 node（节点）上。
+                        }
+                    }
+                }
+
+            });
+            // 绑定窗口重置大小回调
+            window.onresize = echartsApp[index].resize;
+        };
+
+        // 首次渲染数据表格
+        var tableInst = table.render({
+            elem: '#pricePlan'
+            , url: ''
+            , method: 'post'
+            , selectOnClick: true
+            , height: $('.fullh').height() - 97
+            , cols: [[
+                //{type: 'numbers', title: '--', fixed: 'left'}
+                //,{type: 'radio',title:'选择', width:48,fixed:'left'}
+                //, {type: 'checkbox'}
+                //,{field:'id', title:'ID', width:100, unresize: true, sort: true}
+                {field: 'name', title: '方案名'}
+                , {field: 'amount', title: '电量', sort: true, align: 'right'}
+                , {field: 'price', title: '电价', sort: true, align: 'right'}
+                , {field: 'desc', title: '详情'}
+            ]]
+            , page: false
+            , limit: 1000
+            // , rowClick: function (obj) {
+            //   console.log(obj)
+            // }
+        });
+
+        // 监听select选中事件
+        form.on('select(notice)', function (data) {
+            console.log(data.elem); //得到select原始DOM对象
+            console.log(data.value); //得到被选中的值
+            console.log(data.othis); //得到美化后的DOM对象
+        });
+
+        // 监听提交
+        form.on('submit(form-smt)', function (data) {
+            if (!elemDataView[0]) return;
+            // 请求数据，成功后执行渲染
+            $.ajax({
+                type: 'post',
+                url: admin.baseUrl + '/priceForecastChart',
+                dataType: 'json',
+                data: data.field,
+                beforeSend: function () {
+                    // 请求完成前就实例化对象
+                    if (elemDataView[0]) {
+                        initDataView(0)
+                    }
+                },
+                complete: function () {
+                },
+                success: function (result) {
+                    if (result.state === 'success') {
+                        // todo: 如果图表较多，可尝试将基本配置分离出去，然后通过对象合并方式生成真实配置，以达到基础配置共用的更优操作
+                        options.push({
+                            grid: {
+                                left: '1%',
+                                right: '3%',
+                                bottom: '3%',
+                                containLabel: true
+                            },
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            xAxis: [{
+                                type: 'category',
+                                boundaryGap: false,
+                                name: '售电量（兆瓦时）',
+                                nameRotate: 90,
+                                axisLabel: {rotate: 50},
+                                data: result.xData
+                            }],
+                            yAxis: [
+                                {
+                                    type: 'value',
+                                    name: '单价（元/兆瓦时）',
+                                    nameGap: 30,
+                                    axisLabel: {
+                                        formatter: '{value}'
+                                    }
+                                }
+                            ],
+                            /*dataZoom: [
+                             {
+                             type: 'slider',
+                             show: true,
+                             xAxisIndex: [0],
+                             start: 30,
+                             end: 100
+                             }
+                             ],*/
+                            series: [
+                                {
+                                    name: result.data[0].name,
+                                    type: 'line',
+                                    smooth: false,
+                                    /*symbolSize: function(value, params){
+                                     // console.log(value, params)
+                                     // if(value > 143859.83) return 10
+                                     return 10
+                                     },*/
+                                    data: result.data[0].value
+                                }
+                            ]
+                        });
+                        // 没找到DOM，终止执行
+                        if (!elemDataView[0]) return;
+                        // 传入序号及点击回调方法名
+                        renderDataView(0, 'drawPricePlan');
+                    }
+                }
+            });
+            return false;
+        });
+    })
+</script>

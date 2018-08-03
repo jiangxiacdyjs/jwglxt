@@ -55,6 +55,7 @@
 .pr{position: relative}
 .pa{position: absolute}
 .pf{position: fixed}
+.ps{position: static}
 
 /*字体*/
 .f12{font-size: 12px}

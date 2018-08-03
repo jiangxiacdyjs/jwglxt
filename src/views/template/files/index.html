@@ -184,7 +184,6 @@
       , $searchIpt = $('#searchInput')
       , $list = $('#list');
 
-
     // 获取选中数据
     function getCheckedDatas() {
       var $boxes = $list.find('.box'),
@@ -316,6 +315,7 @@
           "title": "编辑数据"
           , area: admin.screen() < 2 ? ['100%', '450px'] : ['620px', '450px']
           , id: 'add' //id唯一
+          , type: 1
           , maxmin: true
           , shadeClose: false
           , success: function () {
