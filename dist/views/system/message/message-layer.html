@@ -187,6 +187,7 @@
 
     // 监听提交(根据lay-filter值来监听提交，便于保存操作和新增操作的提交公用一个方法)，但是需要判断是新增模式还是修改模式（根据点击按钮是否有data-id值来确定，有的话是编辑模式，无则是新增模式）
     form.on('submit(message-smt)', function (data) {
+      data.field.msg = layedit.getContent(msgBoxIdx);
       // 新增操作
       $.ajax({
         type: 'post',

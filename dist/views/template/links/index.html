@@ -177,7 +177,7 @@
     function generateItems(data) {
       $list.empty();
       for (var i = 0; i < data.length; i++) {
-        var $newTemplate = $template.clone().removeClass('layui-hide');
+        var $newTemplate = $template.clone().removeClass('layui-hide').removeAttr('id');
         data[i]['disabled'] ? $newTemplate.children('.box').addClass('disabled') : null;
         $newTemplate.children('.box').attr('data-id', data[i].id).attr('data-sort', data[i].sort)
           .find('.box-title strong').html(data[i].name).end()
@@ -314,6 +314,7 @@
               // 表单赋值
               form.val('editForm', dataObj);
               $('#img').prop('src', dataObj.img);
+              $('#iptImg').value(dataObj.img);
             });
           }
         });
@@ -396,6 +397,36 @@
         searchVal = $searchIpt.val();
       searchVal ? ($clearIcon.is(':visible') ? null : $clearIcon.removeClass('layui-hide')) :
         ($clearIcon.is(':visible') ? $clearIcon.addClass('layui-hide') : null);
-    })
+    });
+
+    // 监听提交
+    form.on('submit(form-smt)', function (data) {
+      delete data.field.file;
+      $.ajax({
+        //contentType: 'application/json; charset=utf-8',
+        type: 'post',
+        url: admin.baseUrl + '/linksDatas',
+        data: JSON.stringify(data.field),
+        dataType: 'json',
+        beforeSend: function () {
+          this.loadingIdx = admin.loading();
+        },
+        complete: function () {
+          layer.close(this.loadingIdx);
+        },
+        success: function (result) {
+          if(result.code == 0){
+            layer.msg('数据编辑成功', {icon:1})
+          };
+          if(admin.popup.editLayer) layer.close(admin.popup.editLayer);
+          if(admin.popup.addLayer) layer.close(admin.popup.addLayer);
+          drawList();
+        },
+        error: function (error) {
+          layer.msg('请求出错啦', {icon: 2,anim:6});
+        },
+      });
+      return false;
+    });
   });
 </script>
