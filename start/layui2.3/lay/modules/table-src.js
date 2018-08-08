@@ -1106,7 +1106,8 @@ layui.define(['laytpl', 'laypage', 'layer', 'form'], function (exports) {
 
     /**
      * @修改：新增配置项selectOnClick，如果为true，则执行点击行选中该行数据
-     * @time:2018/6/26
+     * @修复bug：修复当一个页面中存在多个table实例时，多个实例均设置了selectOnClick: true并且其中有一个或多个设置了fixed栏目时，点击行选中行会导致其他表格实例行被选中
+     * @time:2018/8/8
      * @author:freshzxf
      */
     (function () {
@@ -1133,7 +1134,7 @@ layui.define(['laytpl', 'laypage', 'layer', 'form'], function (exports) {
 
             /******固定列模式下*******/
             //当前点击行对应固定行
-            , fixedTr = tr.closest('.layui-table-body').next().find('.layui-table-fixed').find('.layui-table-body').find('tr[data-index=' + index + ']')
+            , fixedTr = tr.parents('.layui-table-fixed').length ? tr : tr.closest('.layui-table-body').siblings('.layui-table-fixed').find('.layui-table-body').find('tr[data-index=' + index + ']')
             //复选模式下 当前点击行对应固定的隐藏checkbox
             , fixedCheckBoxIpt = fixedTr.find('input[name="layTableCheckbox"]').eq(0)
             //单选模式下 当前点击行对应固定的隐藏radio
