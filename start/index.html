@@ -8,19 +8,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <!--<link rel="stylesheet" href="layui/css/layui.css" media="all">-->
-  <link rel="stylesheet" href="layui2.3/css/layui.css" media="all">
+  <link rel="stylesheet" href="layui/css/layui.css" media="all">
   <script>
   /^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
   </script>
 </head>
 <body>
   <div id="LAY_app"></div>
-  <!--<script src="layui/layui.js"></script>-->
-  <script src="layui2.3/layui.js"></script>
+  <script src="layui/layui.js"></script>
   <script>
   layui.config({
     base: '../src/' //指定 layuiAdmin 项目路径，本地开发用 src，线上用 dist
-    ,version: '2.0' //用于控制缓存信息，页面加载时候会在所有已引入的模块js后加上v=version
+    ,version: '2.1' //用于控制缓存信息，页面加载时候会在所有已引入的模块js后加上v=version
   }).use('index');
   </script>
 </body>
