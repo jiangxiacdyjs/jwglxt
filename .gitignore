@@ -4,4 +4,9 @@ node_modules
 .idea/workspace.xml
 dist/
 layui-src/
+.DS_Store∂
 .DS_Store
+src/.DS_Store
+start/.DS_Store
+start/layui/.DS_Store
+start/layui/lay/.DS_Store
