@@ -4,3 +4,4 @@ node_modules
 .idea/workspace.xml
 dist/
 layui-src/
+.DS_Store
